@@ -1,9 +1,8 @@
 import './App.css'
+import SiteCard from './components/site-card/siteCard'
 
 function App() {
-  return (
-    
-  )
+
 }
 
 export default App
