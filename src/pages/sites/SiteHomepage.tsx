@@ -1,3 +1,4 @@
+import CalibrationCard from "../../components/calibration-card/CalibrationCard";
 
 
 export default function SiteHomepage () {
@@ -26,10 +27,11 @@ export default function SiteHomepage () {
                 </div>
             </div>
             <div className="flex flex-col w-full gap-2">
-                <div className="bg-green-200 w-full rounded-md p-4">Previous 4 results  ^</div>
-                <div className="bg-green-200 w-full rounded-md p-4">Previous 4 results  ^</div>
-                <div className="bg-green-200 w-full rounded-md p-4">Previous 4 results  ^</div>
-                <div className="bg-green-200 w-full rounded-md p-4">Previous 4 results  ^</div>
+                <CalibrationCard date='27 October 2025' clinician='JE'/>
+                <CalibrationCard date='3 November 2025' clinician='JE'/>
+                <CalibrationCard date='10 November 2025' clinician='JE'/>
+                <CalibrationCard date='17 November 2025' clinician='JE'/>
+
             </div>
         </div>
     )

@@ -18,7 +18,7 @@ function AffinionDropdown ({ title }: AffinionDropdownProps) {
         <div>
             <div className='flex flex-row justify-between'>
                 <p>{title}</p>
-                <FontAwesomeIcon className='cursor-pointer' icon="fa-solid fa-chevron-down" onClick={() => {setIsOpen(prev => !prev)}}/>
+                <FontAwesomeIcon className='cursor-pointer'  icon={ isOpen ? "fa-solid fa-caret-up" : "fa-solid fa-caret-down"} onClick={() => {setIsOpen(prev => !prev)}}/>
             </div>
             {
                 isOpen && <AffinionResults />
@@ -56,14 +56,24 @@ interface CalibrationCardProps {
 
 function CalibrationCard ({ date, clinician }: CalibrationCardProps) {
 
-    return (
-        <div className='flex flex-col w-11/12 bg-gray-200 rounded-xl py-2 px-4'>
-            <div className='flex flex-row justify-between'>
-                <p>{ date }</p>
-                <p>{ clinician }</p>
-            </div>
+    const [isOpen, setIsOpen] = useState(false)
+
+    const affinionDiv = (
+        <div className='bg-white rounded-xl p-4'>
             <AffinionDropdown title={'Affinion 1'}/>
             <AffinionDropdown title={'Affinion 2'}/>
+        </div>
+    )
+
+    return (
+        <div className='flex flex-col bg-green-200 rounded-xl p-6 gap-4'>
+            <div className='flex flex-row justify-between' onClick={() => {setIsOpen(prev => !prev)}}>
+                <p>{ date }</p>
+                <FontAwesomeIcon className='cursor-pointer' icon={ isOpen ? "fa-solid fa-caret-up" : "fa-solid fa-caret-down"}/>
+            </div>
+            {
+                isOpen && affinionDiv
+            }
         </div>
     )
 }
