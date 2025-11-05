@@ -4,8 +4,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import CalibrationCard from "../../components/calibration-card/CalibrationCard"
 library.add(fas, far, fab)
+import { useEffect, useState } from "react"
 
 interface RegionCardProps {
     title: string,
@@ -31,9 +31,19 @@ const regionalAreas: Array<RegionCardProps> = [
         title: 'West',
     }
 
-]
+] // Remove this hard code
 
 export default function Home ({ name = 'Guest'}) {
+
+    const [regions, setRegions] = useState([]);
+ 
+    useEffect(() => {
+        function fetchData() {
+            
+        }
+        fetchData();
+
+    }, [])
 
     return (
         <div className="height-full p-6">
