@@ -6,36 +6,48 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, far, fab)
 import { useEffect, useState } from "react"
+import supabase from "../../utility/supabase"
 
 interface RegionCardProps {
     title: string,
-    regionalLead: string,
 }
 
-const regionalAreas: Array<RegionCardProps> = [
-    {
-        regionalLead: 'Sam T',
-        title: 'South',
-    },
-    {
-        regionalLead: 'Cherly',
-        title: 'North',
-    },
-    {
-        regionalLead: 'Tom',
-        title: 'East',
-    },
-    {
-        regionalLead: 'Sophie',
-        title: 'West',
-    }
+interface StateInterface <T> {
+    data: Array<T>,
+    loading: boolean,
+    error: boolean,
+}
 
-] // Remove this hard code
+interface RegionState {
+    site_region: string,
+}
 
 export default function Home ({ name = 'Guest'}) {
 
-    const [regions, setRegions] = useState();
-    const [sites, setSites] = useState();
+    const [regions, setRegions] = useState<StateInterface<RegionState>>({
+        data: [],
+        loading: true,
+        error: false,
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data } = await supabase
+                .from('sites')
+                .select('site_region')
+            if (!data) {
+                return console.log('Error fetching')
+            } 
+            const formattedData = data.map(item => item.site_region)
+            setRegions((prev) => {
+                return {
+                    ...prev, 
+                    data: formattedData,
+                }
+            })
+        }
+        fetchData();
+    }, [])
 
     return (
         <div className="height-full p-6">
@@ -52,9 +64,9 @@ export default function Home ({ name = 'Guest'}) {
             </div>
             <div className="grid grid-cols-2 gap-4 ">
             {
-                regionalAreas.map((item) => {
+                regions.data.map((item) => {
                     return (
-                        <RegionCard title={item.title} regionalLead={item.regionalLead} /> 
+                        <RegionCard title={item} /> 
                     )
                 })
             }
@@ -63,12 +75,11 @@ export default function Home ({ name = 'Guest'}) {
     )
 }
 
-function RegionCard ({ title, regionalLead }: RegionCardProps) {
+function RegionCard ({ title }: RegionCardProps) {
 
     return (
         <div className="rounded-xl bg-white p-2 min-w-6/12">
             <h1>{title}</h1>
-            <p>{regionalLead}</p>
             <CalibratedUI calibratedData={[{completed: true}, {completed: true}, {completed: true}, {completed: true}, {completed: true}, {completed: true}]}/>
             <p>View and manage compliance for all sites in the {title}</p>
         </div>
