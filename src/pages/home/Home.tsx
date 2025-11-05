@@ -12,7 +12,6 @@ interface RegionCardProps {
     regionalLead: string,
 }
 
-
 const regionalAreas: Array<RegionCardProps> = [
     {
         regionalLead: 'Sam T',
@@ -35,15 +34,8 @@ const regionalAreas: Array<RegionCardProps> = [
 
 export default function Home ({ name = 'Guest'}) {
 
-    const [regions, setRegions] = useState([]);
- 
-    useEffect(() => {
-        function fetchData() {
-            
-        }
-        fetchData();
-
-    }, [])
+    const [regions, setRegions] = useState();
+    const [sites, setSites] = useState();
 
     return (
         <div className="height-full p-6">
