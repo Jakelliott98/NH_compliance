@@ -7,46 +7,58 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, far, fab)
 import { useEffect, useState } from "react"
 import supabase from "../../utility/supabase"
+import { Link } from "react-router"
 
 interface RegionCardProps {
     title: string,
 }
 
-interface StateInterface <T> {
-    data: Array<T>,
+interface FetchState {
+    data: Array<any>,
     loading: boolean,
     error: boolean,
 }
 
-interface RegionState {
-    site_region: string,
+interface RegionsState extends Omit<FetchState, 'data'> {
+    data: Array<string>
 }
 
 export default function Home ({ name = 'Guest'}) {
 
-    const [regions, setRegions] = useState<StateInterface<RegionState>>({
+    const [regions, setRegions] = useState<RegionsState>({
         data: [],
         loading: true,
         error: false,
     });
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await supabase
+        const fetchRegions = async (): Promise<void> => {
+
+            const { data } = await supabase 
                 .from('sites')
                 .select('site_region')
+
             if (!data) {
-                return console.log('Error fetching')
-            } 
-            const formattedData = data.map(item => item.site_region)
-            setRegions((prev) => {
-                return {
-                    ...prev, 
-                    data: formattedData,
-                }
-            })
-        }
-        fetchData();
+                setRegions((prev) => {
+                    return {
+                        ...prev,
+                        error: true,
+                    }
+                })
+            }
+            else {
+                const sortedData = data.map(item => item.site_region)
+                setRegions((prev) => {
+                    return {
+                        ...prev,
+                        data: sortedData,
+                        loading: false,
+                    }
+                })
+            }
+
+            }
+            fetchRegions();
     }, [])
 
     return (
@@ -66,7 +78,7 @@ export default function Home ({ name = 'Guest'}) {
             {
                 regions.data.map((item) => {
                     return (
-                        <RegionCard title={item} /> 
+                        <Link to="/sites"><RegionCard title={item} /> </Link>
                     )
                 })
             }
