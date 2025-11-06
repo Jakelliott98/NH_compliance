@@ -1,8 +1,9 @@
+import SitePage from "../../components/site-page/SitePage";
 
 
 export default function SettingsHomepage () {
 
     return (
-        <p>Settings</p>
+        <SitePage /> // Temporary hold to see UI
     )
 }

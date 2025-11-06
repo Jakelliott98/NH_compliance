@@ -2,7 +2,7 @@ import CalibratedUI from "../CalibratedUI"
 
 interface SiteCardProps {
     title: string,
-    date: string,
+    date: Date,
 }
 
 interface calibratedDataType {completed: boolean | null}
@@ -19,7 +19,7 @@ function SiteCard ({ title, date }: SiteCardProps) {
             </div>
             <p className='text-xs'> 
                 Last Calibrated: 
-                <span className='text-xs italic text-gray-500'> {date}</span>
+                <span className='text-xs italic text-gray-500'> {`${date}`}</span>
 
             </p>
         </div>
