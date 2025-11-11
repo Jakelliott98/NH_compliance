@@ -1,5 +1,5 @@
-import SitesDashboard from "./sites_dashboard/SitesDashboard";
-
+import { Outlet } from "react-router";
+import { NavLink } from "react-router";
 
 export default function CompliancePage () {
 
@@ -7,18 +7,16 @@ export default function CompliancePage () {
         <div>
             <div className="w-full flex justify-center">
                 <div className="w-4/12 flex justify-around rounded-xl py-1 px-2 bg-white">
-                    <p className="bg-green-200 py-0.5 px-2 rounded-lg">Sites</p>
-                    <p className="py-0.5 px-2 rounded-lg">Reports</p>
+                    <NavLink to="Sites" className={( {isActive}) => {return isActive ? 'text-blue-500' : 'tet-black'}}>
+                        <p className="py-0.5 px-2 rounded-lg">Sites</p>
+                    </NavLink>
+                    <NavLink to="Reports" className={( {isActive}) => {return isActive ? 'text-blue-500' : 'tet-black'}}>
+                        <p className="py-0.5 px-2 rounded-lg">Reports</p>
+                    </NavLink>                    
                 </div>
             </div>
-            <SitesDashboard />
+            <Outlet />
         </div>
-    )
-}
-
-function ReportSection () {
-    return (
-        <p>Report Section</p>
     )
 }
 
