@@ -4,12 +4,15 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import SiteCard from './SiteCard'
+import { useState } from 'react'
 library.add(fas, far, fab)
 
 
 const tempRegions = [{number: 27, region: 'North', status: 'All Calibrated'}, {number: 31, region: 'South', status: 'All Calibrated'}, {number: 12, region: 'West', status: 'All Calibrated'}, {number: 17, region: 'East', status: 'Missing Calibrations'}]
 
 export default function SitesDashboard () {
+
+    const [activeRegion, setActiveRegion] = useState('')
 
     return (
         <div className=''>
@@ -18,7 +21,7 @@ export default function SitesDashboard () {
                     {
                         tempRegions.map((item) => {
                             return (
-                                <RegionCard region={item} />
+                                <RegionCard region={item} activeRegion={activeRegion} setActiveRegion={setActiveRegion}/>
                             )
                         })
                     }
@@ -70,13 +73,15 @@ interface RegionObj {
 }
 
 interface RegionCardProp {
-    region: Array<RegionObj>
+    region: Array<RegionObj>,
+    activeRegion: string,
+    setActiveRegion: (region: string) => void,
 }
 
-function RegionCard ({ region }: RegionCardProp) {
+function RegionCard ({ region, activeRegion, setActiveRegion }: RegionCardProp) {
 
     return (
-        <div className="bg-white border-green-200 border-2 border-solid rounded-xl flex gap-2 content-center justify-center py-1 px-2 cursor-pointer">
+        <div className={`${ activeRegion === region.region ? 'bg-green-500' : 'bg-white'} border-green-200 border-2 border-solid rounded-xl flex gap-2 content-center justify-center py-1 px-2 cursor-pointer`} onClick={() => {setActiveRegion(region.region)}}>
             <p className='self-center'>{region.region}</p>
             <div className="self-center bg-green-200 rounded-full p-1"><p className='text-green-700'>{ region.number }</p></div>
             <div className="self-center bg-red-200 rounded-full p-1"><p className='text-red-700'>{ region.number }</p></div>
