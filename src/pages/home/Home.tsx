@@ -7,7 +7,6 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, far, fab)
 import { useEffect, useState } from "react"
 import supabase from "../../utility/supabase"
-import { Link } from "react-router"
 
 interface RegionCardProps {
     title: string,
@@ -23,7 +22,7 @@ interface RegionsState extends Omit<FetchState, 'data'> {
     data: Array<string>
 }
 
-export default function Home ({ name = 'Guest'}) {
+export default function Home ({ name = 'Guest' }) {
 
     const [regions, setRegions] = useState<RegionsState>({
         data: [],
@@ -78,7 +77,7 @@ export default function Home ({ name = 'Guest'}) {
             {
                 regions.data.map((item) => {
                     return (
-                        <Link to="/sites"><RegionCard title={item} /> </Link>
+                        <RegionCard title={item} />
                     )
                 })
             }

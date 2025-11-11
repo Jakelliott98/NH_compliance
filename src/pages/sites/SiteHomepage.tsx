@@ -51,8 +51,6 @@ export default function SiteHomepage () {
         fetchSites()
     }, [])
 
-    console.log(sites)
-
     return (
         <div>
             {
