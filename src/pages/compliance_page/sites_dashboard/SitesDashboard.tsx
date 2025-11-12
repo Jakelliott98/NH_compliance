@@ -4,22 +4,21 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import SiteCard from './SiteCard'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import RegionContext from '../../../components/context/RegionContext'
 library.add(fas, far, fab)
-
-
-const tempRegions = [{number: 27, region: 'North', status: 'All Calibrated'}, {number: 31, region: 'South', status: 'All Calibrated'}, {number: 12, region: 'West', status: 'All Calibrated'}, {number: 17, region: 'East', status: 'Missing Calibrations'}]
 
 export default function SitesDashboard () {
 
     const [activeRegion, setActiveRegion] = useState('')
+    const {temporaryRegions, complianceData} = useContext(RegionContext)
 
     return (
         <div className=''>
             <div className="flex p-2">
                 <div className="flex flex-cols flex-1 gap-5">
                     {
-                        tempRegions.map((item) => {
+                        temporaryRegions.map((item) => {
                             return (
                                 <RegionCard region={item} activeRegion={activeRegion} setActiveRegion={setActiveRegion}/>
                             )
@@ -39,27 +38,13 @@ export default function SitesDashboard () {
             <div className='p-2'>
                     <h1 className='text-lg'>Sites</h1>
                     <div className='grid grid-cols-4 gap-4'>
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard />                                                
+                        {
+                            complianceData.sites.data.map(() => {
+                                return (
+                                     <SiteCard /> // ADD PERSONAL INFORMATION
+                                )
+                            })
+                        }                                              
                     </div>
             </div>
         </div>
