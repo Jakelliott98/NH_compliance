@@ -1,7 +1,7 @@
-
+import SitePage from "../../../components/site-page/SitePage"
 
 export default function ReportSection () {
     return (
-        <p>Report Section</p>
+        <SitePage />
     )
 }

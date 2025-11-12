@@ -48,7 +48,7 @@ function SitesSection({ sites }) {
                     {
                         sites.map((item) => {
                             return (
-                                    <SiteCard key={item.site_id} site={item.site_name} teamLeader={item.team_leader}/> // ADD PERSONAL INFORMATION
+                                    <SiteCard key={item.site_id} site={item}/> // ADD PERSONAL INFORMATION
                             )
                         })
                     }                                              

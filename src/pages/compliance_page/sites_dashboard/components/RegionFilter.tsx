@@ -5,7 +5,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, far, fab)
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import RegionContext from '../../../../components/context/RegionContext'
 
 interface RegionsFilterProps {
@@ -16,6 +16,10 @@ interface RegionsFilterProps {
 export default function RegionsFilter({activeRegion, selectRegion}: RegionsFilterProps) {
 
     const { complianceData } = useContext(RegionContext)
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+    const searchInput = <input className='text-gray-500 border-l-2 px-2 border-gray-300 border-solid focus:outline-none' placeholder='Search for a site...'></input>
+
 
     return (
         <div className="flex p-2">
@@ -29,8 +33,9 @@ export default function RegionsFilter({activeRegion, selectRegion}: RegionsFilte
                 }
             </div>
             <div className="flex gap-2 justify-center content-center">
-                <div className='p-2 bg-white rounded-full border-solid border-2 border-green-200'>
-                    <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+                <div className='p-2 bg-white rounded-lg border-solid border-2 border-green-200 flex gap-2' onClick={() => {setIsSearchOpen(true)}}>
+                    <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className=' text-gray-300 self-center'/>
+                    { isSearchOpen && searchInput }
                 </div>
                 <div className='p-2 bg-white border-solid border-2 border-green-200 rounded-lg flex gap-1'>
                     <p>Filters</p>
