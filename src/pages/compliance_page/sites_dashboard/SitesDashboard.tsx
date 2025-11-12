@@ -11,14 +11,14 @@ library.add(fas, far, fab)
 export default function SitesDashboard () {
 
     const [activeRegion, setActiveRegion] = useState('')
-    const {temporaryRegions, complianceData} = useContext(RegionContext)
+    const { complianceData } = useContext(RegionContext)
 
     return (
         <div className=''>
             <div className="flex p-2">
                 <div className="flex flex-cols flex-1 gap-5">
                     {
-                        temporaryRegions.map((item) => {
+                        complianceData.regions.data.map((item) => {
                             return (
                                 <RegionCard region={item} activeRegion={activeRegion} setActiveRegion={setActiveRegion}/>
                             )
@@ -39,9 +39,9 @@ export default function SitesDashboard () {
                     <h1 className='text-lg'>Sites</h1>
                     <div className='grid grid-cols-4 gap-4'>
                         {
-                            complianceData.sites.data.map(() => {
+                            complianceData.sites.data.map((item) => {
                                 return (
-                                     <SiteCard /> // ADD PERSONAL INFORMATION
+                                     <SiteCard site={item.site_name} teamLeader={item.team_leader}/> // ADD PERSONAL INFORMATION
                                 )
                             })
                         }                                              
@@ -68,8 +68,8 @@ function RegionCard ({ region, activeRegion, setActiveRegion }: RegionCardProp) 
     return (
         <div className={`${ activeRegion === region.region ? 'bg-green-500' : 'bg-white'} border-green-200 border-2 border-solid rounded-xl flex gap-2 content-center justify-center py-1 px-2 cursor-pointer`} onClick={() => {setActiveRegion(region.region)}}>
             <p className='self-center'>{region.region}</p>
-            <div className="self-center bg-green-200 rounded-full p-1"><p className='text-green-700'>{ region.number }</p></div>
-            <div className="self-center bg-red-200 rounded-full p-1"><p className='text-red-700'>{ region.number }</p></div>
+            <div className="self-center bg-green-200 rounded-full p-1"><p className='text-green-700'>{ 23}</p></div>
+            <div className="self-center bg-red-200 rounded-full p-1"><p className='text-red-700'>{ 50 }</p></div>
         </div>
     )
 }

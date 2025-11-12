@@ -8,35 +8,28 @@ import supabase from './utility/supabase'
 
 function App() {
 
-const temporaryRegions = [{number: 27, region: 'North', status: 'All Calibrated'}, {number: 31, region: 'South', status: 'All Calibrated'}, {number: 12, region: 'West', status: 'All Calibrated'}, {number: 17, region: 'East', status: 'Missing Calibrations'}]
-const {complianceData, setSites} = SitesReducer()
+const {complianceData, setSites, setRegions} = SitesReducer()
 
 useEffect(() => {
 
-  const fetchSites = async () => {
+  const fetchData = async (table: string, stateSetter: (data: Array<object>) => void) => {
 
-    const {data} = await supabase
-      .from('sites')
+    const { data } = await supabase
+      .from(table)
       .select('*')
-      setSites(data)
+      stateSetter(data)
 
   }
 
-  // Region Fetch
-
-  fetchSites()
-  // Region Call
-
-  // Move both sites and region call into a reusable hook
+  fetchData('sites', setSites)
+  fetchData('regions', setRegions)
 
 }, [])
-
-console.log(complianceData)
 
   return (
     <div className='w-full min-h-screen rounded-xl flex flex-col'>
       <Header />
-        <RegionContext value={{temporaryRegions, complianceData}}>
+        <RegionContext value={{ complianceData }}>
         <div className='rounded-xl p-2 bg-gray-100 min-h-full flex-1'>
           <Outlet />
         </div>
