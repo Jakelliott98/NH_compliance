@@ -8,7 +8,7 @@ export default function SiteCard ({site, teamLeader}: SiteCardProps) {
 
 
     return (
-        <div className="bg-white rounded-xl w-fit p-4 border-solid border-2 border-gray-400 cursor-pointer">
+        <div className="bg-white rounded-xl w-full p-4 border-solid border-2 border-gray-400 cursor-pointer">
             <div className="border-b-1 border-dashed border-black flex justify-between pb-2">
                 <div className="w-6/12">
                     <p className="text-sm">{site}</p>
