@@ -1,21 +1,28 @@
-import CalibrationCard from "../calibration-card/CalibrationCard"
+import { Outlet } from "react-router"
+import { useParams } from "react-router"
+import { useContext } from "react"
+import RegionContext from "../context/RegionContext"
+import { NavLink } from "react-router"
+
 
 export default function SitePage () {
 
+    const { complianceData } = useContext(RegionContext)
+    const siteID = useParams()
+    const site = complianceData.sites.data.find(item => item.slug === siteID.Site)
 
     return (
-
         <div className="flex flex-col bg-white p-5 rounded-xl my-2">
             <div className="flex flex-col gap-4 border-b-1 border-solid border-gray-300 pb-2">
-                <h1 className="font-bold text-xl">Title</h1>
+                <h1 className="font-bold text-xl">{site.site_name}</h1>
                 <div className="flex flex-row gap-10">
                     <div className="flex flex-col">
                         <p className="text-xs uppercase text-gray-500">Team Leader</p>
-                        <p className="text-sm">Anne Weyer</p>
+                        <p className="text-sm">{site.team_leader}</p>
                     </div>
                     <div className="flex flex-col">
                         <p className="text-xs uppercase text-gray-500">Last Calibrated</p>
-                        <p className="text-sm">12th October 2025</p>
+                        <p className="text-sm">{site.last_calibrated}</p>
                     </div>
                     <div className="flex flex-col">
                         <p className="text-xs uppercase text-gray-500">Report</p>
@@ -23,17 +30,11 @@ export default function SitePage () {
                     </div>
                 </div>
                 <div className="flex flex-row gap-10">
-                    <p className="text-sm text-gray-500">Overview</p>
-                    <p className="text-sm text-gray-500">Results</p>
-                    <p className="text-sm text-gray-500">Calibrations</p>
+                    <NavLink to="."><p className="text-sm text-gray-500">Overview</p></NavLink>
+                    <NavLink to="Results"><p className="text-sm text-gray-500">Results</p></NavLink>
+                    <NavLink to="Calibration"><p className="text-sm text-gray-500">Calibrations</p></NavLink>
                 </div>
-
-            </div>
-            <div className="flex flex-col w-full gap-2 my-2">
-                <CalibrationCard date='27 October 2025' clinician='JE'/>
-                <CalibrationCard date='3 November 2025' clinician='JE'/>
-                <CalibrationCard date='10 November 2025' clinician='JE'/>
-                <CalibrationCard date='17 November 2025' clinician='JE'/>
+                <Outlet />
             </div>
         </div>
     )

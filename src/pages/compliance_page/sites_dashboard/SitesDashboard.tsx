@@ -2,6 +2,7 @@ import SiteCard from './SiteCard'
 import { useContext, useState } from 'react'
 import RegionContext from '../../../components/context/RegionContext'
 import RegionsFilter from './components/RegionFilter'
+import { Link } from 'react-router'
 
 export default function SitesDashboard () {
 
@@ -48,7 +49,7 @@ function SitesSection({ sites }) {
                     {
                         sites.map((item) => {
                             return (
-                                    <SiteCard key={item.site_id} site={item}/> // ADD PERSONAL INFORMATION
+                                    <Link to={`${item.slug}`} key={item.site_id}><SiteCard key={item.site_id} site={item}/></Link>
                             )
                         })
                     }                                              
