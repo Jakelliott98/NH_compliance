@@ -45,7 +45,7 @@ function SitesSection({ sites }) {
     return (
         <div className='p-2'>
                 <h1 className='text-lg'>Sites</h1>
-                <div className='grid grid-cols-5 gap-4'>
+                <div className='grid grid-cols-5 grid-rows-[1fr] gap-4'>
                     {
                         sites.map((item) => {
                             return (
