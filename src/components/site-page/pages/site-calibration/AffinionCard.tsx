@@ -20,7 +20,7 @@ export default function AffinionCard ({ affinion }) {
                         <div className='bg-green-100 rounded-full p-3 flex items-center justify-center'>
                             <FontAwesomeIcon icon="fa-regular fa-calendar-check" className='text-xl text-green-400'/>
                         </div>
-                        <p className='text-sm text-gray-500 text-center'>{moment(affinion.last_calibrated).format("Mo MMMM")}</p>
+                        <p className='text-sm text-gray-500 text-center'>{moment(affinion.last_calibrated).format("Do MMMM")}</p>
                     </div>
                     <div className='flex flex-col justify-center items-center'>
                         <div className='bg-orange-100 rounded-full p-3 flex items-center justify-center'>                        

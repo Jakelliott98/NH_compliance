@@ -1,16 +1,17 @@
+import moment from "moment";
 
+export default function CalibrationCard ({ calibration }) {
 
-export default function CalibrationCard ({ lipid, title }) {
-
+    const isLipids = calibration.test_type === 'lipids';
+    const title = isLipids ? 'Lipids' : 'HBA1c';
+    
     const hba1cDisplay = (
         <>
             <div className='flex justify-between'>
                 <p className="font-medium">C1</p>
-                <p>60 - 78</p>
             </div>
             <div className='flex justify-between'>
                 <p className="font-medium">C2</p>
-                <p>30 - 42</p>
             </div>
         </>
     )
@@ -55,13 +56,13 @@ export default function CalibrationCard ({ lipid, title }) {
             <div className='bg-white rounded-xl p-3'>
                 <div className='border-b-2 border-solid border-gray-300 py-2'>
                     <p className='font-medium'>{title}</p>
-                    <p className='text-gray-400 text-sm'>Lot Number: 345676543</p>
+                    <p className='text-gray-400 text-sm'>Lot Number: {calibration.lot_number}</p>
                 </div>
                 <div className='py-2'>
-                    { lipid ? lipidDisplay : hba1cDisplay }
+                    { isLipids ? lipidDisplay : hba1cDisplay }
                 </div>
             </div>
-            <p className='text-red-900 self-center text-sm p-1'>Expires 27th October</p>
+            <p className='text-red-900 self-center text-sm p-1'>Expires {moment(calibration.expiry_date).format('dddd Do MMMM')}</p>
         </div>
     )
 }
