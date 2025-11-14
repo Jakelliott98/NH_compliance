@@ -59,7 +59,7 @@ export default function SitePage () {
                     <NavLink to="Calibration" className={({isActive}) => {return isActive ? 'text-blue-500' : 'text-gray-500'}}><p className="text-sm">Calibrations</p></NavLink>
                 </div>
             </div>
-            <Outlet />
+            <Outlet context={site.site_id}/>
         </div>
     )
 }
