@@ -23,6 +23,7 @@ ReactDOM.createRoot(root).render(
           <Route path="Sites" element={<SitesDashboard/>}/>
           <Route path="Sites/:Site" element={<SitePage />}>
             <Route index element={<SiteOverview />}/>
+            <Route path="Overview" element={<SiteOverview />}/>
             <Route path="Results" element={<SiteResults />}/>
             <Route path="Calibration" element={<SiteCalibration />}/>
           </Route>

@@ -54,9 +54,9 @@ export default function SitePage () {
                     </div>
                 </div>
                 <div className="flex flex-row gap-10">
-                    <NavLink to="."><p className="text-sm text-gray-500">Overview</p></NavLink>
-                    <NavLink to="Results"><p className="text-sm text-gray-500">Results</p></NavLink>
-                    <NavLink to="Calibration"><p className="text-sm text-gray-500">Calibrations</p></NavLink>
+                    <NavLink to="Overview" className={({isActive}) => {return isActive ? 'text-blue-500' : 'text-gray-500'}}><p className="text-sm">Overview</p></NavLink>
+                    <NavLink to="Results" className={({isActive}) => {return isActive ? 'text-blue-500' : 'text-gray-500'}}><p className="text-sm">Results</p></NavLink>
+                    <NavLink to="Calibration" className={({isActive}) => {return isActive ? 'text-blue-500' : 'text-gray-500'}}><p className="text-sm">Calibrations</p></NavLink>
                 </div>
             </div>
             <Outlet />
