@@ -9,7 +9,7 @@ import SitesDashboard from './pages/compliance_page/sites_dashboard/SitesDashboa
 import ReportSection from './pages/compliance_page/reports/Reports.tsx'
 import SitePage from './components/site-page/SitePage.tsx'
 import SiteResults from './components/site-page/pages/SiteResults.tsx'
-import SiteCalibration from './components/site-page/pages/SiteCalibration.tsx'
+import SiteCalibration from './components/site-page/pages/site-calibration/SiteCalibration.tsx'
 import SiteOverview from './components/site-page/pages/SiteOverview.tsx'
 
 const root = document.getElementById('root');
