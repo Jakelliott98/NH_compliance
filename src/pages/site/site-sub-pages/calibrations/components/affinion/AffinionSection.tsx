@@ -1,6 +1,6 @@
 import { useOutletContext } from "react-router"
 import { useState, useEffect } from "react"
-import supabase from "../../../../../utility/supabase"
+import supabase from "../../../../../../utility/supabase"
 import AffinionCard from "./AffinionCard"
 
 export default function AffinionSection () {

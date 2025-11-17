@@ -1,7 +1,8 @@
 import { useOutletContext } from "react-router"
 import { useState, useEffect } from "react"
-import supabase from "../../../../../utility/supabase"
+import supabase from "../../../../../../utility/supabase"
 import CalibrationCard from "./CalibrationCard"
+import LoadingComponent from "../../../../../../components/loading- component/LoadingComponent"
 
 export default function CalibrationSection () {
 
@@ -32,14 +33,45 @@ export default function CalibrationSection () {
         <div className='flex-1 flex flex-col gap-3 p-3'>
             <p className='font-medium text-lg'>Calibration Fluids</p>
             <div className='flex gap-8'>
-            {
-                calibrations.data.map((item) => {
-                    return (
-                        <CalibrationCard key={item.id} calibration={item}/>
-                )})
-            }
+                {
+                    <CalibrationHolder calibrations={calibrations}/>
+                }
              </div>
         </div>
     )
 
 }
+
+function CalibrationHolder ({ calibrations }) {
+
+    if (calibrations.loading) {
+        return <LoadingComponent />
+    } else {
+        return (
+            <>
+            {
+                calibrations.data.map((item) => {
+                    return (
+                        <CalibrationCard key={item.id} calibration={item}/>
+                    )
+                })
+            }   
+        </>
+    )
+    }
+
+}
+
+/*
+
+function CalibrationHolder ({calibrations}: Array<object>) {
+    console.log(calibrations)
+    return (
+        {
+                calibrations.map((item) => {
+                    return (
+                        <CalibrationCard key={item.id} calibration={item}/>
+                )})
+        }
+    )
+}*/

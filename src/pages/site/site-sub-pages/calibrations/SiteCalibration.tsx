@@ -1,5 +1,5 @@
-import AffinionSection from "./components/AffinionSection"
-import CalibrationSection from "./components/CalibrationSection"
+import AffinionSection from "./components/affinion/AffinionSection"
+import CalibrationSection from "./components/calibration-fluid/CalibrationSection"
 
 export default function SiteCalibration () {
 
