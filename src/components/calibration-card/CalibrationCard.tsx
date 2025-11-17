@@ -56,27 +56,6 @@ function AffinionResults () {
     )
 }
 
-/*
-
-   <p className='font-bold'></p>
-            <p className='font-bold'>Control 1</p>
-            <p className='font-bold'>Control 2</p>
-
-            <p className='font-bold'>Hba1c</p>
-            <p>45</p>
-            <p>65</p>
-            <p className='font-bold'>Total Cholesterol</p>
-            <p>6.2</p>
-            <p>8.6</p>
-            <p className='font-bold'>HDL Cholesterol</p>
-            <p>2.3</p>
-            <p>4.7</p>
-            <p className='font-bold'>Triglycerides</p>
-            <p>1.77</p>
-            <p>4.6</p>
-
-            */
-
 interface CalibrationCardProps {
     date: string,
     clinician: string,

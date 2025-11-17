@@ -1,7 +1,7 @@
 import { Outlet } from "react-router"
 import { useParams } from "react-router"
 import { useContext, useEffect } from "react"
-import RegionContext from "../context/RegionContext"
+import RegionContext from "../../components/context/RegionContext"
 import { NavLink } from "react-router"
 import supabase from "../../utility/supabase"
 import { useState } from "react"
@@ -63,37 +63,3 @@ export default function SitePage () {
         </div>
     )
 }
-
-
-/*
-
-            <div className="flex flex-col justify-between">
-                <h1 className="text-xl font-bold">Canary Wharf</h1>
-                <p>Anne Weyer</p>
-            </div>
-            <div className="w-full flex flex-row justify-between">
-                <div className="bg-white rounded-xl p-2">
-                    <p>Affinion 1</p>
-                    <p>NH234567</p>
-                    <p>Last Calibrated: '27 October'</p>
-                </div>
-                <div className="bg-white rounded-xl p-2">
-                    <p>Affinion 2</p>
-                    <p>NH234567</p>
-                    <p>Last Calibrated: '27 October'</p>
-                </div>
-                <div className="bg-white rounded-xl p-2">
-                    <p>Affinion 3</p>
-                    <p>NH234567</p>
-                    <p>Last Calibrated: '27 October'</p>
-                </div>
-            </div>
-            <div className="flex flex-col w-full gap-2">
-                <CalibrationCard date='27 October 2025' clinician='JE'/>
-                <CalibrationCard date='3 November 2025' clinician='JE'/>
-                <CalibrationCard date='10 November 2025' clinician='JE'/>
-                <CalibrationCard date='17 November 2025' clinician='JE'/>
-
-            </div>
-
-            */

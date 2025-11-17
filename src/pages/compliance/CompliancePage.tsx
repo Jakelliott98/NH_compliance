@@ -19,26 +19,3 @@ export default function CompliancePage () {
         </div>
     )
 }
-
-/*
-
-—| Compliance
-	—| Mini NavBar with Sites | Reports
-		—| Grid of all Nuffield Health Sites
-			—| Flex-box over the top of 4 containers to set regions for the sites
-			—| Filter drop-down for specific
-			—| Search bar to find specific site
-			—| All the sites container boxes for the calibrations
-		—| Reports of the calibrations over the last 3 months
-
-—| CompliancePage
-	—| ComplianceNavBar
-		—\ SitesDashboardSection
-			—| RegionsFilterSection
-			—| FiltersContainer
-			—\ SearchBarContainer
-			—| SitesDashboard 
-		—\ ReportsSection
-
-
-*/

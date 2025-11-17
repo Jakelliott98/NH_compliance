@@ -1,4 +1,4 @@
-import CalibrationCard from "../../calibration-card/CalibrationCard"
+import CalibrationCard from "../../../../components/calibration-card/CalibrationCard"
 
 export default function SiteResults () {
 

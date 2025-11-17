@@ -1,9 +1,10 @@
+import LoadingComponent from "../../components/loading- component/LoadingComponent";
 
 
 export default function DashboardPage () {
 
     return (
-        <p>Dashboard</p>
+        <LoadingComponent />
     )
 }
 

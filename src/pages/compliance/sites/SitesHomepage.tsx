@@ -1,8 +1,7 @@
-import SiteCard from './SiteCard'
 import { useContext, useState } from 'react'
 import RegionContext from '../../../components/context/RegionContext'
 import RegionsFilter from './components/RegionFilter'
-import { Link } from 'react-router'
+import SitesSection from './components/SitesSection'
 
 export default function SitesDashboard () {
 
@@ -36,24 +35,6 @@ export default function SitesDashboard () {
         <div className=''>
             <RegionsFilter activeRegion={activeRegion.activeRegion} selectRegion={selectRegion}/>
             <SitesSection sites={filteredSites} />
-        </div>
-    )
-}
-
-
-function SitesSection({ sites }) {
-    return (
-        <div className='p-2'>
-                <h1 className='text-lg'>Sites</h1>
-                <div className='grid grid-cols-5 grid-rows-[1fr] gap-4'>
-                    {
-                        sites.map((item) => {
-                            return (
-                                    <Link to={`${item.slug}`} key={item.site_id}><SiteCard key={item.site_id} site={item}/></Link>
-                            )
-                        })
-                    }                                              
-                </div>
         </div>
     )
 }
