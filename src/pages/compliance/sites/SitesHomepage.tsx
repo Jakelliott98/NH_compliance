@@ -1,12 +1,17 @@
 import { useContext, useState } from 'react'
 import RegionContext from '../../../components/context/RegionContext'
-import RegionsFilter from './components/RegionFilter'
+import RegionsFilter from './components/Regions/RegionFilter'
 import SitesSection from './components/SitesSection'
+
+interface ActiveRegionState{
+    activeRegion: string,
+    isFiltered: boolean,
+}
 
 export default function SitesDashboard () {
 
     const { complianceData } = useContext(RegionContext)
-    const [activeRegion, setActiveRegion] = useState({
+    const [activeRegion, setActiveRegion] = useState<ActiveRegionState>({
         activeRegion: '',
         isFiltered: false,
     })

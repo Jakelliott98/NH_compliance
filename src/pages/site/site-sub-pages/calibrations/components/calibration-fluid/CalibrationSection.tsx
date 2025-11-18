@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import supabase from "../../../../../../utility/supabase"
 import CalibrationCard from "./CalibrationCard"
 import LoadingComponent from "../../../../../../components/loading- component/LoadingComponent"
+import type { CalibrationType } from "../../../../../../types/calibration"
 
 export default function CalibrationSection () {
 
@@ -42,8 +43,18 @@ export default function CalibrationSection () {
 
 }
 
-function CalibrationHolder ({ calibrations }) {
+interface CalibrationState{
+    data: CalibrationType[],
+    loading: boolean,
+    error: boolean
+}
 
+interface CalibrationHolderProps{
+    calibrations: CalibrationState,
+}
+
+function CalibrationHolder ({ calibrations }: CalibrationHolderProps) {
+    console.log(calibrations)
     if (calibrations.loading) {
         return <LoadingComponent />
     } else {
@@ -61,17 +72,3 @@ function CalibrationHolder ({ calibrations }) {
     }
 
 }
-
-/*
-
-function CalibrationHolder ({calibrations}: Array<object>) {
-    console.log(calibrations)
-    return (
-        {
-                calibrations.map((item) => {
-                    return (
-                        <CalibrationCard key={item.id} calibration={item}/>
-                )})
-        }
-    )
-}*/

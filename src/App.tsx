@@ -18,7 +18,6 @@ useEffect(() => {
       .from(table)
       .select('*')
       stateSetter(data)
-
   }
 
   fetchData('sites', setSites)

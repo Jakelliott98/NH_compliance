@@ -5,13 +5,14 @@ import RegionContext from "../../components/context/RegionContext"
 import { NavLink } from "react-router"
 import supabase from "../../utility/supabase"
 import { useState } from "react"
+import type { SiteData } from "../../types/site"
 
 
 export default function SitePage () {
 
     const { complianceData } = useContext(RegionContext)
     const siteID = useParams()
-    const site = complianceData.sites.data.find(item => item.slug === siteID.Site)
+    const site = complianceData.sites.data.find((site: SiteData) => {return site.slug === siteID.Site})
     const [affinions, setAffinions] = useState({
         loading: true,
         data: [],

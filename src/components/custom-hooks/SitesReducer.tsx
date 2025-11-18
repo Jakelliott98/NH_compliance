@@ -1,17 +1,23 @@
 import { useReducer } from "react";
+import type { SiteData } from "../../types/site";
+import type { RegionData } from "../../types/region";
 
-interface ResultState {
+export interface ResultState {
     sites: {
-        data: Array<object>,
+        data: Array<SiteData>,
         loading: boolean, 
         errors: boolean,
     }
     regions: {
-        data: Array<object>,
+        data: Array<RegionData>,
         loading: boolean, 
         errors: boolean,
     }
 }
+
+type Action = 
+    | { type: "SET_SITES", value: SiteData[] }
+    | { type: "SET_REGIONS", value: RegionData[] }
 
 const initializer: ResultState = {
     sites: {
@@ -30,14 +36,14 @@ export default function SitesReducer() {
 
     const [complianceData, dispatch] = useReducer(reducer, initializer)
 
-    function setSites(sites) {
+    function setSites(sites: SiteData[]) {
         dispatch({
             type: 'SET_SITES',
             value: sites, 
         })
     }
 
-    function setRegions(regions) {
+    function setRegions(regions: RegionData[]) {
         dispatch({
             type: 'SET_REGIONS',
             value: regions,
@@ -48,7 +54,7 @@ export default function SitesReducer() {
 
 }
 
-function reducer(state, action) {
+function reducer(state: ResultState, action: Action) {
 
     switch (action.type) {
         

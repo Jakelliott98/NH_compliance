@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router"
 import { useState, useEffect } from "react"
 import supabase from "../../../../../../utility/supabase"
 import AffinionCard from "./AffinionCard"
+import type { AffinionCardType } from "../../../../../../types/affinion"
 
 export default function AffinionSection () {
 
@@ -33,9 +34,9 @@ export default function AffinionSection () {
             <p className='font-medium text-lg'>Affinions</p>
             <div className="flex gap-8">
                 {
-                    affinions.data.map((item) => {
+                    affinions.data.map((item: AffinionCardType) => {
                         return (
-                            <AffinionCard key={item.id} affinion={item}/>
+                            <AffinionCard key={item.affinion_id} affinion={item}/>
                         )
                     })
                 }

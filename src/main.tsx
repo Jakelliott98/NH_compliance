@@ -34,8 +34,3 @@ ReactDOM.createRoot(root).render(
     </Routes>
   </BrowserRouter>
 )
-
-
-
-/*           <Route path="Site" element={<SitePage />}/>
-*/

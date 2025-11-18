@@ -5,15 +5,13 @@ interface SiteCardProps {
         team_leader: string,
         site_name: string,
         last_calibrated: Date,
-    },
+    }
 }
 
 export default function SiteCard ({site}: SiteCardProps) {
 
     const difference = moment().diff(site.last_calibrated, "days");
     const isCalibrated = difference <= 7 ? true : false;
-
-    // ADD THE LAST CALIBRATED BELOW REST
 
     return (
         <div className={`${ isCalibrated ? 'bg-white' : 'bg-red-100'} rounded-xl w-full h-full p-4 border-solid border-2 border-gray-400 cursor-pointer`}>

@@ -1,9 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-library.add(fas, far, fab)
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from 'react-router'
 
 export default function Header () {
@@ -16,7 +12,7 @@ export default function Header () {
             <NavLink to="/Compliance" className={( {isActive}) => {return isActive ? 'text-blue-500' : 'text-black'}}>Compliance</NavLink>
             <NavLink to="/Settings" className={( {isActive}) => {return isActive ? 'text-blue-500' : 'text-black'}}>Settings</NavLink>
         </nav>
-        <FontAwesomeIcon className='self-center' icon="fa-regular fa-circle-user" />
+        <FontAwesomeIcon icon={faCircleUser} className='self-center'/>
     </div>
     )
 }

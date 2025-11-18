@@ -1,6 +1,12 @@
 import moment from "moment";
+import type { CalibrationType } from "../../../../../../types/calibration";
 
-export default function CalibrationCard ({ calibration }) {
+interface CalibrationCardProps{
+    calibration: CalibrationType,
+}
+
+export default function CalibrationCard ({calibration}: CalibrationCardProps) {
+    console.log(calibration)
 
     const isLipids = calibration.test_type === 'lipids';
     const title = isLipids ? 'Lipids' : 'HBA1c';
@@ -13,7 +19,7 @@ export default function CalibrationCard ({ calibration }) {
                     <p className='text-gray-400 text-sm'>Lot Number: {calibration.lot_number}</p>
                 </div>
                 <div className='py-2'>
-                    { isLipids ? <LipidsDisplay /> : <Hba1cDisplay calibration={calibration.calibration_ranges}/> }
+                    { isLipids ? <LipidsDisplay /> : <Hba1cDisplay calibrationRanges={calibration.calibration_ranges}/> }
                 </div>
             </div>
             <p className='text-red-900 self-center text-sm p-1'>Expires {moment(calibration.expiry_date).format('dddd Do MMMM')}</p>
@@ -21,17 +27,18 @@ export default function CalibrationCard ({ calibration }) {
     )
 }
 
-function Hba1cDisplay ({ calibration }) {
+// CLEAN UP RANGES / DATABASE
 
+function Hba1cDisplay ({ calibrationRanges }) {
     return (
         <>
             <div className='flex justify-between'>
                 <p className="font-medium">C1</p>
-                <p>{calibration.c1.lower} - {calibration.c1.upper}</p>
+                <p>{calibrationRanges.c1.lower} - {calibrationRanges.c1.upper}</p>
             </div>
             <div className='flex justify-between'>
                 <p className="font-medium">C2</p>
-                <p>{calibration.c2.lower} - {calibration.c2.upper}</p>
+                <p>{calibrationRanges.c2.lower} - {calibrationRanges.c2.upper}</p>
             </div>
         </>
     )

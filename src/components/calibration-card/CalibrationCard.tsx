@@ -1,10 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { useState } from 'react'
-library.add(fas, far, fab)
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { useState } from 'react';
 
 interface AffinionDropdownProps {
     title: string,
@@ -21,7 +17,7 @@ function AffinionDropdown ({ title }: AffinionDropdownProps) {
                     <p className='flex-1 text-gray-500'>{title}</p>
                     <p className='flex-1 text-gray-500 border-l-1 border-solid border-gray-300 px-1 text-center'>NH2353432</p>
                 </div>
-                <FontAwesomeIcon className='cursor-pointer text-gray-500'  icon={ isOpen ? "fa-solid fa-caret-up" : "fa-solid fa-caret-down"} onClick={() => {setIsOpen(prev => !prev)}}/>
+                <FontAwesomeIcon icon={isOpen ? faCaretUp : faCaretDown} className='cursor-pointer text-gray-500' onClick={() => {setIsOpen(prev => !prev)}}/>
             </div>
             {
                 isOpen && <AffinionResults />
@@ -58,10 +54,9 @@ function AffinionResults () {
 
 interface CalibrationCardProps {
     date: string,
-    clinician: string,
 }
 
-function CalibrationCard ({ date, clinician }: CalibrationCardProps) {
+function CalibrationCard ({ date }: CalibrationCardProps) {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -76,7 +71,7 @@ function CalibrationCard ({ date, clinician }: CalibrationCardProps) {
         <div className='flex flex-col bg-green-100 rounded-xl p-6 gap-4'>
             <div className='flex flex-row justify-between' onClick={() => {setIsOpen(prev => !prev)}}>
                 <p className='text-sm text-gray-500'>{ date }</p>
-                <FontAwesomeIcon className='cursor-pointer text-sm text-gray-500' icon={ isOpen ? "fa-solid fa-caret-up" : "fa-solid fa-caret-down"}/>
+                <FontAwesomeIcon icon={isOpen ? faCaretUp : faCaretDown} className='cursor-pointer text-gray-500'/>
             </div>
             {
                 isOpen && affinionDiv

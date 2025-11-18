@@ -1,6 +1,6 @@
 
 export default function ReportSection () {
     return (
-        <p>hi</p>
+        <p>Report Page...</p>
     )
 }

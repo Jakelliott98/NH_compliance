@@ -1,7 +1,12 @@
 import { Link } from "react-router"
 import SiteCard from "./SiteCard"
+import type { SiteData } from "../../../../types/site"
 
-export default function SitesSection({ sites }) {
+interface SitesSectionProps {
+    sites: SiteData[],
+}
+
+export default function SitesSection({ sites }: SitesSectionProps) {
     return (
         <div className='p-2'>
                 <h1 className='text-lg'>Sites</h1>
