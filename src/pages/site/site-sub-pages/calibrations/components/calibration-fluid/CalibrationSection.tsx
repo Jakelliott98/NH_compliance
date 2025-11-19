@@ -1,34 +1,14 @@
 import { useOutletContext } from "react-router"
-import { useState, useEffect } from "react"
-import supabase from "../../../../../../utility/supabase"
 import CalibrationCard from "./CalibrationCard"
 import LoadingComponent from "../../../../../../components/loading- component/LoadingComponent"
 import type { CalibrationType } from "../../../../../../types/calibration"
+import useFetchData from "../../../../../../components/custom-hooks/useFetchData"
 
 export default function CalibrationSection () {
 
-    const siteID = useOutletContext()
-    const [calibrations, setCalibrations] = useState({
-        data: [],
-        loading: true,
-        error: false,
-    })
+    const {siteID} = useOutletContext()
+    const calibrations = useFetchData(siteID, 'calibrations')
 
-    useEffect(() => {
-
-        const getCalibrations = async () => {
-            const {data} = await supabase
-            .from('calibrations')
-            .select('*')
-            .eq('site_id', siteID)
-            setCalibrations({
-                data: data,
-                loading: false,
-                error: false,
-            })
-        }
-        getCalibrations()
-    }, [siteID])
 
     return (
         <div className='flex-1 flex flex-col gap-3 p-3'>

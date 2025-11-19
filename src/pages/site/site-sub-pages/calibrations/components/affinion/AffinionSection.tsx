@@ -1,33 +1,12 @@
 import { useOutletContext } from "react-router"
-import { useState, useEffect } from "react"
-import supabase from "../../../../../../utility/supabase"
 import AffinionCard from "./AffinionCard"
 import type { AffinionCardType } from "../../../../../../types/affinion"
+import useFetchData from "../../../../../../components/custom-hooks/useFetchData"
 
 export default function AffinionSection () {
 
-    const siteID = useOutletContext()
-    const [affinions, setAffinions] = useState({
-        data: [],
-        loading: true,
-        error: false,
-    })
-
-    useEffect(() => {
-
-        const getAffinions = async () => {
-            const { data } = await supabase
-            .from('affinions')
-            .select('*')
-            .eq('site_id', siteID)
-            setAffinions({
-                data: data, 
-                loading: false,
-                error: false,
-                })
-        }
-        getAffinions()
-    }, [siteID])
+    const { siteID } = useOutletContext()
+    const affinions = useFetchData(siteID, 'affinions')
 
     return (
         <div className='flex-1 flex flex-col gap-3 p-3'>
