@@ -23,7 +23,7 @@ interface LipidType {
     }
 }
 
-interface ResultsData {
+export interface ResultsData {
     hba1c: Hba1cType,
     lipids: LipidType,
 }

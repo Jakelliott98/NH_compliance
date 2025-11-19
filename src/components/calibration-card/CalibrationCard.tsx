@@ -3,6 +3,7 @@ import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
 import moment from 'moment';
 import type { ResultsType } from '../../types/result';
+import type { AffinionCardType } from '../../types/affinion';
 
 interface AffinionDropdownProps {
     result: ResultsType,
@@ -18,7 +19,9 @@ function AffinionDropdown ({ result } :AffinionDropdownProps) {
 }
 
 
-function AffinionResults ({ result }) {
+function AffinionResults ({result}) {
+
+    console.log(result)
 
     return (
         <div className='py-4'>
@@ -46,19 +49,19 @@ function AffinionResults ({ result }) {
 }
 
 interface CalibrationCardProps {
-    date: string,
     result: ResultsType,
+    affinion: AffinionCardType,
 }
 
-function CalibrationCard ({ date, result }: CalibrationCardProps) {
+function CalibrationCard ({ result, affinion }: CalibrationCardProps) {
 
     const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div className='flex flex-col bg-green-100 rounded-xl p-6 gap-4'>
             <div className='flex flex-row justify-between' onClick={() => {setIsOpen(prev => !prev)}}>
-                <p className='text-sm text-gray-500'>{ moment(date).format('Do MMMM YYYY') }</p>
-                <p className='text-sm text-gray-500'>Affinion 1 | NH2345343</p>
+                <p className='text-sm text-gray-500'>{ moment(result.calibration_date).format('Do MMMM YYYY') }</p>
+                <p className='text-sm text-gray-500'>{affinion.name} | NH{affinion.nh_number}</p>
                 <FontAwesomeIcon icon={isOpen ? faCaretUp : faCaretDown} className='cursor-pointer text-gray-500'/>
             </div>
             {
