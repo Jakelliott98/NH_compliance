@@ -7,4 +7,5 @@ export interface AffinionCardType{
     name: string,
     nh_number: string,
     site_id: number,
+    last_clean: Date,
 }

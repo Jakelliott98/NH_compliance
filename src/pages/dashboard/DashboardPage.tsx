@@ -1,10 +1,35 @@
-import LoadingComponent from "../../components/loading- component/LoadingComponent";
 
 
 export default function DashboardPage () {
 
     return (
-        <LoadingComponent />
+		<div className="">
+			<div className=" p-3 rounded-xl">
+				Total Compliance
+			</div>
+			<div className=" p-3 rounded-xl flex flex-row justify-around">
+				<div className="bg-blue-500 p-3 rounded-xl">
+					Calibrated
+				</div>
+				<div className="bg-blue-500 p-3 rounded-xl">
+					Due Soon
+				</div>
+				<div className="bg-blue-500 p-3 rounded-xl">
+					Overdue
+				</div>
+			</div>
+			<div className="p-3 rounded-xl flex flex-row justify-around">
+				<div className="bg-blue-500 p-3 rounded-xl">
+					Flagging Sites
+				</div>
+				<div className="bg-blue-500 p-3 rounded-xl">
+					Missing Data
+				</div>
+			</div>
+			<div className="p-3 rounded-xl bg-white">
+				<input placeholder="Search for Site of Affinion Machine..." className="w-full"/>
+			</div>
+		</div>
     )
 }
 

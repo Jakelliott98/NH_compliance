@@ -54,7 +54,6 @@ interface CalibrationHolderProps{
 }
 
 function CalibrationHolder ({ calibrations }: CalibrationHolderProps) {
-    console.log(calibrations)
     if (calibrations.loading) {
         return <LoadingComponent />
     } else {

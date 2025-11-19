@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { faHandSparkles } from "@fortawesome/free-solid-svg-icons";
 import moment from 'moment'
-
 import type { AffinionCardType } from '../../../../../../types/affinion'
 
 interface AffinionCardProps{
@@ -27,7 +26,7 @@ export default function AffinionCard ({ affinion }: AffinionCardProps) {
                         <div className='bg-orange-100 rounded-full p-3 flex items-center justify-center'>                        
                             <FontAwesomeIcon icon={faHandSparkles} className='text-xl text-orange-400'/>
                         </div>
-                        <p className='text-sm text-gray-500 text-center'>Last Clean Date</p>
+                        <p className='text-sm text-gray-500 text-center'>{moment(affinion.last_clean).format("Do MMMM")}</p>
                     </div>
                 </div>
             </div>
