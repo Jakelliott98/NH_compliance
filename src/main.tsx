@@ -13,6 +13,12 @@ import SiteCalibration from './pages/site/site-sub-pages/calibrations/SiteCalibr
 import SiteOverview from './pages/site/site-sub-pages/overview/SiteOverview.tsx'
 import Portal from './portal/Portal.tsx'
 import Form from './form/Form.tsx'
+import SiteForm from './form/pages/SiteForm.tsx'
+import OptionForms from './form/pages/OptionForms.tsx'
+import ResultsForm from './form/pages/ResultsForm.tsx'
+import FormHolder from './form/pages/FormHolder.tsx'
+import CalibrationForm from './form/pages/CalibrationFluidForm.tsx'
+import AffinionsForm from './form/pages/AffinionsForm.tsx'
 
 const root = document.getElementById('root');
 
@@ -36,7 +42,15 @@ ReactDOM.createRoot(root).render(
           </Route>
           <Route path="Settings" element={<SettingsHomepage />}/>
         </Route>
-        <Route path="Form" element={<Form />}/>
+        <Route path="Form" element={<Form />}>
+          <Route index element={<SiteForm />}/>
+          <Route path="Options" element={<FormHolder />}>
+            <Route index element={<OptionForms />}/>
+            <Route path="Results-Form" element={<ResultsForm />}/>
+            <Route path="Calibration-Form" element={<CalibrationForm />}/>
+            <Route path="Affinion-Form" element={<AffinionsForm />}/>
+          </Route >
+        </Route>
       </Route>
     </Routes>
   </BrowserRouter>
