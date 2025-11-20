@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import FormContext from "../FormContext";
 
 export default function ResultsForm () {
 
@@ -12,11 +14,14 @@ export default function ResultsForm () {
 }
 
 function FormHeader () {
+
+    const { site } = useContext(FormContext)
+
     return (
         <div className="flex flex-col gap-3 py-2">
-            <p className="text-center">Canary Wharf Medical Centre</p>
+            <p className="text-center">{site.site_name}</p>
             <div className="flex gap-5 justify-between">
-                <p>Anne Weyer</p>
+                <p>{site.team_leader}</p>
                 <p>3 Affinions</p>
             </div>
             <div className="flex gap-5 justify-between">
