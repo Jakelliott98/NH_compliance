@@ -1,4 +1,4 @@
-interface SiteData{
+export interface SiteData{
   site_id: number,
   created_at: Date,
   team_leader: string,
@@ -7,5 +7,3 @@ interface SiteData{
   last_calibrated: Date,
   slug: string,
 }
-
-export { SiteData }

@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import RegionContext from '../../../components/context/RegionContext'
 import RegionsFilter from './components/Regions/RegionFilter'
 import SitesSection from './components/SitesSection'
+import type { SiteData } from '../../../types/site'
 
 interface ActiveRegionState{
     activeRegion: string,
@@ -34,7 +35,7 @@ export default function SitesDashboard () {
 
     }
 
-    const filteredSites = activeRegion.isFiltered ? complianceData.sites.data.filter(item => item.site_region === activeRegion.activeRegion) : complianceData.sites.data;
+    const filteredSites = activeRegion.isFiltered ? complianceData.sites.data.filter((item: SiteData) => {return item.site_region === activeRegion.activeRegion}) : complianceData.sites.data;
 
     return (
         <div className=''>

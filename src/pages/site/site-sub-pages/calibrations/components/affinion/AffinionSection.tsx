@@ -1,6 +1,5 @@
 import { useOutletContext } from "react-router"
 import AffinionCard from "./AffinionCard"
-import type { AffinionCardType } from "../../../../../../types/affinion"
 import useFetchData from "../../../../../../components/custom-hooks/useFetchData"
 
 export default function AffinionSection () {
@@ -13,7 +12,7 @@ export default function AffinionSection () {
             <p className='font-medium text-lg'>Affinions</p>
             <div className="flex gap-8">
                 {
-                    affinions.data.map((item: AffinionCardType) => {
+                    affinions.data.map((item) => {
                         return (
                             <AffinionCard key={item.affinion_id} affinion={item}/>
                         )

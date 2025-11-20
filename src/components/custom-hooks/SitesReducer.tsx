@@ -1,25 +1,13 @@
 import { useReducer } from "react";
 import type { SiteData } from "../../types/site";
 import type { RegionData } from "../../types/region";
-
-export interface ResultState {
-    sites: {
-        data: Array<SiteData>,
-        loading: boolean, 
-        errors: boolean,
-    }
-    regions: {
-        data: Array<RegionData>,
-        loading: boolean, 
-        errors: boolean,
-    }
-}
+import type { ResultStateType } from "../../types/dataTypes";
 
 type Action = 
     | { type: "SET_SITES", value: SiteData[] }
     | { type: "SET_REGIONS", value: RegionData[] }
 
-const initializer: ResultState = {
+const initializer: ResultStateType = {
     sites: {
         data: [],
         loading: true,
@@ -54,7 +42,7 @@ export default function SitesReducer() {
 
 }
 
-function reducer(state: ResultState, action: Action) {
+function reducer(state: ResultStateType, action: Action) {
 
     switch (action.type) {
         

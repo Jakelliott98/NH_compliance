@@ -29,13 +29,12 @@ useEffect(() => {
     <div className='w-full min-h-screen rounded-xl flex flex-col'>
       <Header />
         <RegionContext value={{ complianceData }}>
-        <div className='rounded-xl p-2 bg-gray-100 min-h-full flex-1'>
-          <Outlet />
-        </div>
+          <div className='rounded-xl p-2 bg-gray-100 min-h-full flex-1'>
+            <Outlet />
+          </div>
         </RegionContext >
     </div>
-  )
 
-}
+)}
 
 export default App;

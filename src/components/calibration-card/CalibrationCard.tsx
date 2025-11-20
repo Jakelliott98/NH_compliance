@@ -21,8 +21,6 @@ function AffinionDropdown ({ result } :AffinionDropdownProps) {
 
 function AffinionResults ({result}) {
 
-    console.log(result)
-
     return (
         <div className='py-4'>
             <div className='grid grid-cols-3 text-center'>
@@ -55,7 +53,7 @@ interface CalibrationCardProps {
 
 function CalibrationCard ({ result, affinion }: CalibrationCardProps) {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return (
         <div className='flex flex-col bg-green-100 rounded-xl p-6 gap-4'>

@@ -3,6 +3,7 @@ import { faMagnifyingGlass, faCaretDown } from "@fortawesome/free-solid-svg-icon
 import { useContext, useState } from 'react'
 import RegionContext from '../../../../../components/context/RegionContext'
 import RegionCard from './RegionCard';
+import type { RegionData } from '../../../../../types/region';
 
 interface RegionsFilterProps {
     activeRegion: string,
@@ -12,7 +13,7 @@ interface RegionsFilterProps {
 export default function RegionsFilter({activeRegion, selectRegion}: RegionsFilterProps) {
 
     const { complianceData } = useContext(RegionContext)
-    const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
 
     const searchInput = <input className='text-gray-500 border-l-2 px-2 border-gray-300 border-solid focus:outline-none' placeholder='Search for a site...'></input>
 
@@ -21,7 +22,7 @@ export default function RegionsFilter({activeRegion, selectRegion}: RegionsFilte
         <div className="flex p-2">
             <div className="flex flex-cols flex-1 gap-5">
                 {
-                    complianceData.regions.data.map((item) => {
+                    complianceData.regions.data.map((item: RegionData) => {
                         return (
                             <RegionCard key={item.id} region={item} activeRegion={activeRegion} onSelected={selectRegion}/>
                         )
