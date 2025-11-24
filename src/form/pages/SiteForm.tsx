@@ -1,13 +1,10 @@
-import { useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router"
-import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router"
+import { useEffect, useState } from "react"
 import supabase from "../../utility/supabase"
-import FormContext from "../FormContext"
+import SiteSearch from "./SiteSearch"
 
 export default function SiteForm () {
 
-    const { register, handleSubmit } = useForm()
-    const {setSite} = useContext(FormContext)
     const [allSites, setAllSites] = useState([])
     const navigate = useNavigate();
     
@@ -24,17 +21,15 @@ export default function SiteForm () {
 
     }, [])
 
-    const onSubmit = (data) => {
-        const newSite = allSites.find((site) => {return site.site_name === data.site_location})
-        setSite(newSite)
+    const onSubmit = () => {
         navigate("Options")
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <p>What site are you looking for?</p>
-            <input placeholder="What site are you looking for?" type="text" {...register("site_location")}/>
-            <button type='submit'>Search</button>
-        </form>
+        <>
+            <p>What site would you like to visit?</p>
+            <SiteSearch sites={allSites}/>
+            <button onClick={() => {onSubmit()}} className="py-1 px-3 bg-gray-300 rounded-xl cursor-pointer">Go</button>
+         </>
     )
 }
