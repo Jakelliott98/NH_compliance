@@ -13,12 +13,12 @@ import SiteCalibration from './pages/site/site-sub-pages/calibrations/SiteCalibr
 import SiteOverview from './pages/site/site-sub-pages/overview/SiteOverview.tsx'
 import Portal from './portal/Portal.tsx'
 import Form from './form/Form.tsx'
-import SiteForm from './form/pages/SiteForm.tsx'
+import SiteForm from './form/pages/site-search/SiteForm.tsx'
 import OptionForms from './form/pages/OptionForms.tsx'
-import ResultsForm from './form/pages/ResultsForm.tsx'
+import ResultsForm from './form/pages/results-add/ResultsForm.tsx'
 import FormHolder from './form/pages/FormHolder.tsx'
-import CalibrationForm from './form/pages/CalibrationFluidForm.tsx'
-import AffinionsForm from './form/pages/AffinionsForm.tsx'
+import CalibrationForm from './form/pages/calibration-add/CalibrationFluidForm.tsx'
+import AffinionsForm from './form/pages/affinion-add/AffinionsForm.tsx'
 
 const root = document.getElementById('root');
 

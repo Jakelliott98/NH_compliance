@@ -1,17 +1,23 @@
-import { useContext } from "react"
 import { Link } from "react-router"
 import { Outlet } from "react-router"
-import FormContext from "../FormContext"
 
 export default function OptionForms () {
 
     return (
-        <div>
-            <Link to="Results-Form"><button>Add Results</button></Link>
-            <Link to="Calibration-Form"><button>Add Calibration Fluids</button></Link>
-            <Link to="Affinion-Form"><button>Add Affinions</button></Link>
+        <div className="flex gap-5">
+            <Link to="Results-Form">
+                <button className="bg-gray-200 rounded-xl p-5 cursor-pointer">Add Results</button>
+            </Link>
+            <Link to="Calibration-Form">
+                <button className="bg-gray-200 rounded-xl p-5 cursor-pointer">Add Calibration Fluids</button>
+            </Link>
+            <Link to="Affinion-Form">
+                <button className="bg-gray-200 rounded-xl p-5 cursor-pointer">Add Affinions</button>
+            </Link>
             <Outlet />
         </div>
     )
+
+    // Change to use navigation instead of Link
 
 }

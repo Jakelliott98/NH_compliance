@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useState } from "react"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
-import FormContext from "../FormContext"
+import FormContext from "../../FormContext"
 import { useContext } from "react"
 
 export default function SiteSearch ({ sites }) {
