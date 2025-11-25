@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import FormContext from "@/form/FormContext"
+import SiteFormContext from "@/components/context/SiteFormContext";
 
 export default function CalibrationForm () {
 
@@ -18,6 +19,10 @@ export default function CalibrationForm () {
 
 function CalibrationHeader () {
     const { site } = useContext(FormContext)
+    const { controls } = useContext(SiteFormContext)
+
+    const lipidControl = controls.loading ? '' : controls.data.find(item => item.test_type === 'lipids')
+    const hba1cControl = controls.loading ? '' : controls.data.find(item => item.test_type === 'hba1c')
 
     return (
         <div className="flex flex-col gap-3 py-2 w-fit">
@@ -28,13 +33,13 @@ function CalibrationHeader () {
             <div className="flex gap-5 justify-between">
                 <div>
                     <p>HBA1c</p>
-                    <p>LOT3456784</p>
-                    <p>Expires:</p>
+                    <p>{lipidControl.lot_number}</p>
+                    <p>Expires: {hba1cControl.expiry_date}</p>
                 </div>
                 <div>
                     <p>Lipids</p>
-                    <p>LOT3456784</p>
-                    <p>Expires:</p>
+                    <p>{hba1cControl.lot_number}</p>
+                    <p>Expires: {lipidControl.expiry_date}</p>
                 </div>
             </div>
         </div>
