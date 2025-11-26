@@ -2,6 +2,10 @@
 import SiteFormContext from "@/components/context/SiteFormContext"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useContext } from "react"
+import type { CalibrationType } from "@/types/calibration"
+import type { AffinionCardType } from "@/types/affinion"
+import type { LipidsRangeType } from "@/types/calibration"
+import type { Hba1cRangeType } from "@/types/calibration"
 
 export default function FormSection () {
 
@@ -11,9 +15,9 @@ export default function FormSection () {
     return (
         <div className="flex flex-row w-full justify-around">
             {
-                affinions.data.map((affinion) => {
+                affinions.data.map((affinion: AffinionCardType) => {
                     return (
-                        <AffinionResultCard affinion={affinion} key={affinion.id}/>
+                        <AffinionResultCard affinion={affinion} key={affinion.affinion_id}/>
                     )
                 })
             }
@@ -21,22 +25,15 @@ export default function FormSection () {
     )
 }
 
-// <input type="text" placeholder="location" {...register("location")}/>
-/* 
+interface AffinionResultCardProps {
+    affinion: AffinionCardType,
+}
 
- const { register, handleSubmit } = useForm();
-
-    const onSubmit = (data) => {
-        console.log(data)
-    } 
-
-    */
-
-function AffinionResultCard ({ affinion }) {
+function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
     const { controls } = useContext(SiteFormContext)
-    const lipidControl = controls.loading ? '' : controls.data.find(item => item.test_type === 'lipids')
-    const hba1cControl = controls.loading ? '' : controls.data.find(item => item.test_type === 'hba1c')
+    const lipidControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'lipids' })
+    const hba1cControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'hba1c' })
 
     return (
         <form className="bg-white p-4 rounded outline">
@@ -81,7 +78,11 @@ function AffinionResultCard ({ affinion }) {
     )
 }
 
-function Hba1cInputRanges ({ ranges }) {
+interface Hba1cInputRangesProps {
+    ranges: Hba1cRangeType,
+}
+
+function Hba1cInputRanges ({ ranges }: Hba1cInputRangesProps) {
 
     return (
     <div className="flex flex-row gap-2">
@@ -103,7 +104,12 @@ function Hba1cInputRanges ({ ranges }) {
     )
 }
 
-function LipidsInputRanges ({ ranges, test }) {
+interface LipidsInputRangesProps {
+    ranges: LipidsRangeType,
+    test: string,
+} // Need to figure out how to render the test sections
+
+function LipidsInputRanges ({ ranges, test }: LipidsInputRangesProps) {
 
     return (
         <div className="flex flex-row gap-2">

@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import FormContext from "@/form/FormContext"
+import { useForm } from 'react-hook-form'
 
 export default function AffinionsForm () {
 
@@ -13,6 +14,7 @@ export default function AffinionsForm () {
 
 function AffinionsHeader () {
 
+    const context = useContext(FormContext)
     const { site } = useContext(FormContext)
 
     return (
@@ -28,17 +30,21 @@ function AffinionsHeader () {
 
 function AffinionFormSection () {
 
+    const { register, handleSubmit } = useForm()
+
+    const onSubmit = handleSubmit((data) => {console.log(data)})
+
     return (
-        <form className="p-4 bg-white flex flex-col gap-2 rounded">
+        <form className="p-4 bg-white flex flex-col gap-2 rounded" onSubmit={onSubmit}>
             <div className="flex flex-col">
                 <label>Affinion Name</label>
-                <input className="outline rounded" placeholder="Affinion 1"/>
+                <input className="outline rounded" placeholder="Affinion 1" {...register("affinion_name")}/>
             </div>
             <div className="flex flex-col">
                 <label>NH Number</label>
-                <input className="outline rounded" placeholder="NH"/>
+                <input className="outline rounded" placeholder="NH" {...register("nh_number")}/>
             </div>
-            <button className="p-2 w-full bg-green-300 font-bold rounded cursor-pointer">Add Affinion</button>
+            <button className="p-2 w-full bg-green-300 font-bold rounded cursor-pointer" type="submit">Add Affinion</button>
         </form>
     )
 }

@@ -4,8 +4,13 @@ import { useState } from "react"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import FormContext from "../../FormContext"
 import { useContext } from "react"
+import type { SiteData } from "@/types/site"
 
-export default function SiteSearch ({ sites }) {
+interface SiteSearchProps {
+    sites: Array<SiteData>
+}
+
+export default function SiteSearch ({ sites }: SiteSearchProps) {
 
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState('')

@@ -1,11 +1,7 @@
-interface RegionObj {
-    region: string,
-    number: number, 
-    status: string,
-}
+import type { RegionData } from "@/types/region"
 
 interface RegionCardProp {
-    region: RegionObj,
+    region: RegionData,
     activeRegion: string,
     onSelected: (region: string) => void,
 }
@@ -18,8 +14,6 @@ export default function RegionCard ({ region, activeRegion, onSelected }: Region
             onClick={() => {onSelected(region.region)}}
         >
             <p className='self-center'>{region.region}</p>
-            <div className="self-center bg-green-200 rounded-full p-1"><p className='text-green-700'>{ 23}</p></div>
-            <div className="self-center bg-red-200 rounded-full p-1"><p className='text-red-700'>{ 50 }</p></div>
         </div>
     )
 }

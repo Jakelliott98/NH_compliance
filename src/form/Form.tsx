@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { Outlet } from "react-router"
 import FormContext from "./FormContext"
+import type { SiteData } from "@/types/site"
 
 export default function Form () {
 
-    const [site, setSite] = useState()
+    const [site, setSite] = useState<SiteData | null>(null)
 
     return (
         <FormContext.Provider value={{site, setSite}}>

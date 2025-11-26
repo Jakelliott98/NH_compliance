@@ -1,14 +1,15 @@
 import moment from "moment";
-import type { CalibrationType } from "../../../../../../types/calibration";
+import type { CalibrationType, LipidsRangeType, Hba1cRangeType } from "../../../../../../types/calibration";
 
 interface CalibrationCardProps{
     calibration: CalibrationType,
 }
 
-export default function CalibrationCard ({calibration}: CalibrationCardProps) {
+export default function CalibrationCard({ calibration }: CalibrationCardProps) {
 
     const isLipids = calibration.test_type === 'lipids';
     const title = isLipids ? 'Lipids' : 'HBA1c';
+
 
     return (
         <div className='p-1 bg-red-100 w-fit rounded-xl flex flex-col h-fit grow-1'>
@@ -18,7 +19,7 @@ export default function CalibrationCard ({calibration}: CalibrationCardProps) {
                     <p className='text-gray-400 text-sm'>Lot Number: {calibration.lot_number}</p>
                 </div>
                 <div className='py-2'>
-                    { isLipids ? <LipidsDisplay calibrationRanges={calibration.calibration_ranges}/> : <Hba1cDisplay calibrationRanges={calibration.calibration_ranges}/> }
+                    { isLipids ? <LipidsDisplay calibrationRanges={calibration.calibration_ranges} /> : <Hba1cDisplay calibrationRanges={calibration.calibration_ranges}/> }
                 </div>
             </div>
             <p className='text-red-900 self-center text-sm p-1'>Expires {moment(calibration.expiry_date).format('dddd Do MMMM')}</p>
@@ -26,24 +27,34 @@ export default function CalibrationCard ({calibration}: CalibrationCardProps) {
     )
 }
 
-function Hba1cDisplay ({ calibrationRanges }) {
-    return (
-        <>
-            <div className='flex justify-between'>
-                <p className="font-medium">C1</p>
-                <p>{calibrationRanges.c1.low} - {calibrationRanges.c1.high}</p>
-            </div>
-            <div className='flex justify-between'>
-                <p className="font-medium">C2</p>
-                <p>{calibrationRanges.c2.low} - {calibrationRanges.c2.high}</p>
-            </div>
-        </>
-    )
-
+interface Hba1cDisplayProps {
+    calibrationRanges: Hba1cRangeType,
 }
 
-function LipidsDisplay ({ calibrationRanges }) {
+function Hba1cDisplay ({ calibrationRanges }: Hba1cDisplayProps) {
 
+        return (
+            <>
+                <div className='flex justify-between'>
+                    <p className="font-medium">C1</p>
+                    <p>{calibrationRanges.c1.low} - {calibrationRanges.c1.high}</p>
+                </div>
+                <div className='flex justify-between'>
+                    <p className="font-medium">C2</p>
+                    <p>{calibrationRanges.c2.low} - {calibrationRanges.c2.high}</p>
+                </div>
+            </>
+        )
+}
+
+
+interface LipidsDisplayProps {
+    calibrationRanges: LipidsRangeType,
+}
+
+function LipidsDisplay ({ calibrationRanges }: LipidsDisplayProps) {
+
+    console.log(calibrationRanges)
     return (
         <div className='grow-2'>
             <div className=''>
@@ -78,5 +89,4 @@ function LipidsDisplay ({ calibrationRanges }) {
             </div>
         </div>
     )
-
 }

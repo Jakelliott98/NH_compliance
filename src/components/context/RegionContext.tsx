@@ -5,6 +5,6 @@ interface ContextType{
     complianceData: ResultStateType,
 }
 
-const RegionContext = createContext<ContextType | undefined>(undefined);
+const RegionContext = createContext<ContextType | null>(null);
 
 export default RegionContext;

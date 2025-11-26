@@ -2,11 +2,12 @@ import CalibrationCard from "../../../../components/calibration-card/Calibration
 import { useOutletContext } from "react-router"
 import useFetchData from "../../../../components/custom-hooks/useFetchData"
 import type { AffinionCardType } from "../../../../types/affinion"
+import type { ResultsType } from "@/types/result"
 
 export default function SiteResults () {
 
     const {siteID, affinions}: {siteID: number, affinions: Array<AffinionCardType>} = useOutletContext()
-    const results = useFetchData(siteID, 'results')
+    const results = useFetchData<ResultsType>(siteID, 'results')
 
     return (
             <div className="flex flex-col w-full gap-2 my-2">

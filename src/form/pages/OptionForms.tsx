@@ -1,16 +1,10 @@
-import { useContext } from "react"
 import { useNavigate } from "react-router"
 import { Outlet } from "react-router"
-import FormContext from "../FormContext"
 
 export default function OptionForms () {
 
-    const { site } = useContext(FormContext)
     const navigate = useNavigate();
-
-    const onSubmit = (newPage) => {
-        navigate(newPage)
-    }
+    const onSubmit = (newPage: string) => { navigate(newPage) }
 
     return (
             <div className="flex gap-5">
@@ -20,7 +14,5 @@ export default function OptionForms () {
                     <Outlet />
             </div>
     )
-
-    // Change to use navigation instead of Link
 
 }

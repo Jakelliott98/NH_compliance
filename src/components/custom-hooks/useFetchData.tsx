@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import supabase from "../../utility/supabase";
-import type { ResultsType } from "../../types/result";
-import type { AffinionCardType } from "../../types/affinion";
-import type { CalibrationType } from "../../types/calibration";
 
-interface StateType{ 
-    data: Array<AffinionCardType | CalibrationType | ResultsType | undefined>,
+export interface FetchState<T> {
+    data: T[],
     loading: boolean,
     error: boolean,
 }
 
-export default function useFetchData (siteID: number, dataPoint: string) {
+export default function useFetchData<T>(siteID: number, dataPoint: string) {
 
-    const [data, setData] = useState<StateType>({
+    const [data, setData] = useState<FetchState<T>>({
         data: [],
         loading: true,
         error: false,
@@ -26,7 +23,7 @@ export default function useFetchData (siteID: number, dataPoint: string) {
             .select('*')
             .eq('site_id', siteID)
             setData({
-                data: data,
+                data: data as T[],
                 loading: false,
                 error: false,
             })

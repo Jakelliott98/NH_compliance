@@ -7,7 +7,7 @@ import useFetchData from "../../../../../../components/custom-hooks/useFetchData
 export default function CalibrationSection () {
 
     const {siteID} = useOutletContext()
-    const calibrations = useFetchData(siteID, 'calibrations')
+    const calibrations = useFetchData<CalibrationType>(siteID, 'calibrations')
 
 
     return (

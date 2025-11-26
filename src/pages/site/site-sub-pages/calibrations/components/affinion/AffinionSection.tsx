@@ -1,11 +1,12 @@
 import { useOutletContext } from "react-router"
 import AffinionCard from "./AffinionCard"
 import useFetchData from "../../../../../../components/custom-hooks/useFetchData"
+import type { AffinionCardType } from "@/types/affinion"
 
 export default function AffinionSection () {
 
     const { siteID } = useOutletContext()
-    const affinions = useFetchData(siteID, 'affinions')
+    const affinions = useFetchData<AffinionCardType>(siteID, 'affinions')
 
     return (
         <div className='flex-1 flex flex-col gap-3 p-3'>

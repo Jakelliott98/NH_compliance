@@ -5,13 +5,14 @@ import RegionContext from "../../components/context/RegionContext"
 import { NavLink } from "react-router"
 import type { SiteData } from "../../types/site"
 import useFetchData from "../../components/custom-hooks/useFetchData"
+import type { AffinionCardType } from "@/types/affinion"
 
 export default function SitePage () {
 
     const { complianceData } = useContext(RegionContext)
     const siteID = useParams()
     const site = complianceData.sites.data.find((site: SiteData) => {return site.slug === siteID.Site})
-    const affinions = useFetchData(site.site_id, 'affinions')
+    const affinions = useFetchData<AffinionCardType>(site.site_id, 'affinions')
     const numberOfAffinions = affinions.data.length;
 
 

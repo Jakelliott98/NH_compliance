@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
 import moment from 'moment';
-import type { ResultsType } from '../../types/result';
+import type { ResultsType, ResultsData } from '../../types/result';
 import type { AffinionCardType } from '../../types/affinion';
 
 interface AffinionDropdownProps {
@@ -18,8 +18,12 @@ function AffinionDropdown ({ result } :AffinionDropdownProps) {
     )
 }
 
+interface AffinionResultsProps {
+    result: ResultsData
+}
 
-function AffinionResults ({result}) {
+
+function AffinionResults ({ result }: AffinionResultsProps) {
 
     return (
         <div className='py-4'>
