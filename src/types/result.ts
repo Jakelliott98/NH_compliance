@@ -35,4 +35,6 @@ export interface ResultsType {
     clinician: string,
     calibration_date: Date,
     attempts: number,
+    site_id: number,
+    affinion_id: number,
 }

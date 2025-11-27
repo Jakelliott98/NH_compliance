@@ -11,17 +11,15 @@ export interface Hba1cRangeType {
     c2: RangeLimitType
 }
 
+export interface TestRangeType {
+    c1: RangeLimitType,
+    c2: RangeLimitType
+}
+
 export interface LipidsRangeType {
-    c1: {
-        hdl: RangeLimitType,
-        total: RangeLimitType,
-        triglycerides: RangeLimitType,
-    }
-    c2: {
-        hdl: RangeLimitType,
-        total: RangeLimitType,
-        triglycerides: RangeLimitType, 
-    }
+    hdl: TestRangeType,
+    total: TestRangeType,
+    triglycerides: TestRangeType
 }
 
 export interface CalibrationType{

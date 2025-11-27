@@ -26,10 +26,12 @@ export default function SiteForm () {
     }
 
     return (
-        <>
+        <div className="bg-gray-300 rounded p-4 flex justify-center items-center flex-col w-fit gap-2">
             <p>What site would you like to visit?</p>
-            <SiteSearch sites={allSites}/>
-            <button onClick={() => {onSubmit()}} className="py-1 px-3 bg-gray-300 rounded-xl cursor-pointer">Go</button>
-         </>
+            <div className="flex justify-center items-center w-full gap-2">
+                <SiteSearch sites={allSites}/>
+                <button onClick={() => {onSubmit()}} className="py-1 px-3 bg-gray-300 rounded-lg cursor-pointer">Go</button>
+            </div>
+         </div>
     )
 }

@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useContext } from "react"
 import type { CalibrationType } from "@/types/calibration"
 import type { AffinionCardType } from "@/types/affinion"
-import type { LipidsRangeType } from "@/types/calibration"
+import type { TestRangeType } from "@/types/calibration"
 import type { Hba1cRangeType } from "@/types/calibration"
 
 export default function FormSection () {
@@ -54,15 +54,15 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                         <p className="text-center font-bold text-gray-600">Lipids</p>
                         <div>
                             <p>Total Cholesterol</p>
-                            <LipidsInputRanges ranges={lipidControl.calibration_ranges} test={'total'}/>
+                            <LipidsInputRanges ranges={lipidControl.calibration_ranges.total} />
                         </div>
                         <div>
                             <p>HDL Cholesterol</p>
-                            <LipidsInputRanges ranges={lipidControl.calibration_ranges} test={'hdl'}/>
+                            <LipidsInputRanges ranges={lipidControl.calibration_ranges.hdl} />
                         </div>
                         <div>
                             <p>Triglycerides</p>
-                            <LipidsInputRanges ranges={lipidControl.calibration_ranges} test={'triglycerides'}/>
+                            <LipidsInputRanges ranges={lipidControl.calibration_ranges.triglycerides} />
                         </div>
                     </div>
                     <div className=" bg-green-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
@@ -105,28 +105,27 @@ function Hba1cInputRanges ({ ranges }: Hba1cInputRangesProps) {
 }
 
 interface LipidsInputRangesProps {
-    ranges: LipidsRangeType,
-    test: string,
-} // Need to figure out how to render the test sections
+    ranges: TestRangeType,
+}
 
-function LipidsInputRanges ({ ranges, test }: LipidsInputRangesProps) {
+function LipidsInputRanges ({ ranges }: LipidsInputRangesProps) {
 
     return (
         <div className="flex flex-row gap-2">
             <div className="flex flex-col">
                 <div className="flex flex-row justify-between">
                     <label className="font-bold">C1</label>
-                    <p className="text-gray-500">{ranges.c1[test].low} - {ranges.c1[test].high}</p>
+                    <p className="text-gray-500">{ranges.c1.low} - {ranges.c1.high}</p>
                 </div>
                 <input type="text" className="outline rounded"/>
             </div>
             <div className="flex flex-col">
                 <div className="flex flex-row justify-between">
                     <label className="font-bold">C2</label>
-                    <p className="text-gray-500">{ranges.c2[test].low} - {ranges.c2[test].high}</p>
+                    <p className="text-gray-500">{ranges.c2.low} - {ranges.c2.high}</p>
                 </div>
                 <input type="text" className="outline rounded"/>
             </div>
         </div>
     )
-} // Condense into 1
+}

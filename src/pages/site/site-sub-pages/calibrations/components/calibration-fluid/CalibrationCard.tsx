@@ -54,37 +54,36 @@ interface LipidsDisplayProps {
 
 function LipidsDisplay ({ calibrationRanges }: LipidsDisplayProps) {
 
-    console.log(calibrationRanges)
     return (
         <div className='grow-2'>
             <div className=''>
                 <p className="font-medium">C1</p>
                 <div className='flex justify-between'>
                     <p className='text-sm'>Total Cholesterol</p>
-                    <p className='text-sm'> {calibrationRanges.c1.total.low} - {calibrationRanges.c1.total.high}</p>
+                    <p className='text-sm'> {calibrationRanges.total.c1.low} - {calibrationRanges.total.c1.high}</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className='text-sm'>HDL Cholesterol</p>
-                    <p className='text-sm'> {calibrationRanges.c1.hdl.low} - {calibrationRanges.c1.hdl.high}</p>
+                    <p className='text-sm'> {calibrationRanges.hdl.c1.low} - {calibrationRanges.hdl.c2.high}</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className='text-sm'>Triglycerides</p>
-                    <p className='text-sm'> {calibrationRanges.c1.triglycerides.low} - {calibrationRanges.c1.triglycerides.high}</p>
+                    <p className='text-sm'> {calibrationRanges.triglycerides.c1.low} - {calibrationRanges.triglycerides.c1.high}</p>
                 </div>
             </div>
             <div className=''>
                 <p className="font-medium">C2</p>
                 <div className='flex justify-between'>
                     <p className='text-sm'>Total Cholesterol</p>
-                    <p className='text-sm'> {calibrationRanges.c2.total.low} - {calibrationRanges.c2.total.high}</p>
+                    <p className='text-sm'> {calibrationRanges.total.c2.low} - {calibrationRanges.total.c2.high}</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className='text-sm'>HDL Cholesterol</p>
-                    <p className='text-sm'> {calibrationRanges.c2.hdl.low} - {calibrationRanges.c2.hdl.high}</p>
+                    <p className='text-sm'> {calibrationRanges.hdl.c2.low} - {calibrationRanges.hdl.c2.high}</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className='text-sm'>Triglycerides</p>
-                    <p className='text-sm'> {calibrationRanges.c2.triglycerides.low} - {calibrationRanges.c2.triglycerides.high}</p>
+                    <p className='text-sm'> {calibrationRanges.triglycerides.c2.low} - {calibrationRanges.triglycerides.c2.high}</p>
                 </div>
             </div>
         </div>

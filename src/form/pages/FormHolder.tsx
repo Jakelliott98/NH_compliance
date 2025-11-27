@@ -14,7 +14,7 @@ export default function FormHolder () {
 
     return (
         <SiteFormContext.Provider value={{ affinions, controls }}>
-                <Outlet />
+            <Outlet />
         </SiteFormContext.Provider>
     )
 }

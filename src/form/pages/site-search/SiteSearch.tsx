@@ -5,6 +5,8 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import FormContext from "../../FormContext"
 import { useContext } from "react"
 import type { SiteData } from "@/types/site"
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface SiteSearchProps {
     sites: Array<SiteData>
@@ -16,6 +18,13 @@ export default function SiteSearch ({ sites }: SiteSearchProps) {
     const [value, setValue] = useState('')
     const { setSite, site } = useContext(FormContext)
 
+    const buttonPlaceholder = (
+        <div className="flex w-full items-center justify-between">
+            <p>Select Site... </p>
+            <FontAwesomeIcon icon={ faCaretDown }/>
+        </div>
+    )
+
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -23,7 +32,10 @@ export default function SiteSearch ({ sites }: SiteSearchProps) {
                     variant="outline"
                     role="comobox"
                     aria-expanded={open}
-                >{value === '' ? 'Select Site...' : value}</Button>
+                    className="flex-1"
+                >
+                    {value === '' ? buttonPlaceholder : value}
+                </Button>
             </PopoverTrigger>
             <PopoverContent>
                 <Command>

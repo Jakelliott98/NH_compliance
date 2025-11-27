@@ -9,9 +9,7 @@ export default function Form () {
 
     return (
         <FormContext.Provider value={{site, setSite}}>
-            <div>
                 <Outlet/>
-            </div>
         </FormContext.Provider>
     )
 
