@@ -6,6 +6,7 @@ import type { CalibrationType } from "@/types/calibration"
 import type { AffinionCardType } from "@/types/affinion"
 import type { TestRangeType } from "@/types/calibration"
 import type { Hba1cRangeType } from "@/types/calibration"
+import type { FetchState } from "@/components/custom-hooks/useFetchData"
 
 export default function FormSection () {
 
@@ -38,15 +39,8 @@ interface AffinionResultCardProps {
 function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
     const siteFormContext = useContext(SiteFormContext)
-
-    if (siteFormContext === null) {
-        throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
-    }
-
+    if (siteFormContext === null) throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
     const { controls } = siteFormContext
-
-    const lipidControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'lipids' })
-    const hba1cControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'hba1c' })
 
     return (
         <form className="bg-white p-4 rounded outline">
@@ -59,25 +53,8 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                         />
                         <label className="text-blue-500 text-sm">Not in rotation this week</label>
                     </div>
-                    <div>
-                        <p className="text-center font-bold text-gray-600">HBA1c</p>
-                        <Hba1cInputRanges ranges={hba1cControl.calibration_ranges}/>
-                    </div>
-                    <div>
-                        <p className="text-center font-bold text-gray-600">Lipids</p>
-                        <div>
-                            <p>Total Cholesterol</p>
-                            <LipidsInputRanges ranges={lipidControl.calibration_ranges.total} />
-                        </div>
-                        <div>
-                            <p>HDL Cholesterol</p>
-                            <LipidsInputRanges ranges={lipidControl.calibration_ranges.hdl} />
-                        </div>
-                        <div>
-                            <p>Triglycerides</p>
-                            <LipidsInputRanges ranges={lipidControl.calibration_ranges.triglycerides} />
-                        </div>
-                    </div>
+                    <Hba1cSection controlsData={controls}/>
+                    <LipidSection controlsData={controls}/>
                     <div className=" bg-green-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                         <Checkbox 
                             className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600 data-[state=checked]:text-white dark:data-[state=checked]:border-green-700 dark:data-[state=checked]:bg-green-700"
@@ -90,6 +67,75 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
         </form>
     )
 }
+
+function Loading () {
+    return (
+        <div>
+            <p>Loading...</p>
+        </div>
+    )
+}
+
+interface Hba1cSectionProps {
+    title: string,
+    testType: string,
+    controlsData: FetchState<CalibrationType>
+}
+
+function Hba1cSection ({ controlsData }: Hba1cSectionProps) {
+
+    const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === 'hba1c' })
+
+
+    if (controlsData.loading) {
+        return (<Loading />)
+    } else if (control === undefined) {
+        return (
+            <p>Error msg</p>
+        )
+    } else {
+        return (
+            <div>
+                <p className="text-center font-bold text-gray-600">HBA1c</p>
+                <Hba1cInputRanges ranges={control.calibration_ranges}/>
+            </div>
+        )
+    }
+
+}
+
+interface LipidSectionProps {
+    testType: string,
+    controlsData: FetchState<CalibrationType>
+}
+
+function LipidSection ({ controlsData }: LipidSectionProps) {
+
+    const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === 'lipids' })
+
+    if (controlsData.loading) {
+        return (<Loading />)
+    } else if (control == undefined) {
+        return (
+            <p>Error msg</p>
+        )
+    } else {
+        return (
+            <div>
+                <p className="text-center font-bold text-gray-600">Lipids</p>
+                <p>Total</p>
+                <LipidsInputRanges ranges={control.calibration_ranges.total} />
+                <p>HDL Cholesterol</p>
+                <LipidsInputRanges ranges={control.calibration_ranges.hdl} />
+                <p>Trigylcerides</p>
+                <LipidsInputRanges ranges={control.calibration_ranges.triglycerides} />
+            </div>
+        )
+    }
+}
+
+// New files
+
 
 interface Hba1cInputRangesProps {
     ranges: Hba1cRangeType,

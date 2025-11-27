@@ -2,8 +2,8 @@ import { createContext } from "react";
 import type { SiteData } from "@/types/site";
 
 interface FormContextType {
-    site: SiteData, 
-    setSite: React.Dispatch<React.SetStateAction<SiteData>>,
+    site: SiteData | null, 
+    setSite: React.Dispatch<React.SetStateAction<SiteData | null>>,
 }
 
 const FormContext = createContext<FormContextType | null>(null)

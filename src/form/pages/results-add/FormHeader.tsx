@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import FormContext from "@/form/FormContext"
+import FormContext from "@/components/context/FormContext"
 import SiteFormContext from "@/components/context/SiteFormContext"
 import type { CalibrationType } from "@/types/calibration"
 import type { FetchState } from "@/components/custom-hooks/useFetchData"
@@ -10,15 +10,12 @@ export default function FormHeader () {
     const formContext = useContext(FormContext)
     const siteFormContext = useContext(SiteFormContext)
 
-    if (formContext === null) {
-        throw new Error('FormContext has to be used within <FormContext.Provider>')
-    }
+    if (formContext === null) throw new Error('FormContext has to be used within <FormContext.Provider>')
 
-    if (siteFormContext === null) {
-        throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
-    }
-
+    if (siteFormContext === null) throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
     const { site } = formContext
+    if (site === null) throw new Error('Component has been rendered without site being selected')
+
     const { affinions, controls } = siteFormContext
 
     return (
@@ -51,7 +48,7 @@ interface ReturnControlSectionProps {
     title: string,
 }
 
-export function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
+function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
     
     const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === controlType})
     

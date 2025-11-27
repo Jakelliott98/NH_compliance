@@ -1,8 +1,10 @@
 import { useContext, useState } from "react"
-import FormContext from "@/form/FormContext"
+import FormContext from "@/components/context/FormContext"
 import SiteFormContext from "@/components/context/SiteFormContext";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import type { CalibrationType } from "@/types/calibration";
+import type { FetchState } from "@/components/custom-hooks/useFetchData";
+import moment from "moment";
 
 export default function CalibrationForm () {
 
@@ -24,19 +26,12 @@ function CalibrationHeader () {
     const formContext = useContext(FormContext)
     const siteFormContext = useContext(SiteFormContext)
 
-    if (formContext === null) {
-        throw new Error('FormContext has to be used within <FormContext.Provider>')
-    }
-
-    if (siteFormContext === null) {
-        throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
-    }
-
-    const { site } = formContext
+    if (siteFormContext === null) {throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')}
     const { controls } = siteFormContext
 
-    const lipidControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'lipids' })
-    const hba1cControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'hba1c' })
+    if (formContext === null) {throw new Error('FormContext has to be used within <FormContext.Provider>')}
+    const { site } = formContext
+    if (site === null) {throw new Error('Component has been rendered without selecting a site')}
 
     return (
         <div className="flex flex-col gap-3 py-2 w-fit">
@@ -45,20 +40,56 @@ function CalibrationHeader () {
                 <p>{site.team_leader}</p>
             </div>
             <div className="flex gap-5 justify-between">
-                <div>
-                    <p>HBA1c</p>
-                    <p>{lipidControl.lot_number}</p>
-                    <p>Expires: {hba1cControl.expiry_date}</p>
-                </div>
-                <div>
-                    <p>Lipids</p>
-                    <p>{hba1cControl.lot_number}</p>
-                    <p>Expires: {lipidControl.expiry_date}</p>
-                </div>
+                <ReturnControlSection title="Lipids" controlsData={controls} controlType="lipids"/>
+                <ReturnControlSection title="HBA1c" controlsData={controls} controlType="hba1c"/>
             </div>
         </div>
     )
 }
+
+function Loading () {
+    return (
+        <div>
+            <p>Loading...</p>
+        </div>
+    )
+}
+
+interface ReturnControlSectionProps {
+    controlType: string,
+    controlsData: FetchState<CalibrationType>,
+    title: string,
+}
+
+function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
+    
+    const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === controlType})
+
+    if (controlsData.loading) {
+        return (
+            <Loading />
+        )
+    } else if (control === undefined) {
+        return (
+            <p className="text-red-700 text-sm">No {title} control</p>
+        )
+    } else {
+        return (
+            <div>
+                <p>{title}</p>
+                <p>{control.lot_number}</p>
+                <p>Expires: {moment(control.expiry_date).format('dddd Do MMM')} </p>
+            </div>
+        )
+    }
+
+} 
+
+
+
+
+
+
 
 interface CalibrationSectionProps {
     setSelectedFluid: React.Dispatch<React.SetStateAction<string>>,

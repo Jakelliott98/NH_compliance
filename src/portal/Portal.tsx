@@ -11,7 +11,7 @@ export default function Portal () {
 
     useEffect(() => {
 
-    const fetchData = async (table: string, stateSetter: (data: Array<object>) => void) => {
+    const fetchData = async (table: string, stateSetter: () => void) => {
 
         const { data } = await supabase
         .from(table)

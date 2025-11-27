@@ -5,7 +5,8 @@ import type { AffinionCardType } from "@/types/affinion"
 
 export default function AffinionSection () {
 
-    const { siteID } = useOutletContext()
+    const { siteID }: { siteID: number} = useOutletContext();
+
     const affinions = useFetchData<AffinionCardType>(siteID, 'affinions')
 
     return (

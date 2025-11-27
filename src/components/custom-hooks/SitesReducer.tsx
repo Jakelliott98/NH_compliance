@@ -24,14 +24,14 @@ export default function SitesReducer() {
 
     const [complianceData, dispatch] = useReducer(reducer, initializer)
 
-    function setSites(sites: SiteData[]) {
+    function setSites(sites: SiteData[]): void {
         dispatch({
             type: 'SET_SITES',
             value: sites, 
         })
     }
 
-    function setRegions(regions: RegionData[]) {
+    function setRegions(regions: RegionData[]): void {
         dispatch({
             type: 'SET_REGIONS',
             value: regions,

@@ -6,22 +6,18 @@ import { NavLink } from "react-router"
 import type { SiteData } from "../../types/site"
 import useFetchData from "../../components/custom-hooks/useFetchData"
 import type { AffinionCardType } from "@/types/affinion"
+import moment from "moment"
 
 export default function SitePage () {
 
     const context = useContext(RegionContext)
 
-    if (context === null) {
-        throw new Error('RegionContext has to be used within <RegionContext.Provider>')
-    }
-
+    if (context === null) throw new Error('RegionContext has to be used within <RegionContext.Provider>')
     const { complianceData } = context;
     const siteID = useParams()
-
     const site = complianceData.sites.data.find((site: SiteData) => {return site.slug === siteID.Site})
+    if (site === undefined) throw new Error('SitePage is being accessed before a site has been selected')
     const affinions = useFetchData<AffinionCardType>(site.site_id, 'affinions')
-    const numberOfAffinions = affinions.data.length;
-
 
     return (
         <div className="flex flex-col bg-white p-5 rounded-xl my-2">
@@ -34,11 +30,11 @@ export default function SitePage () {
                     </div>
                     <div className="flex flex-col">
                         <p className="text-xs uppercase text-gray-500">Last Calibrated</p>
-                        <p className="text-sm">{site.last_calibrated}</p>
+                        <p className="text-sm">{moment(site.last_calibrated).format('dddd Do MMM')}</p>
                     </div>
                     <div className="flex flex-col">
                         <p className="text-xs uppercase text-gray-500">Affinions</p>
-                        <p className="text-sm">{numberOfAffinions}</p>
+                        <p className="text-sm">{affinions.data.length}</p>
                     </div>
                 </div>
                 <div className="flex flex-row gap-10">

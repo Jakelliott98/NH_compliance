@@ -14,6 +14,11 @@ export default function SiteResults () {
                 {
                     !results.loading && results.data.map(((result) => {
                         const affinion: AffinionCardType | undefined = affinions.find((item: AffinionCardType) => item.affinion_id === result.affinion_id)
+                        if (affinion === undefined) {
+                            return (
+                                <p>Currently no affinions registered to this site</p>
+                            )
+                        }
                         return (
                             <CalibrationCard key={result.id} result={result} affinion={affinion}/>
                         )

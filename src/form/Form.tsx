@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Outlet } from "react-router"
-import FormContext from "./FormContext"
+import FormContext from "../components/context/FormContext"
 import type { SiteData } from "@/types/site"
 
 export default function Form () {
