@@ -9,8 +9,14 @@ import type { Hba1cRangeType } from "@/types/calibration"
 
 export default function FormSection () {
 
+    const siteFormContext = useContext(SiteFormContext)
+
+    if (siteFormContext === null) {
+        throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
+    }
+
     // Change type back to number
-    const { affinions } = useContext(SiteFormContext)
+    const { affinions } = siteFormContext
 
     return (
         <div className="flex flex-row w-full justify-around">
@@ -31,7 +37,14 @@ interface AffinionResultCardProps {
 
 function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
-    const { controls } = useContext(SiteFormContext)
+    const siteFormContext = useContext(SiteFormContext)
+
+    if (siteFormContext === null) {
+        throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
+    }
+
+    const { controls } = siteFormContext
+
     const lipidControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'lipids' })
     const hba1cControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'hba1c' })
 

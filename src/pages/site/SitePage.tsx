@@ -9,8 +9,15 @@ import type { AffinionCardType } from "@/types/affinion"
 
 export default function SitePage () {
 
-    const { complianceData } = useContext(RegionContext)
+    const context = useContext(RegionContext)
+
+    if (context === null) {
+        throw new Error('RegionContext has to be used within <RegionContext.Provider>')
+    }
+
+    const { complianceData } = context;
     const siteID = useParams()
+
     const site = complianceData.sites.data.find((site: SiteData) => {return site.slug === siteID.Site})
     const affinions = useFetchData<AffinionCardType>(site.site_id, 'affinions')
     const numberOfAffinions = affinions.data.length;

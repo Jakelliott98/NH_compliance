@@ -8,7 +8,13 @@ import type { CalibrationType } from "@/types/calibration"
 
 export default function FormHolder () {
 
-    const { site } = useContext(FormContext)
+    const context = useContext(FormContext)
+
+    if (context === null) {
+        throw new Error('Error fetching the site')
+    } 
+
+    const { site } = context;
     const affinions = useFetchData<AffinionCardType>(site.site_id, 'affinions')
     const controls = useFetchData<CalibrationType>(site.site_id, 'calibrations')
 

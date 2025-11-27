@@ -16,7 +16,14 @@ export default function SiteSearch ({ sites }: SiteSearchProps) {
 
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState('')
-    const { setSite, site } = useContext(FormContext)
+
+    const context = useContext(FormContext)
+
+    if (context === null) {
+        throw new Error('FormContext has to be used within <FormContext.Provider>')
+    }
+
+    const { setSite } = context;
 
     const buttonPlaceholder = (
         <div className="flex w-full items-center justify-between">

@@ -11,7 +11,14 @@ interface ActiveRegionState{
 
 export default function SitesDashboard () {
 
-    const { complianceData } = useContext(RegionContext)
+    const context = useContext(RegionContext)
+
+    if (context === null) {
+        throw new Error('RegionContext has to be used within <RegionContext.Provider>')
+    }
+
+    const { complianceData } = context;
+    
     const [activeRegion, setActiveRegion] = useState<ActiveRegionState>({
         activeRegion: '',
         isFiltered: false,

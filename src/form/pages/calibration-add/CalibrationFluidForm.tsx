@@ -21,8 +21,19 @@ export default function CalibrationForm () {
 
 function CalibrationHeader () {
     
-    const { site } = useContext(FormContext)
-    const { controls } = useContext(SiteFormContext)
+    const formContext = useContext(FormContext)
+    const siteFormContext = useContext(SiteFormContext)
+
+    if (formContext === null) {
+        throw new Error('FormContext has to be used within <FormContext.Provider>')
+    }
+
+    if (siteFormContext === null) {
+        throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
+    }
+
+    const { site } = formContext
+    const { controls } = siteFormContext
 
     const lipidControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'lipids' })
     const hba1cControl = controls.loading ? '' : controls.data.find((item: CalibrationType) => { return item.test_type === 'hba1c' })

@@ -12,7 +12,14 @@ interface RegionsFilterProps {
 
 export default function RegionsFilter({activeRegion, selectRegion}: RegionsFilterProps) {
 
-    const { complianceData } = useContext(RegionContext)
+    const context = useContext(RegionContext)
+
+    if (context === null) {
+        throw new Error('RegionContext has to be used within <RegionContext.Provider>')
+    }
+
+    const { complianceData } = context;
+
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
 
     const searchInput = <input className='text-gray-500 border-l-2 px-2 border-gray-300 border-solid focus:outline-none' placeholder='Search for a site...'></input>

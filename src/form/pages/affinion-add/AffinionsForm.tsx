@@ -15,7 +15,11 @@ export default function AffinionsForm () {
 function AffinionsHeader () {
 
     const context = useContext(FormContext)
-    const { site } = useContext(FormContext)
+
+    if (context === null) {
+        throw new Error('FormContext has to be used within <FormContext.Provider>')
+    }
+    const { site } = context;
 
     return (
         <div className="flex flex-col gap-3 py-2 w-fit">
