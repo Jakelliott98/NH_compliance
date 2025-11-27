@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import FormContext from "@/components/context/FormContext"
+import FormContext from "@/form/context/FormContext"
 import { useForm } from 'react-hook-form'
 
 export default function AffinionsForm () {

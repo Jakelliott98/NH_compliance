@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router"
 import { useEffect, useState } from "react"
-import supabase from "../../../utility/supabase"
+import supabase from "../../../utils/supabase"
 import SiteSearch from "./SiteSearch"
 
 export default function SiteForm () {

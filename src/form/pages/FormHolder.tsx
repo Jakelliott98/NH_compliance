@@ -1,8 +1,8 @@
-import SiteFormContext from "@/components/context/SiteFormContext"
+import SiteFormContext from "@/form/context/SiteFormContext"
 import { Outlet } from "react-router"
-import useFetchData from "@/components/custom-hooks/useFetchData"
+import useFetchData from "@/hooks/useFetchData"
 import { useContext } from "react"
-import FormContext from "../../components/context/FormContext"
+import FormContext from "../context/FormContext"
 import type { AffinionCardType } from "@/types/affinion"
 import type { CalibrationType } from "@/types/calibration"
 

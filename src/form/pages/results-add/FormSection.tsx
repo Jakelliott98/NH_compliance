@@ -1,12 +1,12 @@
 // import { useForm } from "react-hook-form";
-import SiteFormContext from "@/components/context/SiteFormContext"
+import SiteFormContext from "@/form/context/SiteFormContext"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useContext } from "react"
 import type { CalibrationType } from "@/types/calibration"
 import type { AffinionCardType } from "@/types/affinion"
 import type { TestRangeType } from "@/types/calibration"
 import type { Hba1cRangeType } from "@/types/calibration"
-import type { FetchState } from "@/components/custom-hooks/useFetchData"
+import type { FetchState } from "@/hooks/useFetchData"
 
 export default function FormSection () {
 

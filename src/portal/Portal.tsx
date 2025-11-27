@@ -1,8 +1,8 @@
 import { useEffect } from "react"
-import SitesReducer from "../components/custom-hooks/SitesReducer"
-import supabase from "../utility/supabase"
-import Header from "../components/header/Header"
-import RegionContext from "../components/context/RegionContext"
+import SitesReducer from "./hooks/SitesReducer"
+import supabase from "../utils/supabase"
+import Header from "./components/Header"
+import RegionContext from "./context/RegionContext"
 import { Outlet } from "react-router"
 
 export default function Portal () {

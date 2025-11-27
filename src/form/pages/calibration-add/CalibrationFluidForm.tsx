@@ -1,9 +1,9 @@
 import { useContext, useState } from "react"
-import FormContext from "@/components/context/FormContext"
-import SiteFormContext from "@/components/context/SiteFormContext";
+import FormContext from "@/form/context/FormContext"
+import SiteFormContext from "@/form/context/SiteFormContext";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import type { CalibrationType } from "@/types/calibration";
-import type { FetchState } from "@/components/custom-hooks/useFetchData";
+import type { FetchState } from "@/hooks/useFetchData";
 import moment from "moment";
 
 export default function CalibrationForm () {
