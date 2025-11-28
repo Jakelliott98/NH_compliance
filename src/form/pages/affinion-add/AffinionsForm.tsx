@@ -1,38 +1,11 @@
-import { useContext } from "react"
-import FormContext from "@/form/context/FormContext"
 import { useForm } from 'react-hook-form'
 
 export default function AffinionsForm () {
 
     return (
         <div className="bg-gray-100 w-full p-5 rounded flex flex-col items-center">
-            <AffinionsHeader />
             <AffinionFormSection />
         </div>        
-    )
-}
-
-function AffinionsHeader () {
-
-    const context = useContext(FormContext)
-
-    if (context === null) {
-        throw new Error('FormContext has to be used within <FormContext.Provider>')
-    }
-    const { site } = context;
-
-    if (site === null) {
-        throw new Error('Component has been rendered without site being selected')
-    }
-
-    return (
-        <div className="flex flex-col gap-3 py-2 w-fit">
-            <p className="text-center font-bold">{site.site_name}</p>
-            <div className="flex gap-5 justify-between">
-                <p>{site.team_leader}</p>
-                <p>3 Affinions</p>
-            </div>
-        </div> 
     )
 }
 

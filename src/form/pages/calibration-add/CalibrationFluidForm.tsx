@@ -1,6 +1,4 @@
-import { useContext, useState } from "react"
-import FormContext from "@/form/context/FormContext"
-import SiteFormContext from "@/form/context/SiteFormContext";
+import { useState } from "react"
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import type { CalibrationType } from "@/types/calibration";
 import type { FetchState } from "@/hooks/useFetchData";
@@ -13,36 +11,9 @@ export default function CalibrationForm () {
 
     return (
         <div className="bg-gray-100 w-full p-5 rounded flex flex-col items-center">
-            <CalibrationHeader />
             {
                 !isFormOpen ? <CalibrationSection setSelectedFluid={setSelectedFluid} setIsFormOpen={setIsFormOpen}/> : <CalibrationFormInput selectedFluid={selectedFluid}/>
             }
-        </div>
-    )
-}
-
-function CalibrationHeader () {
-    
-    const formContext = useContext(FormContext)
-    const siteFormContext = useContext(SiteFormContext)
-
-    if (siteFormContext === null) {throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')}
-    const { controls } = siteFormContext
-
-    if (formContext === null) {throw new Error('FormContext has to be used within <FormContext.Provider>')}
-    const { site } = formContext
-    if (site === null) {throw new Error('Component has been rendered without selecting a site')}
-
-    return (
-        <div className="flex flex-col gap-3 py-2 w-fit">
-            <p className="text-center font-bold">{site.site_name}</p>
-            <div className="flex gap-5 justify-center">
-                <p>{site.team_leader}</p>
-            </div>
-            <div className="flex gap-5 justify-between">
-                <ReturnControlSection title="Lipids" controlsData={controls} controlType="lipids"/>
-                <ReturnControlSection title="HBA1c" controlsData={controls} controlType="hba1c"/>
-            </div>
         </div>
     )
 }
@@ -61,7 +32,7 @@ interface ReturnControlSectionProps {
     title: string,
 }
 
-function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
+export function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
     
     const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === controlType})
 
@@ -75,18 +46,15 @@ function ReturnControlSection ({controlType, controlsData, title}: ReturnControl
         )
     } else {
         return (
-            <div>
-                <p>{title}</p>
-                <p>{control.lot_number}</p>
-                <p>Expires: {moment(control.expiry_date).format('dddd Do MMM')} </p>
+            <div className="bg-white rounded p-2">
+                <p className="font-semibold text-center">{title}</p>
+                <p className="text-center">LOT{control.lot_number}</p>
+                <p className="text-center">Expires: {moment(control.expiry_date).format('Do MMMM')} </p>
             </div>
         )
     }
 
 } 
-
-
-
 
 
 
