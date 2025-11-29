@@ -3,6 +3,8 @@ import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import type { CalibrationType } from "@/types/calibration";
 import type { FetchState } from "@/hooks/useFetchData";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlaskVial } from "@fortawesome/free-solid-svg-icons";
 
 export default function CalibrationForm () {
 
@@ -46,7 +48,8 @@ export function ReturnControlSection ({controlType, controlsData, title}: Return
         )
     } else {
         return (
-            <div className="bg-white rounded p-2">
+            <div className="bg-white rounded p-2 flex flex-col justify-center items-center">
+                <FontAwesomeIcon className="text-3xl pb-2 text-red-900" icon={faFlaskVial} />
                 <p className="font-semibold text-center">{title}</p>
                 <p className="text-center">LOT{control.lot_number}</p>
                 <p className="text-center">Expires: {moment(control.expiry_date).format('Do MMMM')} </p>
