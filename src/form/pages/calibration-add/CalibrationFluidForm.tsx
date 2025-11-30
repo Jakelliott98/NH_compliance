@@ -35,7 +35,7 @@ interface ReturnControlSectionProps {
 }
 
 export function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
-    
+
     const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === controlType})
 
     if (controlsData.loading) {
@@ -47,12 +47,13 @@ export function ReturnControlSection ({controlType, controlsData, title}: Return
             <p className="text-red-700 text-sm">No {title} control</p>
         )
     } else {
+        const isExpired = moment(control.expiry_date).isBefore(moment())
         return (
             <div className="bg-white rounded p-2 flex flex-col justify-center items-center">
                 <FontAwesomeIcon className="text-3xl pb-2 text-red-900" icon={faFlaskVial} />
                 <p className="font-semibold text-center">{title}</p>
                 <p className="text-center">LOT{control.lot_number}</p>
-                <p className="text-center">Expires: {moment(control.expiry_date).format('Do MMMM')} </p>
+                <p className={isExpired ? 'text-center text-red-500' : 'text-center'}>{isExpired ? 'Expired:' : 'Expires:'} {moment(control.expiry_date).format('Do MMMM')} </p>
             </div>
         )
     }
