@@ -22,7 +22,7 @@ export function SiteHeader ({ onSubmit }) {
         <div className="flex flex-col gap-5 h-full">
             <p className="text-center font-bold text-3xl">{site.site_name}</p>
             <div className="flex flex-col flex-1 gap-3 ">
-                    <AffinionSection affinions={affinions} onSubmit={onSubmit}/>
+                    <AffinionSection affinions={affinions} onSubmit={onSubmit} />
                     <ControlsSection controls={controls} onSubmit={onSubmit}/>
                     <AddResults onSubmit={onSubmit}/>
             </div>

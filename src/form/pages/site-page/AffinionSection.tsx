@@ -44,7 +44,7 @@ export default function AffinionSection ({ affinions, onSubmit }: AffinionSectio
                 }
             </div>
             <div className="cold-start-3">
-                <FormButtons option={affinionButton} onSubmit={onSubmit}/>
+                <FormButtons option={affinionButton} onSubmit={onSubmit} />
             </div>
         </div>
     )
