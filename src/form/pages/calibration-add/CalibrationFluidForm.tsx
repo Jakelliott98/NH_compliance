@@ -1,8 +1,9 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import supabase from "@/utils/supabase";
+import { addControls, updateControl } from "@/form/hooks/useInsert";
 import SiteFormContext from "@/form/context/SiteFormContext";
 import FormContext from "@/form/context/FormContext";
+import CalendarPopup from "@/form/components/CalendarPopup";
 
 export default function CalibrationForm () {
 
@@ -55,133 +56,8 @@ interface CalibrationFormInputProps {
     selectedFluid: string,
 }
 
-const addControls = async (data, controlType, siteID) => {
-    
-    let dataStructure = ''
-
-    if (controlType === 'hba1c') {
-        dataStructure = {
-                c1: {
-                    low: data.hba1c_c1_low,
-                    high: data.hba1c_c1_high
-                },
-                c2: {
-                    low: data.hba1c_c2_low,
-                    high: data.hba1c_c2_high,
-                }
-            }
-    } else if (controlType === 'lipids') {
-        dataStructure = {
-                hdl: {
-                    c1: {
-                        low: data.lipids_c1_hdl_low,
-                        high: data.lipids_c1_hdl_high
-                    },
-                    c2: {
-                        low: data.lipids_c2_hdl_low,
-                        high: data.lipids_c2_hdl_high,
-                    }
-                },
-                total: {
-                    c1: {
-                        low: data.lipids_c1_tc_low,
-                        high: data.lipids_c1_tc_high
-                    },
-                    c2: {
-                        low: data.lipids_c2_tc_low,
-                        high: data.lipids_c2_tc_high,
-                    }
-                },
-                triglycerides: {
-                    c1: {
-                        low: data.lipids_c1_trig_low,
-                        high: data.lipids_c1_trig_high
-                    },
-                    c2: {
-                        low: data.lipids_c2_trig_low,
-                        high: data.lipids_c2_trig_high,
-                    }
-                }
-        }
-    }
-
-    const { error } = await supabase
-    .from('calibrations')
-    .insert({
-        lot_number: data.lot_number, 
-        expiry_date: data.expiry_date, 
-        calibration_ranges: dataStructure,
-        site_id: siteID,
-        test_type: controlType,
-    })
-
-}
-
-const updateControl = async (data, controlType, siteID) => {
-
-    let dataStructure = ''
-
-    if (controlType === 'hba1c') {
-        dataStructure = {
-                c1: {
-                    low: data.hba1c_c1_low,
-                    high: data.hba1c_c1_high
-                },
-                c2: {
-                    low: data.hba1c_c2_low,
-                    high: data.hba1c_c2_high,
-                }
-            }
-    } else if (controlType === 'lipids') {
-        dataStructure = {
-                hdl: {
-                    c1: {
-                        low: data.lipids_c1_hdl_low,
-                        high: data.lipids_c1_hdl_high
-                    },
-                    c2: {
-                        low: data.lipids_c2_hdl_low,
-                        high: data.lipids_c2_hdl_high,
-                    }
-                },
-                total: {
-                    c1: {
-                        low: data.lipids_c1_tc_low,
-                        high: data.lipids_c1_tc_high
-                    },
-                    c2: {
-                        low: data.lipids_c2_tc_low,
-                        high: data.lipids_c2_tc_high,
-                    }
-                },
-                triglycerides: {
-                    c1: {
-                        low: data.lipids_c1_trig_low,
-                        high: data.lipids_c1_trig_high
-                    },
-                    c2: {
-                        low: data.lipids_c2_trig_low,
-                        high: data.lipids_c2_trig_high,
-                    }
-                }
-        }
-    }
-
-    const { error } = await supabase
-    .from('calibrations')
-    .update({
-        lot_number: data.lot_number, 
-        expiry_date: data.expiry_date, 
-        calibration_ranges: dataStructure,
-    })
-    .eq("site_id", siteID)
-    .eq("test_type", controlType)
-
-}
-
 export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputProps) {
 
-    // Find out if controls exist
     const siteFormContext = useContext(SiteFormContext)
     if (siteFormContext === null) throw new Error('Error fetching the site')
     const { controls } = siteFormContext;
@@ -189,12 +65,14 @@ export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputPro
     if (siteContext === null) throw new Error('Error fetching the site')
     const { site } = siteContext;
     const isUpdating = controls === undefined ? true : false;
-
-
-    console.log(isUpdating) // If true add / update
-
     const methods = useForm();
-    const { register, handleSubmit } = methods
+    const { register, handleSubmit, setValue } = methods
+
+    const [date, setDate] = useState<Date | undefined>()
+
+    useEffect(() => {
+        setValue("expiry_date", date?.toISOString())
+    }, [date, setValue])
 
     const onSubmit = handleSubmit((data) => {
         if (isUpdating) {
@@ -210,11 +88,11 @@ export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputPro
             <form className="bg-white p-4 rounded flex flex-col gap-2" onSubmit={onSubmit}>
                 <div className="flex flex-col gap-1">
                     <label>Lot Number</label>
-                    <input className="outline rounded" {...register("lot_number", {required: "Please provide a Lot Number"})}/>
+                    <input className="outline rounded px-2 py-0.5" {...register("lot_number", {required: "Please provide a Lot Number"})}/>
                 </div>
                 <div className="flex flex-col gap-1">
                     <label>Expiry Date</label>
-                    <input className="outline rounded" {...register("expiry_date", {required: "Please provide a expiry date"})}/>
+                    <CalendarPopup onSelect={setDate} date={date}/>
                 </div>
                 { selectedFluid === 'hba1c' ? <HBA1cForm /> : <LipidsForm /> }
                 <button className="rounded p-2 bg-green-300 w-full" type="submit">Submit</button>
