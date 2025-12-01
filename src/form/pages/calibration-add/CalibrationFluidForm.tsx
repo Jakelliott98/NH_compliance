@@ -1,16 +1,14 @@
-import { useState } from "react"
-import type { CalibrationType } from "@/types/calibration";
-import type { FetchState } from "@/hooks/useFetchData";
-import moment from "moment";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFlaskVial } from "@fortawesome/free-solid-svg-icons";
+import { useContext, useState } from "react"
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import supabase from "@/utils/supabase";
+import SiteFormContext from "@/form/context/SiteFormContext";
+import FormContext from "@/form/context/FormContext";
 
 export default function CalibrationForm () {
 
     const [selectedFluid, setSelectedFluid] = useState('');
     const [isFormOpen, setIsFormOpen] = useState(false)
+
 
     return (
         <div className="bg-gray-100 w-full p-5 rounded flex flex-col items-center">
@@ -20,47 +18,6 @@ export default function CalibrationForm () {
         </div>
     )
 }
-
-
-function Loading () {
-    return (
-        <div>
-            <p>Loading...</p>
-        </div>
-    )
-}
-
-interface ReturnControlSectionProps {
-    controlType: string,
-    controlsData: FetchState<CalibrationType>,
-    title: string,
-}
-
-export function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
-
-    const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === controlType})
-
-    if (controlsData.loading) {
-        return (
-            <Loading />
-        )
-    } else if (control === undefined) {
-        return (
-            <p className="text-red-700 text-sm">No {title} control</p>
-        )
-    } else {
-        const isExpired = moment(control.expiry_date).isBefore(moment())
-        return (
-            <div className="bg-white rounded p-2 flex flex-col justify-center items-center">
-                <FontAwesomeIcon className="text-3xl pb-2 text-red-900" icon={faFlaskVial} />
-                <p className="font-semibold text-center">{title}</p>
-                <p className="text-center">LOT{control.lot_number}</p>
-                <p className={isExpired ? 'text-center text-red-500' : 'text-center'}>{isExpired ? 'Expired:' : 'Expires:'} {moment(control.expiry_date).format('Do MMMM')} </p>
-            </div>
-        )
-    }
-
-} 
 
 interface CalibrationSectionProps {
     setSelectedFluid: React.Dispatch<React.SetStateAction<string>>,
@@ -98,7 +55,69 @@ interface CalibrationFormInputProps {
     selectedFluid: string,
 }
 
-const updateControl = async (data, controlType) => {
+const addControls = async (data, controlType, siteID) => {
+    
+    let dataStructure = ''
+
+    if (controlType === 'hba1c') {
+        dataStructure = {
+                c1: {
+                    low: data.hba1c_c1_low,
+                    high: data.hba1c_c1_high
+                },
+                c2: {
+                    low: data.hba1c_c2_low,
+                    high: data.hba1c_c2_high,
+                }
+            }
+    } else if (controlType === 'lipids') {
+        dataStructure = {
+                hdl: {
+                    c1: {
+                        low: data.lipids_c1_hdl_low,
+                        high: data.lipids_c1_hdl_high
+                    },
+                    c2: {
+                        low: data.lipids_c2_hdl_low,
+                        high: data.lipids_c2_hdl_high,
+                    }
+                },
+                total: {
+                    c1: {
+                        low: data.lipids_c1_tc_low,
+                        high: data.lipids_c1_tc_high
+                    },
+                    c2: {
+                        low: data.lipids_c2_tc_low,
+                        high: data.lipids_c2_tc_high,
+                    }
+                },
+                triglycerides: {
+                    c1: {
+                        low: data.lipids_c1_trig_low,
+                        high: data.lipids_c1_trig_high
+                    },
+                    c2: {
+                        low: data.lipids_c2_trig_low,
+                        high: data.lipids_c2_trig_high,
+                    }
+                }
+        }
+    }
+
+    const { error } = await supabase
+    .from('calibrations')
+    .insert({
+        lot_number: data.lot_number, 
+        expiry_date: data.expiry_date, 
+        calibration_ranges: dataStructure,
+        site_id: siteID,
+        test_type: controlType,
+    })
+
+}
+
+const updateControl = async (data, controlType, siteID) => {
 
     let dataStructure = ''
 
@@ -155,18 +174,34 @@ const updateControl = async (data, controlType) => {
         expiry_date: data.expiry_date, 
         calibration_ranges: dataStructure,
     })
-    .eq("site_id", 50)
+    .eq("site_id", siteID)
     .eq("test_type", controlType)
 
 }
 
 export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputProps) {
 
+    // Find out if controls exist
+    const siteFormContext = useContext(SiteFormContext)
+    if (siteFormContext === null) throw new Error('Error fetching the site')
+    const { controls } = siteFormContext;
+    const siteContext = useContext(FormContext)
+    if (siteContext === null) throw new Error('Error fetching the site')
+    const { site } = siteContext;
+    const isUpdating = controls === undefined ? true : false;
+
+
+    console.log(isUpdating) // If true add / update
+
     const methods = useForm();
     const { register, handleSubmit } = methods
 
-    const onSubmit = handleSubmit((data) => { 
-        updateControl(data, selectedFluid)
+    const onSubmit = handleSubmit((data) => {
+        if (isUpdating) {
+            updateControl(data, selectedFluid, site?.site_id)
+        } else {
+            addControls(data, selectedFluid, site?.site_id)
+        }
         console.log(data)
     })
 
