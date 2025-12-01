@@ -6,7 +6,7 @@ import useFetchData from "@/hooks/useFetchData"
 
 export default function CalibrationSection () {
 
-    const {siteID} = useOutletContext()
+    const { siteID } = useOutletContext()
     const calibrations = useFetchData<CalibrationType>(siteID, 'calibrations')
 
 
