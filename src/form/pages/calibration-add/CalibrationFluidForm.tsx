@@ -98,34 +98,66 @@ interface CalibrationFormInputProps {
     selectedFluid: string,
 }
 
-const updateHBA1c = async (data) => {
+const updateControl = async (data, controlType) => {
+
+    let dataStructure = ''
+
+    if (controlType === 'hba1c') {
+        dataStructure = {
+                c1: {
+                    low: data.hba1c_c1_low,
+                    high: data.hba1c_c1_high
+                },
+                c2: {
+                    low: data.hba1c_c2_low,
+                    high: data.hba1c_c2_high,
+                }
+            }
+    } else if (controlType === 'lipids') {
+        dataStructure = {
+                hdl: {
+                    c1: {
+                        low: data.lipids_c1_hdl_low,
+                        high: data.lipids_c1_hdl_high
+                    },
+                    c2: {
+                        low: data.lipids_c2_hdl_low,
+                        high: data.lipids_c2_hdl_high,
+                    }
+                },
+                total: {
+                    c1: {
+                        low: data.lipids_c1_tc_low,
+                        high: data.lipids_c1_tc_high
+                    },
+                    c2: {
+                        low: data.lipids_c2_tc_low,
+                        high: data.lipids_c2_tc_high,
+                    }
+                },
+                triglycerides: {
+                    c1: {
+                        low: data.lipids_c1_trig_low,
+                        high: data.lipids_c1_trig_high
+                    },
+                    c2: {
+                        low: data.lipids_c2_trig_low,
+                        high: data.lipids_c2_trig_high,
+                    }
+                }
+        }
+    }
+
     const { error } = await supabase
     .from('calibrations')
     .update({
-        lot_number: data.lotNumber, 
-        expiry_date: data.ExpDate, 
-        calibration_ranges: {
-            c1: {
-                low: data.hba1c_c1_low,
-                high: data.hba1c_c1_high
-            },
-            c2: {
-                low: data.hba1c_c2_low,
-                high: data.hba1c_c2_high,
-            }
-        }
+        lot_number: data.lot_number, 
+        expiry_date: data.expiry_date, 
+        calibration_ranges: dataStructure,
     })
     .eq("site_id", 50)
-    .eq("test_type", 'hba1c')
-}
+    .eq("test_type", controlType)
 
-const updateLipids = async (lotNumber: number, ExpDate: Date) => {
-    const { error } = await supabase
-    .from('calibrations')
-    .update({lot_number: lotNumber, expiry_date: ExpDate})
-    
-    .eq("site_id", 50)
-    .eq("test_type", 'lipids')
 }
 
 export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputProps) {
@@ -134,14 +166,8 @@ export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputPro
     const { register, handleSubmit } = methods
 
     const onSubmit = handleSubmit((data) => { 
-        console.log(data) 
-        if (selectedFluid === 'hba1c') {
-            updateHBA1c(data)
-        } else if (selectedFluid === 'lipids') {
-            updateLipids(data.lot_number, data.expiry_date)
-        } else {
-            throw new Error('No control fluid was selected')
-        }
+        updateControl(data, selectedFluid)
+        console.log(data)
     })
 
     return (
@@ -237,8 +263,41 @@ function LipidsForm () {
                         <input className="outline rounded" {...register("lipids_c1_trig_high", {required: "Please provide controls range"})}/>
                     </div>
                 </div>
-                <div>
-                    <p className="font-bold">C2</p>
+            </div>
+            <div>
+                <p className="font-bold">C2</p>
+                <div className="flex items-center gap-1">
+                    <p>Total Cholesterol</p>
+                    <div className="flex flex-col">
+                        <label>Lower</label>
+                        <input className="outline rounded" {...register("lipids_c2_tc_low", {required: "Please provide controls range"})}/>
+                    </div>
+                    <div className="flex flex-col">
+                        <label>Upper</label>
+                        <input className="outline rounded" {...register("lipids_c2_tc_high", {required: "Please provide controls range"})}/>
+                    </div>
+                </div>
+                <div className="flex items-center gap-1">
+                    <p>HDL Cholesterol</p>
+                    <div className="flex flex-col">
+                        <label>Lower</label>
+                        <input className="outline rounded" {...register("lipids_c2_hdl_low", {required: "Please provide controls range"})}/>
+                    </div>
+                    <div className="flex flex-col">
+                        <label>Upper</label>
+                        <input className="outline rounded" {...register("lipids_c2_hdl_high", {required: "Please provide controls range"})}/>
+                    </div>
+                </div>
+                <div className="flex items-center gap-1">
+                    <p>Triglycerides</p>
+                    <div className="flex flex-col">
+                        <label>Lower</label>
+                        <input className="outline rounded" {...register("lipids_c2_trig_low", {required: "Please provide controls range"})}/>
+                    </div>
+                    <div className="flex flex-col">
+                        <label>Upper</label>
+                        <input className="outline rounded" {...register("lipids_c2_trig_high", {required: "Please provide controls range"})}/>
+                    </div>
                 </div>
             </div>
         </div>   
