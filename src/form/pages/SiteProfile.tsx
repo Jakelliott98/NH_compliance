@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router"
-import { SiteHeader } from "../components/SiteHeader";
+import { SitePage } from "../components/SitePage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function OptionForms () {
+export default function SiteProfile () {
 
     const navigate = useNavigate();
     const onSubmit = (newPage: string) => { navigate(newPage) }
 
     return (
         <div className="w-9/12 h-10/12 flex flex-col gap-5 p-5 bg-gray-200 rounded">  
-                <SiteHeader onSubmit={onSubmit}/>
+                <SitePage onSubmit={onSubmit}/>
         </div>
     )
 

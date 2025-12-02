@@ -14,8 +14,8 @@ export default function SitePage () {
 
     if (context === null) throw new Error('RegionContext has to be used within <RegionContext.Provider>')
     const { complianceData } = context;
-    const siteID = useParams()
-    const site = complianceData.sites.data.find((site: SiteData) => {return site.slug === siteID.Site})
+    const siteSlug = useParams()
+    const site = complianceData.sites.data.find((site: SiteData) => {return site.slug === siteSlug.Site})
     if (site === undefined) throw new Error('SitePage is being accessed before a site has been selected')
     const affinions = useFetchData<AffinionCardType>(site.site_id, 'affinions')
 

@@ -3,7 +3,7 @@ import type { AffinionCardType } from "@/types/affinion"
 import moment from "moment"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
-import { FormButtons } from "../OptionForms";
+import { FormButtons } from "../SiteProfile";
 
 
 interface AffinionSectionProps {

@@ -1,7 +1,7 @@
 import type { FetchState } from "@/hooks/useFetchData"
 import type { CalibrationType } from "@/types/calibration"
 import { ReturnControlSection } from "../calibration-add/ReturnControlSection"
-import { FormButtons } from "../OptionForms"
+import { FormButtons } from "../SiteProfile"
 
 interface ControlsSectionProps {
     controls: FetchState<CalibrationType>

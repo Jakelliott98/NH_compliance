@@ -4,9 +4,14 @@ import SiteFormContext from "../context/SiteFormContext"
 import AffinionSection from "../pages/site-page/AffinionSection"
 import ControlsSection from "../pages/site-page/ControlsSection"
 import AddResults from "../pages/site-page/AddResults"
+import { useParams } from "react-router"
 
-export function SiteHeader ({ onSubmit }) {
+export function SitePage ({ onSubmit }) {
 
+
+    const siteSlug = useParams().Site;
+    console.log(siteSlug)
+    
     const formContext = useContext(FormContext)
     const siteFormContext = useContext(SiteFormContext)
 

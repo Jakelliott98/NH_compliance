@@ -9,10 +9,11 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface SiteSearchProps {
-    sites: Array<SiteData>
+    sites: Array<SiteData>,
+    setActiveSite: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function SiteSearch ({ sites }: SiteSearchProps) {
+export default function SiteSearch ({ sites, setActiveSite }: SiteSearchProps) {
 
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState('')
@@ -60,6 +61,7 @@ export default function SiteSearch ({ sites }: SiteSearchProps) {
                                                 setValue(currentValue === value ? '' : currentValue)
                                                 setSite(site)
                                                 setOpen(false)
+                                                setActiveSite(site.slug)
                                             }}
                                         >
                                             { site.site_name }

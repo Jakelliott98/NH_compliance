@@ -1,4 +1,4 @@
-import { FormButtons } from "../OptionForms";
+import { FormButtons } from "../SiteProfile";
 
 const option = {
     title: 'New Result',

@@ -14,7 +14,7 @@ import SiteOverview from './portal/pages/site/site-sub-pages/overview/SiteOvervi
 import Portal from './portal/Portal.tsx'
 import Form from './form/Form.tsx'
 import SiteForm from './form/pages/site-search/SiteForm.tsx'
-import OptionForms from './form/pages/OptionForms.tsx'
+import SiteProfile from './form/pages/SiteProfile.tsx'
 import ResultsForm from './form/pages/results-add/ResultsForm.tsx'
 import FormHolder from './form/pages/FormHolder.tsx'
 import CalibrationForm from './form/pages/calibration-add/CalibrationFluidForm.tsx'
@@ -27,6 +27,7 @@ ReactDOM.createRoot(root).render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="/" element={<HomeNav />}/>
+
         <Route path="Portal" element={<Portal />}>
           <Route index element={<DashboardPage />}/>
           <Route path="Dashboard" element={<DashboardPage />}/>
@@ -42,16 +43,29 @@ ReactDOM.createRoot(root).render(
           </Route>
           <Route path="Settings" element={<SettingsHomepage />}/>
         </Route>
-        <Route path="Form" element={<Form />}>
-          <Route index element={<SiteForm />}/>
-          <Route path="Options" element={<FormHolder />}>
-            <Route index element={<OptionForms />}/>
-            <Route path="Results-Form" element={<ResultsForm />}/>
-            <Route path="Calibration-Form" element={<CalibrationForm />}/>
-            <Route path="Affinion-Form" element={<AffinionsForm />}/>
-          </Route >
-        </Route>
+
+          <Route path="SiteForm" element={<Form />}>
+            <Route index element={<SiteForm />} />
+            <Route path="Sites/:Site" element={<FormHolder />}>
+              <Route index element={<SiteProfile />}/>
+              <Route path="Results-Form" element={<ResultsForm />}/>
+              <Route path="Calibration-Form" element={<CalibrationForm />}/>
+              <Route path="Affinion-Form" element={<AffinionsForm />}/>
+            </Route >
+          </Route>
+
       </Route>
     </Routes>
   </BrowserRouter>
 )
+
+
+
+/*
+
+  <Route path="Form" element={<Form />}>
+
+            <Route path="Results-Form" element={<ResultsForm />}/>
+            <Route path="Calibration-Form" element={<CalibrationForm />}/>
+            <Route path="Affinion-Form" element={<AffinionsForm />}/>
+*/

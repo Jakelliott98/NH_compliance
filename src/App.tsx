@@ -21,7 +21,7 @@ export function HomeNav () {
           Portal
         </button>
       </Link>
-      <Link to="Form">
+      <Link to="SiteForm">
         <button className='p-10 flex-1 bg-purple-400 rounded-xl'>
           Form
         </button>
