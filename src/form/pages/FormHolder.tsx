@@ -1,10 +1,6 @@
-import SiteFormContext from "@/form/context/SiteFormContext"
 import { Outlet } from "react-router"
-import useFetchData from "@/hooks/useFetchData"
 import { useContext } from "react"
 import FormContext from "../context/FormContext"
-import type { AffinionCardType } from "@/types/affinion"
-import type { CalibrationType } from "@/types/calibration"
 
 export default function FormHolder () {
 
@@ -14,12 +10,9 @@ export default function FormHolder () {
     const { site } = context;
     if (site === null) throw new Error('Component rendered without site being selected')
 
-    const affinions = useFetchData<AffinionCardType>(site.site_id, 'affinions')
-    const controls = useFetchData<CalibrationType>(site.site_id, 'calibrations')
-
     return (
-        <SiteFormContext.Provider value={{ affinions, controls }}>
+        <>
             <Outlet />
-        </SiteFormContext.Provider>
+        </>
     )
 }

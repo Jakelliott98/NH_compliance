@@ -9,7 +9,7 @@ interface Hba1cSectionProps {
 
 export default function Hba1cSection ({ controlsData }: Hba1cSectionProps) {
 
-    const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === 'hba1c' })
+    const control = controlsData.find((item: CalibrationType) => { return item.test_type === 'hba1c' })
 
     if (controlsData.loading) {
         return (<Loading />)

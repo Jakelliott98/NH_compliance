@@ -9,7 +9,7 @@ interface LipidSectionProps {
 
 export default function LipidSection ({ controlsData }: LipidSectionProps) {
 
-    const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === 'lipids' })
+    const control = controlsData.find((item: CalibrationType) => { return item.test_type === 'lipids' })
 
     if (controlsData.loading) {
         return (<Loading />)

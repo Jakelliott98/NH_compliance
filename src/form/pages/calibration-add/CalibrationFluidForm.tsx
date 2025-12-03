@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { addControls, updateControl } from "@/form/hooks/useInsert";
-import SiteFormContext from "@/form/context/SiteFormContext";
 import CalendarPopup from "@/form/components/CalendarPopup";
 import { useQuery } from "@tanstack/react-query";
 import fetchSiteBySlug from "@/form/utils/fetchSiteBySlug";
 import { useParams } from "react-router";
+import fetchCalibrations from "@/form/utils/fetchControls";
 
 export default function CalibrationForm () {
 
@@ -60,11 +60,7 @@ interface CalibrationFormInputProps {
 
 export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputProps) {
 
-    const siteFormContext = useContext(SiteFormContext)
-    if (siteFormContext === null) throw new Error('Error fetching the site')
-    const { controls } = siteFormContext;
-
-    const isUpdating = controls === undefined ? true : false;
+//    const isUpdating = controls === undefined ? true : false; NEED TO FIND WAY TO UPDATE VS SUBMIT
     const methods = useForm();
     const { register, handleSubmit, setValue } = methods
     const [date, setDate] = useState<Date | undefined>()
@@ -74,18 +70,24 @@ export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputPro
     }, [date, setValue])
 
     const siteSlug = useParams().Site;
-    const { data, isError, isLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
-    if ( isError ) throw new Error('Could not fetch active site')
-    if ( isLoading ) return (<p>Loading...</p>)
+    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
+        const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
+        queryKey: ['controls', activeSite],
+        queryFn: () => fetchCalibrations(activeSite.site_id),
+        enabled: !!activeSite,
+    }) // ONLY ACCESSED FOR THE CHECK ON SUBMIT MAY FIND EASIER WAY
+    
+    if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
+    if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
 
 
     const onSubmit = handleSubmit((data) => {
-        if (isUpdating) {
-            updateControl(data, selectedFluid, data.site_id)
-        } else {
-            addControls(data, selectedFluid, data.site_id)
-        }
-        console.log(data)
+        //if (isUpdating) {
+            updateControl(data, selectedFluid, activeSite.site_id)
+        //} else {
+        //    addControls(data, selectedFluid, activeSite.site_id)
+        //}
+        //console.log(data)
     })
 
     return (

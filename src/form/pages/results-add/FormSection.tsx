@@ -1,7 +1,5 @@
 // import { useForm } from "react-hook-form";
-import SiteFormContext from "@/form/context/SiteFormContext"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useContext } from "react"
 import type { AffinionCardType } from "@/types/affinion"
 import { FormProvider, useForm } from "react-hook-form"
 import Hba1cSection from "./Hba1cSection"
@@ -9,22 +7,28 @@ import LipidSection from "./LipidSection"
 import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
 import fetchSiteBySlug from "@/form/utils/fetchSiteBySlug"
+import fetchAffinions from "@/form/utils/fetchAffinions"
+import fetchCalibrations from "@/form/utils/fetchControls"
 
 
 export default function FormSection () {
 
-    const siteFormContext = useContext(SiteFormContext)
+    const siteSlug = useParams().Site;
+    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
+    const { data: affinions, isError: affinionsError, isLoading: affinionsLoading} = useQuery({
+        queryKey: ['affinions', activeSite], 
+        queryFn: () => fetchAffinions(activeSite.site_id),
+        enabled: !!activeSite,
+    })
 
-    if (siteFormContext === null) {
-        throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
-    }
+    if ( siteError || affinionsError ) throw new Error('Could not fetch active site or Affinions')
+    if ( siteLoading || affinionsLoading ) return (<p>Loading...</p>)
 
-    const { affinions } = siteFormContext    // Change type back to number
 
     return (
         <div className="flex flex-row w-full justify-around">
             {
-                affinions.data.map((affinion: AffinionCardType) => {
+                affinions.map((affinion: AffinionCardType) => {
                     return (
                         <AffinionResultCard affinion={affinion} key={affinion.affinion_id}/>
                     )
@@ -40,20 +44,22 @@ interface AffinionResultCardProps {
 
 function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
-    const siteFormContext = useContext(SiteFormContext)
-    if (siteFormContext === null) throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
-    const { controls } = siteFormContext
-
     const methods = useForm();
     const { handleSubmit, setValue } = methods;
 
     const siteSlug = useParams().Site;
-    const { data, isError, isLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
-    if ( isError ) throw new Error('Could not fetch active site')
-    if ( isLoading ) return (<p>Loading...</p>)
+    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
+    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
+        queryKey: ['controls', activeSite],
+        queryFn: () => fetchCalibrations(activeSite.site_id),
+        enabled: !!activeSite,
+    }) 
+
+    if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
+    if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
 
     setValue("affinion_id", affinion.affinion_id)
-    setValue("site_id", data.site_id)
+    setValue("site_id", activeSite.site_id)
 
     const onSubmit = handleSubmit((data) => {
         console.log(data)

@@ -20,7 +20,7 @@ function Loading () {
 
 export function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
 
-    const control = controlsData.data.find((item: CalibrationType) => { return item.test_type === controlType})
+    const control = controlsData.find((item: CalibrationType) => { return item.test_type === controlType})
 
     if (controlsData.loading) {
         return (

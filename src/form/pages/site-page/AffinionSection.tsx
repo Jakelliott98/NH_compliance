@@ -23,7 +23,7 @@ export default function AffinionSection ({ affinions, onSubmit }: AffinionSectio
         <div className="grid grid-cols-4 gap-2">
             <div className="flex gap-3 col-start-1 col-end-4">
                 {
-                    affinions.data.map((affinion) => {
+                    affinions.map((affinion) => {
                         const lastClean = moment(affinion.last_clean).format('Do MMM')
                         const lastCalibrated = moment(affinion.last_calibrated).format('Do MMM')
                         return (

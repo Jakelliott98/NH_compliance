@@ -14,7 +14,7 @@ export default function AffinionsForm () {
 }
 
 const addAffinion = async (name: string, siteID: number, nhNumber: number) => {
-    const { error } = await supabase
+    const {  error } = await supabase
     .from('affinions')
     .insert([{
          site_id: siteID, name: name, nh_number: nhNumber, last_calibrated: null, last_clean: null,
@@ -24,12 +24,7 @@ const addAffinion = async (name: string, siteID: number, nhNumber: number) => {
 function AffinionFormSection () {
 
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const siteSlug = useParams().Site;
-
-    const { data, isError, isLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
-    if ( isError ) throw new Error('Could not fetch active site')
-    if ( isLoading ) return (<p>Loading...</p>)
-
+    
     const onSubmit = handleSubmit((data) => {
         addAffinion(data.affinion_name, data.site_id, data.nh_number)
     })
