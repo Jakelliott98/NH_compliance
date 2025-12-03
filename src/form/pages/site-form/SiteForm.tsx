@@ -1,26 +1,18 @@
 import { useNavigate } from "react-router"
-import { useEffect, useState } from "react"
-import supabase from "../../../utils/supabase"
+import { useState } from "react"
+import fetchAllSites from "@/form/utils/fetchAllSites"
 import SiteSearch from "./SiteSearch"
+import { useQuery } from "@tanstack/react-query"
 
 export default function SiteForm () {
 
-    const [allSites, setAllSites] = useState([])
     const [activeSite, setActiveSite] = useState('')
     const navigate = useNavigate();
+
+    const { data, isError, isLoading } = useQuery({queryKey: ['allSites'], queryFn: fetchAllSites})
     
-    useEffect(() => {
-        
-        const fetchSites = async () => {
-            const { data } = await supabase
-            .from('sites')
-            .select('*')
-            setAllSites(data)
-        }
-
-        fetchSites()
-
-    }, [])
+    if (isError) throw new Error('Could not fetch sites')
+    if (isLoading) return (<p>Loading...</p>)
 
     const onSubmit = () => {
         navigate(`Sites/${activeSite}`)
@@ -30,9 +22,10 @@ export default function SiteForm () {
         <div className="bg-gray-300 rounded p-4 flex justify-center items-center flex-col w-fit gap-2">
             <p>What site would you like to visit?</p>
             <div className="flex justify-center items-center w-full gap-2">
-                <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
+                <SiteSearch sites={data} setActiveSite={setActiveSite}/>
                 <button onClick={() => {onSubmit()}} className="py-1 px-3 bg-gray-300 rounded-lg cursor-pointer">Go</button>
             </div>
          </div>
     )
 }
+

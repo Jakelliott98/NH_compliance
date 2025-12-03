@@ -13,7 +13,7 @@ import SiteCalibration from './portal/pages/site/site-sub-pages/calibrations/Sit
 import SiteOverview from './portal/pages/site/site-sub-pages/overview/SiteOverview.tsx'
 import Portal from './portal/Portal.tsx'
 import Form from './form/Form.tsx'
-import SiteForm from './form/pages/site-search/SiteForm.tsx'
+import SiteForm from './form/pages/site-form/SiteForm.tsx'
 import SiteProfile from './form/pages/SiteProfile.tsx'
 import ResultsForm from './form/pages/results-add/ResultsForm.tsx'
 import FormHolder from './form/pages/FormHolder.tsx'
