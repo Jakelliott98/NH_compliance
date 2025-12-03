@@ -13,10 +13,10 @@ import SiteCalibration from './portal/pages/site/site-sub-pages/calibrations/Sit
 import SiteOverview from './portal/pages/site/site-sub-pages/overview/SiteOverview.tsx'
 import Portal from './portal/Portal.tsx'
 import Form from './form/Form.tsx'
-import SiteForm from './form/pages/site-form/SiteForm.tsx'
-import SiteProfile from './form/pages/SiteProfile.tsx'
+import SiteSearchContainer from './form/pages/site-search/SiteSearchContainer.tsx'
+import SiteProfile from './form/pages/site-profile/SiteProfile.tsx'
 import ResultsForm from './form/pages/results-add/ResultsForm.tsx'
-import SiteProfileContainer from './form/pages/FormHolder.tsx'
+import SiteProfileContainer from './form/pages/site-profile/SiteProfileContainer.tsx'
 import CalibrationForm from './form/pages/calibration-add/CalibrationFluidForm.tsx'
 import AffinionsForm from './form/pages/affinion-add/AffinionsForm.tsx'
 
@@ -45,7 +45,7 @@ ReactDOM.createRoot(root).render(
         </Route>
 
           <Route path="SiteForm" element={<Form />}>
-            <Route index element={<SiteForm />} />
+            <Route index element={<SiteSearchContainer />} />
             <Route path="Sites/:Site" element={<SiteProfileContainer />}>
               <Route index element={<SiteProfile />}/>
               <Route path="Results-Form" element={<ResultsForm />}/>

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router"
-import { SitePage } from "../components/SitePage";
+import { SitePage } from "./SitePage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 

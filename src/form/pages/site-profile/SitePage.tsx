@@ -1,11 +1,11 @@
-import AffinionSection from "../pages/site-page/AffinionSection"
-import ControlsSection from "../pages/site-page/ControlsSection"
-import AddResults from "../pages/site-page/AddResults"
+import AffinionSection from "./components/AffinionSection"
+import ControlsSection from "./components/ControlsSection"
+import AddResults from "./components/AddResults"
 import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
-import fetchSiteBySlug from "../utils/fetchSiteBySlug"
-import fetchAffinions from "../utils/fetchAffinions"
-import fetchCalibrations from "../utils/fetchControls"
+import fetchSiteBySlug from "../../utils/fetchSiteBySlug"
+import fetchAffinions from "../../utils/fetchAffinions"
+import fetchCalibrations from "../../utils/fetchControls"
 
 
 export function SitePage ({ onSubmit }) {

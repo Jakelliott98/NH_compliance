@@ -4,7 +4,7 @@ import fetchAllSites from "@/form/utils/fetchAllSites"
 import SiteSearch from "./SiteSearch"
 import { useQuery } from "@tanstack/react-query"
 
-export default function SiteForm () {
+export default function SiteSearchContainer () {
 
     const [activeSite, setActiveSite] = useState('')
     const navigate = useNavigate();
