@@ -1,14 +1,18 @@
 import './App.css'
 import { Link } from 'react-router';
 import { Outlet } from 'react-router';
+import { useQueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 function App() {
 
-  return (
-    <div className='w-full h-screen flex justify-center items-center'>
-      <Outlet />
-    </div>
+  const queryClient = useQueryClient()
 
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div className='w-full h-screen flex justify-center items-center'>
+        <Outlet />
+      </div>
+    </QueryClientProvider>
 )}
 
 // Change to navigation
