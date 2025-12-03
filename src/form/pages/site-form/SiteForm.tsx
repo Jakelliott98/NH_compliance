@@ -12,7 +12,7 @@ export default function SiteForm () {
     const { data, isError, isLoading } = useQuery({queryKey: ['allSites'], queryFn: fetchAllSites})
     
     if (isError) throw new Error('Could not fetch sites')
-    if (isLoading) return (<p>Loading...</p>)
+    if (isLoading) return (<p>Loading...</p>) // Add a loading compent
 
     const onSubmit = () => {
         navigate(`Sites/${activeSite}`)

@@ -6,7 +6,9 @@ import type { AffinionCardType } from "@/types/affinion"
 import { FormProvider, useForm } from "react-hook-form"
 import Hba1cSection from "./Hba1cSection"
 import LipidSection from "./LipidSection"
-import FormContext from "@/form/context/FormContext"
+import { useParams } from "react-router"
+import { useQuery } from "@tanstack/react-query"
+import fetchSiteBySlug from "@/form/utils/fetchSiteBySlug"
 
 
 export default function FormSection () {
@@ -42,16 +44,16 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
     if (siteFormContext === null) throw new Error('SiteFormContext has to be used within <SiteFormContext.Provider>')
     const { controls } = siteFormContext
 
-    const context = useContext(FormContext)
-    if (context === null) throw new Error('Error fetching the site')
-    const { site } = context;
-    if (site === null) throw new Error('Component rendered without site being selected')
-
     const methods = useForm();
     const { handleSubmit, setValue } = methods;
 
+    const siteSlug = useParams().Site;
+    const { data, isError, isLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
+    if ( isError ) throw new Error('Could not fetch active site')
+    if ( isLoading ) return (<p>Loading...</p>)
+
     setValue("affinion_id", affinion.affinion_id)
-    setValue("site_id", site.site_id)
+    setValue("site_id", data.site_id)
 
     const onSubmit = handleSubmit((data) => {
         console.log(data)

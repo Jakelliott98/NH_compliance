@@ -1,7 +1,8 @@
-import FormContext from '@/form/context/FormContext'
 import supabase from '@/utils/supabase'
-import { useContext } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
+import fetchSiteBySlug from '@/hooks/fetchSiteBySlug'
+import { useParams } from 'react-router'
 
 export default function AffinionsForm () {
 
@@ -13,7 +14,7 @@ export default function AffinionsForm () {
 }
 
 const addAffinion = async (name: string, siteID: number, nhNumber: number) => {
-    const { data, error } = await supabase
+    const { error } = await supabase
     .from('affinions')
     .insert([{
          site_id: siteID, name: name, nh_number: nhNumber, last_calibrated: null, last_clean: null,
@@ -22,16 +23,15 @@ const addAffinion = async (name: string, siteID: number, nhNumber: number) => {
 
 function AffinionFormSection () {
 
-    const formContext = useContext(FormContext)
-    if (formContext === null) throw new Error('FormContext has to be used within <FormContext.Provider>')
-    const { site } = formContext;
-    const siteID = site?.site_id;
-
-
     const { register, handleSubmit, formState: { errors } } = useForm()
+    const siteSlug = useParams().Site;
+
+    const { data, isError, isLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
+    if ( isError ) throw new Error('Could not fetch active site')
+    if ( isLoading ) return (<p>Loading...</p>)
 
     const onSubmit = handleSubmit((data) => {
-        addAffinion(data.affinion_name, siteID, data.nh_number)
+        addAffinion(data.affinion_name, data.site_id, data.nh_number)
     })
 
     return (
