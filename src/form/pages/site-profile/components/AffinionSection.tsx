@@ -1,5 +1,3 @@
-import type { FetchState } from "@/hooks/useFetchData"
-import type { AffinionCardType } from "@/types/affinion"
 import moment from "moment"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
@@ -7,12 +5,7 @@ import { FormButtons } from "../SiteProfile";
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import AffinionsForm from "../../affinion-add/AffinionsForm";
-
-
-interface AffinionSectionProps {
-    affinions: FetchState<AffinionCardType>,
-    onSubmit: (value: string) => void,
-}
+import type { AffinionCardType } from "@/types/affinion";
 
 const affinionButton = {
     title: 'New Affinion',
@@ -20,7 +13,11 @@ const affinionButton = {
     value: 'Affinion-Form',
 }
 
-export default function AffinionSection ({ affinions, onSubmit }: AffinionSectionProps) {
+interface AffinionSectionProps {
+    affinions: AffinionCardType[]
+}
+
+export default function AffinionSection ({ affinions }: AffinionSectionProps) {
 
     const [open, setOpen] = useState(false)
 
@@ -57,7 +54,7 @@ export default function AffinionSection ({ affinions, onSubmit }: AffinionSectio
                     </PopoverTrigger>
                     <PopoverContent>
                         <div>
-                            <AffinionsForm />
+                            <AffinionsForm closePopover={() => {setOpen(false)}}/>
                         </div>
                     </PopoverContent>
                 </Popover>

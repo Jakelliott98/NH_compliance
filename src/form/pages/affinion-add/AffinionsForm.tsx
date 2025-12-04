@@ -1,30 +1,51 @@
-import supabase from '@/utils/supabase'
 import { useForm } from 'react-hook-form'
+import addAffinion from '@/form/utils/addAffinion'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useParams } from 'react-router'
+import fetchSiteBySlug from '@/hooks/fetchSiteBySlug'
+import type { AffinionData } from '@/form/utils/addAffinion'
 
-export default function AffinionsForm () {
+export default function AffinionsForm ({ closePopover }) {
 
     return (
         <div className="bg-gray-100 w-full p-5 rounded flex flex-col items-center">
-            <AffinionFormSection />
+            <AffinionFormSection closePopover={closePopover}/>
         </div>        
     )
 
 }
 
-const addAffinion = async (name: string, siteID: number, nhNumber: number) => {
-    const {  error } = await supabase
-    .from('affinions')
-    .insert([{
-         site_id: siteID, name: name, nh_number: nhNumber, last_calibrated: null, last_clean: null,
-    }]) // Add affinion ID
-}
+function AffinionFormSection ({ closePopover }) {
 
-function AffinionFormSection () {
+    const queryClient = useQueryClient()
+
+    const addNewAffinion = useMutation({
+        mutationFn: (affinionData: AffinionData) => addAffinion(affinionData),
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: ['affinions']})
+        }
+    }) 
 
     const { register, handleSubmit, formState: { errors } } = useForm()
     
+    const siteSlug = useParams().Site;
+    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({
+        queryKey: ['site', siteSlug],
+        queryFn: () => fetchSiteBySlug(siteSlug),
+    })
+    console.log(activeSite)
+    if (siteError) throw new Error ('Cannot find the site')
+    if ( siteLoading ) return (<p>Loading...</p>)
+
+
     const onSubmit = handleSubmit((data) => {
-        addAffinion(data.affinion_name, data.site_id, data.nh_number)
+        const affinionData: AffinionData = {
+            name: data.affinion_name,
+            nhNumber: data.nh_number,
+            siteID: activeSite.site_id,
+        }
+        addNewAffinion.mutate(affinionData)
+        closePopover()
     })
 
     return (

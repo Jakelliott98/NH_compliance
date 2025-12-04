@@ -1,0 +1,17 @@
+import supabase from "@/utils/supabase"
+
+export interface AffinionData {
+    siteID: number, 
+    nhNumber: number, 
+    name: string,
+}
+
+const addAffinion = async (affinionData: AffinionData) => {
+    const { error } = await supabase
+    .from('affinions')
+    .insert({
+        site_id: affinionData.siteID, name: affinionData.name, nh_number: affinionData.nhNumber, last_calibrated: null, last_clean: null,
+    })
+}
+
+export default addAffinion;
