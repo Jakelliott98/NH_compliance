@@ -4,6 +4,9 @@ import moment from "moment"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { FormButtons } from "../SiteProfile";
+import { useState } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
+import AffinionsForm from "../../affinion-add/AffinionsForm";
 
 
 interface AffinionSectionProps {
@@ -18,6 +21,8 @@ const affinionButton = {
 }
 
 export default function AffinionSection ({ affinions, onSubmit }: AffinionSectionProps) {
+
+    const [open, setOpen] = useState(false)
 
     return (
         <div className="grid grid-cols-4 gap-2">
@@ -44,7 +49,16 @@ export default function AffinionSection ({ affinions, onSubmit }: AffinionSectio
                 }
             </div>
             <div className="cold-start-3">
-                <FormButtons option={affinionButton} onSubmit={onSubmit} />
+                <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild>
+                        <div>
+                            <FormButtons option={affinionButton} />
+                        </div>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <AffinionsForm />
+                    </PopoverContent>
+                </Popover>
             </div>
         </div>
     )

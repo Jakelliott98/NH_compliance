@@ -1,8 +1,5 @@
 import supabase from '@/utils/supabase'
-import { useQuery } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import fetchSiteBySlug from '@/hooks/fetchSiteBySlug'
-import { useParams } from 'react-router'
 
 export default function AffinionsForm () {
 
@@ -11,6 +8,7 @@ export default function AffinionsForm () {
             <AffinionFormSection />
         </div>        
     )
+
 }
 
 const addAffinion = async (name: string, siteID: number, nhNumber: number) => {

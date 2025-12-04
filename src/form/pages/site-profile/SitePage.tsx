@@ -8,7 +8,7 @@ import fetchAffinions from "../../utils/fetchAffinions"
 import fetchCalibrations from "../../utils/fetchControls"
 
 
-export function SitePage ({ onSubmit }) {
+export function SitePage () {
 
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
@@ -30,9 +30,9 @@ export function SitePage ({ onSubmit }) {
         <div className="flex flex-col gap-5 h-full">
             <p className="text-center font-bold text-3xl">{activeSite.site_name}</p>
             <div className="flex flex-col flex-1 gap-3 ">
-                    <AffinionSection affinions={affinions} onSubmit={onSubmit} />
-                    <ControlsSection controls={controls} onSubmit={onSubmit}/>
-                    <AddResults onSubmit={onSubmit}/>
+                    <AffinionSection affinions={affinions} />
+                    <ControlsSection controls={controls} />
+                    <AddResults />
             </div>
         </div>
     )

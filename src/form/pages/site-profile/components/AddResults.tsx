@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { FormButtons } from "../SiteProfile";
+import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
+import FormSection from "../../results-add/FormSection";
 
 const option = {
     title: 'New Result',
@@ -6,13 +9,22 @@ const option = {
     value: 'Results-Form',
 }
 
-interface AddResultsProps {
-    onSubmit: (value: string) => void,
-}
+export default function AddResults () {
 
-export default function AddResults ({ onSubmit }: AddResultsProps) {
+    const [open, setOpen] = useState(false)
 
     return (
-        <FormButtons option={option} onSubmit={onSubmit}/>
+        <div>
+            <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                    <div>
+                        <FormButtons option={option} />
+                    </div>
+                </PopoverTrigger>
+                <PopoverContent>
+                    <FormSection />
+                </PopoverContent>
+            </Popover>
+        </div>
     )
 }
