@@ -21,8 +21,8 @@ function AffinionFormSection ({ closePopover }) {
 
     const addNewAffinion = useMutation({
         mutationFn: (affinionData: AffinionData) => addAffinion(affinionData),
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['affinions']})
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['affinions']})
         }
     }) 
 

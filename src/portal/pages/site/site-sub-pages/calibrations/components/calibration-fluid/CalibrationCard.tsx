@@ -7,7 +7,7 @@ interface CalibrationCardProps{
 
 export default function CalibrationCard({ calibration }: CalibrationCardProps) {
 
-    const isLipids = calibration.test_type === 'lipids';
+    const isLipids = calibration.control_type === 'lipids';
     const title = isLipids ? 'Lipids' : 'HBA1c';
 
 

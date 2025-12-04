@@ -29,5 +29,5 @@ export interface CalibrationType{
     id: number,
     lot_number: string,
     site_id: number,
-    test_type: "hba1c" | "lipids",
+    control_type: "hba1c" | "lipids",
 }

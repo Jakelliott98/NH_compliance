@@ -2,13 +2,12 @@
 import { Checkbox } from "@/components/ui/checkbox"
 import type { AffinionCardType } from "@/types/affinion"
 import { FormProvider, useForm } from "react-hook-form"
-import Hba1cSection from "./Hba1cSection"
-import LipidSection from "./LipidSection"
 import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
 import fetchSiteBySlug from "@/form/utils/fetchSiteBySlug"
 import fetchAffinions from "@/form/utils/fetchAffinions"
 import fetchCalibrations from "@/form/utils/fetchControls"
+import RangesComponent from "./RangesComponent"
 
 
 export default function FormSection () {
@@ -77,8 +76,13 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                             />
                             <label className="text-blue-500 text-sm">Not in rotation this week</label>
                         </div>
-                        <Hba1cSection controlsData={controls} />
-                        <LipidSection controlsData={controls} />
+                        {
+                            controls?.map((control) => {
+                                return (
+                                    <RangesComponent control={control}/>
+                                )
+                            })
+                        }
                         <div className=" bg-green-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                             <Checkbox 
                                 className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600 data-[state=checked]:text-white dark:data-[state=checked]:border-green-700 dark:data-[state=checked]:bg-green-700"

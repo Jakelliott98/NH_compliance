@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import { addControls, updateControl } from "@/form/hooks/useInsert";
 import CalendarPopup from "@/form/components/CalendarPopup";
 import { useQuery } from "@tanstack/react-query";
 import fetchSiteBySlug from "@/form/utils/fetchSiteBySlug";
@@ -60,11 +59,10 @@ interface CalibrationFormInputProps {
 
 export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputProps) {
 
-//    const isUpdating = controls === undefined ? true : false; NEED TO FIND WAY TO UPDATE VS SUBMIT
     const methods = useForm();
     const { register, handleSubmit, setValue } = methods
     const [date, setDate] = useState<Date | undefined>()
-    
+
     useEffect(() => {
         setValue("expiry_date", date?.toISOString())
     }, [date, setValue])
@@ -79,15 +77,26 @@ export function CalibrationFormInput ({ selectedFluid }: CalibrationFormInputPro
     
     if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
     if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
+    
+    const hba1cControlPresent = controls?.some(control => control.control_type === 'hba1c')
+    const lipidsControlPresent = controls?.some(control => control.control_type === 'lipids')
 
 
     const onSubmit = handleSubmit((data) => {
-        //if (isUpdating) {
-            updateControl(data, selectedFluid, activeSite.site_id)
-        //} else {
-        //    addControls(data, selectedFluid, activeSite.site_id)
-        //}
-        //console.log(data)
+
+        if (selectedFluid === 'hba1c') {
+            if (hba1cControlPresent) {
+                // Modify
+            } else {
+                // Insert
+            }
+        } else if (selectedFluid === 'lipids') {
+            if (lipidsControlPresent) {
+                // Update
+            } else {
+                // Insert
+            }
+        }
     })
 
     return (
