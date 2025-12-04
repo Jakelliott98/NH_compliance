@@ -25,8 +25,8 @@ export default function AffinionSection ({ affinions, onSubmit }: AffinionSectio
     const [open, setOpen] = useState(false)
 
     return (
-        <div className="grid grid-cols-4 gap-2">
-            <div className="flex gap-3 col-start-1 col-end-4">
+        <div className="h-full grid grid-cols-4 gap-2">
+            <div className="flex gap-3 col-start-1 col-end-4 h-full">
                 {
                     affinions.map((affinion) => {
                         const lastClean = moment(affinion.last_clean).format('Do MMM')
@@ -48,15 +48,17 @@ export default function AffinionSection ({ affinions, onSubmit }: AffinionSectio
                     })
                 }
             </div>
-            <div className="cold-start-3">
+            <div className="col-start-4 h-full w-full">
                 <Popover open={open} onOpenChange={setOpen}>
                     <PopoverTrigger asChild>
-                        <div>
+                        <div className="h-full">
                             <FormButtons option={affinionButton} />
                         </div>
                     </PopoverTrigger>
                     <PopoverContent>
-                        <AffinionsForm />
+                        <div>
+                            <AffinionsForm />
+                        </div>
                     </PopoverContent>
                 </Popover>
             </div>

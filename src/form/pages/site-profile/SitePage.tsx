@@ -29,7 +29,7 @@ export function SitePage () {
     return (
         <div className="flex flex-col gap-5 h-full">
             <p className="text-center font-bold text-3xl">{activeSite.site_name}</p>
-            <div className="flex flex-col flex-1 gap-3 ">
+            <div className=" flex-1 grid grid-rows-3 gap-y-2 items-stretch w-full">
                     <AffinionSection affinions={affinions} />
                     <ControlsSection controls={controls} />
                     <AddResults />

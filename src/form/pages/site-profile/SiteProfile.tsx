@@ -26,7 +26,7 @@ interface FormButtonsProps {
 export function FormButtons ({ option }: FormButtonsProps) {
 
         return (
-                <div className="bg-gray-300 h-full rounded p-5 cursor-pointer flex flex-col justify-center items-center gap-1" >
+                <div className="h-full bg-gray-300 rounded p-5 cursor-pointer flex flex-col justify-center items-center gap-1" >
                         <FontAwesomeIcon className="text-3xl" icon={faPlus} />
                         <h1 className="text-xl font-bold">{ option.title }</h1>
                         <p className="text-sm"> {option.text} </p>

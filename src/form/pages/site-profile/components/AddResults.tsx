@@ -14,15 +14,17 @@ export default function AddResults () {
     const [open, setOpen] = useState(false)
 
     return (
-        <div>
+        <div className="h-full">
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
-                    <div>
+                    <div className="h-full">
                         <FormButtons option={option} />
                     </div>
                 </PopoverTrigger>
                 <PopoverContent>
-                    <FormSection />
+                    <div>
+                        <FormSection />
+                    </div>
                 </PopoverContent>
             </Popover>
         </div>

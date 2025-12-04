@@ -24,15 +24,15 @@ export default function ControlsSection ({ controls }: ControlsSectionProps) {
     const [open, setOpen] = useState(false)
 
     return (
-        <div className="grid grid-cols-4 gap-2">
-            <div className="col-start-1 col-end-4 flex [&>*]:grow gap-3">
+        <div className="h-full grid grid-cols-4 gap-2">
+            <div className="h-full col-start-1 col-end-4 flex [&>*]:grow gap-3">
                 <ReturnControlSection title="Lipids" controlsData={controls} controlType="lipids"/>
                 <ReturnControlSection title="HBA1c" controlsData={controls} controlType="hba1c"/>
             </div>
-            <div className="cold-start-3">
+            <div className="col-start-4">
                 <Popover open={open} onOpenChange={setOpen}>
                     <PopoverTrigger asChild>
-                        <div>
+                        <div className="h-full">
                             <FormButtons option={option} />
                         </div>
                     </PopoverTrigger>
