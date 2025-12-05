@@ -79,7 +79,6 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
 
     const onSubmit = handleSubmit((data) => {
 
-
         if (selectedControl === 'hba1c') {
             if (hba1cControlPresent) {
                 updateNewControl.mutate({control: data, testType: 'hba1c', ranges: data.hba1c})
@@ -104,7 +103,7 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
             <form className="bg-white p-4 rounded flex flex-col gap-2" onSubmit={onSubmit}>
                 <div className="flex flex-col gap-1">
                     <label>Lot Number</label>
-                    <input className="outline rounded px-2 py-0.5" {...register("lotNumber", {required: "Please provide a Lot Number"})}/>
+                    <input className="outline rounded px-2 py-0.5" {...register("lotNumber", {required: "Please provide a Lot Number", valueAsNumber: true})}/>
                 </div>
                 <div className="flex flex-col gap-1">
                     <label>Expiry Date</label>

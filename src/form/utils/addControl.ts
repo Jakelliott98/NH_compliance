@@ -1,10 +1,14 @@
 import supabase from "@/utils/supabase";
 
 export interface RangesType {
-    c1_low: number,
-    c2_low: number,
-    c1_high: number,
-    c2_high: number,
+    c1: {
+        low: number,
+        high: number,
+    }
+    c2: {
+        low: number,
+        high: number,
+    }
 }
 
 export interface ControlType {
@@ -33,6 +37,8 @@ const setTitle: (type: string) => string = (type) => {
 }
 
 const addControl = async (control: ControlType, testType: string, ranges: RangesType) => {
+
+    console.log(ranges)
 
     const { error } = await supabase
     .from('controls')

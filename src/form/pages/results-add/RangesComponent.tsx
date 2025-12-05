@@ -2,6 +2,7 @@ import { useFormContext } from "react-hook-form"
 
 export default function RangesComponent ({ control }) {
 
+
     const { register } = useFormContext()
 
     return (
