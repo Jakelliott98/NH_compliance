@@ -1,10 +1,10 @@
 
 interface ControlsSelectProps {
-    setSelectedFluid: React.Dispatch<React.SetStateAction<string>>,
+    onSelect: React.Dispatch<React.SetStateAction<string>>,
     setIsFormOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-export default function ControlsSelect ({ setSelectedFluid, setIsFormOpen }: ControlsSelectProps) {
+export default function ControlsSelect ({ onSelect, setIsFormOpen }: ControlsSelectProps) {
 
     return (
         <div>
@@ -12,7 +12,7 @@ export default function ControlsSelect ({ setSelectedFluid, setIsFormOpen }: Con
             <div className="flex gap-5">
                 <div className="p-4 bg-red-200 rounded flex-1 cursor-pointer" 
                     onClick={() => {
-                        setSelectedFluid('hba1c')
+                        onSelect('hba1c')
                         setIsFormOpen(true)
                     }}
                 >
@@ -21,7 +21,7 @@ export default function ControlsSelect ({ setSelectedFluid, setIsFormOpen }: Con
                 <div 
                     className="p-4 bg-yellow-200 rounded flex-1 cursor-pointer"
                     onClick={() => {
-                        setSelectedFluid('lipids')
+                        onSelect('lipids')
                         setIsFormOpen(true)
                     }}
                 >

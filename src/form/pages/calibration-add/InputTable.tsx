@@ -33,10 +33,10 @@ export default function InputTable ({ test }: InputTableProps) {
                         <tr key={`${test.type}C1`}>
                             <td>{test.title}</td>
                             <td>
-                                <input {...register(`${test.type}_c1_low`, {required: "Please provide controls range"})}/>
+                                <input {...register(`${test.type}.c1_low`, {required: "Please provide controls range"})}/>
                             </td>
                             <td>
-                                <input {...register(`${test.type}_c1_high`, {required: "Please provide controls range"})}/>
+                                <input {...register(`${test.type}.c1_high`, {required: "Please provide controls range"})}/>
                             </td>
                         </tr>
                     )
@@ -51,10 +51,10 @@ export default function InputTable ({ test }: InputTableProps) {
                         <tr key={`${test.type}C2`}>
                             <td>{test.title}</td>
                             <td>
-                                <input {...register(`${test.type}_c2_low`, {required: "Please provide controls range"})}/>
+                                <input {...register(`${test.type}.c2_low`, {required: "Please provide controls range"})}/>
                             </td>
                             <td>
-                                <input {...register(`${test.type}_c2_high`, {required: "Please provide controls range"})}/>
+                                <input {...register(`${test.type}.c2_high`, {required: "Please provide controls range"})}/>
                             </td>
                         </tr>
                     )
