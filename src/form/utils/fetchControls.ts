@@ -4,7 +4,7 @@ import supabase from "@/utils/supabase"
 const fetchCalibrations = async (siteID: number) => {
 
     const { data } = await supabase
-    .from('calibrations')
+    .from('controls')
     .select('*')
     .eq('site_id', siteID)
 
