@@ -30,7 +30,7 @@ export default function FormSection () {
 
 
     return (
-        <div className="flex flex-row w-full justify-around">
+        <div className="flex flex-row w-full justify-around overflow-scroll gap-3">
             {
                 affinions.map((affinion: AffinionCardType) => {
                     return (
@@ -95,8 +95,8 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
     return (
         <FormProvider {...methods}>
             <form className="bg-white p-4 rounded outline" onSubmit={onSubmit}>
-                <div>
-                    <div>
+                <div className="m-0.5">
+                    <div className="flex flex-col gap-1">
                         <p className="text-center">{affinion.name} | {affinion.nh_number}</p>
                         <div className=" bg-blue-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                             <Checkbox 
@@ -121,7 +121,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                         </div>
                     </div>
                 </div>
-                <button type="submit" >Submit Results</button>
+                <button type="submit" className="rounded p-1 bg-green-300 w-full">Submit Results</button>
             </form>
         </FormProvider>
     )

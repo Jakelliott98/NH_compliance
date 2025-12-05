@@ -5,14 +5,16 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import fetchSiteBySlug from "@/form/utils/fetchSiteBySlug";
 import { useParams } from "react-router";
 import fetchCalibrations from "@/form/utils/fetchControls";
-import LipidsForm from "./LipidsForm";
-import HBA1cForm from "./Hba1cForm";
 import ControlsSelect from "./ControlsSelect";
 import addControl from "@/form/utils/addControl";
 import type { ControlType } from "@/form/utils/addControl";
 import type { RangesType } from "@/form/utils/addControl";
 import { useQueryClient } from "@tanstack/react-query";
 import updateControl from "@/form/utils/updateControl";
+import InputTable from "./InputTable";
+
+const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
+const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
 
 export default function CalibrationForm () {
 
@@ -101,15 +103,17 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
     return (
         <FormProvider {...methods}>
             <form className="bg-white p-4 rounded flex flex-col gap-2" onSubmit={onSubmit}>
-                <div className="flex flex-col gap-1">
-                    <label>Lot Number</label>
-                    <input className="outline rounded px-2 py-0.5" {...register("lotNumber", {required: "Please provide a Lot Number", valueAsNumber: true})}/>
+                <div className="flex row gap-2">
+                    <div className="flex flex-col gap-1 flex-1">
+                        <label className="text-sm">Lot Number</label>
+                        <input className="outline rounded px-2 py-0.5 text-sm" {...register("lotNumber", {required: "Please provide a Lot Number", valueAsNumber: true})}/>
+                    </div>
+                    <div className="flex flex-col gap-1 flex-1">
+                        <label className="text-sm">Expiry Date</label>
+                        <CalendarPopup onSelect={setDate} date={date}/>
+                    </div>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <label>Expiry Date</label>
-                    <CalendarPopup onSelect={setDate} date={date}/>
-                </div>
-                { selectedControl === 'hba1c' ? <HBA1cForm /> : <LipidsForm /> }
+                <InputTable test={ selectedControl === 'hba1c' ? hba1cTable : lipidsTable}/>
                 <button className="rounded p-2 bg-green-300 w-full" type="submit">Submit</button>
             </form>
         </FormProvider>

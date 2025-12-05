@@ -18,7 +18,7 @@ export default function CalendarPopup ({ onSelect, date }: CalanderPopupProps) {
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <div className="w-full outline rounded flex items-center px-2 py-0.5" >
-                    <p className={`flex-1 text-start ${date === undefined ? 'text-gray-300' : 'text-black'}`}>{ date === undefined ? 'Select a date....' : moment(date.toISOString()).format('Do MMMM YYYY') }</p>
+                    <p className={`flex-1 text-start text-sm ${date === undefined ? 'text-gray-300' : 'text-black'}`}>{ date === undefined ? 'Select a date....' : moment(date.toISOString()).format('Do MMMM YYYY') }</p>
                     <FontAwesomeIcon icon={faCalendar} className="text-gray-500"/>
                 </div>
             </PopoverTrigger>

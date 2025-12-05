@@ -12,7 +12,6 @@ export default function AffinionsForm ({ closePopover }) {
             <AffinionFormSection closePopover={closePopover}/>
         </div>        
     )
-
 }
 
 function AffinionFormSection ({ closePopover }) {
@@ -33,7 +32,6 @@ function AffinionFormSection ({ closePopover }) {
         queryKey: ['site', siteSlug],
         queryFn: () => fetchSiteBySlug(siteSlug),
     })
-    console.log(activeSite)
     if (siteError) throw new Error ('Cannot find the site')
     if ( siteLoading ) return (<p>Loading...</p>)
 

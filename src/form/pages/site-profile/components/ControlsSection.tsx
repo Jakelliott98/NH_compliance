@@ -2,7 +2,7 @@ import type { FetchState } from "@/hooks/useFetchData"
 import type { CalibrationType } from "@/types/calibration"
 import { ReturnControlSection } from "../../calibration-add/ReturnControlSection"
 import { FormButtons } from "../SiteProfile"
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover"
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react"
 import CalibrationForm from "../../calibration-add/CalibrationFluidForm"
 
@@ -30,16 +30,17 @@ export default function ControlsSection ({ controls }: ControlsSectionProps) {
                 <ReturnControlSection title="HBA1c" controlsData={controls} controlType="hba1c"/>
             </div>
             <div className="col-start-4">
-                <Popover open={open} onOpenChange={setOpen}>
-                    <PopoverTrigger asChild>
+                <Dialog open={open} onOpenChange={setOpen}>
+                    <DialogTrigger asChild>
                         <div className="h-full">
                             <FormButtons option={option} />
                         </div>
-                    </PopoverTrigger>
-                    <PopoverContent>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogTitle>Add a control</DialogTitle>
                         <CalibrationForm />
-                    </PopoverContent>
-                </Popover>
+                    </DialogContent>
+                </Dialog>
             </div>
         </div>
     )

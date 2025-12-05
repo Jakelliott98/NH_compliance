@@ -14,47 +14,49 @@ export default function InputTable ({ test }: InputTableProps) {
     const { register } = useFormContext();
 
     return (
-        <table>
+        <table className="bg-gray-100 border-separate border-spacing-y-2">
             <thead>
-                <tr>
+                <tr className="bg-gray-200">
                     <th></th>
-                    <th>Lower Range</th>
-                    <th>Upper Range</th>
+                    <th className="text-sm font-semibold">Lower Range</th>
+                    <th className="text-sm font-semibold">Upper Range</th>
                 </tr>
             </thead>
 
-            <tbody>
-            <tr>
-                <td>C1</td>
+            <tbody className="">
+            <tr className="">
+                <td className="text-center font-medium text-sm">C1</td>
+                <td colSpan={2}></td>
             </tr>
             {
                 test.map(test => {
                     return (
-                        <tr key={`${test.type}C1`}>
+                        <tr key={`${test.type}C1`} className="font-medium text-sm">
                             <td>{test.title}</td>
-                            <td>
-                                <input type="number" {...register(`${test.type}.c1.low`, {required: "Please provide controls range", valueAsNumber: true})}/>
+                            <td className="text-center">
+                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" {...register(`${test.type}.c1.low`, {required: "Please provide controls range", valueAsNumber: true})}/>
                             </td>
-                            <td>
-                                <input type="number" {...register(`${test.type}.c1.high`, {required: "Please provide controls range", valueAsNumber: true})}/>
+                            <td className="text-center">
+                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" {...register(`${test.type}.c1.high`, {required: "Please provide controls range", valueAsNumber: true})}/>
                             </td>
                         </tr>
                     )
                 })
             }
-            <tr>
-                <td>C2</td>
+            <tr className="">
+                <td className="text-center font-medium text-sm">C2</td>
+                <td colSpan={2}></td>
             </tr>
             {
                 test.map(test => {
                     return (
-                        <tr key={`${test.type}C2`}>
+                        <tr key={`${test.type}C2`} className="font-medium text-sm">
                             <td>{test.title}</td>
-                            <td>
-                                <input type="number" {...register(`${test.type}.c2.low`, {required: "Please provide controls range", valueAsNumber: true})}/>
+                            <td className="text-center">
+                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" {...register(`${test.type}.c2.low`, {required: "Please provide controls range", valueAsNumber: true})}/>
                             </td>
-                            <td>
-                                <input type="number" {...register(`${test.type}.c2.high`, {required: "Please provide controls range", valueAsNumber: true})}/>
+                            <td className="text-center">
+                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" {...register(`${test.type}.c2.high`, {required: "Please provide controls range", valueAsNumber: true})}/>
                             </td>
                         </tr>
                     )

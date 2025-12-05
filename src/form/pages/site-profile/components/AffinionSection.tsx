@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { FormButtons } from "../SiteProfile";
 import { useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import AffinionsForm from "../../affinion-add/AffinionsForm";
 import type { AffinionCardType } from "@/types/affinion";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const affinionButton = {
     title: 'New Affinion',
@@ -46,18 +46,19 @@ export default function AffinionSection ({ affinions }: AffinionSectionProps) {
                 }
             </div>
             <div className="col-start-4 h-full w-full">
-                <Popover open={open} onOpenChange={setOpen}>
-                    <PopoverTrigger asChild>
+                <Dialog>
+                    <DialogTrigger asChild>
                         <div className="h-full">
                             <FormButtons option={affinionButton} />
                         </div>
-                    </PopoverTrigger>
-                    <PopoverContent>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogTitle>Add an Affinion</DialogTitle>
                         <div>
                             <AffinionsForm closePopover={() => {setOpen(false)}}/>
                         </div>
-                    </PopoverContent>
-                </Popover>
+                    </DialogContent>
+                </Dialog>
             </div>
         </div>
     )

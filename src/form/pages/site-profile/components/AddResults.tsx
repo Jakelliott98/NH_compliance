@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { FormButtons } from "../SiteProfile";
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 import FormSection from "../../results-add/FormSection";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const option = {
     title: 'New Result',
@@ -11,22 +10,17 @@ const option = {
 
 export default function AddResults () {
 
-    const [open, setOpen] = useState(false)
-
     return (
-        <div className="h-full">
-            <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                    <div className="h-full">
+            <Dialog>
+                <DialogTrigger asChild>
+                    <div className="">
                         <FormButtons option={option} />
                     </div>
-                </PopoverTrigger>
-                <PopoverContent>
-                    <div>
+                </DialogTrigger>
+                <DialogContent className="">
+                    <DialogTitle>Add Calibration Results</DialogTitle>
                         <FormSection />
-                    </div>
-                </PopoverContent>
-            </Popover>
-        </div>
+                </DialogContent>
+            </Dialog>
     )
 }
