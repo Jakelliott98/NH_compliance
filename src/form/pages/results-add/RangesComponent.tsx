@@ -2,7 +2,6 @@ import { useFormContext } from "react-hook-form"
 
 export default function RangesComponent ({ control }) {
 
-
     const { register } = useFormContext()
 
     return (
@@ -14,14 +13,14 @@ export default function RangesComponent ({ control }) {
                         <label className="font-bold">C1</label>
                         <p className="text-gray-500">{control.calibration_ranges.c1.low} - {control.calibration_ranges.c1.high}</p>
                     </div>
-                    <input type="text" className="outline rounded" {...register(`${control.test_type}_c1`)}/>
+                    <input type="text" className="outline rounded" {...register(`${control.test_type}.c1.result`, {valueAsNumber: true})}/>
                 </div>
                 <div className="flex flex-col">
                     <div className="flex flex-row justify-between">
                         <label className="font-bold">C2</label>
                         <p className="text-gray-500">{control.calibration_ranges.c2.low} - {control.calibration_ranges.c2.high}</p>
                     </div>
-                    <input type="text" className="outline rounded" {...register(`${control.test_type}_c2`)}/>
+                    <input type="text" className="outline rounded" {...register(`${control.test_type}.c2.result`, {valueAsNumber: true})}/>
                 </div>
             </div>
         </div>
