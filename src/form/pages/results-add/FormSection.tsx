@@ -11,6 +11,7 @@ import RangesComponent from "./RangesComponent"
 import { useState } from "react"
 import updateLastCleaned from "@/form/utils/updateLastCleaned"
 import updateLastCalibration from "@/form/utils/updateLastCalibration"
+import addCalibrationResults from "@/form/utils/addResults"
 
 
 
@@ -67,13 +68,16 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
         mutationFn: ({affinionID}) => updateLastCalibration(affinionID),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['affinions']})
     })
+    const addResult = useMutation({
+        mutationFn: ({ result }) => addCalibrationResults(result)
+    })
 
 
     if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
     if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
 
-    setValue("affinion_id", affinion.affinion_id)
-    setValue("site_id", activeSite.site_id)
+    setValue("affinionID", affinion.affinion_id)
+    setValue("siteID", activeSite.site_id)
     controls?.map((control) => {
         setValue(`${control.test_type}.c1.low`, control.calibration_ranges.c1.low)
         setValue(`${control.test_type}.c1.high`, control.calibration_ranges.c1.high)
@@ -83,8 +87,9 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
     const onSubmit = handleSubmit((data) => {
         console.log(data)
-        if (isCleaned) updateCleaned.mutate({ affinionID: data.affinion_id})
-        updateCalibrated.mutate({affinionID: data.affinion_id})
+        if (isCleaned) updateCleaned.mutate({ affinionID: data.affinionID})
+        updateCalibrated.mutate({affinionID: data.affinionID})
+        addResult.mutate({ result: data })
     })
 
     return (
