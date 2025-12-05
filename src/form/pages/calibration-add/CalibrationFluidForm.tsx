@@ -12,6 +12,7 @@ import addControl from "@/form/utils/addControl";
 import type { ControlType } from "@/form/utils/addControl";
 import type { RangesType } from "@/form/utils/addControl";
 import { useQueryClient } from "@tanstack/react-query";
+import updateControl from "@/form/utils/updateControl";
 
 export default function CalibrationForm () {
 
@@ -31,7 +32,7 @@ interface CalibrationFormInputProps {
     selectedControl: string,
 }
 
-interface addNewControlParameters {
+interface NewControlParameters {
     control: ControlType,
     testType: string,
     ranges: RangesType,
@@ -57,10 +58,14 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
         enabled: !!activeSite,
     }) // ONLY ACCESSED FOR THE CHECK ON SUBMIT MAY FIND EASIER WAY
     const addNewControl = useMutation({
-        mutationFn: ({control, testType, ranges}: addNewControlParameters) => addControl(control, testType, ranges),
+        mutationFn: ({control, testType, ranges}: NewControlParameters) => addControl(control, testType, ranges),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['controls']})
         }
+    })
+    const updateNewControl = useMutation({
+        mutationFn: ({control, testType, ranges}: NewControlParameters) => updateControl(control, testType, ranges),
+        onSuccess: () => queryClient.invalidateQueries({queryKey: ['controls']})
     })
 
 
@@ -77,13 +82,15 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
 
         if (selectedControl === 'hba1c') {
             if (hba1cControlPresent) {
-                // Modify
+                updateNewControl.mutate({control: data, testType: 'hba1c', ranges: data.hba1c})
             } else {
                 addNewControl.mutate({control: data, testType: 'hba1c', ranges: data.hba1c})
             }
         } else if (selectedControl === 'lipids') {
             if (lipidsControlPresent) {
-                // Update
+                updateNewControl.mutate({control: data, testType:'hdl', ranges: data.hdl})
+                updateNewControl.mutate({control: data, testType: 'triglycerides', ranges: data.triglycerides})
+                updateNewControl.mutate({control: data, testType: 'total', ranges: data.total})
             } else {
                 addNewControl.mutate({control: data, testType:'hdl', ranges: data.hdl})
                 addNewControl.mutate({control: data, testType: 'triglycerides', ranges: data.triglycerides})
