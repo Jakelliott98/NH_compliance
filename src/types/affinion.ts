@@ -4,7 +4,7 @@ export interface AffinionCardType{
     affinion_id: number, 
     created_at: Date,
     last_calibrated: string,
-    name: string,
+    affinion_number: number,
     nh_number: string,
     site_id: number,
     last_clean: Date,

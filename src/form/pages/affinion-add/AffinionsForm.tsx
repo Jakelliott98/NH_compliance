@@ -38,7 +38,7 @@ function AffinionFormSection ({ closePopover }) {
 
     const onSubmit = handleSubmit((data) => {
         const affinionData: AffinionData = {
-            name: data.affinion_name,
+            number: data.number,
             nhNumber: data.nh_number,
             siteID: activeSite.site_id,
         }
@@ -49,21 +49,26 @@ function AffinionFormSection ({ closePopover }) {
     return (
         <form className="p-4 bg-white flex flex-col gap-2 rounded" onSubmit={onSubmit}>
             <div className="flex flex-col">
-                <label>Affinion Name</label>
-                <input className="outline rounded" placeholder="Affinion 1" {...register("affinion_name", {required: "Each affinion requires a name"})}/>
-                <p className='text-xs text-red-700'>{errors.affinion_name?.message}</p>
+                <label>Affinion Number</label>
+                <div className='outline rounded flex p-0.5 gap-2'>
+                    <p>Affinion</p>
+                    <input className="" type="number" {...register("number", {required: "Each affinion requires a name", valueAsNumber: true})}/>
+                </div>
+                <p className='text-xs text-red-700'>{errors.number?.message}</p>
             </div>
             <div className="flex flex-col">
                 <label>NH Number</label>
-                <input 
-                    className="outline rounded" 
-                    placeholder="NH" 
-                    type="number" 
-                    {...register("nh_number", {
-                        required: "A NH number is required",
-                        valueAsNumber: true,
-                    }
-                )}/>
+                <div className='outline rounded flex p-0.5 gap-2'>
+                    <p>NH</p>
+                    <input 
+                        className="" 
+                        type="number" 
+                        {...register("nh_number", {
+                            required: "A NH number is required",
+                            valueAsNumber: true,
+                        }
+                    )}/>
+                </div>
                 <p className='text-xs text-red-700'>{errors.nh_number?.message}</p>
             </div>
             <button className="p-2 w-full bg-green-300 font-bold rounded cursor-pointer" type="submit">Add Affinion</button>

@@ -93,7 +93,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
             <form className="bg-white p-4 rounded outline" onSubmit={onSubmit}>
                 <div className="m-0.5">
                     <div className="flex flex-col gap-1">
-                        <p className="text-center">{affinion.name} | {affinion.nh_number}</p>
+                        <p className="text-center">Affinion {affinion.affinion_number} | {affinion.nh_number}</p>
                         <div className=" bg-blue-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                             <Checkbox 
                                 className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"

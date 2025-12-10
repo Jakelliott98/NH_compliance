@@ -20,25 +20,26 @@ interface AffinionSectionProps {
 export default function AffinionSection ({ affinions }: AffinionSectionProps) {
 
     const [open, setOpen] = useState(false)
+    const sortedAffinions = affinions.sort((a, b) => a.affinion_number - b.affinion_number)
 
     return (
         <div className="h-full grid grid-cols-4 gap-2">
             <div className="flex gap-3 col-start-1 col-end-4 h-full">
                 {
-                    affinions.map((affinion) => {
+                    sortedAffinions.map((affinion) => {
                         const lastClean = moment(affinion.last_clean).format('Do MMM')
                         const lastCalibrated = moment(affinion.last_calibrated).format('Do MMM')
                         return (
                             <div className="bg-white p-2 rounded flex-grow flex flex-col justify-around items-center" key={affinion.affinion_id}>
                                 <FontAwesomeIcon className="text-green-700 text-3xl" icon={faCalendarCheck} />
-                                <p className="font-semibold text-center text-lg">{affinion.name}</p>
+                                <p className="font-semibold text-center text-lg">Affinion {affinion.affinion_number}</p>
                                 <p className="text-sm">
                                     Last Calibrated:
-                                    <span className="italics"> {lastCalibrated}</span>
+                                    <span className="italics"> {lastCalibrated === null ? lastCalibrated : ''}</span>
                                 </p>
                                 <p className="text-sm">
                                     Last Cleaned:
-                                    <span className="italics"> {lastClean}</span>
+                                    <span className="italics">{lastClean === null ? lastCalibrated : ''}</span>
                                 </p>
                             </div>
                         )
