@@ -1,4 +1,3 @@
-// import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox"
 import type { AffinionCardType } from "@/types/affinion"
 import { FormProvider, useForm } from "react-hook-form"
@@ -12,8 +11,6 @@ import { useState } from "react"
 import updateLastCleaned from "@/form/utils/updateLastCleaned"
 import updateLastCalibration from "@/form/utils/updateLastCalibration"
 import addCalibrationResults from "@/form/utils/addResults"
-
-
 
 export default function FormSection () {
 
@@ -50,7 +47,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
     const queryClient = useQueryClient()
     const methods = useForm();
-    const { handleSubmit, setValue } = methods;
+    const { handleSubmit, setValue, register } = methods;
     const [isCleaned, setIsCleaned] = useState(false)
 
     const siteSlug = useParams().Site;
@@ -86,7 +83,6 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
     })
 
     const onSubmit = handleSubmit((data) => {
-        console.log(data)
         if (isCleaned) updateCleaned.mutate({ affinionID: data.affinionID})
         updateCalibrated.mutate({affinionID: data.affinionID})
         addResult.mutate({ result: data })
@@ -111,6 +107,14 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                                 )
                             })
                         }
+                        <div className="flex gap-2">
+                            <label className="text-sm">Clinician Name:</label>
+                            <input className="flex-1 " {...register('clinician', {required: 'Please provide your initials'})}/>
+                        </div>
+                        <div>
+                            <label className="text-sm">Number of attempts: </label>
+                            <input type="number" {...register('attempts', {required: 'Please complete number of attempts.'})}/>
+                        </div>
                         <div className=" bg-green-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                             <Checkbox 
                                 onCheckedChange={(value: boolean) => setIsCleaned(value)}

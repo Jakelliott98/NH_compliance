@@ -33,9 +33,9 @@ const addCalibrationResults = async (result: ResultType) => {
     .insert([{
         site_id: result.siteID,
         affinion_id: result.affinionID,
-        clinician: 'J.Elliott', // ADD
+        clinician: result.clinician,
         calibration_date: new Date(),
-        attempts: 3, // ADD
+        attempts: result.attempts,
         hdl_result: result.hdl,
         hba1c_result: result.hba1c,
         total_result: result.total,
