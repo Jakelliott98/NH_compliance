@@ -1,40 +1,28 @@
 
 interface CalibrationType {
-    low: number,
-    high: number, 
-    result: number,
-}
-
-interface Hba1cType {
-    c1: CalibrationType,
-    c2: CalibrationType,
-}
-
-interface LipidType {
     c1: {
-        total: CalibrationType,
-        hdl: CalibrationType, 
-        trigs: CalibrationType,
+        low: number,
+        high: number, 
+        result: number
     },
     c2: {
-        total: CalibrationType,
-        hdl: CalibrationType, 
-        trigs: CalibrationType,
+        low: number,
+        high: number, 
+        result: number
     }
 }
 
-export interface ResultsData {
-    hba1c: Hba1cType,
-    lipids: LipidType,
-}
+
 
 export interface ResultsType {
     id: number,
-    results_data: ResultsData,
-    passed: boolean,
     clinician: string,
     calibration_date: Date,
     attempts: number,
     site_id: number,
     affinion_id: number,
+    total_result: CalibrationType,
+    hdl_result: CalibrationType,
+    hba1c_result: CalibrationType,
+    triglycerides_result: CalibrationType,
 }
