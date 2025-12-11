@@ -3,15 +3,18 @@ import ControlsSection from "./components/ControlsSection"
 import AddResults from "./components/AddResults"
 import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
-import fetchSiteBySlug from "../../utils/fetchSiteBySlug"
-import fetchAffinions from "../../utils/fetchAffinions"
+import fetchSiteBySlug from "../../../utils/fetchSiteBySlug"
+import fetchAffinions from "../../../utils/fetchAffinions"
 import fetchCalibrations from "../../utils/fetchControls"
 
 
 export function SitePage () {
 
     const siteSlug = useParams().Site;
-    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
+    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({
+        queryKey: ['activeSite', siteSlug], 
+        queryFn: () => fetchSiteBySlug(siteSlug)
+    })
     const { data: affinions, isError: affinionsError, isLoading: affinionsLoading} = useQuery({
         queryKey: ['affinions', activeSite], 
         queryFn: () => fetchAffinions(activeSite.site_id),

@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from 'react'
-import RegionContext from '@/portal/context/RegionContext';
+import { useState } from 'react'
 import RegionCard from './RegionCard';
 import type { RegionData } from '@/types/region';
+import { useQuery } from '@tanstack/react-query';
+import fetchRegions from '@/portal/utils/fetchRegions';
 
 interface RegionsFilterProps {
     activeRegion: string,
@@ -12,23 +13,21 @@ interface RegionsFilterProps {
 
 export default function RegionsFilter({activeRegion, selectRegion}: RegionsFilterProps) {
 
-    const context = useContext(RegionContext)
-
-    if (context === null) {
-        throw new Error('RegionContext has to be used within <RegionContext.Provider>')
-    }
-
-    const { complianceData } = context;
+    const { data: regions, isLoading: regionsLoading, isError: regionsError} = useQuery({queryKey: ['regions'], queryFn: () => fetchRegions()})
 
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
 
     const searchInput = <input className='text-gray-500 border-l-2 px-2 border-gray-300 border-solid focus:outline-none' placeholder='Search for a site...'></input>
 
+    if (regionsLoading) return (<p>Loading...</p>)
+    if (regionsError) throw new Error('Error fetching regions at useQuery')
+    if (regions === null || regions === undefined) throw new Error('Error fetching regions at useQuery')
+
     return (
         <div className="flex p-2">
             <div className="flex flex-cols flex-1 gap-5">
                 {
-                    complianceData.regions.data.map((item: RegionData) => {
+                    regions.map((item: RegionData) => {
                         return (
                             <RegionCard key={item.id} region={item} activeRegion={activeRegion} onSelected={selectRegion}/>
                         )

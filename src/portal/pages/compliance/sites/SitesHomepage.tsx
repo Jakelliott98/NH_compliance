@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react'
-import RegionContext from '@/portal/context/RegionContext'
+import { useState } from 'react'
 import RegionsFilter from './components/Regions/RegionFilter'
 import SitesSection from './components/SitesSection'
 import type { SiteData } from '@/types/site'
+import { useQuery } from '@tanstack/react-query'
+import fetchAllSites from '@/utils/fetchAllSites'
 
 interface ActiveRegionState{
     activeRegion: string,
@@ -11,14 +12,8 @@ interface ActiveRegionState{
 
 export default function SitesDashboard () {
 
-    const context = useContext(RegionContext)
+    const { data: allSites, isLoading: allSitesLoading, isError: allSitesError } = useQuery({queryKey: ['sites'], queryFn: () => fetchAllSites()})
 
-    if (context === null) {
-        throw new Error('RegionContext has to be used within <RegionContext.Provider>')
-    }
-
-    const { complianceData } = context;
-    
     const [activeRegion, setActiveRegion] = useState<ActiveRegionState>({
         activeRegion: '',
         isFiltered: false,
@@ -42,7 +37,10 @@ export default function SitesDashboard () {
 
     }
 
-    const filteredSites = activeRegion.isFiltered ? complianceData.sites.data.filter((item: SiteData) => {return item.site_region === activeRegion.activeRegion}) : complianceData.sites.data;
+    if (allSitesLoading) return (<p>Loading...</p>)
+    if (allSitesError || allSites === null || allSites === undefined) throw new Error('Error fetching all sites')
+
+    const filteredSites = activeRegion.isFiltered ? allSites.filter((item: SiteData) => {return item.site_region === activeRegion.activeRegion}) : allSites;
 
     return (
         <div className=''>

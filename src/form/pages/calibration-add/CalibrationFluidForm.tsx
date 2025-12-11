@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form";
 import CalendarPopup from "@/form/components/CalendarPopup";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import fetchSiteBySlug from "@/form/utils/fetchSiteBySlug";
+import fetchSiteBySlug from "@/utils/fetchSiteBySlug";
 import { useParams } from "react-router";
 import fetchCalibrations from "@/form/utils/fetchControls";
 import ControlsSelect from "./ControlsSelect";
