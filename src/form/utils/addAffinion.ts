@@ -16,6 +16,7 @@ const addAffinion = async (affinionData: AffinionData) => {
         last_calibrated: null, 
         last_clean: null,
     })
+    if (error) throw error;
 }
 
 export default addAffinion;

@@ -1,7 +1,7 @@
 import supabase from "@/utils/supabase"
 
 
-const updateLastCalibration = async (affinionID) => {
+const updateLastCalibration = async (affinionID: number) => {
 
     const today = new Date()
 
@@ -9,7 +9,8 @@ const updateLastCalibration = async (affinionID) => {
     .from('affinions')
     .update({last_calibrated: today})
     .eq("affinion_id", affinionID)
-    if (error) console.log(error)
+    
+    if (error) throw error;
 
 }
 

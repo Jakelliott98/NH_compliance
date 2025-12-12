@@ -18,7 +18,7 @@ export interface ControlType {
     hba1c?: RangesType,
     hdl?: RangesType,
     total?: RangesType,
-    triglycerides: RangesType,
+    triglycerides?: RangesType,
     controlType: 'hba1c' | 'lipids',
 }
 
@@ -49,7 +49,7 @@ const addControl = async (control: ControlType, testType: string, ranges: Ranges
         test_type: testType,
         display_name: setTitle(testType),
     })
-    if (error) console.log(error)
+    if (error) throw error;
 
 }
 

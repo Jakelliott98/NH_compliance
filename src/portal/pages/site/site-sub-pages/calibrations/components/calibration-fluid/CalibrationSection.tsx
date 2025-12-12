@@ -3,6 +3,7 @@ import { useParams } from "react-router"
 import fetchSiteBySlug from "@/utils/fetchSiteBySlug"
 import fetchCalibrations from "@/utils/fetchControls"
 import moment from "moment"
+import type { CalibrationDatabaseType } from "@/types/calibration"
 
 export default function CalibrationSection () {
 
@@ -36,7 +37,11 @@ export default function CalibrationSection () {
 
 }
 
-function CalibrationHolder ({ controls }) {
+interface CalibrationHolderProps {
+    controls: CalibrationDatabaseType[],
+}
+
+function CalibrationHolder ({ controls }: CalibrationHolderProps) {
 
     const hba1c = controls.find(control => control.test_type === 'hba1c')
     const lipids = controls.filter(control => control.control_type === 'lipids')
@@ -51,9 +56,17 @@ function CalibrationHolder ({ controls }) {
 
 }
 
-function LipidsDisplay ({ lipids }) {
+interface LipidsDisplayProps {
+    lipids: CalibrationDatabaseType[] | undefined,
+}
+
+function LipidsDisplay ({ lipids }: LipidsDisplayProps) {
+
+    if (!lipids) return (<p>No Lipids Control added yet</p>)
 
     const total = lipids.find(control => control.test_type === 'total')
+
+    if (!total) return (<p>No Lipids Control added yet</p>)
 
     return (
         <div className='p-1 bg-red-100 w-fit rounded-xl flex flex-col h-fit grow-1'>
@@ -80,7 +93,11 @@ function LipidsDisplay ({ lipids }) {
     )
 }
 
-function CalibrationRangesLayout ({ control }) {
+interface CalibrationRangesLayoutProps {
+    control: CalibrationDatabaseType,
+}
+
+function CalibrationRangesLayout ({ control }: CalibrationRangesLayoutProps) {
     return (
         <div className='py-2'>
             <div className='flex justify-between'>
@@ -95,7 +112,13 @@ function CalibrationRangesLayout ({ control }) {
     )
 }
 
-function Hba1cDisplay ({ hba1c }) {
+interface Hba1cDisplayProps {
+    hba1c: CalibrationDatabaseType | undefined,
+}
+
+function Hba1cDisplay ({ hba1c }: Hba1cDisplayProps) {
+
+    if (!hba1c) return (<p>No HBA1c Control Added yet</p>)
 
     return (
     <div className='p-1 bg-red-100 w-fit rounded-xl flex flex-col h-fit grow-1'>

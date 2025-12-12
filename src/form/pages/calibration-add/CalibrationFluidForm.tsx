@@ -52,9 +52,13 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
         setValue("controlType", selectedControl)
     }, [date, setValue, selectedControl])
 
-    const siteSlug = useParams().Site;
-    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
-        const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
+    const siteSlug: string | undefined = useParams().Site;
+    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({
+        queryKey: ['activeSite', siteSlug], 
+        queryFn: () => fetchSiteBySlug(siteSlug),
+        enabled: !!siteSlug,
+    })
+    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
         queryKey: ['controls', activeSite],
         queryFn: () => fetchCalibrations(activeSite.site_id),
         enabled: !!activeSite,

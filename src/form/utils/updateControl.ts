@@ -1,6 +1,6 @@
 import supabase from "@/utils/supabase";
 import type { ControlType } from "./addControl";
-import type { RangesType } from "./addControl";
+import type { RangesType } from "./addControl"; 
 
 const updateControl = async (control: ControlType, testType: string, ranges: RangesType) => {
 
@@ -13,7 +13,8 @@ const updateControl = async (control: ControlType, testType: string, ranges: Ran
     })
     .eq('site_id', control.siteID)
     .eq('test_type', testType)
-    if (error) console.log(error)
+    
+    if (error) throw error;
 
 }
 

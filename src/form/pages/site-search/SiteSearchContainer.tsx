@@ -3,20 +3,26 @@ import { useState } from "react"
 import fetchAllSites from "@/utils/fetchAllSites"
 import SiteSearch from "./SiteSearch"
 import { useQuery } from "@tanstack/react-query"
+import type { SiteDatabaseType } from "@/types/site"
 
 export default function SiteSearchContainer () {
 
     const [activeSite, setActiveSite] = useState('')
     const navigate = useNavigate();
 
-    const { data, isError, isLoading } = useQuery({queryKey: ['allSites'], queryFn: fetchAllSites})
+    const { data, isError, isLoading, error, isSuccess } = useQuery<SiteDatabaseType[]>({
+        queryKey: ['allSites'], 
+        queryFn: fetchAllSites
+    })
     
-    if (isError) throw new Error('Could not fetch sites')
-    if (isLoading) return (<p>Loading...</p>) // Add a loading compent
+    if (isError) throw error;
+    if (isLoading) return (<p>Loading...</p>)
 
     const onSubmit = () => {
         navigate(`Sites/${activeSite}`)
     }
+
+    if (isSuccess) {
 
     return (
         <div className="bg-gray-300 rounded p-4 flex justify-center items-center flex-col w-fit gap-2">
@@ -27,5 +33,7 @@ export default function SiteSearchContainer () {
             </div>
          </div>
     )
+    
+    }
 }
 

@@ -5,7 +5,11 @@ import { useParams } from 'react-router'
 import fetchSiteBySlug from '@/hooks/fetchSiteBySlug'
 import type { AffinionData } from '@/form/utils/addAffinion'
 
-export default function AffinionsForm ({ closePopover }) {
+interface AffinionsFormProps {
+    closePopover: () => void,
+}
+
+export default function AffinionsForm ({ closePopover }: AffinionsFormProps) {
 
     return (
         <div className="bg-gray-100 w-full p-5 rounded flex flex-col items-center">
@@ -14,7 +18,11 @@ export default function AffinionsForm ({ closePopover }) {
     )
 }
 
-function AffinionFormSection ({ closePopover }) {
+interface AffinionFormSectionProps {
+    closePopover: () => void,
+}
+
+function AffinionFormSection ({ closePopover }: AffinionFormSectionProps) {
 
     const queryClient = useQueryClient()
 

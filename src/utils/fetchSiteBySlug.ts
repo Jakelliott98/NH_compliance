@@ -1,6 +1,7 @@
+import type { SiteDatabaseType } from "@/types/site"
 import supabase from "@/utils/supabase"
 
-const fetchSiteBySlug = async (siteSlug: string) => {
+const fetchSiteBySlug = async (siteSlug: string): Promise<SiteDatabaseType> => {
 
   const { data, error } = await supabase
     .from('sites')

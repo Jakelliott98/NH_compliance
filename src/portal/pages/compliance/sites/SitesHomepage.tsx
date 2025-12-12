@@ -12,7 +12,10 @@ interface ActiveRegionState{
 
 export default function SitesDashboard () {
 
-    const { data: allSites, isLoading: allSitesLoading, isError: allSitesError } = useQuery({queryKey: ['sites'], queryFn: () => fetchAllSites()})
+    const { data: sites, isLoading: isSitesLoading, isError: isSitesError, error: sitesError } = useQuery<SiteDatabaseType[] ,Error>({
+        queryKey: ['sites'], 
+        queryFn: () => fetchAllSites()
+    })
 
     const [activeRegion, setActiveRegion] = useState<ActiveRegionState>({
         activeRegion: '',
@@ -37,10 +40,10 @@ export default function SitesDashboard () {
 
     }
 
-    if (allSitesLoading) return (<p>Loading...</p>)
-    if (allSitesError || allSites === null || allSites === undefined) throw new Error('Error fetching all sites')
+    if (isSitesLoading) return (<p>Loading...</p>)
+    if (isSitesError || sites === null || sites === undefined) throw sitesError;
 
-    const filteredSites = activeRegion.isFiltered ? allSites.filter((item: SiteDatabaseType) => {return item.site_region === activeRegion.activeRegion}) : allSites;
+    const filteredSites = activeRegion.isFiltered ? sites.filter((item: SiteDatabaseType) => {return item.site_region === activeRegion.activeRegion}) : sites;
 
     return (
         <div className=''>

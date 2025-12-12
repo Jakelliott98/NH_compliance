@@ -7,7 +7,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface SiteSearchProps {
-    sites: Array<SiteDatabaseType>,
+    sites: SiteDatabaseType[],
     setActiveSite: React.Dispatch<React.SetStateAction<string>>
 }
 

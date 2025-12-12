@@ -17,6 +17,6 @@ export interface CalibrationDatabaseType {
     expiry_date: Date,
     calibration_ranges: TestRangeType,
     control_type: "hba1c" | "lipids", 
-    test_Type: 'hdl' | 'total' | 'hba1c' | 'triglycerides',
+    test_type: 'hdl' | 'total' | 'hba1c' | 'triglycerides',
     display_name: 'Triglycerides' | 'HBA1c' | 'Total Cholesterol' | 'HDL Cholesterol',
 }

@@ -14,7 +14,9 @@ export default function SitesSection({ sites }: SitesSectionProps) {
                     {
                         sites.map((item) => {
                             return (
-                                    <Link to={`${item.slug}`} key={item.site_id}><SiteCard key={item.site_id} site={item}/></Link>
+                                    <Link to={`${item.slug}`} key={item.site_id}>
+                                        <SiteCard key={item.site_id} site={item}/>
+                                    </Link>
                             )
                         })
                     }                                              

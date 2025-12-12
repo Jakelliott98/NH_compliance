@@ -39,7 +39,7 @@ const addCalibrationResults = async (result: ResultType) => {
         total_result: result.total,
         triglycerides_result: result.triglycerides,
     }])
-    if (error) console.log(error)
+    if (error) throw error;
 }
 
 export default addCalibrationResults;

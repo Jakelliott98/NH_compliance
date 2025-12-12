@@ -1,10 +1,13 @@
+import type { RegionsDatabaseType } from "@/types/region";
 import supabase from "@/utils/supabase"
 
-const fetchRegions = async () => {
-    const { data, erorr } = await supabase
+const fetchRegions = async (): Promise<RegionsDatabaseType[]> => {
+    
+    const { data, error } = await supabase
     .from('regions')
     .select('*')
-    if ( erorr ) throw new Error('Error fetching the regions')
+
+    if (error) throw error;
     return data;
 }
 

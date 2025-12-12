@@ -1,12 +1,15 @@
+import type { SiteDatabaseType } from "@/types/site";
 import supabase from "@/utils/supabase";
 
-const fetchAllSites = async () => {
+const fetchAllSites = async (): Promise<SiteDatabaseType[]> => {
 
-    const { data } = await supabase
+    const { data, error } = await supabase
         .from('sites')
         .select('*')
-    return data
 
+    if (error) throw error;
+    return data
+    
 }
 
 export default fetchAllSites;

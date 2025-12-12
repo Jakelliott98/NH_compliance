@@ -1,7 +1,7 @@
-import type { RegionData } from "@/types/region"
+import type { RegionsDatabaseType } from "@/types/region"
 
 interface RegionCardProp {
-    region: RegionData,
+    region: RegionsDatabaseType,
     activeRegion: string,
     onSelected: (region: string) => void,
 }
