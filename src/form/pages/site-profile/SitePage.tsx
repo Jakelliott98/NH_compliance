@@ -5,7 +5,7 @@ import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
 import fetchSiteBySlug from "../../../utils/fetchSiteBySlug"
 import fetchAffinions from "../../../utils/fetchAffinions"
-import fetchCalibrations from "../../utils/fetchControls"
+import fetchCalibrations from "../../../utils/fetchControls"
 
 
 export function SitePage () {

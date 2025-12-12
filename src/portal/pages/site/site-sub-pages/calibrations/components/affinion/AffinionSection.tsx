@@ -1,22 +1,37 @@
-import { useOutletContext } from "react-router"
 import AffinionCard from "./AffinionCard"
-import useFetchData from "@/hooks/useFetchData"
-import type { AffinionCardType } from "@/types/affinion"
+import { useParams } from "react-router"
+import fetchSiteBySlug from "@/hooks/fetchSiteBySlug"
+import fetchAffinions from "@/utils/fetchAffinions"
+import { useQuery } from "@tanstack/react-query"
 
 export default function AffinionSection () {
 
-    const { siteID }: { siteID: number} = useOutletContext();
+    const siteSlug = useParams().Site
+    const { data: activeSite, isError:siteError, isLoading: siteLoading} = useQuery({
+        queryKey: ['portalActiveSite', siteSlug],
+        queryFn: () => fetchSiteBySlug(siteSlug),
+            enabled: !!siteSlug,
+    })
+    const { data: affinions, isError: affinionError, isLoading: affinionsLoading } = useQuery({
+        queryKey: ['portalAffinions', activeSite],
+        queryFn: () => fetchAffinions(activeSite.site_id),
+        enabled: !!activeSite,
+    })
 
-    const affinions = useFetchData<AffinionCardType>(siteID, 'affinions')
+    if (siteError) return <p>Error loading site</p>;
+    if (!activeSite) return <p>No site found</p>;
+    if (siteLoading || affinionsLoading ) return <p>Loading...</p>;
+    if (affinionError) return (<p>Something went wrong...</p>)
+    if (!affinions) return (<p>No affinions found</p>)
 
     return (
         <div className='flex-1 flex flex-col gap-3 p-3'>
             <p className='font-medium text-lg'>Affinions</p>
             <div className="flex gap-8">
                 {
-                    affinions.data.map((item) => {
+                    affinions.map((affinion) => {
                         return (
-                            <AffinionCard key={item.affinion_id} affinion={item}/>
+                            <AffinionCard key={affinion.affinion_id} affinion={affinion}/>
                         )
                     })
                 }

@@ -38,8 +38,6 @@ const setTitle: (type: string) => string = (type) => {
 
 const addControl = async (control: ControlType, testType: string, ranges: RangesType) => {
 
-    console.log(ranges)
-
     const { error } = await supabase
     .from('controls')
     .insert({

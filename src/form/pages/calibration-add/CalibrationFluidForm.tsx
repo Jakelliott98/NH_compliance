@@ -4,7 +4,7 @@ import CalendarPopup from "@/form/components/CalendarPopup";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import fetchSiteBySlug from "@/utils/fetchSiteBySlug";
 import { useParams } from "react-router";
-import fetchCalibrations from "@/form/utils/fetchControls";
+import fetchCalibrations from "@/utils/fetchControls";
 import ControlsSelect from "./ControlsSelect";
 import addControl from "@/form/utils/addControl";
 import type { ControlType } from "@/form/utils/addControl";

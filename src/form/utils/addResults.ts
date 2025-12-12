@@ -26,8 +26,6 @@ interface ResultType {
 
 const addCalibrationResults = async (result: ResultType) => {
 
-    console.log(result)
-
     const { error } = await supabase
     .from('results')
     .insert([{

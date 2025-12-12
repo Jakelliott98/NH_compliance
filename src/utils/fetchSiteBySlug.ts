@@ -1,7 +1,7 @@
 import supabase from "@/utils/supabase"
 
 const fetchSiteBySlug = async (siteSlug: string) => {
-  console.log('called')
+
   const { data, error } = await supabase
     .from('sites')
     .select('*')
