@@ -1,4 +1,4 @@
-export interface SiteData{
+export interface SiteDatabaseType {
   site_id: number,
   created_at: Date,
   team_leader: string,

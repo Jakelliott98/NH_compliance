@@ -2,17 +2,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { faHandSparkles } from "@fortawesome/free-solid-svg-icons";
 import moment from 'moment'
-import type { AffinionCardType } from '@/types/affinion';
+import type { AffinionDatabaseType } from '@/types/affinion';
 
 interface AffinionCardProps{
-    affinion: AffinionCardType,
+    affinion: AffinionDatabaseType,
 }
 
 export default function AffinionCard ({ affinion }: AffinionCardProps) {
     return (
             <div className="rounded-xl bg-gray-100 p-4 flex flex-col gap-4 items-center">
                 <div className='bg-white rounded-full w-9/12 aspect-square flex items-center justify-center'>
-                    <p className='uppercase font-medium'>{affinion.name}</p>
+                    <p className='uppercase font-medium'>Affinion {affinion.affinion_number}</p>
                 </div>
                 <p className='text-gray-600'>NH{affinion.nh_number}</p>
                 <div className='flex gap-2'>

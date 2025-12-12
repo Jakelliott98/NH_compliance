@@ -1,6 +1,6 @@
 
 
-export interface AffinionCardType{
+export interface AffinionDatabaseType {
     affinion_id: number, 
     created_at: Date,
     last_calibrated: string,

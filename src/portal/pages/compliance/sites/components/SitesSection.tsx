@@ -1,9 +1,9 @@
 import { Link } from "react-router"
 import SiteCard from "./SiteCard"
-import type { SiteData } from "@/types/site"
+import type { SiteDatabaseType } from "@/types/site"
 
 interface SitesSectionProps {
-    sites: SiteData[],
+    sites: SiteDatabaseType[],
 }
 
 export default function SitesSection({ sites }: SitesSectionProps) {

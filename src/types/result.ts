@@ -12,17 +12,16 @@ interface CalibrationType {
     }
 }
 
-
-
-export interface ResultsType {
+export interface ResultsDatabaseType {
     id: number,
+    created_at: Date,
+    site_id: number,
+    affinion_id: number,
     clinician: string,
     calibration_date: Date,
     attempts: number,
-    site_id: number,
-    affinion_id: number,
     total_result: CalibrationType,
-    hdl_result: CalibrationType,
-    hba1c_result: CalibrationType,
     triglycerides_result: CalibrationType,
+    hba1c_result: CalibrationType,
+    hdl_result: CalibrationType,
 }

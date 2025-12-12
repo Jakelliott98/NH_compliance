@@ -1,10 +1,10 @@
 import { useReducer } from "react";
-import type { SiteData } from "../../types/site";
+import type { SiteDatabaseType } from "../../types/site";
 import type { RegionData } from "../../types/region";
 import type { ResultStateType } from "../../types/dataTypes";
 
 type Action = 
-    | { type: "SET_SITES", value: SiteData[] }
+    | { type: "SET_SITES", value: SiteDatabaseType[] }
     | { type: "SET_REGIONS", value: RegionData[] }
 
 const initializer: ResultStateType = {
@@ -24,7 +24,7 @@ export default function SitesReducer() {
 
     const [complianceData, dispatch] = useReducer(reducer, initializer)
 
-    function setSites(sites: SiteData[]): void {
+    function setSites(sites: SiteDatabaseType[]): void {
         dispatch({
             type: 'SET_SITES',
             value: sites, 

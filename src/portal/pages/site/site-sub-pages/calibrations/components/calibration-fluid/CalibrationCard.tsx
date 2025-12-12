@@ -1,5 +1,5 @@
 import moment from "moment";
-import type { CalibrationType, LipidsRangeType, Hba1cRangeType } from "@/types/calibration";
+import type { CalibrationType, TestRangeType } from "@/types/calibration";
 
 interface CalibrationCardProps{
     calibration: CalibrationType,
@@ -30,7 +30,7 @@ export default function CalibrationCard({ calibration }: CalibrationCardProps) {
 }
 
 interface Hba1cDisplayProps {
-    calibrationRanges: Hba1cRangeType,
+    calibrationRanges: TestRangeType,
 }
 
 function Hba1cDisplay ({ calibrationRanges }: Hba1cDisplayProps) {
@@ -51,7 +51,7 @@ function Hba1cDisplay ({ calibrationRanges }: Hba1cDisplayProps) {
 
 
 interface LipidsDisplayProps {
-    calibrationRanges: LipidsRangeType,
+    calibrationRanges: TestRangeType,
 }
 
 function LipidsDisplay ({ calibrationRanges }: LipidsDisplayProps) {

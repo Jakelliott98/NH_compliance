@@ -1,5 +1,4 @@
-import type { FetchState } from "@/hooks/useFetchData"
-import type { CalibrationType } from "@/types/calibration"
+import type { CalibrationDatabaseType } from "@/types/calibration"
 import { ReturnControlSection } from "../../calibration-add/ReturnControlSection"
 import { FormButtons } from "../SiteProfile"
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -7,9 +6,8 @@ import { useState } from "react"
 import CalibrationForm from "../../calibration-add/CalibrationFluidForm"
 
 interface ControlsSectionProps {
-    controls: FetchState<CalibrationType>
+    controls: CalibrationDatabaseType,
     onSubmit: (value: string) => void,
-
 }
 
 const option = {

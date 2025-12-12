@@ -4,7 +4,7 @@ import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { FormButtons } from "../SiteProfile";
 import { useState } from "react";
 import AffinionsForm from "../../affinion-add/AffinionsForm";
-import type { AffinionCardType } from "@/types/affinion";
+import type { AffinionDatabaseType } from "@/types/affinion";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const affinionButton = {
@@ -14,7 +14,7 @@ const affinionButton = {
 }
 
 interface AffinionSectionProps {
-    affinions: AffinionCardType[]
+    affinions: AffinionDatabaseType[]
 }
 
 export default function AffinionSection ({ affinions }: AffinionSectionProps) {

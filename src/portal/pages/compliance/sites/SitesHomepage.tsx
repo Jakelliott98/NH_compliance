@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import RegionsFilter from './components/Regions/RegionFilter'
 import SitesSection from './components/SitesSection'
-import type { SiteData } from '@/types/site'
+import type { SiteDatabaseType } from '@/types/site'
 import { useQuery } from '@tanstack/react-query'
 import fetchAllSites from '@/utils/fetchAllSites'
 
@@ -40,7 +40,7 @@ export default function SitesDashboard () {
     if (allSitesLoading) return (<p>Loading...</p>)
     if (allSitesError || allSites === null || allSites === undefined) throw new Error('Error fetching all sites')
 
-    const filteredSites = activeRegion.isFiltered ? allSites.filter((item: SiteData) => {return item.site_region === activeRegion.activeRegion}) : allSites;
+    const filteredSites = activeRegion.isFiltered ? allSites.filter((item: SiteDatabaseType) => {return item.site_region === activeRegion.activeRegion}) : allSites;
 
     return (
         <div className=''>

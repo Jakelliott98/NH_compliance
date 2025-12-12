@@ -1,12 +1,11 @@
-import type { CalibrationType } from "@/types/calibration";
-import type { FetchState } from "@/hooks/useFetchData";
+import type { CalibrationDatabaseType } from "@/types/calibration";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlaskVial } from "@fortawesome/free-solid-svg-icons";
 
 interface ReturnControlSectionProps {
     controlType: string,
-    controlsData: FetchState<CalibrationType>,
+    controlsData: CalibrationDatabaseType,
     title: string,
 }
 
@@ -20,7 +19,7 @@ function Loading () {
 
 export function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
 
-    const control = controlsData.find((item: CalibrationType) => { return item.control_type === controlType})
+    const control = controlsData.find((item: CalibrationDatabaseType) => { return item.control_type === controlType})
 
     if (controlsData.loading) {
         return (

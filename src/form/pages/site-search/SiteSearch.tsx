@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useState } from "react"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
-import type { SiteData } from "@/types/site"
+import type { SiteDatabaseType } from "@/types/site"
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface SiteSearchProps {
-    sites: Array<SiteData>,
+    sites: Array<SiteDatabaseType>,
     setActiveSite: React.Dispatch<React.SetStateAction<string>>
 }
 

@@ -1,5 +1,5 @@
 import CalibrationCard from "@/portal/components/CalibrationCard"
-import type { AffinionCardType } from "@/types/affinion"
+import type { AffinionDatabaseType } from "@/types/affinion"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router"
 import fetchSiteBySlug from "@/hooks/fetchSiteBySlug"
@@ -37,7 +37,7 @@ export default function SiteResults () {
             <div className="flex flex-col w-full gap-2 my-2">
                 {
                     results.map(((result) => {
-                        const affinion: AffinionCardType | undefined = affinions.find((item: AffinionCardType) => item.affinion_id === result.affinion_id)
+                        const affinion: AffinionDatabaseType | undefined = affinions.find((item: AffinionDatabaseType) => item.affinion_id === result.affinion_id)
                         return (
                             <CalibrationCard key={result.id} result={result} affinion={affinion}/>
                         )

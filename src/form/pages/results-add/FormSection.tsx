@@ -1,5 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox"
-import type { AffinionCardType } from "@/types/affinion"
+import type { AffinionDatabaseType } from "@/types/affinion"
 import { FormProvider, useForm } from "react-hook-form"
 import { useParams } from "react-router"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
@@ -29,7 +29,7 @@ export default function FormSection () {
     return (
         <div className="flex flex-row w-full justify-around overflow-scroll gap-3">
             {
-                affinions.map((affinion: AffinionCardType) => {
+                affinions.map((affinion: AffinionDatabaseType) => {
                     return (
                         <AffinionResultCard key={affinion.affinion_id} affinion={affinion} />
                     )
@@ -40,7 +40,7 @@ export default function FormSection () {
 }
 
 interface AffinionResultCardProps {
-    affinion: AffinionCardType,
+    affinion: AffinionDatabaseType,
 }
 
 function AffinionResultCard ({ affinion }: AffinionResultCardProps) {

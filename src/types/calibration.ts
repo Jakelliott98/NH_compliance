@@ -1,14 +1,7 @@
 
-// Be more specific with calibration_ranges
-
 interface RangeLimitType {
     low: number,
     high: number,
-}
-
-export interface Hba1cRangeType {
-    c1: RangeLimitType,
-    c2: RangeLimitType
 }
 
 export interface TestRangeType {
@@ -16,18 +9,14 @@ export interface TestRangeType {
     c2: RangeLimitType
 }
 
-export interface LipidsRangeType {
-    hdl: TestRangeType,
-    total: TestRangeType,
-    triglycerides: TestRangeType
-}
-
-export interface CalibrationType{
-    calibration_ranges: LipidsRangeType | Hba1cRangeType,
-    created_at: Date,
-    expiry_date: Date,
+export interface CalibrationDatabaseType {
     id: number,
-    lot_number: string,
+    created_at: Date,
     site_id: number,
-    control_type: "hba1c" | "lipids",
+    lot_number: number,
+    expiry_date: Date,
+    calibration_ranges: TestRangeType,
+    control_type: "hba1c" | "lipids", 
+    test_Type: 'hdl' | 'total' | 'hba1c' | 'triglycerides',
+    display_name: 'Triglycerides' | 'HBA1c' | 'Total Cholesterol' | 'HDL Cholesterol',
 }

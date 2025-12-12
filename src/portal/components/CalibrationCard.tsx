@@ -2,11 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
 import moment from 'moment';
-import type { ResultsType } from '../../types/result';
-import type { AffinionCardType } from '../../types/affinion';
+import type { ResultsDatabaseType } from '../../types/result';
+import type { AffinionDatabaseType } from '../../types/affinion';
 
 interface AffinionDropdownProps {
-    result: ResultsType,
+    result: ResultsDatabaseType,
 }
 
 function AffinionDropdown ({ result } :AffinionDropdownProps) {
@@ -37,8 +37,8 @@ function AffinionDropdown ({ result } :AffinionDropdownProps) {
 }
 
 interface CalibrationCardProps {
-    result: ResultsType,
-    affinion: AffinionCardType,
+    result: ResultsDatabaseType,
+    affinion: AffinionDatabaseType,
 }
 
 function CalibrationCard ({ result, affinion }: CalibrationCardProps) {
