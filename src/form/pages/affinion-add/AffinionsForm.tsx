@@ -33,15 +33,19 @@ function AffinionFormSection ({ closePopover }: AffinionFormSectionProps) {
         }
     }) 
 
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit } = useForm()
     
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({
         queryKey: ['site', siteSlug],
-        queryFn: () => fetchSiteBySlug(siteSlug),
+        queryFn: () => {
+            if (!siteSlug) throw new Error('Cannot find this site')    
+            fetchSiteBySlug(siteSlug)
+        },
     })
-    if (siteError) throw new Error ('Cannot find the site')
+    if ( siteError ) throw new Error ('Cannot find the site')
     if ( siteLoading ) return (<p>Loading...</p>)
+    if ( !activeSite ) throw new Error('Cannot find this site')
 
 
     const onSubmit = handleSubmit((data) => {
@@ -62,7 +66,6 @@ function AffinionFormSection ({ closePopover }: AffinionFormSectionProps) {
                     <p>Affinion</p>
                     <input className="" type="number" {...register("number", {required: "Each affinion requires a name", valueAsNumber: true})}/>
                 </div>
-                <p className='text-xs text-red-700'>{errors.number?.message}</p>
             </div>
             <div className="flex flex-col">
                 <label>NH Number</label>
@@ -77,7 +80,6 @@ function AffinionFormSection ({ closePopover }: AffinionFormSectionProps) {
                         }
                     )}/>
                 </div>
-                <p className='text-xs text-red-700'>{errors.nh_number?.message}</p>
             </div>
             <button className="p-2 w-full bg-green-300 font-bold rounded cursor-pointer" type="submit">Add Affinion</button>
         </form>

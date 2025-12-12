@@ -13,21 +13,31 @@ export function SitePage () {
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({
         queryKey: ['activeSite', siteSlug], 
-        queryFn: () => fetchSiteBySlug(siteSlug)
+        queryFn: () => {
+            if (!siteSlug) throw new Error('Cannot find this site')
+            return fetchSiteBySlug(siteSlug)
+        }
     })
     const { data: affinions, isError: affinionsError, isLoading: affinionsLoading} = useQuery({
         queryKey: ['affinions', activeSite], 
-        queryFn: () => fetchAffinions(activeSite.site_id),
+        queryFn: () => {
+            if (!activeSite) throw new Error('Cannot find this site')
+            return fetchAffinions(activeSite.site_id)
+        },
         enabled: !!activeSite,
     })
     const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
         queryKey: ['controls', activeSite],
-        queryFn: () => fetchCalibrations(activeSite.site_id),
+        queryFn: () => {
+            if (!activeSite) throw new Error('Cannot find this site')
+            return fetchCalibrations(activeSite.site_id)
+        },
         enabled: !!activeSite,
     })
 
     if ( siteError || affinionsError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
     if ( siteLoading || affinionsLoading || controlsLoading ) return (<p>Loading...</p>)
+    if (!activeSite || !affinions || !controls) return (<p>ERROR: Cannot find the current site or Controls / Affinions</p>)
 
     return (
         <div className="flex flex-col gap-5 h-full">

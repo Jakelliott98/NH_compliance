@@ -18,7 +18,9 @@ export default function FormSection () {
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
     const { data: affinions, isError: affinionsError, isLoading: affinionsLoading} = useQuery({
         queryKey: ['affinions', activeSite], 
-        queryFn: () => fetchAffinions(activeSite.site_id),
+        queryFn: () => {
+            if (!activeSite) throw new Error('Cannot find the current site')
+            return fetchAffinions(activeSite.site_id)},
         enabled: !!activeSite,
     })
 
@@ -29,7 +31,7 @@ export default function FormSection () {
     return (
         <div className="flex flex-row w-full justify-around overflow-scroll gap-3">
             {
-                affinions.map((affinion: AffinionDatabaseType) => {
+                affinions?.map((affinion: AffinionDatabaseType) => {
                     return (
                         <AffinionResultCard key={affinion.affinion_id} affinion={affinion} />
                     )
@@ -54,15 +56,17 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
     const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
         queryKey: ['controls', activeSite],
-        queryFn: () => fetchCalibrations(activeSite.site_id),
+        queryFn: () => {
+            if (!activeSite) throw new Error('This site cannot be found')
+            return fetchCalibrations(activeSite.site_id)},
         enabled: !!activeSite,
     })
     const updateCleaned = useMutation({
-        mutationFn: ({affinionID}) => updateLastCleaned(affinionID),
+        mutationFn: ({ affinionID }) => updateLastCleaned(affinionID),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['affinions']})
     })
     const updateCalibrated = useMutation({
-        mutationFn: ({affinionID}) => updateLastCalibration(affinionID),
+        mutationFn: ({ affinionID }) => updateLastCalibration(affinionID),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['affinions']})
     })
     const addResult = useMutation({
@@ -72,6 +76,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
     if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
     if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
+    if (!activeSite) throw new Error('This site cannot be found')
 
     setValue("affinionID", affinion.affinion_id)
     setValue("siteID", activeSite.site_id)

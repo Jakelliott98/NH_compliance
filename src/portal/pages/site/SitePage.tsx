@@ -11,12 +11,18 @@ export default function SitePage () {
     const siteSlug = useParams().Site
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useQuery({
         queryKey: ['portalActiveSite', siteSlug],
-        queryFn: () => fetchSiteBySlug(siteSlug),
+        queryFn: () => {
+            if (!siteSlug) throw new Error('Cannot find this site')
+            return fetchSiteBySlug(siteSlug)
+        },
             enabled: !!siteSlug,
     })
     const { data: affinions, isError: affinionError, isLoading: affinionsLoading } = useQuery({
         queryKey: ['portalAffinions', activeSite],
-        queryFn: () => fetchAffinions(activeSite.site_id),
+        queryFn: () => {
+            if (!activeSite) throw new Error('Cannot find this site')
+            return fetchAffinions(activeSite.site_id)
+        },
         enabled: !!activeSite,
     })
 

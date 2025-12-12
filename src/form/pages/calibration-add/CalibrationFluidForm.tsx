@@ -12,6 +12,7 @@ import type { RangesType } from "@/form/utils/addControl";
 import { useQueryClient } from "@tanstack/react-query";
 import updateControl from "@/form/utils/updateControl";
 import InputTable from "./InputTable";
+import type { CalibrationDatabaseType } from "@/types/calibration";
 
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
@@ -55,12 +56,18 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
     const siteSlug: string | undefined = useParams().Site;
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({
         queryKey: ['activeSite', siteSlug], 
-        queryFn: () => fetchSiteBySlug(siteSlug),
+        queryFn: () => {
+            if (!siteSlug) throw new Error('Cannot find the site')
+            return fetchSiteBySlug(siteSlug)
+        },
         enabled: !!siteSlug,
     })
-    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
+    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery<CalibrationDatabaseType[]>({
         queryKey: ['controls', activeSite],
-        queryFn: () => fetchCalibrations(activeSite.site_id),
+        queryFn: () => {
+            if (!activeSite) throw new Error('Active site has not been fetched')
+            return fetchCalibrations(activeSite.site_id)
+        },
         enabled: !!activeSite,
     }) // ONLY ACCESSED FOR THE CHECK ON SUBMIT MAY FIND EASIER WAY
     const addNewControl = useMutation({
@@ -77,6 +84,7 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
 
     if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
     if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
+    if (!activeSite || !controls) return (<p>Something went wrong fetching sites</p>)
     
     setValue("siteID", activeSite.site_id)
     const hba1cControlPresent = controls?.some(control => control.control_type === 'hba1c')

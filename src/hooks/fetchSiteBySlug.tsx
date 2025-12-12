@@ -1,6 +1,6 @@
 import supabase from "../utils/supabase";
 
-export default async function fetchSiteBySlug(siteSlug) {
+export default async function fetchSiteBySlug(siteSlug: string) {
   const { data, error } = await supabase
     .from('sites')
     .select('*')

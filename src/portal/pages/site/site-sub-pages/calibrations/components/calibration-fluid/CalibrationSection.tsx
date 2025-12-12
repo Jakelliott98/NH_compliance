@@ -10,12 +10,16 @@ export default function CalibrationSection () {
     const siteSlug = useParams().Site
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useQuery({
         queryKey: ['portalActiveSite', siteSlug],
-        queryFn: () => fetchSiteBySlug(siteSlug),
+        queryFn: () => {
+            if (!siteSlug) throw new Error('Cannot find this site')
+            return fetchSiteBySlug(siteSlug)},
             enabled: !!siteSlug,
     })
     const { data: controls, isError: controlError, isLoading: controlLoading} = useQuery({
         queryKey: ['controls', activeSite],
-        queryFn: () => fetchCalibrations(activeSite.site_id),
+        queryFn: () => {
+            if (!activeSite) throw new Error('Cannot find this site')
+            return fetchCalibrations(activeSite.site_id)},
         enabled: !!activeSite,
     })
     if (siteError) return <p>Error loading site</p>;

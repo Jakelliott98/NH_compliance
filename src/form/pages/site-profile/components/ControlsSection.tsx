@@ -6,7 +6,7 @@ import { useState } from "react"
 import CalibrationForm from "../../calibration-add/CalibrationFluidForm"
 
 interface ControlsSectionProps {
-    controls: CalibrationDatabaseType,
+    controls: CalibrationDatabaseType[],
     onSubmit: (value: string) => void,
 }
 

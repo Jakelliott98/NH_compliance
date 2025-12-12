@@ -12,6 +12,7 @@ interface ReturnControlSectionProps {
 export function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
 
     const control = controlsData.find((item: CalibrationDatabaseType) => { return item.control_type === controlType})
+    if (!control) return (<p>No Control Fluid Found</p>)
     const isExpired = moment(control.expiry_date).isBefore(moment())
 
     return (
