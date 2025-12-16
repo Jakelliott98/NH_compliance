@@ -30,7 +30,6 @@ export default function CalibrationSection () {
 
     return (
         <div className='flex-1 flex flex-col gap-3 p-3'>
-            <p className='font-medium text-lg'>Calibration Fluids</p>
             <div className='flex gap-8'>
                 {
                     <CalibrationHolder controls={controls}/>

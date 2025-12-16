@@ -8,9 +8,6 @@ import CompliancePage from './portal/pages/compliance/CompliancePage.tsx'
 import SitesDashboard from './portal/pages/compliance/sites/SitesHomepage.tsx'
 import ReportSection from './portal/pages/compliance/reports/Reports.tsx'
 import SitePage from './portal/pages/site/SitePage.tsx'
-import SiteResults from './portal/pages/site/site-sub-pages/results/SiteResults.tsx'
-import SiteCalibration from './portal/pages/site/site-sub-pages/calibrations/SiteCalibration.tsx'
-import SiteOverview from './portal/pages/site/site-sub-pages/overview/SiteOverview.tsx'
 import Portal from './portal/Portal.tsx'
 import Form from './form/Form.tsx'
 import SiteSearchContainer from './form/pages/site-search/SiteSearchContainer.tsx'
@@ -18,6 +15,8 @@ import SiteProfile from './form/pages/site-profile/SiteProfile.tsx'
 import SiteProfileContainer from './form/pages/site-profile/SiteProfileContainer.tsx'
 
 const root = document.getElementById('root');
+
+if (!root) throw Error;
 
 ReactDOM.createRoot(root).render(
   <BrowserRouter>
@@ -30,18 +29,13 @@ ReactDOM.createRoot(root).render(
           <Route path="Dashboard" element={<DashboardPage />}/>
           <Route path="Compliance" element={<CompliancePage />}>
             <Route path="Sites" element={<SitesDashboard/>}/>
-            <Route path="Sites/:Site" element={<SitePage />}>
-              <Route index element={<SiteOverview />}/>
-              <Route path="Overview" element={<SiteOverview />}/>
-              <Route path="Results" element={<SiteResults />}/>
-              <Route path="Calibration" element={<SiteCalibration />}/>
-            </Route>
+            <Route path="Sites/:Site" element={<SitePage />}/>
             <Route path="Reports" element={<ReportSection />}/>
           </Route>
           <Route path="Settings" element={<SettingsHomepage />}/>
         </Route>
 
-          <Route path="SiteForm" element={<Form />}>
+          <Route path="SiteForm" element={<Form />}>c
             <Route index element={<SiteSearchContainer />} />
             <Route path="Sites/:Site" element={<SiteProfileContainer />}>
               <Route index element={<SiteProfile />}/>

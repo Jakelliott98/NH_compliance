@@ -5,6 +5,7 @@ import moment from "moment"
 import { useQuery } from "@tanstack/react-query"
 import fetchSiteBySlug from "../../../utils/fetchSiteBySlug"
 import fetchAffinions from "../../../utils/fetchAffinions"
+import SiteOverview from "./site-sub-pages/overview/SiteOverview"
 
 export default function SitePage () {
 
@@ -50,13 +51,8 @@ export default function SitePage () {
                         <p className="text-sm">{affinions.length}</p>
                     </div>
                 </div>
-                <div className="flex flex-row gap-10">
-                    <NavLink to="Overview" className={({isActive}) => {return isActive ? 'text-blue-500' : 'text-gray-500'}}><p className="text-sm">Overview</p></NavLink>
-                    <NavLink to="Results" className={({isActive}) => {return isActive ? 'text-blue-500' : 'text-gray-500'}}><p className="text-sm">Results</p></NavLink>
-                    <NavLink to="Calibration" className={({isActive}) => {return isActive ? 'text-blue-500' : 'text-gray-500'}}><p className="text-sm">Calibrations</p></NavLink>
-                </div>
             </div>
-            <Outlet />
+            <SiteOverview />
         </div>
     )
 }

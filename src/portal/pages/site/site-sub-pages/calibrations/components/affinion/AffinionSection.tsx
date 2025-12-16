@@ -29,7 +29,6 @@ export default function AffinionSection () {
 
     return (
         <div className='flex-1 flex flex-col gap-3 p-3'>
-            <p className='font-medium text-lg'>Affinions</p>
             <div className="flex gap-8">
                 {
                     affinions.map((affinion) => {
