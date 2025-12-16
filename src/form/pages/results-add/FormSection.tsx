@@ -11,6 +11,7 @@ import { useState } from "react"
 import updateLastCleaned from "@/form/utils/updateLastCleaned"
 import updateLastCalibration from "@/form/utils/updateLastCalibration"
 import addCalibrationResults from "@/form/utils/addResults"
+import updateSiteCalibration from "@/form/utils/updateSiteCalibration"
 
 export default function FormSection () {
 
@@ -72,6 +73,9 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
     const addResult = useMutation({
         mutationFn: ({ result }) => addCalibrationResults(result)
     })
+    const updateSite = useMutation({
+        mutationFn: () => updateSiteCalibration(activeSite?.site_id)
+    })
 
 
     if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
@@ -91,6 +95,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
         if (isCleaned) updateCleaned.mutate({ affinionID: data.affinionID})
         updateCalibrated.mutate({affinionID: data.affinionID})
         addResult.mutate({ result: data })
+        updateSite.mutate()
     })
 
     return (
