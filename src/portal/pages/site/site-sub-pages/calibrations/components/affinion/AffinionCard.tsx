@@ -20,13 +20,13 @@ export default function AffinionCard ({ affinion }: AffinionCardProps) {
                         <div className='bg-green-100 rounded-full p-3 flex items-center justify-center'>
                             <FontAwesomeIcon icon={faCalendarCheck} className='text-xl text-green-400'/>
                         </div>
-                        <p className='text-sm text-gray-500 text-center'>{moment(affinion.last_calibrated).format("Do MMMM")}</p>
+                        <p className='text-sm text-gray-500 text-center'>{affinion.last_calibrated ? moment(affinion.last_calibrated).format("Do MMMM") : 'No calibrations'}</p>
                     </div>
                     <div className='flex flex-col justify-center items-center'>
                         <div className='bg-orange-100 rounded-full p-3 flex items-center justify-center'>                        
                             <FontAwesomeIcon icon={faHandSparkles} className='text-xl text-orange-400'/>
                         </div>
-                        <p className='text-sm text-gray-500 text-center'>{moment(affinion.last_clean).format("Do MMMM")}</p>
+                        <p className='text-sm text-gray-500 text-center'>{affinion.last_clean ? moment(affinion.last_clean).format("Do MMMM") : 'No cleans'}</p>
                     </div>
                 </div>
             </div>

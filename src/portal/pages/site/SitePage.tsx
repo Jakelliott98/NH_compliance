@@ -35,20 +35,20 @@ export default function SitePage () {
 
     return (
         <div className="flex flex-col bg-white p-5 rounded-xl my-2">
-            <div className="flex flex-col gap-4 border-b-1 border-solid border-gray-300 pb-2">
+            <div className="flex justify-between gap-4 border-b-1 border-solid border-gray-300 pb-2">
                 <h1 className="font-bold text-xl">{activeSite.site_name}</h1>
                 <div className="flex flex-row gap-10">
                     <div className="flex flex-col">
                         <p className="text-xs uppercase text-gray-500">Team Leader</p>
-                        <p className="text-sm">{activeSite.team_leader}</p>
+                        <p className="text-sm text-center">{activeSite.team_leader}</p>
                     </div>
                     <div className="flex flex-col">
                         <p className="text-xs uppercase text-gray-500">Last Calibrated</p>
-                        <p className="text-sm">{moment(activeSite.last_calibrated).format('dddd Do MMM')}</p>
+                        <p className="text-sm text-center">{moment(activeSite.last_calibrated).format('Do MMM')}</p>
                     </div>
                     <div className="flex flex-col">
                         <p className="text-xs uppercase text-gray-500">Affinions</p>
-                        <p className="text-sm">{affinions.length}</p>
+                        <p className="text-sm text-center">{affinions.length}</p>
                     </div>
                 </div>
             </div>

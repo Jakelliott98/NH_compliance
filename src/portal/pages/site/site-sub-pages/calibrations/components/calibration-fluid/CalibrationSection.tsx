@@ -29,8 +29,8 @@ export default function CalibrationSection () {
     if (controlError) return (<p>Something went wrong...</p>)
 
     return (
-        <div className='flex-1 flex flex-col gap-3 p-3'>
-            <div className='flex gap-8'>
+        <div className='w-full flex-1 flex flex-col gap-3 p-3'>
+            <div className=' flex gap-8'>
                 {
                     <CalibrationHolder controls={controls}/>
                 }
@@ -50,7 +50,7 @@ function CalibrationHolder ({ controls }: CalibrationHolderProps) {
     const lipids = controls.filter(control => control.control_type === 'lipids')
 
     return (
-        <div className="flex">
+        <div className="w-full flex [&>*]:flex-1 gap-2">
             <Hba1cDisplay hba1c={hba1c} />
             <LipidsDisplay lipids={lipids} />
         </div>
@@ -72,7 +72,7 @@ function LipidsDisplay ({ lipids }: LipidsDisplayProps) {
     if (!total) return (<p>No Lipids Control added yet</p>)
 
     return (
-        <div className='p-1 bg-red-100 w-fit rounded-xl flex flex-col h-fit grow-1'>
+        <div className='p-1 bg-red-100 rounded-xl flex flex-col h-fit grow-1'>
             <div className='bg-white rounded-xl p-3'>
                 <div className='border-b-2 border-solid border-gray-300 py-2'>
                     <p className='font-medium'>Lipids</p>
@@ -83,7 +83,7 @@ function LipidsDisplay ({ lipids }: LipidsDisplayProps) {
                         lipids.map((control) => {
                             return (
                                 <div key={control.id}>
-                                    <p>{control.display_name}</p>
+                                    <p className="text-sm">{control.display_name}</p>
                                     <CalibrationRangesLayout control={control} />
                                 </div>
                             )
@@ -91,7 +91,7 @@ function LipidsDisplay ({ lipids }: LipidsDisplayProps) {
                     }
                 </div>
             </div>
-            <p className='text-red-900 self-center text-sm p-1'>Expires {moment(total.expiry_date).format('dddd Do MMMM')}</p>
+            <p className='text-red-900 self-center text-sm p-1'>Expires {moment(total.expiry_date).format('Do MMMM')}</p>
         </div>
     )
 }
@@ -102,7 +102,7 @@ interface CalibrationRangesLayoutProps {
 
 function CalibrationRangesLayout ({ control }: CalibrationRangesLayoutProps) {
     return (
-        <div className='py-2'>
+        <div className='py-2 text-sm'>
             <div className='flex justify-between'>
                 <p className="font-medium">C1</p>
                 <p>{control.calibration_ranges.c1.low} - {control.calibration_ranges.c1.high}</p>
@@ -124,7 +124,7 @@ function Hba1cDisplay ({ hba1c }: Hba1cDisplayProps) {
     if (!hba1c) return (<p>No HBA1c Control Added yet</p>)
 
     return (
-    <div className='p-1 bg-red-100 w-fit rounded-xl flex flex-col h-fit grow-1'>
+    <div className='p-1 bg-red-100 rounded-xl flex flex-col h-fit grow-1'>
             <div className='bg-white rounded-xl p-3'>
                 <div className='border-b-2 border-solid border-gray-300 py-2'>
                     <p className='font-medium'>{hba1c.display_name}</p>
@@ -132,7 +132,7 @@ function Hba1cDisplay ({ hba1c }: Hba1cDisplayProps) {
                 </div>
                 <CalibrationRangesLayout control={hba1c}/>
             </div>
-            <p className='text-red-900 self-center text-sm p-1'>Expires {moment(hba1c.expiry_date).format('dddd Do MMMM')}</p>
+            <p className='text-red-900 self-center text-sm p-1'>Expires {moment(hba1c.expiry_date).format('Do MMMM')}</p>
         </div>
     )
 

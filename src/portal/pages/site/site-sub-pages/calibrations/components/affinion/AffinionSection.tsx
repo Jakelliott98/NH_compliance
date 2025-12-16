@@ -27,11 +27,13 @@ export default function AffinionSection () {
     if (affinionError) return (<p>Something went wrong...</p>)
     if (!affinions) return (<p>No affinions found</p>)
 
+    const sortedAffinions = affinions.sort((a, b) => a.affinion_number - b.affinion_number)
+
     return (
         <div className='flex-1 flex flex-col gap-3 p-3'>
-            <div className="flex gap-8">
+            <div className="flex [&>*]:flex-1 gap-8">
                 {
-                    affinions.map((affinion) => {
+                    sortedAffinions.map((affinion) => {
                         return (
                             <AffinionCard key={affinion.affinion_id} affinion={affinion}/>
                         )

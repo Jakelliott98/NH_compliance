@@ -36,10 +36,12 @@ export default function SiteResults () {
     if (resultError) return (<p>Something went wrong...</p>)
     if (!results) return (<p>No affinions found</p>)
 
+    const sortedResults = results.sort((a, b) => new Date(b.calibration_date).getTime() - new Date(a.calibration_date).getTime())
+
     return (
             <div className="flex flex-col w-full gap-2 my-2">
                 {
-                    results.map(((result) => {
+                    sortedResults.map(((result) => {
                         const affinion: AffinionDatabaseType | undefined = affinions.find((item: AffinionDatabaseType) => item.affinion_id === result.affinion_id)
                         return (
                             <CalibrationCard key={result.id} result={result} affinion={affinion}/>

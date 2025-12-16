@@ -8,17 +8,17 @@ export default function SiteOverview () {
     return (
         <div>
             <div className='flex gap-20 p-2'>
-                <div>
-                    <p>AFFINIONS</p>
+                <div className="flex-1">
+                    <p className="text-center">AFFINIONS</p>
                     <AffinionSection />
                 </div>
-                <div>
-                    <p>CONTROLS</p>
+                <div className=" flex-1">
+                    <p className="text-center">CONTROLS</p>
                     <CalibrationSection />
                 </div>
             </div>
             <div>
-                <p>RESULTS</p>
+                <p className="text-center">RESULTS</p>
                 <SiteResults />
             </div>
         </div>
