@@ -9,13 +9,12 @@ interface SitesSectionProps {
 export default function SitesSection({ sites }: SitesSectionProps) {
     return (
         <div className='p-2'>
-                <h1 className='text-lg'>Sites</h1>
                 <div className='grid grid-cols-5 grid-rows-[1fr] gap-4'>
                     {
-                        sites.map((item) => {
+                        sites.map((site) => {
                             return (
-                                    <Link to={`${item.slug}`} key={item.site_id}>
-                                        <SiteCard key={item.site_id} site={item}/>
+                                    <Link to={`${site.slug}`} key={site.site_id}>
+                                        <SiteCard key={site.site_id} site={site}/>
                                     </Link>
                             )
                         })
