@@ -30,7 +30,7 @@ export default function SiteSearch ({ sites, setActiveSite }: SiteSearchProps) {
                     variant="outline"
                     role="comobox"
                     aria-expanded={open}
-                    className="flex-1"
+                    className="flex-1 w-full"
                 >
                     {value === '' ? buttonPlaceholder : value}
                 </Button>

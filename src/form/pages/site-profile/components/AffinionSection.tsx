@@ -27,19 +27,17 @@ export default function AffinionSection ({ affinions }: AffinionSectionProps) {
             <div className="flex gap-3 col-start-1 col-end-4 h-full">
                 {
                     sortedAffinions.map((affinion) => {
-                        const lastClean = moment(affinion.last_clean).format('Do MMM')
-                        const lastCalibrated = moment(affinion.last_calibrated).format('Do MMM')
                         return (
                             <div className="bg-white p-2 rounded flex-grow flex flex-col justify-around items-center" key={affinion.affinion_id}>
                                 <FontAwesomeIcon className="text-green-700 text-3xl" icon={faCalendarCheck} />
                                 <p className="font-semibold text-center text-lg">Affinion {affinion.affinion_number}</p>
                                 <p className="text-sm">
                                     Last Calibrated:
-                                    <span className="italics"> {lastCalibrated === null ? lastCalibrated : ''}</span>
+                                    <span className="italics"> {affinion.last_clean === null ? '' : moment(affinion.last_calibrated).format('Do MMM')}</span>
                                 </p>
                                 <p className="text-sm">
                                     Last Cleaned:
-                                    <span className="italics">{lastClean === null ? lastCalibrated : ''}</span>
+                                    <span className="italics"> {affinion.last_clean === null ? '' : moment(affinion.last_clean).format('Do MMM')}</span>
                                 </p>
                             </div>
                         )

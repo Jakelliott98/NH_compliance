@@ -13,6 +13,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import updateControl from "@/form/utils/updateControl";
 import InputTable from "./InputTable";
 import type { CalibrationDatabaseType } from "@/types/calibration";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
@@ -121,7 +123,7 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
                         <input className="outline rounded px-2 py-0.5 text-sm" {...register("lotNumber", {required: "Please provide a Lot Number", valueAsNumber: true})}/>
                     </div>
                     <div className="flex flex-col gap-1 flex-1">
-                        <label className="text-sm">Expiry Date</label>
+                        <label className="text-sm">Expiry Date <FontAwesomeIcon icon={faCircleInfo} /> </label>
                         <CalendarPopup onSelect={setDate} date={date}/>
                     </div>
                 </div>
