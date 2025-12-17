@@ -2,6 +2,8 @@ import type { AffinionDatabaseType } from "@/types/affinion"
 import fetchAllAffinions from "@/utils/fetchAllAffinions"
 import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
+import fetchAllSites from "@/utils/fetchAllSites"
+import type { SiteDatabaseType } from "@/types/site"
 
 
 export default function ExpiredCleans () {
@@ -10,11 +12,15 @@ export default function ExpiredCleans () {
 		queryKey: ['allAffinions'],
 		queryFn: () => fetchAllAffinions(),
 	})
-
-	if (isAllAffinionsLoading) (<p>Loading...</p>)
+	const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useQuery<SiteDatabaseType[]>({
+		queryKey: ['allSites'],
+		queryFn: () => fetchAllSites()
+	})
+	if (isAllAffinionsLoading || isAllSitesLoading) (<p>Loading...</p>)
 	if (isAllAffinionsError) throw allAffinionsError
-	if (allAffinions === null || allAffinions === undefined) (<p>Could not find any affinions</p>)
-	
+	if (allAffinions === null || allAffinions === undefined ) (<p>Could not find any affinions</p>)
+	if (isAllSitesError) throw allSitesError
+	if (allSites === null || allSites === undefined) (<p>Error fetching the all sites</p>)
 
 	const thirtyDaysAgo = moment().subtract(30, 'days')
 
@@ -29,17 +35,18 @@ export default function ExpiredCleans () {
 			<table className="w-full">
 				<thead>
 					<tr>
-						<th className="text-start font-medium">SITE</th>
-						<th className="text-start font-medium">AFFINION</th>
-						<th className="text-start font-medium">DATE</th>
+						<th className="text-start font-medium text-sm">SITE</th>
+						<th className="text-start font-medium text-sm">AFFINION</th>
+						<th className="text-start font-medium text-sm">DATE</th>
 					</tr>
 				</thead>
 				<tbody>
 					{							 
 						expiredAffinions?.map((affinion) => {
+							const site = allSites?.find(site => site.site_id === affinion.site_id)
 							return (
 								<tr>
-									<td className="text-start text-sm">Site Name</td>
+									<td className="text-start text-sm">{site?.site_name}</td>
 									<td className="text-start text-sm">NH{affinion.nh_number}</td>
 									<td className="text-start text-sm">{moment(affinion.last_clean).format('Do MMM')}</td>
 								</tr>
