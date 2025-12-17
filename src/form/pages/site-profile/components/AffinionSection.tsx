@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { FormButtons } from "../SiteProfile";
 import { useState } from "react";
-import AffinionsForm from "../../affinion-add/AffinionsForm";
+import AffinionFormSection from "../../affinion-add/AffinionsForm";
 import type { AffinionDatabaseType } from "@/types/affinion";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
@@ -56,7 +56,7 @@ export default function AffinionSection ({ affinions }: AffinionSectionProps) {
                     <DialogContent>
                         <DialogTitle>Add an Affinion</DialogTitle>
                         <div>
-                            <AffinionsForm closePopover={() => {setOpen(false)}}/>
+                            <AffinionFormSection closePopover={() => {setOpen(false)}}/>
                         </div>
                     </DialogContent>
                 </Dialog>

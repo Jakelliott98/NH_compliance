@@ -34,10 +34,10 @@ export default function InputTable ({ test }: InputTableProps) {
                         <tr key={`${test.type}C1`} className="font-medium text-sm">
                             <td>{test.title}</td>
                             <td className="text-center">
-                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" {...register(`${test.type}.c1.low`, {required: "Please provide controls range", valueAsNumber: true})}/>
+                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" step={0.1} {...register(`${test.type}.c1.low`, {required: "Please provide controls range", valueAsNumber: true})}/>
                             </td>
                             <td className="text-center">
-                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" {...register(`${test.type}.c1.high`, {required: "Please provide controls range", valueAsNumber: true})}/>
+                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" step={0.1} {...register(`${test.type}.c1.high`, {required: "Please provide controls range", valueAsNumber: true})}/>
                             </td>
                         </tr>
                     )
@@ -53,10 +53,10 @@ export default function InputTable ({ test }: InputTableProps) {
                         <tr key={`${test.type}C2`} className="font-medium text-sm">
                             <td>{test.title}</td>
                             <td className="text-center">
-                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" {...register(`${test.type}.c2.low`, {required: "Please provide controls range", valueAsNumber: true})}/>
+                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" step={0.1} {...register(`${test.type}.c2.low`, {required: "Please provide controls range", valueAsNumber: true})}/>
                             </td>
                             <td className="text-center">
-                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" {...register(`${test.type}.c2.high`, {required: "Please provide controls range", valueAsNumber: true})}/>
+                                <input className="text-center w-3/12 bg-gray-200 rounded" type="number" step={0.1} {...register(`${test.type}.c2.high`, {required: "Please provide controls range", valueAsNumber: true})}/>
                             </td>
                         </tr>
                     )
