@@ -5,7 +5,6 @@ import moment from "moment";
 
 export default function SiteSummary () {
 
-	// Fetch all sites
 	    const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useQuery<SiteDatabaseType[]>({
         queryKey: ['allSites'], 
         queryFn: fetchAllSites
@@ -16,7 +15,7 @@ export default function SiteSummary () {
 
 	const sevenDaysAgo = moment().subtract(7, 'days');
 	
-	const uncalibratedSites = allSites?.filter((site) => { 
+	const sitesFlaggingCalibrations = allSites?.filter((site) => { 
 		const isCalibrationExpired = moment(site.last_calibrated).isBefore(sevenDaysAgo)
 		if (isCalibrationExpired) return site;
 	})
@@ -36,8 +35,8 @@ export default function SiteSummary () {
 				<p className="text-5xl font-bold">{}</p>
 			</div>
 			<div className="bg-red-200 p-4 rounded flex flex-col items-center gap-2">
-				<p className="text-center font-semibold text-xl">Flagging Sites</p>
-				<p className="text-5xl font-bold">{uncalibratedSites?.length}</p>
+				<p className="text-center font-semibold text-xl">Flagging Calibrations</p>
+				<p className="text-5xl font-bold">{sitesFlaggingCalibrations?.length}</p>
 			</div>
 		</div>
 	)
