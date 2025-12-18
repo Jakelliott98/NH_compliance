@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { SiteDatabaseType } from "@/types/site";
 import { useState } from "react";
 
-export default function HandleSiteInformation () {
+export default function SiteConfiguration () {
     
     const [activeSite, setActiveSite] = useState('')
 
@@ -21,9 +21,12 @@ export default function HandleSiteInformation () {
 
 
     return (
-            <div className="p-2 border-b-2 border-solid border-gray-200 w-full">
-                <p className="font-bold">Handle Site Information</p>
-                <div className="flex">
+            <div className="py-4 border-b-2 border-solid border-gray-200 w-full flex gap-4">
+                <div className="flex-1">
+                    <p className="font-bold">Site Configuration</p>
+                    <p className="text-sm text-gray-600">Select an individual site to manage its Affinion machines. Edit machine details, update records, or remove machines that are no longer in use.</p>
+                </div>
+                <div className="flex flex-3 flex-col">
                     <div className="w-4/12">
                         <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
                     </div>
