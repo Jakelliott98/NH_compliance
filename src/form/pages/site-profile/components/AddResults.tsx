@@ -13,11 +13,11 @@ export default function AddResults () {
     return (
             <Dialog>
                 <DialogTrigger asChild>
-                    <div className="">
+                    <div>
                         <FormButtons option={option} />
                     </div>
                 </DialogTrigger>
-                <DialogContent className="">
+                <DialogContent>
                     <DialogTitle>Add Calibration Results</DialogTitle>
                         <FormSection />
                 </DialogContent>

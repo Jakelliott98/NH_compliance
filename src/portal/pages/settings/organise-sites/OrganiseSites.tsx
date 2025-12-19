@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrashCan, faCircle, faPenToSquare } from "@fortawesome/free-solid-svg-icons"
+import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import { useQuery } from "@tanstack/react-query"
 import fetchAllSites from "@/utils/fetchAllSites"
 import type { SiteDatabaseType } from "@/types/site"
 import moment from "moment"
+import EditSite from "./EditSite"
+import DeleteSite from "./DeleteSite"
 
 export default function OrganiseSites () {
 
@@ -13,7 +15,7 @@ export default function OrganiseSites () {
     })
     if (isAllSitesLoading) (<p>Loading...</p>)
     if (isAllSitesError) throw allSitesError
-    if (allSites === null || allSites === undefined) throw new Error ('All Sites could not be fetched')
+    if (allSites === null || allSites === undefined) return (<p>'All Sites could not be fetched'</p>)
 
     const sevenDaysAgo = moment().subtract(7, 'days');
 
@@ -40,18 +42,8 @@ export default function OrganiseSites () {
                                     <td className="text-gray-600">{site.site_name}</td>
                                     <td className="text-gray-600">{site.team_leader}</td>
                                     <td className="text-center"><FontAwesomeIcon icon={faCircle} className={`${isOutOfCalibration ? 'text-red-700' : 'text-green-700'}`}/></td>
-                                    <td className="text-sm text-gray-500 text-center">
-                                        <button className="cursor-pointer hover:text-black">
-                                            <FontAwesomeIcon icon={faPenToSquare}/> 
-                                            <span className="pl-0.5">Edit</span>
-                                        </button>
-                                    </td>
-                                    <td className="text-sm text-gray-500 text-center">
-                                        <button className="cursor-pointer hover:text-black">
-                                            <FontAwesomeIcon icon={faTrashCan}/> 
-                                            <span className="pl-0.5">Remove</span>
-                                        </button>
-                                    </td>
+                                    <td className="text-sm text-gray-500 text-center"><EditSite site={site}/></td>
+                                    <td className="text-sm text-gray-500 text-center"><DeleteSite site={site}/></td>
                                 </tr>
                             )
                         })

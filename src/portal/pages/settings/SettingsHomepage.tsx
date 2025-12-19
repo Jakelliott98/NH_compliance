@@ -1,9 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFileLines, faPlus, faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import SiteConfiguration from "./SiteConfiguration"
 import ComplianceRules from "./ComplianceRules"
 import ReportsExports from "./ReportsExports"
-import OrganiseSites from "./OrganiseSites"
+import OrganiseSites from "./organise-sites/OrganiseSites"
 
 export default function SettingsHomepage () {
 
