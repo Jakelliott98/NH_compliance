@@ -5,7 +5,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import type { SiteDatabaseType } from "@/types/site"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-interface DeleteSiteProps {
+interface DeleteSiteContainerProps {
     site: SiteDatabaseType,
 }
 
@@ -13,11 +13,16 @@ interface onDeleteSite {
     siteID: number,
 }
 
-function DeleteSite ({ site }: DeleteSiteProps) {
+interface DeleteSiteProps {
+    site: SiteDatabaseType,
+    onSubmit: () => void,
+}
+
+export default function DeleteSiteContainer ({ site }: DeleteSiteContainerProps) {
 
     const queryClient = useQueryClient()
 
-    const confirmDeleteSite = () => {
+    const onSubmit = () => {
         deleteCurrentSite.mutate({siteID: site.site_id})
     }
 
@@ -27,6 +32,13 @@ function DeleteSite ({ site }: DeleteSiteProps) {
         },
         onSuccess: () => queryClient.invalidateQueries({queryKey:['allSites']})
     })
+
+    return (
+        <DeleteSite site={site} onSubmit={onSubmit} />
+    )
+}
+
+function DeleteSite ({ site, onSubmit }: DeleteSiteProps) {
 
     return (
         <Dialog>
@@ -43,17 +55,15 @@ function DeleteSite ({ site }: DeleteSiteProps) {
                             <h1 className="font-bold text-lg">Delete</h1>  
                         </div>
                         <div className="flex flex-col items-center gap-1">
-                            <p>Are you sure you want to delete ?</p>
+                            <p>Are you sure you want to delete {site.site_name} ?</p>
                             <p className="italic text-sm text-red-700">This will delete all sites results.</p>
                         </div>
                 </DialogHeader>
                 <div className="flex gap-5">
                     <button className="flex-1 rounded bg-gray-100 py-1 px-3 text-sm cursor-pointer">Cancel</button>
-                    <button className="flex-1 rounded bg-red-700 py-1 px-3 text-sm text-white cursor-pointer" onClick={() => {confirmDeleteSite()}}>Confirm</button>
+                    <button className="flex-1 rounded bg-red-700 py-1 px-3 text-sm text-white cursor-pointer" onClick={() => {onSubmit()}}>Confirm</button>
                 </div>
             </DialogContent>
         </Dialog>
     )
 }
-
-export default DeleteSite

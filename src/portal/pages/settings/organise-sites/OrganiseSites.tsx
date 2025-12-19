@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query"
 import fetchAllSites from "@/utils/fetchAllSites"
 import type { SiteDatabaseType } from "@/types/site"
 import moment from "moment"
-import EditSite from "./EditSite"
-import DeleteSite from "./DeleteSite"
+import EditSiteContainer from "./EditSite"
+import DeleteSiteContainer from "./DeleteSite"
 
 export default function OrganiseSites () {
 
@@ -42,8 +42,8 @@ export default function OrganiseSites () {
                                     <td className="text-gray-600">{site.site_name}</td>
                                     <td className="text-gray-600">{site.team_leader}</td>
                                     <td className="text-center"><FontAwesomeIcon icon={faCircle} className={`${isOutOfCalibration ? 'text-red-700' : 'text-green-700'}`}/></td>
-                                    <td className="text-sm text-gray-500 text-center"><EditSite site={site}/></td>
-                                    <td className="text-sm text-gray-500 text-center"><DeleteSite site={site}/></td>
+                                    <td className="text-sm text-gray-500 text-center"><EditSiteContainer site={site}/></td>
+                                    <td className="text-sm text-gray-500 text-center"><DeleteSiteContainer site={site}/></td>
                                 </tr>
                             )
                         })
