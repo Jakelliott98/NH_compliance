@@ -44,7 +44,7 @@ export default function EditSiteContainer ({site}: EditSiteContainerProps) {
 
         setSiteDetails((prev) => {
             return {
-                [key]: value,
+                key: value,
                 ...prev,
             }
         })
