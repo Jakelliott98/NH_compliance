@@ -4,6 +4,8 @@ import fetchAllSites from "@/utils/fetchAllSites"
 import SiteSearch from "./SiteSearch"
 import { useQuery } from "@tanstack/react-query"
 import type { SiteDatabaseType } from "@/types/site"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"
 
 export default function SiteSearchContainer () {
 
@@ -24,14 +26,25 @@ export default function SiteSearchContainer () {
     }
 
     return (
-        <div className="bg-gray-300 rounded p-4 flex justify-center items-center flex-col w-fit gap-2">
-            <p>What site would you like to visit?</p>
-            <div className="flex justify-center items-center w-full gap-2">
-                <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
-                <button onClick={() => {onSubmit()}} className="py-1 px-3 bg-gray-300 rounded-lg cursor-pointer">Go</button>
+        <div className="rounded p-4 flex justify-center items-center flex-col w-3/12 h-3/12 gap-2">
+            <div className="w-full">
+            <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
             </div>
+            {
+                activeSite !== '' && (
+                    <button onClick={() => {onSubmit()}} className=" py-1 px-3 bg-gray-200 rounded-lg cursor-pointer w-full">
+                        <span className="uppercase font-semibold pr-2">Go</span>
+                        <FontAwesomeIcon icon={faArrowRightLong} className="font-bold"/>
+                    </button>
+                ) 
+            }
+            
          </div>
     )
 
 }
+
+/*
+<button onClick={() => {onSubmit()}} className="py-1 px-3 bg-gray-300 rounded-lg cursor-pointer">Go</button>
+*/
 

@@ -17,9 +17,9 @@ export default function SiteSearch ({ sites, setActiveSite }: SiteSearchProps) {
     const [value, setValue] = useState('')
 
     const buttonPlaceholder = (
-        <div className="flex w-full items-center justify-between">
-            <p>Select Site... </p>
-            <FontAwesomeIcon icon={ faCaretDown }/>
+        <div className="w-full flex items-center justify-between">
+            <p className="text-gray-500">Select a site to continue... </p>
+            <FontAwesomeIcon icon={ faCaretDown } className="text-gray-500"/>
         </div>
     )
 
@@ -30,7 +30,7 @@ export default function SiteSearch ({ sites, setActiveSite }: SiteSearchProps) {
                     variant="outline"
                     role="comobox"
                     aria-expanded={open}
-                    className="flex-1 w-full"
+                    className="w-full cursor-pointer"
                 >
                     {value === '' ? buttonPlaceholder : value}
                 </Button>
@@ -52,6 +52,7 @@ export default function SiteSearch ({ sites, setActiveSite }: SiteSearchProps) {
                                                 setOpen(false)
                                                 setActiveSite(site.slug)
                                             }}
+                                            className="cursor-pointer"
                                         >
                                             { site.site_name }
                                         </CommandItem>
