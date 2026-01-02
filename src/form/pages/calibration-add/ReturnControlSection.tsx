@@ -16,7 +16,7 @@ export function ReturnControlSection ({controlType, controlsData, title}: Return
     const isExpired = moment(control.expiry_date).isBefore(moment())
 
     return (
-        <div className="bg-white rounded p-2 flex flex-col justify-center items-center">
+        <div className="rounded p-2 flex flex-col justify-center items-center shadow-sm bg-gray-50 border border-gray-200">
             <FontAwesomeIcon className="text-3xl pb-2 text-red-900" icon={faFlaskVial} />
             <p className="font-semibold text-center">{title}</p>
             <p className="text-center">LOT{control.lot_number}</p>

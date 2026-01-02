@@ -5,7 +5,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 export default function SiteProfile () {
 
     return (
-        <div className="w-9/12 h-10/12 flex flex-col gap-5 p-5 bg-gray-200 rounded">  
+        <div className="w-10/12 h-11/12 flex flex-col gap-5 p-5 bg-gray-100 rounded shadow-sm">  
                 <SitePage />
         </div>
     )
@@ -26,7 +26,16 @@ interface FormButtonsProps {
 export function FormButtons ({ option }: FormButtonsProps) {
 
         return (
-                <div className="h-full bg-gray-300 rounded p-5 cursor-pointer flex flex-col justify-center items-center gap-1" >
+                <div 
+                        className="
+                                h-full bg-gray-200 rounded p-5 cursor-pointer 
+                                flex flex-col justify-center items-center gap-1 
+                                shadow-md 
+                                transition-all duration-200 ease-out
+                                hover:shadow-lg hover:translate-y-0.5
+                                active:shadow-inner active:translate-y-0 active:scale-95
+                        " 
+                >        
                         <FontAwesomeIcon className="text-3xl" icon={faPlus} />
                         <h1 className="text-xl font-bold">{ option.title }</h1>
                         <p className="text-sm"> {option.text} </p>

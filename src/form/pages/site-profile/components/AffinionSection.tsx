@@ -28,15 +28,15 @@ export default function AffinionSection ({ affinions }: AffinionSectionProps) {
                 {
                     sortedAffinions.map((affinion) => {
                         return (
-                            <div className="bg-white p-2 rounded flex-grow flex flex-col justify-around items-center" key={affinion.affinion_id}>
+                            <div className="flex-1 bg-gray-50 border border-gray-200 p-3 rounded flex-grow flex flex-col justify-around items-center shadow-sm" key={affinion.affinion_id}>
                                 <FontAwesomeIcon className="text-green-700 text-3xl" icon={faCalendarCheck} />
                                 <p className="font-semibold text-center text-lg">Affinion {affinion.affinion_number}</p>
                                 <p className="text-sm">
-                                    Last Calibrated:
+                                    Calibrated:
                                     <span className="italics"> {affinion.last_clean === null ? '' : moment(affinion.last_calibrated).format('Do MMM')}</span>
                                 </p>
                                 <p className="text-sm">
-                                    Last Cleaned:
+                                    Cleaned:
                                     <span className="italics"> {affinion.last_clean === null ? '' : moment(affinion.last_clean).format('Do MMM')}</span>
                                 </p>
                             </div>
