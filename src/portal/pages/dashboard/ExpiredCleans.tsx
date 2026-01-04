@@ -30,14 +30,14 @@ export default function ExpiredCleans () {
 	})
 
 	return (
-		<div className="bg-white p-4 rounded">
-			<p className="font-semibold text-center">CLEANS</p>
-			<table className="w-full">
-				<thead>
+		<div className="bg-gray-50 p-4 rounded">
+			<p className="">CLEANS</p>
+			<table className="w-full bg-white">
+					<thead className="bg-gray-50">
 					<tr>
-						<th className="text-start font-medium text-sm">SITE</th>
-						<th className="text-start font-medium text-sm">AFFINION</th>
-						<th className="text-start font-medium text-sm">DATE</th>
+						<th className="text-start font-medium text-xs p-1 text-gray-500">SITE</th>
+						<th className="text-start font-medium text-xs text-gray-500">AFFINION</th>
+						<th className="text-start font-medium text-xs text-gray-500">DATE</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,10 +45,10 @@ export default function ExpiredCleans () {
 						expiredAffinions?.map((affinion) => {
 							const site = allSites?.find(site => site.site_id === affinion.site_id)
 							return (
-								<tr>
-									<td className="text-start text-sm">{site?.site_name}</td>
-									<td className="text-start text-sm">NH{affinion.nh_number}</td>
-									<td className="text-start text-sm">{moment(affinion.last_clean).format('Do MMM')}</td>
+								<tr className="border border-gray-200">
+									<td className="text-start text-sm p-1 text-gray-600">{site?.site_name}</td>
+									<td className="text-start text-sm text-gray-600">NH{affinion.nh_number}</td>
+									<td className="text-start text-sm text-red-800">{moment(affinion.last_clean).format('Do MMM')}</td>
 								</tr>
 							)
 						})

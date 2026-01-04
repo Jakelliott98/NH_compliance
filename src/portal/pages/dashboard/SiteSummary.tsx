@@ -2,6 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import type { SiteDatabaseType } from "@/types/site";
 import fetchAllSites from "@/utils/fetchAllSites";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareCheck, faTriangleExclamation, faHandSparkles, faBug } from "@fortawesome/free-solid-svg-icons";
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+
 
 export default function SiteSummary () {
 
@@ -25,18 +29,32 @@ export default function SiteSummary () {
 	})
 
 	return (
-		<div className="flex justify-between [&>*]:flex-1 gap-3">
-			<div className="bg-green-200 p-4 rounded flex flex-col items-center gap-2">
-				<p className="font-semibold text-xl">Calibrated Sites</p>
-				<p className="text-5xl font-bold">{calibratedSites?.length}</p>
+		<div className="flex justify-between [&>*]:flex-1 gap-12">
+			<DashboardCards title='Calibrated Sites' dataPoint={calibratedSites.length} icon={faSquareCheck}/>
+			<DashboardCards title='Flagging' dataPoint={1} icon={faTriangleExclamation}/>
+			<DashboardCards title='Flagging Calibrations' dataPoint={sitesFlaggingCalibrations.length} icon={faBug}/>
+			<DashboardCards title='Flagging Cleans' dataPoint={1} icon={faHandSparkles}/>
+		</div>
+	)
+}
+
+interface DashboardCardsProps {
+	title: string,
+	dataPoint: number,
+	icon: IconDefinition,
+}
+
+function DashboardCards ({dataPoint, title, icon}: DashboardCardsProps) {
+
+	return (
+		<div className="bg-white p-4 rounded flex flex-col">
+			<div>
+				<FontAwesomeIcon icon={icon} className="text-green-800"/>
 			</div>
-			<div className="bg-amber-200 p-4 rounded flex flex-col items-center gap-2">
-				<p className="text-center font-semibold text-xl">Concerned Sites</p>
-				<p className="text-5xl font-bold">{}</p>
-			</div>
-			<div className="bg-red-200 p-4 rounded flex flex-col items-center gap-2">
-				<p className="text-center font-semibold text-xl">Flagging Calibrations</p>
-				<p className="text-5xl font-bold">{sitesFlaggingCalibrations?.length}</p>
+			<p className="text-gray-700 font-light">{title}</p>
+			<p className="text-lg">{dataPoint}</p>
+			<div className="flex gap-1 items-center text-gray-500 text-xs cursor-pointer hover:text-black">
+				<p>View More →</p>
 			</div>
 		</div>
 	)

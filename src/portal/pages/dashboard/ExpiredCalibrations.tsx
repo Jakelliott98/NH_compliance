@@ -29,31 +29,31 @@ export default function ExpiredCalibrations () {
 		})
 
 	return (
-		<div className="bg-white p-4 rounded">
-			<p className="font-semibold text-center">CONTROLS</p>
-			<table className="w-full">
-				<thead>
-					<tr>
-						<th className="text-start font-medium text-sm">SITE</th>
-						<th className="text-start font-medium text-sm">LOT</th>
-						<th className="text-start font-medium text-sm">EXPIRED</th>
-					</tr>
-				</thead>
-				<tbody>
-					{
-						expiredControls?.map((control) => {
-							const site = allSites?.find(site => site.site_id === control.site_id)
-							return (
-								<tr>
-									<td className="text-start text-sm">{site?.site_name}</td>
-									<td className="text-start text-sm">{control.control_type === 'hba1c' ? 'HBA1c' : 'Lipids'}</td>
-									<td className="text-start text-sm text-red-700">{moment(control.expiry_date).format('Do MMM')}</td>
-								</tr>
-							)
-						})
-					}
-				</tbody>
-			</table>
+		<div className="bg-gray-50 p-4 rounded">
+			<p className="">CONTROLS</p>
+				<table className="w-full bg-white">
+					<thead className="bg-gray-50">
+						<tr className="">
+							<th className="text-start font-medium text-xs p-1 text-gray-500">SITE</th>
+							<th className="text-start font-medium text-xs text-gray-500">LOT</th>
+							<th className="text-start font-medium text-xs text-gray-500">EXPIRED</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							expiredControls?.map((control) => {
+								const site = allSites?.find(site => site.site_id === control.site_id)
+								return (
+									<tr className="border border-gray-200">
+										<td className="text-start text-sm p-1 text-gray-600">{site?.site_name}</td>
+										<td className="text-start text-sm text-gray-600">{control.control_type === 'hba1c' ? 'HBA1c' : 'Lipids'}</td>
+										<td className="text-start text-sm text-red-800">{moment(control.expiry_date).format('Do MMM')}</td>
+									</tr>
+								)
+							})
+						}
+					</tbody>
+				</table>
 		</div>
 	)
 
