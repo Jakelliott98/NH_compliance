@@ -50,7 +50,7 @@ export default function SiteSearch ({ sites, setActiveSite }: SiteSearchProps) {
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? '' : currentValue)
                                                 setOpen(false)
-                                                setActiveSite(site.slug)
+                                                setActiveSite(site)
                                             }}
                                             className="cursor-pointer"
                                         >

@@ -9,7 +9,7 @@ import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"
 
 export default function SiteSearchContainer () {
 
-    const [activeSite, setActiveSite] = useState('')
+    const [activeSite, setActiveSite] = useState()
     const navigate = useNavigate();
 
     const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useQuery<SiteDatabaseType[]>({
@@ -22,7 +22,7 @@ export default function SiteSearchContainer () {
     if (allSites === undefined || allSites === null) throw allSitesError
 
     const onSubmit = () => {
-        navigate(`Sites/${activeSite}`)
+        navigate(`Sites/${activeSite.slug}`)
     }
 
     return (

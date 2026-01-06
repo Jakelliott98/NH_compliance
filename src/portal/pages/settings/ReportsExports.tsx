@@ -8,7 +8,7 @@ import type { SiteDatabaseType } from "@/types/site"
 
 export default function ReportsExports () {
 
-    const [activeSite, setActiveSite] = useState('')
+    const [activeSite, setActiveSite] = useState()
 
     const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useQuery<SiteDatabaseType[]>({
         queryKey: ['allSites'], 
