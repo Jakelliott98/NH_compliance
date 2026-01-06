@@ -21,19 +21,24 @@ export default function SiteCard ({site}: SiteCardProps) {
     const sortedAffinions = affinions.sort((a, b) => a.affinion_number - b.affinion_number)
 
     return (
-        <div className={`${ isCalibrated ? 'bg-white' : 'bg-red-100'} rounded-xl w-full h-full p-4 border-solid border-2 border-gray-400 cursor-pointer`}>
-            <div className="border-b-1 border-dashed border-black flex flex-col pb-1">
-                    <p className="text-sm">{site.site_name}</p>
-                    <p className="text-xs text-gray-400">{site.team_leader}</p>
+        <div className={`${ isCalibrated ? 'bg-l-green-800' : 'border-l-red-800'} bg-white rounded w-full h-full p-4 border-l border-l-5 border-l-green-700 border border-gray-400 cursor-pointer`}>
+            <div className="border-b-1 border-gray-200 flex flex-col pb-1">
+                    <p className="text-sm text-gray-700">{site.site_name}</p>
+                    <p className="text-xs text-gray-500">{site.team_leader}</p>
             </div>
-            <p className={`text-xs pt-1  ${!isCalibrated ? 'text-red-700' : ''}`}>Last Calibrated: {difference} days ago </p>
+            <p className={`text-xs pt-1  ${!isCalibrated ? 'text-red-800' : ''}`}>Last Calibrated: {difference} days ago </p>
             <div className="pt-2">
+                {
+                    sortedAffinions.length === 0 && (
+                        <p className='text-xs italic text-gray-500'>No affinions added yet</p>
+                    )
+                }
                 {
                     sortedAffinions.map((affinion) => {
                         return (
                             <div className="flex justify-between">
-                                <p className='text-sm'>Affinion {affinion.affinion_number}</p>
-                                <p className={`text-sm ${!affinion.last_calibrated && 'italic'}`} >{affinion.last_calibrated ? moment(affinion.last_calibrated).format('DD MMM') : 'No calibrations'}</p>
+                                <p className='text-xs text-gray-500'>Affinion {affinion.affinion_number}</p>
+                                <p className={`text-xs ${!affinion.last_calibrated && 'italic'} text-gray-500`} >{affinion.last_calibrated ? moment(affinion.last_calibrated).format('DD MMM') : 'No calibrations'}</p>
                             </div>
                         )
                     })

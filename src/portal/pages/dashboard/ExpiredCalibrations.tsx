@@ -45,7 +45,7 @@ export default function ExpiredCalibrations () {
 								const site = allSites?.find(site => site.site_id === control.site_id)
 								return (
 									<tr className="border border-gray-200">
-										<td className="text-start text-sm p-1 text-gray-600">{site?.site_name}</td>
+										<td className="text-start text-sm p-1 text-gray-600 p-2">{site?.site_name}</td>
 										<td className="text-start text-sm text-gray-600">{control.control_type === 'hba1c' ? 'HBA1c' : 'Lipids'}</td>
 										<td className="text-start text-sm text-red-800">{moment(control.expiry_date).format('Do MMM')}</td>
 									</tr>

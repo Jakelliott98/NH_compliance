@@ -46,7 +46,7 @@ export default function ExpiredCleans () {
 							const site = allSites?.find(site => site.site_id === affinion.site_id)
 							return (
 								<tr className="border border-gray-200">
-									<td className="text-start text-sm p-1 text-gray-600">{site?.site_name}</td>
+									<td className="text-start text-sm p-1 text-gray-600 p-2">{site?.site_name}</td>
 									<td className="text-start text-sm text-gray-600">NH{affinion.nh_number}</td>
 									<td className="text-start text-sm text-red-800">{moment(affinion.last_clean).format('Do MMM')}</td>
 								</tr>
