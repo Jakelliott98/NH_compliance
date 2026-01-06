@@ -1,23 +1,37 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import { useQuery } from "@tanstack/react-query"
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import fetchAllSites from "@/utils/fetchAllSites"
 import type { SiteDatabaseType } from "@/types/site"
 import moment from "moment"
 import EditSiteContainer from "./EditSite"
 import DeleteSiteContainer from "./DeleteSite"
+import { FormProvider, useForm, useFormContext } from "react-hook-form"
+import addSite from "@/portal/utils/addSite"
 
 export default function OrganiseSites () {
+
+    const methods = useForm();
+    const { handleSubmit }  = methods;
+    const queryClient = useQueryClient();
 
     const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useQuery<SiteDatabaseType[]>({
         queryKey:['allSites'], 
         queryFn: () => fetchAllSites()
+    })
+    const mutation = useMutation({
+        mutationFn: (data) => {return addSite(data)},
+        onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})
     })
     if (isAllSitesLoading) (<p>Loading...</p>)
     if (isAllSitesError) throw allSitesError
     if (allSites === null || allSites === undefined) return (<p>'All Sites could not be fetched'</p>)
 
     const sevenDaysAgo = moment().subtract(7, 'days');
+
+    const onAddSiteSubmit = handleSubmit((data) => {
+        mutation.mutate(data)
+    })
 
     return (
         <div className="py-4">
@@ -30,23 +44,9 @@ export default function OrganiseSites () {
                     <h2 className="font-semibold">Add Site</h2>
                     <p className="text-sm text-gray-400">Add a new site to the database</p>
                 </div>
-                <div className="flex-2 flex flex-col">
-                    <div className="flex flex-col gap-1">
-                        <p className="text-sm">Site Name</p>
-                        <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2"/>
-                    </div>
-                    <div className="flex gap-3">
-                        <div className="flex flex-col gap-1 flex-1">
-                            <p className="text-sm">Team Leader</p>
-                            <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2"/>
-                        </div>
-                        <div className="flex flex-col gap-1 flex-1">
-                            <p className="text-sm">Region</p>
-                            <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2"/>
-                        </div>
-                    </div>
-                </div>
-
+                <FormProvider {...methods}>
+                    <AddSiteSection onSubmit={onAddSiteSubmit}/>
+                </FormProvider>
             </div>
             <div className="py-2">
                 <table className="w-full">
@@ -78,5 +78,34 @@ export default function OrganiseSites () {
                 </table>
             </div>
         </div>
+    )
+}
+
+interface AddSiteSectionProps {
+    onSubmit: () => void,
+}
+
+function AddSiteSection ({onSubmit}: AddSiteSectionProps) {
+
+    const { register } = useFormContext();
+
+    return (
+        <form className="flex-2 flex flex-col gap-2" onSubmit={onSubmit}>
+            <div className="flex flex-col gap-1">
+                <p className="text-sm">Site Name</p>
+                <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2" {...register('siteName', {required: 'Provide a site name', })}/>
+            </div>
+            <div className="flex gap-3">
+                <div className="flex flex-col gap-1 flex-1">
+                    <p className="text-sm">Team Leader</p>
+                    <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2" {...register('teamLeader', {required: 'Provide a team leader'})}/>
+                </div>
+                <div className="flex flex-col gap-1 flex-1">
+                    <p className="text-sm">Region</p>
+                    <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2" {...register('region', {required: 'Provide a region'})}/>
+                </div>
+            </div>
+            <button className="bg-gray-400" type="submit">Submit</button>
+        </form>
     )
 }

@@ -119,11 +119,11 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                         }
                         <div className="flex gap-2">
                             <label className="text-sm">Clinician Name:</label>
-                            <input className="flex-1 " {...register('clinician', {required: 'Please provide your initials'})}/>
+                            <input className="flex-1 " {...register('clinician', {required: 'Provide your initials'})}/>
                         </div>
                         <div>
                             <label className="text-sm">Number of attempts: </label>
-                            <input type="number" {...register('attempts', {required: 'Please complete number of attempts.'})}/>
+                            <input type="number" {...register('attempts', {required: 'Complete number of attempts.'})}/>
                         </div>
                         <div className=" bg-green-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                             <Checkbox 
