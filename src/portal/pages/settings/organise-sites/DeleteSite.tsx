@@ -1,4 +1,4 @@
-import { Dialog, DialogHeader, DialogTrigger, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogHeader, DialogTrigger, DialogContent, DialogClose, DialogFooter } from "@/components/ui/dialog"
 import deleteSite from "@/portal/utils/deleteSite"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
@@ -60,8 +60,12 @@ function DeleteSite ({ site, onSubmit }: DeleteSiteProps) {
                         </div>
                 </DialogHeader>
                 <div className="flex gap-5">
-                    <button className="flex-1 rounded bg-gray-100 py-1 px-3 text-sm cursor-pointer">Cancel</button>
-                    <button className="flex-1 rounded bg-red-700 py-1 px-3 text-sm text-white cursor-pointer" onClick={() => {onSubmit()}}>Confirm</button>
+                    <DialogClose className="flex-1">
+                        <button className="w-full rounded bg-gray-100 py-1 px-3 text-sm cursor-pointer hover:bg-gray-200">Cancel</button>
+                    </DialogClose>
+                    <DialogClose className="flex-1">
+                        <button className="w-full rounded bg-red-700 py-1 px-3 text-sm text-white cursor-pointer hover:bg-red-800" onClick={() => {onSubmit()}}>Confirm</button>
+                    </DialogClose>
                 </div>
             </DialogContent>
         </Dialog>

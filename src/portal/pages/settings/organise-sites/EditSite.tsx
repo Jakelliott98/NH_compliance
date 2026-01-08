@@ -1,4 +1,4 @@
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog"
 import { useState } from "react"
 import type { SiteInfoData } from '../../../utils/updateSite'
 import updateSite from "@/portal/utils/updateSite"
@@ -102,8 +102,12 @@ function EditSite ({ siteDetails, onSubmit, onChange }: EditSiteProps) {
                     </div>
                 </div>
                 <div className=" flex gap-2 items-end [&>*]:flex-1">
-                    <button className="flex-1 rounded bg-white py-1 px-3 text-sm cursor-pointer border-1 border-green-700">Cancel</button>
-                    <button className="flex-1 rounded bg-green-700 py-1 px-3 text-sm text-white cursor-pointer" onClick={() => {onSubmit()}}>Save</button>
+                    <DialogClose className="flex-1">
+                    <button className="w-full rounded bg-gray-100 py-1 px-3 text-sm cursor-pointer hover:bg-gray-200">Cancel</button>
+                    </DialogClose>
+                    <DialogClose className="flex-1">
+                    <button className="w-full rounded bg-green-700 py-1 px-3 text-sm text-white cursor-pointer hover:bg-green-800" onClick={() => {onSubmit()}}>Save</button>
+                    </DialogClose>
                 </div>
             </DialogContent>
 
