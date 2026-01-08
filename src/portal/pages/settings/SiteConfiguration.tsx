@@ -1,12 +1,13 @@
 import SiteSearch from "@/form/pages/site-search/SiteSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faHandshakeSlash } from "@fortawesome/free-solid-svg-icons";
 import fetchAllSites from "@/utils/fetchAllSites";
 import { useQuery } from "@tanstack/react-query";
 import type { SiteDatabaseType } from "@/types/site";
 import { useState } from "react";
 import type { AffinionDatabaseType } from "@/types/affinion";
 import fetchAffinions from "@/utils/fetchAffinions";
+import { useNavigate } from "react-router";
 
 export default function SiteConfiguration () {
     
@@ -49,6 +50,7 @@ interface EditAffinionsSectionProps {
 
 function EditAffinionsSection ({activeSite}: EditAffinionsSectionProps) {
 
+    const navigate = useNavigate();
     const { data: affinions, isError: isAffinionsError, isLoading: isAffinionsLoading, error: affinionsError } = useQuery<AffinionDatabaseType[]>({
         queryKey:['siteAffinion', activeSite],
         queryFn: () => fetchAffinions(activeSite.site_id),
@@ -60,6 +62,7 @@ function EditAffinionsSection ({activeSite}: EditAffinionsSectionProps) {
 
     const sortedAffinions = affinions.sort((a, b) => a.affinion_number - b.affinion_number)
 
+    if (affinions.length > 0) {
     return (
         <div className="py-2 border-b border-gray-200">
             <div>
@@ -87,5 +90,15 @@ function EditAffinionsSection ({activeSite}: EditAffinionsSectionProps) {
                 }
             </div>
         </div>
-    )
+    )} else {
+        
+        return (
+            <div className="flex flex-col items-center justify-center p-20 gap-2">
+                <FontAwesomeIcon icon={faHandshakeSlash} className="text-5xl text-gray-400"/>
+                <h2 className="font-semibold text-xl text-gray-700">Oops! No affinions can be found...</h2>
+                <p className="text sm text-gray-500">There is nothing here to view right now, please add affinions to your site to see data.</p>
+                <button onClick={() => {navigate(`../../../SiteForm/Sites/${activeSite.slug}`)}} className="bg-gray-700 text-white py-2 px-5 font-semibold rounded-md cursor-pointer mt-2 hover:bg-gray-800 ">Add Affinion</button>
+            </div>
+        )
+    }
 }
