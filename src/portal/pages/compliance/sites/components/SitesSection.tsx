@@ -14,8 +14,6 @@ export default function SitesSection({ sites, searchSite }: SitesSectionProps) {
     const location = useLocation().pathname
     const isComplianceHomepage = location === '/Portal/Compliance'
 
-    console.log(searchSite)
-
     const [filteredSites, setFilteredSites] = useState(sites)
 
     useEffect(() => {

@@ -48,8 +48,6 @@ export default function SitesDashboard () {
 
     }
 
-    console.log(activeRegion)
-
     if (isSitesLoading) return (<p>Loading...</p>)
     if (isSitesError || sites === null || sites === undefined) throw sitesError;
 

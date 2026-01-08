@@ -38,7 +38,7 @@ export default function SiteCard ({site}: SiteCardProps) {
                 {
                     sortedAffinions.map((affinion) => {
                         return (
-                            <div className="flex justify-between">
+                            <div className="flex justify-between" key={affinion.affinion_id}>
                                 <p className='text-xs text-gray-500'>Affinion {affinion.affinion_number}</p>
                                 <p className={`text-xs ${!affinion.last_calibrated && 'italic'} text-gray-500`} >{affinion.last_calibrated ? moment(affinion.last_calibrated).format('DD MMM') : 'No calibrations'}</p>
                             </div>

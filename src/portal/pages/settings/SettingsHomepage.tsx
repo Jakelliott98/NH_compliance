@@ -1,6 +1,9 @@
-import { NavLink, Outlet } from "react-router"
+import { NavLink, Outlet, useLocation } from "react-router"
 
 export default function SettingsHomepage () {
+
+    const location = useLocation().pathname
+    const isHomepage = location === '/Portal/Settings/Sites' || location === '/Portal/Settings'
 
     return (
         <div className="w-full p-2">
@@ -10,7 +13,7 @@ export default function SettingsHomepage () {
             </div>
             <nav className="bg-gray-200 flex rounded p-1 justify-around my-2">
                 <nav className="flex-1 text-gray-400 text-sm text-center">
-                    <NavLink to="Sites" className={({isActive}) => {return isActive ? 'text-gray-800' : 'text-gray-400'}}>Sites</NavLink>
+                    <NavLink to="Sites" className={isHomepage ? 'text-gray-800' : 'text-gray-400'}>Sites</NavLink>
                 </nav>
                 <nav className="flex-1 text-gray-400 text-sm text-center">
                     <NavLink to="Configuration" className={({isActive}) => {return isActive ? 'text-gray-800' : 'text-gray-400'}}>Site Configuration</NavLink>
