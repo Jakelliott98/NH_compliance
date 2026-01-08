@@ -8,6 +8,7 @@ import EditSiteContainer from "./EditSite"
 import DeleteSiteContainer from "./DeleteSite"
 import { FormProvider, useForm, useFormContext } from "react-hook-form"
 import addSite from "@/portal/utils/addSite"
+import AddSiteSection from "./AddSiteSection"
 
 export default function OrganiseSites () {
 
@@ -78,34 +79,5 @@ export default function OrganiseSites () {
                 </table>
             </div>
         </div>
-    )
-}
-
-interface AddSiteSectionProps {
-    onSubmit: () => void,
-}
-
-function AddSiteSection ({onSubmit}: AddSiteSectionProps) {
-
-    const { register } = useFormContext();
-
-    return (
-        <form className="flex-2 flex flex-col gap-2" onSubmit={onSubmit}>
-            <div className="flex flex-col gap-1">
-                <p className="text-sm">Site Name</p>
-                <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2" {...register('siteName', {required: 'Provide a site name', })}/>
-            </div>
-            <div className="flex gap-3">
-                <div className="flex flex-col gap-1 flex-1">
-                    <p className="text-sm">Team Leader</p>
-                    <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2" {...register('teamLeader', {required: 'Provide a team leader'})}/>
-                </div>
-                <div className="flex flex-col gap-1 flex-1">
-                    <p className="text-sm">Region</p>
-                    <input className="border border-gray-300 bg-gray-200 rounded p-1 px-2" {...register('region', {required: 'Provide a region'})}/>
-                </div>
-            </div>
-            <button className="bg-gray-400" type="submit">Submit</button>
-        </form>
     )
 }
