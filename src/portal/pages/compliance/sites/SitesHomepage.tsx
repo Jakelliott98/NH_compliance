@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import RegionsFilter from './components/Regions/RegionFilter'
 import SitesSection from './components/SitesSection'
 import type { SiteDatabaseType } from '@/types/site'
@@ -14,8 +14,18 @@ interface ActiveRegionState{
     isFiltered: boolean,
 }
 
+export interface SearchSiteState {
+    isActive: boolean,
+    searchTerm: string,
+}
+
 export default function SitesDashboard () {
 
+    const [searchSite, setSearchSite] = useState<SearchSiteState>({
+        isActive: false,
+        searchTerm: '',
+    })
+    
     const { data: sites, isLoading: isSitesLoading, isError: isSitesError, error: sitesError } = useQuery<SiteDatabaseType[] ,Error>({
         queryKey: ['sites'], 
         queryFn: () => fetchAllSites()
@@ -53,7 +63,7 @@ export default function SitesDashboard () {
         <div className=''>
             <div className='flex justify-between p-2 border-b'>
                 <div className='flex-1 flex gap-5'>
-                    <SearchSite />
+                    <SearchSite onChange={setSearchSite}/>
                     <AddSiteContainer />
                 </div>
                 <div className='flex gap-2'>
@@ -61,7 +71,7 @@ export default function SitesDashboard () {
                     <FilterButton />
                 </div>
             </div>
-            <SitesSection sites={filteredSites} />
+            <SitesSection sites={filteredSites} searchSite={searchSite}/>
         </div>
     )
 }
