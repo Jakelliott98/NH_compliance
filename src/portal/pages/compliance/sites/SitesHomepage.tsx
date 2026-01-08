@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react'
-import RegionsFilter from './components/Regions/RegionFilter'
+import { useState } from 'react'
 import SitesSection from './components/SitesSection'
 import type { SiteDatabaseType } from '@/types/site'
 import { useQuery } from '@tanstack/react-query'
 import fetchAllSites from '@/utils/fetchAllSites'
-import FilterButton from '@/components/FilterButton'
 import AddSiteContainer from './components/AddSite'
 import SearchSite from './components/SearchSite'
-import SortBtn from './components/SortBtn'
+import RegionFilter from './components/RegionFilter'
 
 interface ActiveRegionState{
     activeRegion: string,
@@ -37,22 +35,20 @@ export default function SitesDashboard () {
     })
 
     const selectRegion: (selectedRegion: string) => void = (selectedRegion) => {
-
-        setActiveRegion((prev) => {
-            if (prev.activeRegion === selectedRegion) {
-                return {
-                    isFiltered: false,
-                    activeRegion: '',
-                }
-            } else {
-                return {
+        if (selectedRegion === '') {
+            return setActiveRegion({
+                isFiltered: false,
+                activeRegion: '',
+            })
+        }
+        setActiveRegion({
                     isFiltered: true,
                     activeRegion: selectedRegion,
-                }
-            }
         })
 
     }
+
+    console.log(activeRegion)
 
     if (isSitesLoading) return (<p>Loading...</p>)
     if (isSitesError || sites === null || sites === undefined) throw sitesError;
@@ -67,8 +63,8 @@ export default function SitesDashboard () {
                     <AddSiteContainer />
                 </div>
                 <div className='flex gap-2'>
-                    <SortBtn />
-                    <FilterButton />
+                    <RegionFilter onSelect={selectRegion}/>
+                    <div className='py-1 px-2 flex items-center gap-2 border border-gray-300 rounded text-gray-500 text-sm cursor-pointer hover:text-gray-700 hover:border-gray-700'>Reset</div>
                 </div>
             </div>
             <SitesSection sites={filteredSites} searchSite={searchSite}/>

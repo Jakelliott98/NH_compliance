@@ -25,7 +25,8 @@ export default function SitesSection({ sites, searchSite }: SitesSectionProps) {
             setFilteredSites(sites)
         }
     }, [searchSite, sites])
-    
+
+
     return (
         <div className='p-2'>
                 <div className='grid grid-cols-5 grid-rows-[1fr] gap-4'>

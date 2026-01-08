@@ -2,7 +2,6 @@ import SiteSummary from "./SiteSummary"
 import ExpiredAffinions from "./ExpiredAffinions"
 import ExpiredCalibrations from "./ExpiredCalibrations"
 import ExpiredCleans from "./ExpiredCleans"
-import FilterButton from "@/components/FilterButton"
 
 export default function DashboardPage () {
 
@@ -13,7 +12,6 @@ export default function DashboardPage () {
 					<h1 className="text-2xl font-bold text-gray-800">Dashboard Overview</h1>
 					<p className="text-sm text-gray-500">Welcome back, here is your overview of all the sites.</p>
 				</div>
-				<FilterButton />
 			</div>
 			<div className="flex flex-col gap-5 my-2">
 			<SiteSummary />
