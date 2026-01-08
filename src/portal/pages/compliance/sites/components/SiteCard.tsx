@@ -26,7 +26,9 @@ export default function SiteCard ({site}: SiteCardProps) {
                     <p className="text-sm text-gray-700">{site.site_name}</p>
                     <p className="text-xs text-gray-500">{site.team_leader}</p>
             </div>
-            <p className={`text-xs pt-1  ${!isCalibrated ? 'text-red-800' : ''}`}>Last Calibrated: {difference} days ago </p>
+            <p className={`text-xs pt-1  ${!isCalibrated ? 'text-red-800' : ''}`}>
+                {difference ? `Last Calibrated: ${difference} days ago` : 'No Calibration Record'}
+            </p>
             <div className="pt-2">
                 {
                     sortedAffinions.length === 0 && (
