@@ -32,6 +32,8 @@ ReactDOM.createRoot(root).render(
           <Route index element={<DashboardPage />}/>
           <Route path="Dashboard" element={<DashboardPage />}/>
           <Route path="Compliance" element={<CompliancePage />}>
+            <Route index element={<SitesDashboard/>}/>
+            <Route path="Sites/:Site" element={<SitePage/>}/>
             <Route path="Sites" element={<SitesDashboard/>}/>
             <Route path="Sites/:Site" element={<SitePage />}/>
             <Route path="Reports" element={<ReportSection />}/>
