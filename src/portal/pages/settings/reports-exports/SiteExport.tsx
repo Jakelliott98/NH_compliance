@@ -1,8 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-
+import SelectButton from "@/components/SelectButton";
+import SelectDuration from "@/portal/components/SelectDuration";
+import { useState } from "react";
 
 function SiteExport () {
+
+    const [selectedCompliance, setSelectedCompliance] = useState<string>('All Compliance')
+    const [selectedDuration, setSelectedDuration] = useState<string>('Last Month')
+
+    const setActiveCompliance = (selectedValue: string) => setSelectedCompliance(selectedValue)
+    const setActiveDuration = (selectedValue: string) => setSelectedDuration(selectedValue)
 
     return (
         <div className="p-4 border-b border-gray-200 flex-1">
@@ -15,24 +23,12 @@ function SiteExport () {
                     <p className="text-sm text-gray-400 font-light">Type of data to export.</p>
                 </div>
                 <div className="flex gap-2">
-                    <button className="flex-grow text-sm py-2 px-4 flex gap-1 items-center justify-center bg-gray-200 rounded border-gray-500 border-1 cursor-pointer">Overall Compliance</button>
-                    <button className="flex-grow text-sm py-2 px-4 flex gap-1 items-center justify-center bg-gray-100 rounded border-gray-200 border-1 cursor-pointer">Missed Calibrations</button>
-                    <button className="flex-grow text-sm py-2 px-4 flex gap-1 items-center justify-center bg-gray-100 rounded border-gray-200 border-1 cursor-pointer">Missed Cleans</button>
+                            <SelectButton text='All Compliance' onSelect={setActiveCompliance} activeSelect={selectedCompliance}/>
+                            <SelectButton text='Calibrations' onSelect={setActiveCompliance} activeSelect={selectedCompliance}/>
+                            <SelectButton text='Cleans' onSelect={setActiveCompliance} activeSelect={selectedCompliance}/>
                 </div>
             </div>
-            <div className="py-2 flex flex-col gap-2">
-                <div>
-                    <p className="text-sm font-semibold">Export Date Range</p>
-                    <p className="text-sm text-gray-400 font-light">All data within the selected date range.</p>
-                </div>
-                <div className="flex gap-2">
-                    <button className="flex-grow text-sm py-2 px-4 flex gap-1 items-center justify-center bg-gray-200 rounded border-gray-500 border-1 cursor-pointer">Last Month</button>
-                    <button className="flex-grow text-sm py-2 px-4 flex gap-1 items-center justify-center bg-gray-100 rounded border-gray-200 border-1 cursor-pointer">3 Months</button>
-                    <button className="flex-grow text-sm py-2 px-4 flex gap-1 items-center justify-center bg-gray-100 rounded border-gray-200 border-1 cursor-pointer">6 Months</button>
-                    <button className="flex-grow text-sm py-2 px-4 flex gap-1 items-center justify-center bg-gray-100 rounded border-gray-200 border-1 cursor-pointer">12 Month</button>
-                    <button className="flex-grow text-sm py-2 px-4 flex gap-1 items-center justify-center bg-gray-100 rounded border-gray-200 border-1 cursor-pointer">All Time</button>
-                </div>
-            </div>
+            <SelectDuration onSelect={setActiveDuration} activeSelect={selectedDuration}/>
             <button className="w-full text-sm py-2 px-4 flex gap-0.5 items-center justify-center bg-white rounded border-gray-200 border-1 cursor-pointer">
                     <FontAwesomeIcon icon={faDownload} />
                     <p>Export</p>
