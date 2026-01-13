@@ -3,11 +3,10 @@ import SitesSection from './components/SitesSection'
 import type { SiteDatabaseType } from '@/types/site'
 import { useQuery } from '@tanstack/react-query'
 import fetchAllSites from '@/utils/fetchAllSites'
-import AddSiteContainer from './components/AddSite'
-import SearchSite from './components/SearchSite'
-import RegionFilter from './components/RegionFilter'
+import FilterSection from './components/sites-filters/FilterSection'
+import { useEffect } from 'react'
 
-interface ActiveRegionState{
+export interface ActiveRegionState{
     activeRegion: string,
     isFiltered: boolean,
 }
@@ -17,55 +16,109 @@ export interface SearchSiteState {
     searchTerm: string,
 }
 
-export default function SitesDashboard () {
-
-    const [searchSite, setSearchSite] = useState<SearchSiteState>({
-        isActive: false,
-        searchTerm: '',
-    })
+export default function SitesDashboardContainer () {
     
     const { data: sites, isLoading: isSitesLoading, isError: isSitesError, error: sitesError } = useQuery<SiteDatabaseType[] ,Error>({
         queryKey: ['sites'], 
         queryFn: () => fetchAllSites()
     })
 
-    const [activeRegion, setActiveRegion] = useState<ActiveRegionState>({
-        activeRegion: '',
-        isFiltered: false,
-    })
-
-    const selectRegion: (selectedRegion: string) => void = (selectedRegion) => {
-        if (selectedRegion === '') {
-            return setActiveRegion({
-                isFiltered: false,
-                activeRegion: '',
-            })
-        }
-        setActiveRegion({
-                    isFiltered: true,
-                    activeRegion: selectedRegion,
-        })
-
-    }
-
     if (isSitesLoading) return (<p>Loading...</p>)
     if (isSitesError || sites === null || sites === undefined) throw sitesError;
 
-    const filteredSites = activeRegion.isFiltered ? sites.filter((item: SiteDatabaseType) => {return item.site_region === activeRegion.activeRegion}) : sites;
+    return (
+        <SitesDashboard sites={sites} />
+    )
+}
+
+interface SitesDashboardProps {
+    sites: SiteDatabaseType[],
+}
+
+function SitesDashboard ({sites}: SitesDashboardProps) {
+
+    const [filteredSites, setFilteredSites] = useState(sites)
+    const [isFiltered, setIsFiltered] = useState({
+        isFiltered: false,
+        search: {
+            isSearch: false, 
+            searchTag: '',
+        },
+        region: {
+            isRegion: false,
+            regionTag: ''
+        }
+    })
+
+    useEffect(() => {
+
+        let allSites = sites
+        if (isFiltered.search.isSearch) {
+            allSites = allSites.filter(site => site.site_name.toLowerCase().includes(isFiltered.search.searchTag.toLowerCase()))
+        }
+        if (isFiltered.region.isRegion) {
+            allSites = allSites.filter((item: SiteDatabaseType) => {return item.site_region === isFiltered.region.regionTag})
+        }
+        setFilteredSites(allSites)
+
+    }, [sites, isFiltered])
+    
+    const searchSite = (value: string) => {
+        return setIsFiltered((prev) => {
+            return {
+                ...prev, 
+                isFiltered: true,
+                search: {
+                    isSearch: true,
+                    searchTag: value,
+                }
+            }
+
+        })
+    }
+    const setRegion = (region: string) => {
+        return setIsFiltered((prev) => {
+            return {
+                ...prev, 
+                isFiltered: true,
+                region: {
+                    isRegion: true, 
+                    regionTag: region}
+            }
+        })
+    }
+    const resetRegion = () => {
+        return setIsFiltered((prev) => {
+            const isFiltersActive = prev.search.isSearch;
+            return {
+                ...prev,
+                isFiltered: isFiltersActive,
+                region: {
+                    isRegion: false,
+                    regionTag: '',
+                }
+            }
+        })
+    }
+    const resetFilters = () => {
+        setIsFiltered({
+            isFiltered: false,
+            search: {
+                isSearch: false, 
+                searchTag: '',
+            },
+            region: {
+                isRegion: false,
+                regionTag: ''
+            }
+        })
+        setFilteredSites(sites)
+    }
 
     return (
-        <div className=''>
-            <div className='flex justify-between p-2 border-b'>
-                <div className='flex-1 flex gap-5'>
-                    <SearchSite onChange={setSearchSite}/>
-                    <AddSiteContainer />
-                </div>
-                <div className='flex gap-2'>
-                    <RegionFilter onSelect={selectRegion}/>
-                    <div className='py-1 px-2 flex items-center gap-2 border border-gray-300 rounded text-gray-500 text-sm cursor-pointer hover:text-gray-700 hover:border-gray-700'>Reset</div>
-                </div>
-            </div>
-            <SitesSection sites={filteredSites} searchSite={searchSite}/>
+        <div>
+            <FilterSection setSearchSite={searchSite} setActiveRegion={setRegion} resetFilters={resetFilters} resetRegion={resetRegion}/>
+            <SitesSection sites={filteredSites}/>
         </div>
     )
 }

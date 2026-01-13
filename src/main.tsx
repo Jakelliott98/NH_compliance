@@ -5,7 +5,7 @@ import App, { HomeNav } from './App.tsx'
 import SettingsHomepage from './portal/pages/settings/SettingsHomepage.tsx'
 import DashboardPage from './portal/pages/dashboard/DashboardPage.tsx'
 import CompliancePage from './portal/pages/compliance/CompliancePage.tsx'
-import SitesDashboard from './portal/pages/compliance/sites/SitesHomepage.tsx'
+import SitesDashboardContainer from './portal/pages/compliance/sites/SitesHomepage.tsx'
 import ReportSection from './portal/pages/compliance/reports/Reports.tsx'
 import SitePage from './portal/pages/site/SitePage.tsx'
 import Portal from './portal/Portal.tsx'
@@ -32,9 +32,9 @@ ReactDOM.createRoot(root).render(
           <Route index element={<DashboardPage />}/>
           <Route path="Dashboard" element={<DashboardPage />}/>
           <Route path="Compliance" element={<CompliancePage />}>
-            <Route index element={<SitesDashboard/>}/>
+            <Route index element={<SitesDashboardContainer/>}/>
             <Route path="Sites/:Site" element={<SitePage/>}/>
-            <Route path="Sites" element={<SitesDashboard/>}/>
+            <Route path="Sites" element={<SitesDashboardContainer/>}/>
             <Route path="Sites/:Site" element={<SitePage />}/>
             <Route path="Reports" element={<ReportSection />}/>
           </Route>

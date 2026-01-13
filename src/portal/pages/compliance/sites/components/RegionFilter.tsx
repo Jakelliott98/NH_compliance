@@ -2,17 +2,18 @@ import { Select, SelectTrigger, SelectItem, SelectContent, SelectValue } from "@
 
 interface SortBtnProps {
     onSelect: (selectedRegion: string) => void,
+    resetRegion: () => void,
 }
 
-function RegionFilter ({ onSelect }: SortBtnProps) {
+function RegionFilter ({ onSelect, resetRegion }: SortBtnProps) {
 
     return (
-            <Select>
+            <Select >
                 <SelectTrigger>
                     <SelectValue placeholder='All Regions'/>
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value='Region' onClick={() => onSelect('')}>All Regions</SelectItem>
+                    <SelectItem value='All Regions' onClick={() => resetRegion()}>All Regions</SelectItem>
                     <SelectItem value='North' onClick={() => onSelect('North')}>North</SelectItem>
                     <SelectItem value='East' onClick={() => onSelect('East')}>East</SelectItem>
                     <SelectItem value='South' onClick={() => onSelect('South')}>South</SelectItem>
