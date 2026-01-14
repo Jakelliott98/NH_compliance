@@ -35,10 +35,22 @@ interface SitesDashboardProps {
     sites: SiteDatabaseType[],
 }
 
+export interface IsFiltered {
+    isFiltered: boolean,
+    search: {
+        isSearch: boolean,
+        searchTag: string,
+    },
+    region: {
+        isRegion: boolean,
+        regionTag: string,
+    }
+}
+
 function SitesDashboard ({sites}: SitesDashboardProps) {
 
     const [filteredSites, setFilteredSites] = useState(sites)
-    const [isFiltered, setIsFiltered] = useState({
+    const [isFiltered, setIsFiltered] = useState<IsFiltered>({
         isFiltered: false,
         search: {
             isSearch: false, 
@@ -46,7 +58,7 @@ function SitesDashboard ({sites}: SitesDashboardProps) {
         },
         region: {
             isRegion: false,
-            regionTag: ''
+            regionTag: 'All Regions'
         }
     })
 
@@ -63,61 +75,11 @@ function SitesDashboard ({sites}: SitesDashboardProps) {
 
     }, [sites, isFiltered])
     
-    const searchSite = (value: string) => {
-        return setIsFiltered((prev) => {
-            return {
-                ...prev, 
-                isFiltered: true,
-                search: {
-                    isSearch: true,
-                    searchTag: value,
-                }
-            }
-
-        })
-    }
-    const setRegion = (region: string) => {
-        return setIsFiltered((prev) => {
-            return {
-                ...prev, 
-                isFiltered: true,
-                region: {
-                    isRegion: true, 
-                    regionTag: region}
-            }
-        })
-    }
-    const resetRegion = () => {
-        return setIsFiltered((prev) => {
-            const isFiltersActive = prev.search.isSearch;
-            return {
-                ...prev,
-                isFiltered: isFiltersActive,
-                region: {
-                    isRegion: false,
-                    regionTag: '',
-                }
-            }
-        })
-    }
-    const resetFilters = () => {
-        setIsFiltered({
-            isFiltered: false,
-            search: {
-                isSearch: false, 
-                searchTag: '',
-            },
-            region: {
-                isRegion: false,
-                regionTag: ''
-            }
-        })
-        setFilteredSites(sites)
-    }
+    const resetSites = () => setFilteredSites(sites)
 
     return (
         <div>
-            <FilterSection setSearchSite={searchSite} setActiveRegion={setRegion} resetFilters={resetFilters} resetRegion={resetRegion}/>
+            <FilterSection  setIsFiltered={setIsFiltered} resetSites={resetSites} isFiltered={isFiltered}/>
             <SitesSection sites={filteredSites}/>
         </div>
     )

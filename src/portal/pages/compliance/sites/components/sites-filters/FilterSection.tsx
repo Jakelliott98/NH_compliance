@@ -1,25 +1,93 @@
 import SearchSite from "../SearchSite";
 import RegionFilter from "../RegionFilter";
 import AddSiteContainer from "../AddSite";
-import { useState } from "react";
+import type { IsFiltered } from "../../SitesHomepage";
 
 interface FilterSection {
-    setSearchSite: ( value: string) => void,
-    setActiveRegion: ( region: string) => void,
-    resetFilters: () => void,
-    resetRegion: () => void,
+    setIsFiltered: React.Dispatch<React.SetStateAction<IsFiltered>>,
+    resetSites: () => void,
+    isFiltered: IsFiltered,
 }
 
-function FilterSection ({ setSearchSite, setActiveRegion, resetFilters, resetRegion }: FilterSection) {
+function FilterSection ({ setIsFiltered, resetSites, isFiltered }: FilterSection) {
+
+    const searchSite = (value: string) => {
+        return setIsFiltered((prev) => {
+            return {
+                ...prev, 
+                isFiltered: true,
+                search: {
+                    isSearch: true,
+                    searchTag: value,
+                }
+            }
+
+        })
+    }
+    const setRegion = (region: string) => {
+        if (region === 'All Regions') {
+            return setIsFiltered((prev) => {
+                const isFiltersActive = prev.search.isSearch;
+                console.log(isFiltersActive)
+                return {
+                    ...prev,
+                    isFiltered: isFiltersActive,
+                    region: {
+                        isRegion: false,
+                        regionTag: 'All Regions'
+                    }
+                }
+            })
+        }
+        return setIsFiltered((prev) => {
+            return {
+                ...prev, 
+                isFiltered: true,
+                region: {
+                    isRegion: true, 
+                    regionTag: region}
+            }
+        })
+    }
+    const resetRegion = () => {
+        return setIsFiltered((prev) => {
+            const isFiltersActive = prev.search.isSearch;
+            return {
+                ...prev,
+                isFiltered: isFiltersActive,
+                region: {
+                    isRegion: false,
+                    regionTag: '',
+                }
+            }
+        })
+    }
+
+    console.log(isFiltered)
+
+    const resetFilters = () => {
+        setIsFiltered({
+            isFiltered: false,
+            search: {
+                isSearch: false, 
+                searchTag: '',
+            },
+            region: {
+                isRegion: false,
+                regionTag: 'All Regions'
+            }
+        })
+        resetSites()
+    }
 
     return (
         <div className='flex justify-between p-2 border-b'>
             <div className='flex-1 flex gap-5'>
-                <SearchSite onChange={setSearchSite}/>
+                <SearchSite onChange={searchSite}/>
                 <AddSiteContainer />
             </div>
             <div className='flex gap-2'>
-                <RegionFilter onSelect={setActiveRegion} resetRegion={resetRegion}/>
+                <RegionFilter onSelect={setRegion} resetRegion={resetRegion} isFiltered={isFiltered}/>
                 <button 
                     className='py-1 px-2 flex items-center gap-2 border border-gray-300 rounded text-gray-500 text-sm cursor-pointer hover:text-gray-700 hover:border-gray-700'
                     onClick={() => resetFilters()}
