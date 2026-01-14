@@ -30,7 +30,7 @@ function AddSiteContainer () {
 }
 
 interface AddSiteProps {
-    onsubmit: () => void,
+    onSubmit: () => void,
 }
 
 function AddSite ({ onSubmit }: AddSiteProps) {

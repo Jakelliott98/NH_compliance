@@ -27,6 +27,14 @@ export default function ExpiredCalibrations () {
 		.filter((control) => {
 			return moment(control.expiry_date).isBefore(moment())
 		})
+	
+	if (expiredControls === undefined || expiredControls.length === 0) {
+		return (
+			<div className="flex justify-center items-center">
+				<p>All Controls are up to date!</p>
+			</div>
+		)
+	}
 
 	return (
 		<div className="bg-gray-50 p-4 rounded">

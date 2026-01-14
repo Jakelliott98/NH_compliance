@@ -1,7 +1,7 @@
 import type { CalibrationDatabaseType } from "@/types/calibration";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFlaskVial } from "@fortawesome/free-solid-svg-icons";
+import { faFlaskVial, faHandshakeSlash } from "@fortawesome/free-solid-svg-icons";
 
 interface ReturnControlSectionProps {
     controlType: string,
@@ -12,7 +12,13 @@ interface ReturnControlSectionProps {
 export function ReturnControlSection ({controlType, controlsData, title}: ReturnControlSectionProps) {
 
     const control = controlsData.find((item: CalibrationDatabaseType) => { return item.control_type === controlType})
-    if (!control) return (<p>No Control Fluid Found</p>)
+    if (!control) return (
+        <div className="bg-white flex flex-col justify-center items-center">
+            <FontAwesomeIcon icon={faHandshakeSlash} className="pb-5 text-gray-300" />
+            <p className="text-sm text-gray-500">No controls added yet</p>
+            <p className="text-xs text-gray-500">Add controls to start submitting results.</p>
+        </div>
+    )
     const isExpired = moment(control.expiry_date).isBefore(moment())
 
     return (

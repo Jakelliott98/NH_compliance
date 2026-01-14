@@ -30,10 +30,10 @@ export default function SiteSummary () {
 
 	return (
 		<div className="flex justify-between [&>*]:flex-1 gap-12">
-			<DashboardCards title='Calibrated Sites' dataPoint={calibratedSites.length} icon={faSquareCheck}/>
-			<DashboardCards title='Flagging' dataPoint={1} icon={faTriangleExclamation}/>
-			<DashboardCards title='Flagging Calibrations' dataPoint={sitesFlaggingCalibrations.length} icon={faBug}/>
-			<DashboardCards title='Flagging Cleans' dataPoint={1} icon={faHandSparkles}/>
+			<DashboardCards title='Calibrated Sites' dataPoint={calibratedSites.length} icon={faSquareCheck} colour={'green'}/>
+			<DashboardCards title='Flagging' dataPoint={1} icon={faTriangleExclamation} colour={'red'}/>
+			<DashboardCards title='Flagging Calibrations' dataPoint={sitesFlaggingCalibrations.length} icon={faBug} colour={'red'}/>
+			<DashboardCards title='Flagging Cleans' dataPoint={1} icon={faHandSparkles} colour={'red'}/>
 		</div>
 	)
 }
@@ -42,14 +42,15 @@ interface DashboardCardsProps {
 	title: string,
 	dataPoint: number,
 	icon: IconDefinition,
+	colour: string,
 }
 
-function DashboardCards ({dataPoint, title, icon}: DashboardCardsProps) {
+function DashboardCards ({dataPoint, title, icon, colour}: DashboardCardsProps) {
 
 	return (
 		<div className="bg-white p-4 rounded flex flex-col">
 			<div>
-				<FontAwesomeIcon icon={icon} className="text-green-800"/>
+				<FontAwesomeIcon icon={icon} className={`text-${colour}-700`}/>
 			</div>
 			<p className="text-gray-700 font-light">{title}</p>
 			<p className="text-lg">{dataPoint}</p>

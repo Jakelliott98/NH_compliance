@@ -7,7 +7,6 @@ import CalibrationForm from "../../calibration-add/CalibrationFluidForm"
 
 interface ControlsSectionProps {
     controls: CalibrationDatabaseType[],
-    onSubmit: (value: string) => void,
 }
 
 const option = {

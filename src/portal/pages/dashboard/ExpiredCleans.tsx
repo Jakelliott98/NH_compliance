@@ -29,6 +29,14 @@ export default function ExpiredCleans () {
 		if (isCleaned) return affinion
 	})
 
+	if (expiredAffinions === undefined || expiredAffinions.length === 0) {
+		return (
+			<div className="flex justify-center items-center">
+				<p>All Affinions Cleans are up to date!</p>
+			</div>
+		)
+	}
+
 	return (
 		<div className="bg-gray-50 p-4 rounded">
 			<p className="">CLEANS</p>

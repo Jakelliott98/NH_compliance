@@ -29,6 +29,14 @@ export default function ExpiredAffinions () {
 		if (isExpired) return affinion
 	})
 
+	if (expiredAffinions === undefined || expiredAffinions.length === 0) {
+		return (
+			<div className="flex justify-center items-center">
+				<p>All Affinions Calibrations are up to date!</p>
+			</div>
+		)
+	}
+
 	return (
 		<div className="bg-gray-50 p-4 rounded">
 			<p className="">CALIBRATIONS</p>

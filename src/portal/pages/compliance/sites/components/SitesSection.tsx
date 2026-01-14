@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router"
 import SiteCard from "./SiteCard"
 import type { SiteDatabaseType } from "@/types/site"
+import NoSites from "./sites-filters/NoSites"
 
 interface SitesSectionProps {
     sites: SiteDatabaseType[],
@@ -10,6 +11,10 @@ export default function SitesSection({ sites }: SitesSectionProps) {
 
     const location = useLocation().pathname
     const isComplianceHomepage = location === '/Portal/Compliance'
+
+    if (sites.length === 0) {
+        return (<NoSites />)
+    }
 
     return (
         <div className='p-2'>

@@ -4,7 +4,7 @@ interface AddSiteSectionProps {
     onSubmit: () => void,
 }
 
-function AddSiteSection ({onSubmit}: AddSiteSectionProps) {
+function AddSiteSection ({ onSubmit }: AddSiteSectionProps) {
 
     const { register } = useFormContext();
 
