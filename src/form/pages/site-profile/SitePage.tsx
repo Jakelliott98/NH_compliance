@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query"
 import fetchSiteBySlug from "../../../utils/fetchSiteBySlug"
 import fetchAffinions from "../../../utils/fetchAffinions"
 import fetchCalibrations from "../../../utils/fetchControls"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
 
 export function SitePage () {
@@ -45,9 +47,30 @@ export function SitePage () {
             <div className="flex-1 grid grid-rows-3 gap-y-2">
                     <AffinionSection affinions={affinions} />
                     <ControlsSection controls={controls} />
-                    <AddResults />
+                    {
+                        controls.length === 0 || affinions.length === 0 ? <DisabledAddResults /> : <AddResults />
+                    }
+                    
             </div>
         </div>
     )
 
+}
+
+function DisabledAddResults () {
+
+    return (
+        <div 
+            className="
+                    h-full bg-gray-200 rounded p-5 cursor-pointer 
+                    flex flex-col justify-center items-center gap-1 
+                    shadow-md 
+            " 
+    >        
+            <FontAwesomeIcon className="text-3xl text-gray-400" icon={faPlus} />
+            <h1 className="text-xl font-bold text-gray-400">Add Results</h1>
+            <p className="text-sm text-red-500"> Add Affinions & Controls to continue adding results </p>
+
+    </div>
+    )
 }

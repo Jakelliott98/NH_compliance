@@ -14,7 +14,7 @@ export default function AddResults () {
             <Dialog>
                 <DialogTrigger asChild>
                     <div>
-                        <FormButtons option={option} />
+                        <FormButtons option={option}/>
                     </div>
                 </DialogTrigger>
                 <DialogContent>
