@@ -47,7 +47,7 @@ export default function AffinionSection () {
                         {
                             sortedAffinions.map((affinion) => {
                                 return (
-                                    <tr className="text-sm text-gray-600">
+                                    <tr className="text-sm text-gray-600 bg-white">
                                         <td className="text-left pl-2 py-1">Affinion {affinion.affinion_number}</td>
                                         <td className="text-center">NH{affinion.nh_number}</td>
                                         <td className="text-center">{affinion.last_calibrated ? moment(affinion.last_calibrated).format("Do MMM") : 'No calibrations'}</td>
