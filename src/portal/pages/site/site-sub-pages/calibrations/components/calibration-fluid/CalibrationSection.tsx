@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router"
 import fetchSiteBySlug from "@/utils/fetchSiteBySlug"
 import fetchCalibrations from "@/utils/fetchControls"
-import moment from "moment"
 import type { CalibrationDatabaseType } from "@/types/calibration"
+import LipidsControlDisplay from "./LipidsControlDisplay"
+import HBA1cControlDisplay from "./HBA1cControlDisplay"
 
 export default function CalibrationSection () {
 
@@ -50,90 +51,11 @@ function CalibrationHolder ({ controls }: CalibrationHolderProps) {
     const lipids = controls.filter(control => control.control_type === 'lipids')
 
     return (
-        <div className="w-full flex [&>*]:flex-1 gap-2">
-            <Hba1cDisplay hba1c={hba1c} />
-            <LipidsDisplay lipids={lipids} />
+        <div className="w-full flex flex-col [&>*]:flex-1 gap-2">
+            <HBA1cControlDisplay hba1c={hba1c} />
+            <LipidsControlDisplay lipids={lipids} />
         </div>
     )
 
-
-}
-
-interface LipidsDisplayProps {
-    lipids: CalibrationDatabaseType[] | undefined,
-}
-
-function LipidsDisplay ({ lipids }: LipidsDisplayProps) {
-
-    if (!lipids) return (<p>No Lipids Control added yet</p>)
-
-    const total = lipids.find(control => control.test_type === 'total')
-
-    if (!total) return (<p>No Lipids Control added yet</p>)
-
-    return (
-        <div className='p-1 bg-red-100 rounded-xl flex flex-col h-fit grow-1'>
-            <div className='bg-white rounded-xl p-3'>
-                <div className='border-b-2 border-solid border-gray-300 py-2'>
-                    <p className='font-medium'>Lipids</p>
-                    <p className='text-gray-400 text-sm'>Lot Number: {total.lot_number}</p>
-                </div>
-                <div className='py-2'>
-                    {
-                        lipids.map((control) => {
-                            return (
-                                <div key={control.id}>
-                                    <p className="text-sm">{control.display_name}</p>
-                                    <CalibrationRangesLayout control={control} />
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </div>
-            <p className='text-red-900 self-center text-sm p-1'>Expires {moment(total.expiry_date).format('Do MMMM')}</p>
-        </div>
-    )
-}
-
-interface CalibrationRangesLayoutProps {
-    control: CalibrationDatabaseType,
-}
-
-function CalibrationRangesLayout ({ control }: CalibrationRangesLayoutProps) {
-    return (
-        <div className='py-2 text-sm'>
-            <div className='flex justify-between'>
-                <p className="font-medium">C1</p>
-                <p>{control.calibration_ranges.c1.low} - {control.calibration_ranges.c1.high}</p>
-            </div>
-            <div className='flex justify-between'>
-                <p className="font-medium">C2</p>
-                <p>{control.calibration_ranges.c2.low} - {control.calibration_ranges.c2.high}</p>
-            </div>
-        </div>
-    )
-}
-
-interface Hba1cDisplayProps {
-    hba1c: CalibrationDatabaseType | undefined,
-}
-
-function Hba1cDisplay ({ hba1c }: Hba1cDisplayProps) {
-
-    if (!hba1c) return (<p>No HBA1c Control Added yet</p>)
-
-    return (
-    <div className='p-1 bg-red-100 rounded-xl flex flex-col h-fit grow-1'>
-            <div className='bg-white rounded-xl p-3'>
-                <div className='border-b-2 border-solid border-gray-300 py-2'>
-                    <p className='font-medium'>{hba1c.display_name}</p>
-                    <p className='text-gray-400 text-sm'>Lot Number: {hba1c.lot_number}</p>
-                </div>
-                <CalibrationRangesLayout control={hba1c}/>
-            </div>
-            <p className='text-red-900 self-center text-sm p-1'>Expires {moment(hba1c.expiry_date).format('Do MMMM')}</p>
-        </div>
-    )
 
 }

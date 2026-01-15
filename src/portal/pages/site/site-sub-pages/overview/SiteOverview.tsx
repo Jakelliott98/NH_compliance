@@ -6,18 +6,18 @@ export default function SiteOverview () {
 
 
     return (
-        <div>
-            <div className='flex gap-20 p-2'>
+        <div className="flex">
+            <div className='flex-2 flex flex-col gap-20 p-2'>
                 <div className="flex-1">
-                    <p className="text-center">AFFINIONS</p>
+                    <p className="text-center pb-2">AFFINIONS</p>
                     <AffinionSection />
                 </div>
-                <div className=" flex-1">
+                <div className="flex-1">
                     <p className="text-center">CONTROLS</p>
                     <CalibrationSection />
                 </div>
             </div>
-            <div>
+            <div className="flex-3">
                 <p className="text-center">RESULTS</p>
                 <SiteResults />
             </div>
