@@ -19,7 +19,11 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
 
-export default function CalibrationForm () {
+interface CalibrationFormProps {
+    closeDialog: () => void,
+}
+
+export default function CalibrationForm ({ closeDialog }: CalibrationFormProps) {
 
     const [selectedControl, setSelectedControl] = useState<string>('');
     const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
@@ -27,7 +31,7 @@ export default function CalibrationForm () {
     return (
         <div className="bg-gray-100 w-full p-5 rounded flex flex-col items-center">
             {
-                !isFormOpen ? <ControlsSelect onSelect={setSelectedControl} setIsFormOpen={setIsFormOpen}/> : <CalibrationFormInput selectedControl={selectedControl} />
+                !isFormOpen ? <ControlsSelect onSelect={setSelectedControl} setIsFormOpen={setIsFormOpen}/> : <CalibrationFormInput selectedControl={selectedControl} closeDialog={closeDialog} />
             }
         </div>
     )
@@ -35,6 +39,7 @@ export default function CalibrationForm () {
 
 interface CalibrationFormInputProps {
     selectedControl: string,
+    closeDialog: () => void,
 }
 
 interface NewControlParameters {
@@ -43,7 +48,7 @@ interface NewControlParameters {
     ranges: RangesType,
 }
 
-export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputProps) {
+export function CalibrationFormInput ({ selectedControl, closeDialog }: CalibrationFormInputProps) {
 
     const queryClient = useQueryClient()
     const methods = useForm();
@@ -98,18 +103,22 @@ export function CalibrationFormInput ({ selectedControl }: CalibrationFormInputP
         if (selectedControl === 'hba1c') {
             if (hba1cControlPresent) {
                 updateNewControl.mutate({control: data, testType: 'hba1c', ranges: data.hba1c})
+                closeDialog()
             } else {
                 addNewControl.mutate({control: data, testType: 'hba1c', ranges: data.hba1c})
+                closeDialog()
             }
         } else if (selectedControl === 'lipids') {
             if (lipidsControlPresent) {
                 updateNewControl.mutate({control: data, testType:'hdl', ranges: data.hdl})
                 updateNewControl.mutate({control: data, testType: 'triglycerides', ranges: data.triglycerides})
                 updateNewControl.mutate({control: data, testType: 'total', ranges: data.total})
+                closeDialog()
             } else {
                 addNewControl.mutate({control: data, testType:'hdl', ranges: data.hdl})
                 addNewControl.mutate({control: data, testType: 'triglycerides', ranges: data.triglycerides})
                 addNewControl.mutate({control: data, testType: 'total', ranges: data.total})
+                closeDialog()
             }
         }
     })

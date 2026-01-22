@@ -8,24 +8,24 @@ export default function ControlsSelect ({ onSelect, setIsFormOpen }: ControlsSel
 
     return (
         <div>
-            <p>Which calibration are you updating?</p>
-            <div className="flex gap-5">
-                <div className="p-4 bg-red-200 rounded flex-1 cursor-pointer" 
+            <p>Select a calibration to update</p>
+            <div className="flex gap-5 pt-5">
+                <div className="py-4 px-6 shadow-sm bg-red-100 rounded-xl flex-1 cursor-pointer hover:shadow-lg hover:scale-105" 
                     onClick={() => {
                         onSelect('hba1c')
                         setIsFormOpen(true)
                     }}
                 >
-                    <p className="text-center font-bold text-red-900">HBA1C</p>
+                    <p className="text-center font-bold text-red-900/75">HBA1c</p>
                 </div>
                 <div 
-                    className="p-4 bg-yellow-200 rounded flex-1 cursor-pointer"
+                    className="py-4 px-6 bg-yellow-100 shadow-sm rounded-xl flex-1 cursor-pointer hover:shadow-lg hover:scale-105"
                     onClick={() => {
                         onSelect('lipids')
                         setIsFormOpen(true)
                     }}
                 >
-                    <p className="text-center font-bold text-yellow-900">Lipids</p>
+                    <p className="text-center font-bold text-yellow-900/75">Lipids</p>
                 </div>
             </div>
         </div>

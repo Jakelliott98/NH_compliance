@@ -35,7 +35,7 @@ export default function ControlsSection ({ controls }: ControlsSectionProps) {
                     </DialogTrigger>
                     <DialogContent>
                         <DialogTitle>Add a control</DialogTitle>
-                        <CalibrationForm />
+                        <CalibrationForm closeDialog={() => setOpen(false)}/>
                     </DialogContent>
                 </Dialog>
             </div>

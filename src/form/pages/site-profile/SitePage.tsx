@@ -43,7 +43,7 @@ export function SitePage () {
 
     return (
         <div className="flex flex-col gap-5 h-full">
-            <p className="text-center font-bold text-3xl">{activeSite.site_name}</p>
+            <p className="text-center font-semibold text-2xl tracking-wide leading-relaxed">{activeSite.site_name}</p>
             <div className="flex-1 grid grid-rows-3 gap-y-2">
                     <AffinionSection affinions={affinions} />
                     <ControlsSection controls={controls} />
@@ -60,17 +60,10 @@ export function SitePage () {
 function DisabledAddResults () {
 
     return (
-        <div 
-            className="
-                    h-full bg-gray-200 rounded p-5 cursor-pointer 
-                    flex flex-col justify-center items-center gap-1 
-                    shadow-md 
-            " 
-    >        
+        <div className="h-full bg-gray-200 rounded p-5 cursor-pointer flex flex-col justify-center items-center gap-1 shadow-md" >        
             <FontAwesomeIcon className="text-3xl text-gray-400" icon={faPlus} />
             <h1 className="text-xl font-bold text-gray-400">Add Results</h1>
             <p className="text-sm text-red-500"> Add Affinions & Controls to continue adding results </p>
-
-    </div>
+        </div>
     )
 }

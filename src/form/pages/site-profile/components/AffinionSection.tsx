@@ -28,7 +28,7 @@ export default function AffinionSection ({ affinions }: AffinionSectionProps) {
                 <AffinionsDisplay affinions={sortedAffinions} />
             </div>
             <div className="col-start-4 h-full w-full">
-                <Dialog>
+                <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <div className="h-full">
                             <FormButtons option={affinionButton} />
@@ -37,7 +37,7 @@ export default function AffinionSection ({ affinions }: AffinionSectionProps) {
                     <DialogContent>
                         <DialogTitle>Add an Affinion</DialogTitle>
                         <div>
-                            <AffinionFormSection closePopover={() => {setOpen(false)}}/>
+                            <AffinionFormSection closeDialog={() => {setOpen(false)}}/>
                         </div>
                     </DialogContent>
                 </Dialog>
@@ -66,16 +66,28 @@ function AffinionsDisplay ({ affinions }: AffinionsDisplayProps) {
         affinions.map((affinion) => {
             return (
                 <div className="flex-1 bg-gray-50 border border-gray-200 p-3 rounded flex-grow flex flex-col justify-around items-center shadow-sm" key={affinion.affinion_id}>
-                    <FontAwesomeIcon className="text-green-700 text-3xl" icon={faCalendarCheck} />
-                    <p className="font-semibold text-center text-lg">Affinion {affinion.affinion_number}</p>
-                    <p className="text-sm">
-                        Calibrated:
-                        <span className="italics"> {affinion.last_clean === null ? '' : moment(affinion.last_calibrated).format('Do MMM')}</span>
-                    </p>
-                    <p className="text-sm">
-                        Cleaned:
-                        <span className="italics"> {affinion.last_clean === null ? '' : moment(affinion.last_clean).format('Do MMM')}</span>
-                    </p>
+                    <FontAwesomeIcon className="text-green-700/90 text-3xl" icon={faCalendarCheck} />
+                    <p className="font-semibold text-center text-lg text-slate-900">Affinion {affinion.affinion_number}</p>
+                    {
+                        affinion.last_clean ? (
+                            <p className="text-sm">
+                                Calibrated:
+                                <span className="italics text-slate-700"> {affinion.last_calibrated === null ? '' : moment(affinion.last_calibrated).format('Do MMM')}</span>
+                            </p>
+                        ) : (
+                            <p className="text-sm text-red-700/80 italic">No Calibrations Yet</p>
+                        )
+                    }
+                    {
+                        affinion.last_clean ? (
+                            <p className="text-sm">
+                                Cleaned:
+                                <span className="italics text-slate-700"> {affinion.last_clean === null ? '' : moment(affinion.last_clean).format('Do MMM')}</span>
+                            </p>
+                        ) : (
+                            <p className="text-sm text-red-700/80 italic">No Cleans Yet</p>
+                        )
+                    }
                 </div>
             )
                     })

@@ -23,10 +23,10 @@ export function ReturnControlSection ({controlType, controlsData, title}: Return
 
     return (
         <div className="rounded p-2 flex flex-col justify-center items-center shadow-sm bg-gray-50 border border-gray-200">
-            <FontAwesomeIcon className="text-3xl pb-2 text-red-900" icon={faFlaskVial} />
-            <p className="font-semibold text-center">{title}</p>
-            <p className="text-center">LOT{control.lot_number}</p>
-            <p className={isExpired ? 'text-center text-red-500' : 'text-center'}>{isExpired ? 'Expired:' : 'Expires:'} {moment(control.expiry_date).format('Do MMMM')} </p>
+            <FontAwesomeIcon className="text-3xl pb-2 text-red-800/80" icon={faFlaskVial} />
+            <p className="font-semibold text-center pb-1 text-slate-900">{title}</p>
+            <p className="text-center text-sm pb-1 text-slate-700">LOT{control.lot_number}</p>
+            <p className={isExpired ? 'text-center text-red-700 text-sm' : 'text-center text-sm text-slate-700'}>{isExpired ? 'Expired:' : 'Expires:'} {moment(control.expiry_date).format('Do MMMM')} </p>
         </div>
     )
 
