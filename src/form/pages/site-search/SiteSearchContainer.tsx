@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import type { SiteDatabaseType } from "@/types/site"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"
+import SubmitButton from "@/components/SubmitButton"
 
 export default function SiteSearchContainer () {
 
@@ -32,7 +33,7 @@ export default function SiteSearchContainer () {
             </div>
             {
                 activeSite !== '' && (
-                    <button onClick={() => {onSubmit()}} className=" py-1 px-3 bg-gray-200 rounded-lg cursor-pointer w-full">
+                    <button onClick={() => {onSubmit()}} className=" py-2 px-3 bg-gray-200 rounded-lg cursor-pointer w-full">
                         <span className="uppercase font-semibold pr-2">Go</span>
                         <FontAwesomeIcon icon={faArrowRightLong} className="font-bold"/>
                     </button>

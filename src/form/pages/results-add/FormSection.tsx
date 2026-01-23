@@ -12,6 +12,7 @@ import updateLastCleaned from "@/form/utils/updateLastCleaned"
 import updateLastCalibration from "@/form/utils/updateLastCalibration"
 import addCalibrationResults from "@/form/utils/addResults"
 import updateSiteCalibration from "@/form/utils/updateSiteCalibration"
+import SubmitButton from "@/components/SubmitButton"
 
 export default function FormSection () {
 
@@ -135,7 +136,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="rounded p-1 bg-green-300 w-full">Submit Results</button>
+                <SubmitButton text='Add Calibration' onSubmit={onSubmit} />
             </form>
         </FormProvider>
     )

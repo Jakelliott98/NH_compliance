@@ -48,12 +48,12 @@ interface DashboardCardsProps {
 function DashboardCards ({dataPoint, title, icon, colour}: DashboardCardsProps) {
 
 	return (
-		<div className="bg-white p-4 rounded flex flex-col">
-			<div>
+		<div className="bg-white p-5 rounded flex flex-col">
+			<div className="flex items-center gap-1">
 				<FontAwesomeIcon icon={icon} className={`text-${colour}-700`}/>
+				<p className="text-gray-700 font-light">{title}</p>
 			</div>
-			<p className="text-gray-700 font-light">{title}</p>
-			<p className="text-lg">{dataPoint}</p>
+			<p className="text-xl">{dataPoint}</p>
 			<div className="flex gap-1 items-center text-gray-500 text-xs cursor-pointer hover:text-black">
 				<p>View More →</p>
 			</div>

@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router'
 import fetchSiteBySlug from '@/utils/fetchSiteBySlug'
 import type { AffinionData } from '@/form/utils/addAffinion'
+import SubmitButton from '@/components/SubmitButton'
 
 interface AffinionFormSectionProps {
     closeDialog: () => void,
@@ -74,7 +75,7 @@ export default function AffinionFormSection ({ closeDialog }: AffinionFormSectio
                         )}/>
                     </div>
                 </div>
-                <button className="p-2 w-full bg-green-300 font-bold rounded cursor-pointer" type="submit">Add Affinion</button>
+                <SubmitButton text="Add Affinion" onSubmit={onSubmit} />
             </form>
         </div>
     )

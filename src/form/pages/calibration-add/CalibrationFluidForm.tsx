@@ -15,6 +15,7 @@ import InputTable from "./InputTable";
 import type { CalibrationDatabaseType } from "@/types/calibration";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import SubmitButton from "@/components/SubmitButton";
 
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
@@ -137,7 +138,7 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
                     </div>
                 </div>
                 <InputTable test={ selectedControl === 'hba1c' ? hba1cTable : lipidsTable}/>
-                <button className="rounded p-2 bg-green-300 w-full" type="submit">Submit</button>
+                <SubmitButton text='Add Control' onSubmit={onSubmit}/>
             </form>
         </FormProvider>
     )
