@@ -3,11 +3,11 @@ import type { IsFiltered } from "../SitesHomepage";
 
 interface SortBtnProps {
     onSelect: (selectedRegion: string) => void,
-    resetRegion: () => void,
-    isFiltered: IsFiltered
+    isFiltered: IsFiltered,
+    dropdownOptions: Array<string>,
 }
 
-function RegionFilter ({ onSelect, resetRegion, isFiltered }: SortBtnProps) {
+function FilterButton ({ onSelect, isFiltered, dropdownOptions }: SortBtnProps) {
     
     return (
             <Select value={isFiltered.region.regionTag} onValueChange={value => onSelect(value)}>
@@ -15,14 +15,14 @@ function RegionFilter ({ onSelect, resetRegion, isFiltered }: SortBtnProps) {
                     <SelectValue placeholder='All Regions'/>
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value='All Regions'>All Regions</SelectItem>
-                    <SelectItem value='North'>North</SelectItem>
-                    <SelectItem value='East'>East</SelectItem>
-                    <SelectItem value='South'>South</SelectItem>
-                    <SelectItem value='West'>West</SelectItem>
+                    {
+                        dropdownOptions.map(item => (
+                            <SelectItem value={item}>{item}</SelectItem>
+                        ))
+                    }
                 </SelectContent>
             </Select>
     )
 }
 
-export default RegionFilter;
+export default FilterButton;

@@ -1,7 +1,9 @@
 import SearchSite from "../SearchSite";
-import RegionFilter from "../RegionFilter";
+import FilterButton from "../FilterButton";
 import AddSiteContainer from "../AddSite";
 import type { IsFiltered } from "../../SitesHomepage";
+
+const regionFilterOptions = ['All Regions', 'North', 'East', 'South', 'West']
 
 interface FilterSection {
     setIsFiltered: React.Dispatch<React.SetStateAction<IsFiltered>>,
@@ -28,7 +30,6 @@ function FilterSection ({ setIsFiltered, resetSites, isFiltered }: FilterSection
         if (region === 'All Regions') {
             return setIsFiltered((prev) => {
                 const isFiltersActive = prev.search.isSearch;
-                console.log(isFiltersActive)
                 return {
                     ...prev,
                     isFiltered: isFiltersActive,
@@ -49,21 +50,6 @@ function FilterSection ({ setIsFiltered, resetSites, isFiltered }: FilterSection
             }
         })
     }
-    const resetRegion = () => {
-        return setIsFiltered((prev) => {
-            const isFiltersActive = prev.search.isSearch;
-            return {
-                ...prev,
-                isFiltered: isFiltersActive,
-                region: {
-                    isRegion: false,
-                    regionTag: '',
-                }
-            }
-        })
-    }
-
-    console.log(isFiltered)
 
     const resetFilters = () => {
         setIsFiltered({
@@ -87,7 +73,7 @@ function FilterSection ({ setIsFiltered, resetSites, isFiltered }: FilterSection
                 <AddSiteContainer />
             </div>
             <div className='flex gap-2'>
-                <RegionFilter onSelect={setRegion} resetRegion={resetRegion} isFiltered={isFiltered}/>
+                <FilterButton onSelect={setRegion} isFiltered={isFiltered} dropdownOptions={regionFilterOptions}/>
                 <button 
                     className='py-1 px-2 flex items-center gap-2 border border-gray-300 rounded text-gray-500 text-sm cursor-pointer hover:text-gray-700 hover:border-gray-700'
                     onClick={() => resetFilters()}

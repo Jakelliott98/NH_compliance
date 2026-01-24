@@ -44,7 +44,7 @@ export interface IsFiltered {
     region: {
         isRegion: boolean,
         regionTag: string,
-    }
+    },
 }
 
 function SitesDashboard ({sites}: SitesDashboardProps) {

@@ -18,7 +18,7 @@ export default function SitesSection({ sites }: SitesSectionProps) {
 
     return (
         <div className='p-2'>
-                <div className='grid grid-cols-5 grid-rows-[1fr] gap-4'>
+                <div className='grid grid-cols-5 auto-rows-fr gap-4'>
                     {
                         sites.map((site) => {
                             return (
