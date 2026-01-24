@@ -6,7 +6,6 @@ import SettingsHomepage from './portal/pages/settings/SettingsHomepage.tsx'
 import DashboardPage from './portal/pages/dashboard/DashboardPage.tsx'
 import CompliancePage from './portal/pages/compliance/CompliancePage.tsx'
 import SitesDashboardContainer from './portal/pages/compliance/sites/SitesHomepage.tsx'
-import ReportSection from './portal/pages/compliance/reports/Reports.tsx'
 import SitePage from './portal/pages/site/SitePage.tsx'
 import Portal from './portal/Portal.tsx'
 import Form from './form/Form.tsx'
@@ -33,10 +32,8 @@ ReactDOM.createRoot(root).render(
           <Route path="Dashboard" element={<DashboardPage />}/>
           <Route path="Compliance" element={<CompliancePage />}>
             <Route index element={<SitesDashboardContainer/>}/>
-            <Route path="Sites/:Site" element={<SitePage/>}/>
             <Route path="Sites" element={<SitesDashboardContainer/>}/>
             <Route path="Sites/:Site" element={<SitePage />}/>
-            <Route path="Reports" element={<ReportSection />}/>
           </Route>
           <Route path="Settings" element={<SettingsHomepage />}>
             <Route index element={<OrganiseSites/>}/>

@@ -1,5 +1,5 @@
-import AffinionSection from "../calibrations/components/affinion/AffinionSection"
-import CalibrationSection from "../calibrations/components/calibration-fluid/CalibrationSection"
+import AffinionSection from "../calibrations/affinion/AffinionSection"
+import CalibrationSection from "../calibrations/calibration-fluid/CalibrationSection"
 import SiteResults from "../results/SiteResults"
 
 export default function SiteOverview () {
