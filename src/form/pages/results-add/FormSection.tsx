@@ -101,7 +101,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
     return (
         <FormProvider {...methods}>
-            <form className="bg-white p-4 rounded outline" onSubmit={onSubmit}>
+            <form className="bg-white p-4 rounded outline m-2" onSubmit={onSubmit}>
                 <div className="m-0.5">
                     <div className="flex flex-col gap-1">
                         <p className="text-center">Affinion {affinion.affinion_number} | {affinion.nh_number}</p>
@@ -118,15 +118,15 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                                 )
                             })
                         }
-                        <div className="flex gap-2">
+                        <div>
                             <label className="text-sm">Clinician Name:</label>
-                            <input className="flex-1 " {...register('clinician', {required: 'Provide your initials'})}/>
+                            <input className="flex-1 px-2 outline-none focus:outline-none" {...register('clinician', {required: 'Provide your initials'})}/>
                         </div>
                         <div>
                             <label className="text-sm">Number of attempts: </label>
-                            <input type="number" {...register('attempts', {required: 'Complete number of attempts.'})}/>
+                            <input className="px-2 outline-none focus:outline-none" type="number" {...register('attempts', {required: 'Complete number of attempts.'})}/>
                         </div>
-                        <div className=" bg-green-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
+                        <div className=" bg-green-100 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                             <Checkbox 
                                 onCheckedChange={(value: boolean) => setIsCleaned(value)}
                                 checked={isCleaned}
@@ -136,7 +136,12 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                         </div>
                     </div>
                 </div>
-                <SubmitButton text='Add Calibration' onSubmit={onSubmit} />
+                <button 
+                    type="submit"
+                    className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded bg-gray-100 text-gray-900"
+                >
+                    Add Calibration
+                </button>
             </form>
         </FormProvider>
     )

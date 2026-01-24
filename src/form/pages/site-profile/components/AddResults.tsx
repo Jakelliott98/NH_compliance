@@ -17,7 +17,7 @@ export default function AddResults () {
                         <FormButtons option={option}/>
                     </div>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="">
                     <DialogTitle>Add Calibration Results</DialogTitle>
                         <FormSection />
                 </DialogContent>
