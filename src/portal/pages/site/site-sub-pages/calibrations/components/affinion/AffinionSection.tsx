@@ -32,16 +32,26 @@ export default function AffinionSection () {
 
     const sortedAffinions = affinions.sort((a, b) => a.affinion_number - b.affinion_number)
 
+    if (affinions.length === 0) {
+        return (
+            <div>
+                <p className="text-sm text-center text-red-900 italic">Site currently has no affinions</p>
+            </div>
+        )
+    }
+
     return (
         <div className='flex-1 flex flex-col gap-3'>
             <div className="flex [&>*]:flex-1 gap-8">
                 <table className="">
                     <thead className="text-xs text-gray-400  bg-gray-100">
-                        <th className="text-left font-medium pl-2 py-2">Affinion</th>
-                        <th className="text-center font-medium">NH Number</th>
-                        <th className="text-center font-medium">Last Calibration</th>
-                        <th className="text-center font-medium">Last Clean</th>
-                        <th className="text-center font-medium pr-2">Status</th>
+                        <tr>
+                            <th className="text-left font-medium pl-2 py-2">Affinion</th>
+                            <th className="text-center font-medium">NH Number</th>
+                            <th className="text-center font-medium">Last Calibration</th>
+                            <th className="text-center font-medium">Last Clean</th>
+                            <th className="text-center font-medium pr-2">Status</th>
+                        </tr>
                     </thead> 
                     <tbody className="">
                         {

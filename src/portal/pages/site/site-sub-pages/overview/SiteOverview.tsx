@@ -18,7 +18,7 @@ export default function SiteOverview () {
                 </div>
             </div>
             <div className="flex-3 min-h-full">
-                <div className="bg-gray-50 rounded-xl p-4 min-h-full">
+                <div className="bg-gray-50 rounded-xl p-4 min-h-full flex flex-col">
                     <p className="text-center">RESULTS</p>
                     <SiteResults />
                 </div>

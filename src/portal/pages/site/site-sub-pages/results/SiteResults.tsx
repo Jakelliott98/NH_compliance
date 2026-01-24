@@ -38,6 +38,14 @@ export default function SiteResults () {
 
     const sortedResults = results.sort((a, b) => new Date(b.calibration_date).getTime() - new Date(a.calibration_date).getTime())
 
+    if (sortedResults.length === 0) {
+        return (
+            <div className="h-full flex flex-col justify-center items-center flex-1">
+                <p className="text-sm text-red-900 text-center italics">Currently no calibrations for this site</p>
+            </div>
+        )
+    }
+
     return (
             <div className="flex flex-col w-full gap-2 my-2">
                 {

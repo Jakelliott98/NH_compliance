@@ -15,7 +15,7 @@ function LipidsControlDisplay ({ lipids }: LipidsDisplayProps) {
     if (!lipids) return (<p>No Lipids Control added yet</p>)
     const total = lipids.find(control => control.test_type === 'total')
 
-    if (!total) return (<p>No Lipids Control added yet</p>)
+    if (!total) return (<p className="text-sm text-red-900 italic text-center">Currently no Lipids Controls</p>)
 
     return (
         <div className='p-0.5 bg-red-100 rounded-xl flex flex-col h-fit grow-1'>

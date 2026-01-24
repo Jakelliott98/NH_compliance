@@ -12,7 +12,7 @@ interface Hba1cDisplayProps {
 function HBA1cControlDisplay ({ hba1c }: Hba1cDisplayProps) {
 
     const [isOpen, setIsOpen] = useState(false)
-    if (!hba1c) return (<p>No HBA1c Control Added yet</p>)
+    if (!hba1c) return (<p className="text-sm text-red-900 italic text-center">Currently no HBA1c Controls</p>)
 
     return (
     <div className='p-0.5 bg-red-100 rounded-xl flex flex-col h-fit grow-1'>
