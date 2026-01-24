@@ -1,4 +1,5 @@
 import supabase from "@/utils/supabase"
+import CreateSiteSlug from "./createSiteSlug"
 
 interface DataObj {
 teamLeader: string, siteName:string , region:string 
@@ -12,6 +13,8 @@ const { error } = await supabase
         team_leader:  data.teamLeader,
         site_name: data.siteName,
         site_region: data.region,
+        slug: CreateSiteSlug(data.siteName)
+
     }])
     if (error) throw error;
     
