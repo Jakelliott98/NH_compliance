@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleUser, faGear, faClipboardList, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faClipboardList, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useLocation } from 'react-router'
 import { UserButton } from '@clerk/clerk-react';
 
