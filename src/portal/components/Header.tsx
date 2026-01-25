@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser, faGear, faClipboardList, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useLocation } from 'react-router'
+import { UserButton } from '@clerk/clerk-react';
 
 export default function Header () {
     
@@ -30,7 +31,7 @@ export default function Header () {
                 </div>
             </NavLink>
         </nav>
-        <FontAwesomeIcon icon={faCircleUser} className='self-center text-lg text-neutral-400 hover:text-black cursor-pointer'/>
+        <UserButton />
     </div>
     )
 }

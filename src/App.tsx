@@ -16,7 +16,7 @@ import OrganiseSites from './portal/pages/settings/organise-sites/OrganiseSites.
 import { Route, Routes } from 'react-router'
 import { HomeNav } from './HomeNav.tsx'
 import { HomeSection } from './HomeNav.tsx'
-
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react'
 
 function App() {
 
@@ -26,22 +26,22 @@ function App() {
     <Routes>
       <Route path="/" element={<HomeSection />}>
         <Route path="/" element={<HomeNav />}/>
-        <Route path="Portal" element={<Portal />}>
-          <Route index element={<DashboardPage />}/>
-          <Route path="Dashboard" element={<DashboardPage />}/>
-          <Route path="Compliance" element={<CompliancePage />}>
-            <Route index element={<SitesDashboardContainer/>}/>
-            <Route path="Sites" element={<SitesDashboardContainer/>}/>
-            <Route path="Sites/:Site" element={<SitePage />}/>
+          <Route path="Portal" element={<Portal />}>
+            <Route index element={<DashboardPage />}/>
+            <Route path="Dashboard" element={<DashboardPage />}/>
+            <Route path="Compliance" element={<CompliancePage />}>
+              <Route index element={<SitesDashboardContainer/>}/>
+              <Route path="Sites" element={<SitesDashboardContainer/>}/>
+              <Route path="Sites/:Site" element={<SitePage />}/>
+            </Route>
+            <Route path="Settings" element={<SettingsHomepage />}>
+              <Route index element={<OrganiseSites/>}/>
+              <Route path="Sites" element={<OrganiseSites/>}/>
+              <Route path="Configuration" element={<SiteConfiguration/>}/>
+              <Route path="Compliance" element={<ComplianceRules/>}/>
+              <Route path="Exports" element={<ReportsExports/>}/>
+            </Route>
           </Route>
-          <Route path="Settings" element={<SettingsHomepage />}>
-            <Route index element={<OrganiseSites/>}/>
-            <Route path="Sites" element={<OrganiseSites/>}/>
-            <Route path="Configuration" element={<SiteConfiguration/>}/>
-            <Route path="Compliance" element={<ComplianceRules/>}/>
-            <Route path="Exports" element={<ReportsExports/>}/>
-          </Route>
-        </Route>
         <Route path="SiteForm" element={<Form />}>c
           <Route index element={<SiteSearchContainer />} />
           <Route path="Sites/:Site" element={<SiteProfileContainer />}>
