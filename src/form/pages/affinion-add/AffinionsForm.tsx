@@ -1,16 +1,19 @@
 import { useForm } from 'react-hook-form'
-import addAffinion from '@/form/utils/addAffinion'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router'
 import fetchSiteBySlug from '@/utils/fetchSiteBySlug'
-import type { AffinionData } from '@/form/utils/addAffinion'
-import SubmitButton from '@/components/SubmitButton'
+import type { AffinionData } from '@/form/utils/addAfinion'
+import addAfinion from '@/form/utils/addAfinion'
+import { useContext } from 'react'
+import supabaseContext from '@/utils/supabaseContext'
 
 interface AffinionFormSectionProps {
     closeDialog: () => void,
 }
 
 export default function AffinionFormSection ({ closeDialog }: AffinionFormSectionProps) {
+
+    const supabase = useContext(supabaseContext)
 
     const queryClient = useQueryClient()
 
@@ -24,7 +27,7 @@ export default function AffinionFormSection ({ closeDialog }: AffinionFormSectio
     })
 
     const addNewAffinion = useMutation({
-        mutationFn: (affinionData: AffinionData) => addAffinion(affinionData),
+        mutationFn: (affinionData: AffinionData) => addAfinion(affinionData, supabase),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['affinions']})
         }

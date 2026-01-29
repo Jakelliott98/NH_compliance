@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form";
 import CalendarPopup from "@/form/components/CalendarPopup";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -16,6 +16,7 @@ import type { CalibrationDatabaseType } from "@/types/calibration";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import SubmitButton from "@/components/SubmitButton";
+import supabaseContext from "@/utils/supabaseContext";
 
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
@@ -51,6 +52,7 @@ interface NewControlParameters {
 
 export function CalibrationFormInput ({ selectedControl, closeDialog }: CalibrationFormInputProps) {
 
+    const supabase = useContext(supabaseContext)
     const queryClient = useQueryClient()
     const methods = useForm();
     const { register, handleSubmit, setValue } = methods
@@ -79,13 +81,13 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
         enabled: !!activeSite,
     }) // ONLY ACCESSED FOR THE CHECK ON SUBMIT MAY FIND EASIER WAY
     const addNewControl = useMutation({
-        mutationFn: ({control, testType, ranges}: NewControlParameters) => addControl(control, testType, ranges),
+        mutationFn: ({control, testType, ranges}: NewControlParameters) => addControl(control, testType, ranges, supabase),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['controls']})
         }
     })
     const updateNewControl = useMutation({
-        mutationFn: ({control, testType, ranges}: NewControlParameters) => updateControl(control, testType, ranges),
+        mutationFn: ({control, testType, ranges}: NewControlParameters) => updateControl(control, testType, ranges, supabase),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['controls']})
     })
 

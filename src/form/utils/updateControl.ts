@@ -1,8 +1,7 @@
-import supabase from "@/utils/supabase";
 import type { ControlType } from "./addControl";
 import type { RangesType } from "./addControl"; 
 
-const updateControl = async (control: ControlType, testType: string, ranges: RangesType) => {
+const updateControl = async (control: ControlType, testType: string, ranges: RangesType, supabase) => {
 
     const { error } = await supabase
     .from('controls')
