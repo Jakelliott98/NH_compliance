@@ -1,4 +1,3 @@
-import supabase from "@/utils/supabase"
 
 export interface SiteInfoData {
     siteID: number, 
@@ -7,7 +6,7 @@ export interface SiteInfoData {
     siteRegion: string  
 }
 
-const updateSite = async (siteInfo: SiteInfoData) => {
+const updateSite = async (siteInfo: SiteInfoData, supabase) => {
     
     const { error } = await supabase
     .from('sites')

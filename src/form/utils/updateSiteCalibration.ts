@@ -1,7 +1,5 @@
-import supabase from "@/utils/supabase"
 
-
-const updateSiteCalibration = async (siteID: number) => {
+const updateSiteCalibration = async (siteID: number, supabase) => {
 
     const { error } = await supabase
     .from('sites')

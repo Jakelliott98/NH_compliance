@@ -1,17 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import fetchAllSites from "@/utils/fetchAllSites"
 import type { SiteDatabaseType } from "@/types/site"
 import moment from "moment"
 import EditSiteContainer from "./EditSite"
 import DeleteSiteContainer from "./DeleteSite"
-import { FormProvider, useForm, useFormContext } from "react-hook-form"
+import { FormProvider, useForm } from "react-hook-form"
 import addSite from "@/portal/utils/addSite"
 import AddSiteSection from "./AddSiteSection"
+import { useContext } from "react"
+import supabaseContext from "@/utils/supabaseContext"
 
 export default function OrganiseSites () {
 
+    const supabase = useContext(supabaseContext)
     const methods = useForm();
     const { handleSubmit }  = methods;
     const queryClient = useQueryClient();
@@ -21,7 +24,7 @@ export default function OrganiseSites () {
         queryFn: () => fetchAllSites()
     })
     const mutation = useMutation({
-        mutationFn: (data) => {return addSite(data)},
+        mutationFn: (data) => {return addSite(data, supabase)},
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})
     })
     if (isAllSitesLoading) (<p>Loading...</p>)

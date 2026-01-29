@@ -1,7 +1,5 @@
-import supabase from "@/utils/supabase"
 
-
-const updateLastCleaned = async (affinionID: number) => {
+const updateLastCleaned = async (affinionID: number, supabase) => {
 
     const today = new Date()
 

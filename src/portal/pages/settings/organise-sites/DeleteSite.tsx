@@ -1,9 +1,11 @@
-import { Dialog, DialogHeader, DialogTrigger, DialogContent, DialogClose, DialogFooter } from "@/components/ui/dialog"
+import { Dialog, DialogHeader, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog"
 import deleteSite from "@/portal/utils/deleteSite"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import type { SiteDatabaseType } from "@/types/site"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useContext } from "react"
+import supabaseContext from "@/utils/supabaseContext"
 
 interface DeleteSiteContainerProps {
     site: SiteDatabaseType,
@@ -20,6 +22,7 @@ interface DeleteSiteProps {
 
 export default function DeleteSiteContainer ({ site }: DeleteSiteContainerProps) {
 
+    const supabase = useContext(supabaseContext)
     const queryClient = useQueryClient()
 
     const onSubmit = () => {
@@ -28,7 +31,7 @@ export default function DeleteSiteContainer ({ site }: DeleteSiteContainerProps)
 
         const deleteCurrentSite = useMutation({
         mutationFn: ({ siteID }: onDeleteSite) => {
-            return deleteSite(siteID)
+            return deleteSite(siteID, supabase)
         },
         onSuccess: () => queryClient.invalidateQueries({queryKey:['allSites']})
     })

@@ -1,11 +1,12 @@
 import { Dialog, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import type { SiteInfoData } from '../../../utils/updateSite'
 import updateSite from "@/portal/utils/updateSite"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import type { SiteDatabaseType } from "@/types/site"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import supabaseContext from "@/utils/supabaseContext"
 
 interface SiteDetails {
         name: string,
@@ -25,6 +26,7 @@ interface EditSiteContainerProps {
 
 export default function EditSiteContainer ({site}: EditSiteContainerProps) {
 
+    const supabase = useContext(supabaseContext)
     const queryClient = useQueryClient()
 
     const [siteDetails, setSiteDetails] = useState<SiteDetails>({
@@ -35,7 +37,7 @@ export default function EditSiteContainer ({site}: EditSiteContainerProps) {
 
     const saveSiteChanges = useMutation({
         mutationFn: (siteInfo: SiteInfoData) => {
-            return updateSite(siteInfo)
+            return updateSite(siteInfo, supabase)
         },
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})
     })

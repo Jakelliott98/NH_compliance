@@ -1,7 +1,5 @@
-import supabase from "@/utils/supabase"
 
-
-const updateLastCalibration = async (affinionID: number) => {
+const updateLastCalibration = async (affinionID: number, supabase) => {
 
     const today = new Date()
 

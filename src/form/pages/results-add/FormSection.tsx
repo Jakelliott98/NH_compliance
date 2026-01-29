@@ -7,12 +7,12 @@ import fetchSiteBySlug from "@/utils/fetchSiteBySlug"
 import fetchAffinions from "@/utils/fetchAffinions"
 import fetchCalibrations from "@/utils/fetchControls"
 import RangesComponent from "./RangesComponent"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import updateLastCleaned from "@/form/utils/updateLastCleaned"
 import updateLastCalibration from "@/form/utils/updateLastCalibration"
 import addCalibrationResults from "@/form/utils/addResults"
 import updateSiteCalibration from "@/form/utils/updateSiteCalibration"
-import SubmitButton from "@/components/SubmitButton"
+import supabaseContext from "@/utils/supabaseContext"
 
 export default function FormSection () {
 
@@ -49,6 +49,7 @@ interface AffinionResultCardProps {
 
 function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
 
+    const supabase = useContext(supabaseContext)
     const queryClient = useQueryClient()
     const methods = useForm();
     const { handleSubmit, setValue, register } = methods;
@@ -64,18 +65,18 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
         enabled: !!activeSite,
     })
     const updateCleaned = useMutation({
-        mutationFn: ({ affinionID }) => updateLastCleaned(affinionID),
+        mutationFn: ({ affinionID }) => updateLastCleaned(affinionID, supabase),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['affinions']})
     })
     const updateCalibrated = useMutation({
-        mutationFn: ({ affinionID }) => updateLastCalibration(affinionID),
+        mutationFn: ({ affinionID }) => updateLastCalibration(affinionID, supabase),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['affinions']})
     })
     const addResult = useMutation({
-        mutationFn: ({ result }) => addCalibrationResults(result)
+        mutationFn: ({ result }) => addCalibrationResults(result, supabase)
     })
     const updateSite = useMutation({
-        mutationFn: () => updateSiteCalibration(activeSite?.site_id)
+        mutationFn: () => updateSiteCalibration(activeSite?.site_id, supabase)
     })
 
 

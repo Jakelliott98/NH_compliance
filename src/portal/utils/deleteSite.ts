@@ -1,7 +1,5 @@
-import supabase from "@/utils/supabase"
 
-
-const deleteSite = async (siteID: number) => {
+const deleteSite = async (siteID: number, supabase) => {
 
     const { error } = await supabase
     .from('sites')

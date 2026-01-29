@@ -1,11 +1,10 @@
-import supabase from "@/utils/supabase"
 import CreateSiteSlug from "./createSiteSlug"
 
 interface DataObj {
 teamLeader: string, siteName:string , region:string 
 }
 
-const addSite = async (data: DataObj) => {
+const addSite = async (data: DataObj, supabase) => {
 
 const { error } = await supabase
     .from('sites')

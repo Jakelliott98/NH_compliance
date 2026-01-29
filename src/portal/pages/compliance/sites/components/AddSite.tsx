@@ -5,15 +5,18 @@ import AddSiteSection from "@/portal/pages/settings/organise-sites/AddSiteSectio
 import { FormProvider, useForm } from "react-hook-form";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import addSite from "@/portal/utils/addSite";
+import { useContext } from "react";
+import supabaseContext from "@/utils/supabaseContext";
 
 function AddSiteContainer () {
 
+    const supabase = useContext(supabaseContext)
     const methods = useForm();
     const { handleSubmit }  = methods;
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: (data) => {return addSite(data)},
+        mutationFn: (data) => {return addSite(data, supabase)},
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})
     })
 
