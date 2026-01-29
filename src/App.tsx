@@ -16,40 +16,59 @@ import OrganiseSites from './portal/pages/settings/organise-sites/OrganiseSites.
 import { Route, Routes } from 'react-router'
 import { HomeNav } from './HomeNav.tsx'
 import { HomeSection } from './HomeNav.tsx'
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react'
+import { useSession } from '@clerk/clerk-react'
+import { createClient } from '@supabase/supabase-js'
+import supabaseContext from './utils/supabaseContext.tsx'
 
 function App() {
 
+  const { session } = useSession()
 
+  function createClerkSupabaseClient () {
+
+      return createClient(
+        import.meta.env.VITE_SUPABASE_URL,
+        import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+        {
+          async accessToken() {
+            return session?.getToken() ?? null
+          },
+        },
+      )
+  }
+
+  const client = createClerkSupabaseClient();
   
   return (
-    <Routes>
-      <Route path="/" element={<HomeSection />}>
-        <Route path="/" element={<HomeNav />}/>
-          <Route path="Portal" element={<Portal />}>
-            <Route index element={<DashboardPage />}/>
-            <Route path="Dashboard" element={<DashboardPage />}/>
-            <Route path="Compliance" element={<CompliancePage />}>
-              <Route index element={<SitesDashboardContainer/>}/>
-              <Route path="Sites" element={<SitesDashboardContainer/>}/>
-              <Route path="Sites/:Site" element={<SitePage />}/>
+    <supabaseContext.Provider value={client}>
+      <Routes>
+        <Route path="/" element={<HomeSection />}>
+          <Route path="/" element={<HomeNav />}/>
+            <Route path="Portal" element={<Portal />}>
+              <Route index element={<DashboardPage />}/>
+              <Route path="Dashboard" element={<DashboardPage />}/>
+              <Route path="Compliance" element={<CompliancePage />}>
+                <Route index element={<SitesDashboardContainer/>}/>
+                <Route path="Sites" element={<SitesDashboardContainer/>}/>
+                <Route path="Sites/:Site" element={<SitePage />}/>
+              </Route>
+              <Route path="Settings" element={<SettingsHomepage />}>
+                <Route index element={<OrganiseSites/>}/>
+                <Route path="Sites" element={<OrganiseSites/>}/>
+                <Route path="Configuration" element={<SiteConfiguration/>}/>
+                <Route path="Compliance" element={<ComplianceRules/>}/>
+                <Route path="Exports" element={<ReportsExports/>}/>
+              </Route>
             </Route>
-            <Route path="Settings" element={<SettingsHomepage />}>
-              <Route index element={<OrganiseSites/>}/>
-              <Route path="Sites" element={<OrganiseSites/>}/>
-              <Route path="Configuration" element={<SiteConfiguration/>}/>
-              <Route path="Compliance" element={<ComplianceRules/>}/>
-              <Route path="Exports" element={<ReportsExports/>}/>
-            </Route>
+          <Route path="SiteForm" element={<Form />}>c
+            <Route index element={<SiteSearchContainer />} />
+            <Route path="Sites/:Site" element={<SiteProfileContainer />}>
+              <Route index element={<SiteProfile />}/>
+            </Route >
           </Route>
-        <Route path="SiteForm" element={<Form />}>c
-          <Route index element={<SiteSearchContainer />} />
-          <Route path="Sites/:Site" element={<SiteProfileContainer />}>
-            <Route index element={<SiteProfile />}/>
-          </Route >
-        </Route>
-    </Route>
-  </Routes>
+      </Route>
+    </Routes>
+  </supabaseContext.Provider>
 )}
 
 
