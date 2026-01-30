@@ -51,7 +51,7 @@ export default function AffinionFormSection ({ closeDialog }: AffinionFormSectio
     })
 
     return (
-        <div className="bg-gray-100 w-full p-5 rounded flex flex-col items-center text-slate-600">
+        <div className="bg-gray-100 w-full p-2 lg:p-5 rounded flex flex-col items-center text-slate-600">
             <form className="p-4 bg-white flex flex-col gap-2 rounded" onSubmit={onSubmit}>
                 <div className="flex flex-col">
                     <label>Affinion Number</label>

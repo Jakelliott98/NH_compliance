@@ -42,9 +42,9 @@ export function SitePage () {
     if (!activeSite || !affinions || !controls) return (<p>ERROR: Cannot find the current site or Controls / Affinions</p>)
 
     return (
-        <div className="flex flex-col gap-5 h-full">
-            <p className="text-center font-semibold text-2xl tracking-wide leading-relaxed">{activeSite.site_name}</p>
-            <div className="flex-1 grid grid-rows-3 gap-y-2">
+        <div className="flex flex-col lg:gap-5 h-full">
+            <h1 className="text-center font-semibold text-xl lg:text-2xl tracking-wide leading-relaxed">{activeSite.site_name}</h1>
+            <div className="flex-1 flex flex-col gap-4 [&>*]:grow lg:grid lg:grid-rows-3 lg:gap-y-2">
                     <AffinionSection affinions={affinions} />
                     <ControlsSection controls={controls} />
                     {
@@ -60,10 +60,10 @@ export function SitePage () {
 function DisabledAddResults () {
 
     return (
-        <div className="h-full bg-gray-200 rounded p-5 cursor-pointer flex flex-col justify-center items-center gap-1 shadow-md" >        
-            <FontAwesomeIcon className="text-3xl text-gray-400" icon={faPlus} />
-            <h1 className="text-xl font-bold text-gray-400">Add Results</h1>
-            <p className="text-sm text-red-500"> Add Affinions & Controls to continue adding results </p>
+        <div className="bg-gray-200 rounded p-5 cursor-pointer flex flex-col justify-center items-center gap-1 shadow-md" >        
+            <FontAwesomeIcon className="text-3xl text-gray-300" icon={faPlus} />
+            <h1 className="text-xl font-bold text-gray-300">Add Results</h1>
+            <p className="text-center text-xs md:text-sm text-red-500 italic"> Add an Afinion & Controls to add calibration results </p>
         </div>
     )
 }

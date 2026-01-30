@@ -23,11 +23,11 @@ export default function AffinionSection ({ affinions }: AffinionSectionProps) {
     const sortedAffinions = affinions.sort((a, b) => a.affinion_number - b.affinion_number)
 
     return (
-        <div className="h-full grid grid-cols-4 gap-2">
-            <div className="flex gap-3 col-start-1 col-end-4 h-full">
+        <div className="flex flex-col lg:grid lg:grid-cols-4 gap-2">
+            <div className="grow flex gap-1 lg:gap-3 col-start-1 col-end-4 lg:h-full max-w-full overflow-x-scroll">
                 <AffinionsDisplay affinions={sortedAffinions} />
             </div>
-            <div className="col-start-4 h-full w-full">
+            <div className="grow lg:col-start-4">
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <div className="h-full">
@@ -54,10 +54,10 @@ function AffinionsDisplay ({ affinions }: AffinionsDisplayProps) {
 
     if (affinions.length === 0) {
         return (
-            <div className="bg-white flex flex-col justify-center items-center w-full">
-                        <FontAwesomeIcon icon={faHandshakeSlash} className="pb-5 text-gray-300" />
-                        <p className="text-sm text-gray-500">No Affinions added yet</p>
-                        <p className="text-xs text-gray-500">Add Affinions to start submitting results.</p>
+            <div className="py-2 px-1 bg-white flex flex-col justify-center items-center w-full">
+                        <FontAwesomeIcon icon={faHandshakeSlash} className="pb-1 md:pb-5 text-gray-300" />
+                        <p className="text-xs md:text-sm text-gray-500">No Affinions added yet</p>
+                        <p className="hidden md:block text-xs text-gray-500">Add Affinions to start submitting results.</p>
             </div>
         )
     }
@@ -66,28 +66,30 @@ function AffinionsDisplay ({ affinions }: AffinionsDisplayProps) {
         affinions.map((affinion) => {
             return (
                 <div className="flex-1 bg-gray-50 border border-gray-200 p-3 rounded flex-grow flex flex-col justify-around items-center shadow-sm" key={affinion.affinion_id}>
-                    <FontAwesomeIcon className="text-green-700/90 text-3xl" icon={faCalendarCheck} />
-                    <p className="font-semibold text-center text-lg text-slate-900">Affinion {affinion.affinion_number}</p>
+                    <FontAwesomeIcon className="text-green-700/90 text-lg md:text-xl lg:text-3xl" icon={faCalendarCheck} />
+                    <p className="font-light lg:font-semibold text-center text-sm lg:text-lg text-slate-900">Affinion {affinion.affinion_number}</p>
+                    <div className="hidden lg:block">
                     {
                         affinion.last_clean ? (
-                            <p className="text-sm">
-                                Calibrated:
+                            <p className="text-xs text-center">
+                                Calibrated <br/>
                                 <span className="italics text-slate-700"> {affinion.last_calibrated === null ? '' : moment(affinion.last_calibrated).format('Do MMM')}</span>
                             </p>
                         ) : (
-                            <p className="text-sm text-red-700/80 italic">No Calibrations Yet</p>
+                            <p className="text-center text-xs text-red-700/80 italic">No Calibrations Yet</p>
                         )
                     }
                     {
                         affinion.last_clean ? (
-                            <p className="text-sm">
-                                Cleaned:
+                            <p className="text-center text-xs">
+                                Cleaned<br/>
                                 <span className="italics text-slate-700"> {affinion.last_clean === null ? '' : moment(affinion.last_clean).format('Do MMM')}</span>
                             </p>
                         ) : (
-                            <p className="text-sm text-red-700/80 italic">No Cleans Yet</p>
+                            <p className="text-center text-xs text-red-700/80 italic">No Cleans Yet</p>
                         )
                     }
+                    </div>
                 </div>
             )
                     })

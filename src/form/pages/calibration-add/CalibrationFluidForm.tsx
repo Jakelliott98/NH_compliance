@@ -128,8 +128,8 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
 
     return (
         <FormProvider {...methods}>
-            <form className="bg-white p-4 rounded flex flex-col gap-2" onSubmit={onSubmit}>
-                <div className="flex row gap-2">
+            <form className="bg-white p-2 lg:p-4 rounded flex flex-col gap-2" onSubmit={onSubmit}>
+                <div className="flex flex-col md:flex-row gap-2">
                     <div className="flex flex-col gap-1 flex-1">
                         <label className="text-sm">Lot Number</label>
                         <input className="outline rounded px-2 py-0.5 text-sm" {...register("lotNumber", {required: "Please provide a Lot Number", valueAsNumber: true})}/>

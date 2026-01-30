@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query"
 import type { SiteDatabaseType } from "@/types/site"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"
-import SubmitButton from "@/components/SubmitButton"
 
 export default function SiteSearchContainer () {
 
@@ -27,9 +26,9 @@ export default function SiteSearchContainer () {
     }
 
     return (
-        <div className="rounded p-4 flex justify-center items-center flex-col w-3/12 h-3/12 gap-2">
+        <div className="w-2/3 lg:w-1/4 flex justify-center items-center flex-col gap-5 h-3/12">
             <div className="w-full">
-            <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
+                <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
             </div>
             {
                 activeSite !== '' && (
@@ -39,7 +38,6 @@ export default function SiteSearchContainer () {
                     </button>
                 ) 
             }
-            
          </div>
     )
 

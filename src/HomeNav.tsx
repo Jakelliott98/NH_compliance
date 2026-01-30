@@ -27,16 +27,52 @@ export function HomeNav () {
   }
 
   return (
-    <div className='bg-gray-200 h-screen w-screen flex flex-row justify-center items-around gap-5 p-10'>      
-        <button className='p-10 flex-1 border-gray-400 border rounded-xl flex flex-col justify-center items-center cursor-pointer hover:bg-white' onClick={() => {navigateSite('Portal')}}>
-          <img src={visualData} className='w-4/12 h-fit mb-5'/>
-          <h1 className='font-bold uppercase text-2xl'>Portal</h1>
-          <p className='text-gray-500 text-sm'>Login to view calibration history</p>
+    <div 
+      className='
+        bg-gray-200 
+        h-screen w-screen
+        flex flex-col gap-5 justify-center items-center
+        py-10 px-10
+        md:flex-row
+      '
+    >      
+        
+        <button 
+          className='
+            flex-1
+            border-gray-400 border rounded-xl 
+            flex flex-col justify-center items-center 
+            p-4 md:p-10
+            cursor-pointer 
+            hover:bg-white
+            md:h-1/3
+            lg:h-full
+          ' 
+          onClick={() => {navigateSite('Portal')}}
+        >
+
+          <img src={visualData} className="w-2/3 md:w-2/5 mb-2 md:mb-5"/>
+          <h1 className='font-bold uppercase text-xl md:text-2xl'>Portal</h1>
+          <p className='text-gray-500 text-sm text-center'>Login to view calibration history</p>
         </button>
-        <button className='p-10 flex-1 border-gray-400 border rounded-xl flex flex-col justify-center items-center cursor-pointer hover:bg-white' onClick={() => {navigateSite('SiteForm')}}>
-          <img src={addFiles} className='w-4/12 h-fit mb-5'/>
-          <h1 className='font-bold uppercase text-2xl'>Form</h1>
-          <p className='text-gray-500 text-sm'>Add calibrations, controls and affinions to your site.</p>
+
+        <button 
+          className='
+            flex-1
+            border-gray-400 border rounded-xl 
+            flex flex-col justify-center items-center 
+            p-4 md:p-10
+            cursor-pointer 
+            hover:bg-white
+            md:h-1/3
+            lg:h-full
+          ' 
+          onClick={() => {navigateSite('SiteForm')}}
+        >
+          <img src={addFiles} className='w-2/3 md:w-2/5 mb-2 md:mb-5'/>
+          <h1 className='font-bold uppercase text-lg md:text-2xl'>Form</h1>
+          <p className='text-gray-500 text-sm text-center'>Add calibrations, controls and affinions to your site.</p>
+        
         </button>
     </div>
   )

@@ -28,18 +28,21 @@ export function FormButtons ({ option }: FormButtonsProps) {
         return (
                 <div 
                         className="
-                                h-full bg-gray-200 rounded p-5 cursor-pointer 
+                                h-full bg-gray-200 rounded py-2 lg:p-5 cursor-pointer 
                                 flex flex-col justify-center items-center gap-1 
                                 shadow-md 
                                 transition-all duration-200 ease-out
                                 hover:shadow-lg hover:translate-y-0.5
                                 active:shadow-inner active:translate-y-0 active:scale-95
+                                lg:h-full
                         " 
                 >        
-                        <FontAwesomeIcon className="text-3xl" icon={faPlus} />
-                        <h1 className="text-xl font-bold">{ option.title }</h1>
-                        <p className="text-sm"> {option.text} </p>
-                        <p className="text-xs text-red-500 italic text-center">{ option.optionalText ? option.optionalText : '' }</p>
+                        <div className="flex lg:flex-col justify-center items-center gap-1 ">
+                                <FontAwesomeIcon className="lg:text-3xl" icon={faPlus} />
+                                <h1 className="text-sm md:text-base lg:text-xl lg:font-bold">{ option.title }</h1>
+                        </div>
+                        <p className="text-sm hidden lg:block"> {option.text} </p>
+                        <p className="hidden md:block text-xs text-red-500 italic text-center">{ option.optionalText ? option.optionalText : '' }</p>
                 </div>
         )
 }

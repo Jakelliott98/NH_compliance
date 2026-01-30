@@ -18,8 +18,8 @@ export default function InputTable ({ test }: InputTableProps) {
             <thead>
                 <tr className="bg-gray-200">
                     <th></th>
-                    <th className="text-sm font-semibold">Lower Range</th>
-                    <th className="text-sm font-semibold">Upper Range</th>
+                    <th className="text-xs font-light md:text-sm md:font-medium">Lower Range</th>
+                    <th className="text-xs font-light md:text-sm md:font-medium">Upper Range</th>
                 </tr>
             </thead>
 
