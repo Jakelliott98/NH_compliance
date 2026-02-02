@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faClipboardList, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useLocation } from 'react-router'
 import { UserButton } from '@clerk/clerk-react';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header () {
     
@@ -10,8 +11,8 @@ export default function Header () {
 
     return (
     <div className='bg-white px-5 py-4 w-full flex justify-between items-center'>
-        <p className='text-sm uppercase text-neutral-400'>CT</p>
-        <nav className='w-4/12 flex justify-between cursor-pointer'>
+        <p className='hidden md:block text-sm uppercase text-neutral-400'>CT</p>
+        <nav className='hidden md:flex w-4/12 justify-between cursor-pointer'>
             <NavLink to="Dashboard" className={isDashboard ? 'text-black' : 'text-neutral-400 hover:text-black'}>
                 <div className='flex gap-1 items-center'>
                     <FontAwesomeIcon icon={faClipboardList} className='text-sm'/>
@@ -31,7 +32,11 @@ export default function Header () {
                 </div>
             </NavLink>
         </nav>
+        <div className='md:hidden'>
+            <FontAwesomeIcon icon={faBars}/>
+        </div>
         <UserButton />
+
     </div>
     )
 }

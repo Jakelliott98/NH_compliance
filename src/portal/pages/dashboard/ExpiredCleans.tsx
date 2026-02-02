@@ -39,12 +39,12 @@ export default function ExpiredCleans () {
 
 	return (
 		<div className="bg-gray-50 p-4 rounded">
-			<p className="">CLEANS</p>
+			<h1 className="hidden md:block">CLEANS</h1>
 			<table className="w-full bg-white">
 					<thead className="bg-gray-50">
 					<tr>
 						<th className="text-start font-medium text-xs p-1 text-gray-500">SITE</th>
-						<th className="text-start font-medium text-xs text-gray-500">AFINION</th>
+						<th className="hidden md:table-cell text-start font-medium text-xs text-gray-500">AFINION</th>
 						<th className="text-start font-medium text-xs text-gray-500">DATE</th>
 					</tr>
 				</thead>
@@ -55,7 +55,7 @@ export default function ExpiredCleans () {
 							return (
 								<tr className="border border-gray-200">
 									<td className="text-start text-sm p-1 text-gray-600 p-2">{site?.site_name}</td>
-									<td className="text-start text-sm text-gray-600">NH{afinion.nh_number}</td>
+									<td className="hidden md:table-cell text-start text-sm text-gray-600">NH{afinion.nh_number}</td>
 									<td className="text-start text-sm text-red-800">{moment(afinion.last_clean).format('Do MMM')}</td>
 								</tr>
 							)

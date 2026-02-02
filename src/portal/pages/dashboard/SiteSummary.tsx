@@ -29,7 +29,7 @@ export default function SiteSummary () {
 	})
 
 	return (
-		<div className="flex justify-between [&>*]:flex-1 gap-12">
+		<div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-12">
 			<DashboardCards title='Calibrated Sites' dataPoint={calibratedSites.length} icon={faSquareCheck} colour={'green'}/>
 			<DashboardCards title='Flagging' dataPoint={1} icon={faTriangleExclamation} colour={'red'}/>
 			<DashboardCards title='Flagging Calibrations' dataPoint={sitesFlaggingCalibrations.length} icon={faBug} colour={'red'}/>
@@ -48,13 +48,13 @@ interface DashboardCardsProps {
 function DashboardCards ({dataPoint, title, icon, colour}: DashboardCardsProps) {
 
 	return (
-		<div className="bg-white p-5 rounded flex flex-col">
+		<div className="bg-white p-2 md:p-5 rounded flex flex-col">
 			<div className="flex items-center gap-1">
-				<FontAwesomeIcon icon={icon} className={`text-${colour}-700`}/>
-				<p className="text-gray-700 font-light">{title}</p>
+				<FontAwesomeIcon icon={icon} className={`text-${colour}-700 text-xs md:text-md`}/>
+				<p className="text-xs md:text-lg text-gray-700 font-light">{title}</p>
 			</div>
-			<p className="text-xl">{dataPoint}</p>
-			<div className="flex gap-1 items-center text-gray-500 text-xs cursor-pointer hover:text-black">
+			<p className="text-md text-center md:text-xl">{dataPoint}</p>
+			<div className="hidden md:block flex gap-1 items-center text-gray-500 text-xs cursor-pointer hover:text-black">
 				<a>View More →</a>
 			</div>
 		</div>
