@@ -1,10 +1,8 @@
-import { Outlet } from "react-router"
 import { useParams } from "react-router"
-import { NavLink } from "react-router"
 import moment from "moment"
 import { useQuery } from "@tanstack/react-query"
-import fetchSiteBySlug from "../../../utils/fetchSiteBySlug"
-import fetchAffinions from "../../../utils/fetchAffinions"
+import fetchSiteBySlug from "../../../services/sites/fetchSiteBySlug"
+import fetchAfinions from "../../../services/afinions/fetchAfinions"
 import SiteOverview from "./site-sub-pages/overview/SiteOverview"
 
 export default function SitePage () {
@@ -18,20 +16,20 @@ export default function SitePage () {
         },
             enabled: !!siteSlug,
     })
-    const { data: affinions, isError: affinionError, isLoading: affinionsLoading } = useQuery({
-        queryKey: ['portalAffinions', activeSite],
+    const { data: afinions, isError: afinionError, isLoading: afinionsLoading } = useQuery({
+        queryKey: ['portalAfinions', activeSite],
         queryFn: () => {
             if (!activeSite) throw new Error('Cannot find this site')
-            return fetchAffinions(activeSite.site_id)
+            return fetchAfinions(activeSite.site_id)
         },
         enabled: !!activeSite,
     })
 
     if (siteError) return <p>Error loading site</p>;
     if (!activeSite) return <p>No site found</p>;
-    if (siteLoading || affinionsLoading) return <p>Loading...</p>;
-    if (affinionError) return (<p>Something went wrong...</p>)
-    if (!affinions) return (<p>No affinions found</p>)
+    if (siteLoading || afinionsLoading) return <p>Loading...</p>;
+    if (afinionError) return (<p>Something went wrong...</p>)
+    if (!afinions) return (<p>No afinions found</p>)
 
     return (
         <div className="flex flex-col bg-white p-5 rounded-xl my-2">
@@ -47,8 +45,8 @@ export default function SitePage () {
                         <p className="text-sm text-center">{moment(activeSite.last_calibrated).format('Do MMM')}</p>
                     </div>
                     <div className="flex flex-col">
-                        <p className="text-xs uppercase text-gray-500">Affinions</p>
-                        <p className="text-sm text-center">{affinions.length}</p>
+                        <p className="text-xs uppercase text-gray-500">Afinions</p>
+                        <p className="text-sm text-center">{afinions.length}</p>
                     </div>
                 </div>
             </div>

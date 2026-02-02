@@ -1,11 +1,11 @@
-import AffinionSection from "./components/AffinionSection"
+import AfinionSection from "./components/AfinionSection"
 import ControlsSection from "./components/ControlsSection"
 import AddResults from "./components/AddResults"
 import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
-import fetchSiteBySlug from "../../../utils/fetchSiteBySlug"
-import fetchAffinions from "../../../utils/fetchAffinions"
-import fetchCalibrations from "../../../utils/fetchControls"
+import fetchSiteBySlug from "../../../services/sites/fetchSiteBySlug"
+import fetchAfinions from "../../../services/afinions/fetchAfinions"
+import fetchCalibrations from "../../../services/controls/fetchControls"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
@@ -20,11 +20,11 @@ export function SitePage () {
             return fetchSiteBySlug(siteSlug)
         }
     })
-    const { data: affinions, isError: affinionsError, isLoading: affinionsLoading} = useQuery({
-        queryKey: ['affinions', activeSite], 
+    const { data: afinions, isError: afinionsError, isLoading: afinionsLoading} = useQuery({
+        queryKey: ['afinions', activeSite], 
         queryFn: () => {
             if (!activeSite) throw new Error('Cannot find this site')
-            return fetchAffinions(activeSite.site_id)
+            return fetchAfinions(activeSite.site_id)
         },
         enabled: !!activeSite,
     })
@@ -37,18 +37,18 @@ export function SitePage () {
         enabled: !!activeSite,
     })
 
-    if ( siteError || affinionsError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
-    if ( siteLoading || affinionsLoading || controlsLoading ) return (<p>Loading...</p>)
-    if (!activeSite || !affinions || !controls) return (<p>ERROR: Cannot find the current site or Controls / Affinions</p>)
+    if ( siteError || afinionsError || controlsError) throw new Error('Could not fetch Active Site, Controls or Afinions')
+    if ( siteLoading || afinionsLoading || controlsLoading ) return (<p>Loading...</p>)
+    if (!activeSite || !afinions || !controls) return (<p>ERROR: Cannot find the current site or Controls / Afinions</p>)
 
     return (
         <div className="flex flex-col lg:gap-5 h-full">
             <h1 className="text-center font-semibold text-xl lg:text-2xl tracking-wide leading-relaxed">{activeSite.site_name}</h1>
             <div className="flex-1 flex flex-col gap-4 [&>*]:grow lg:grid lg:grid-rows-3 lg:gap-y-2">
-                    <AffinionSection affinions={affinions} />
+                    <AinionSection afinions={afinions} />
                     <ControlsSection controls={controls} />
                     {
-                        controls.length === 0 || affinions.length === 0 ? <DisabledAddResults /> : <AddResults />
+                        controls.length === 0 || afinions.length === 0 ? <DisabledAddResults /> : <AddResults />
                     }
                     
             </div>

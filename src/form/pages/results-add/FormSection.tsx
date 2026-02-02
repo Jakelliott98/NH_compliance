@@ -1,41 +1,41 @@
 import { Checkbox } from "@/components/ui/checkbox"
-import type { AffinionDatabaseType } from "@/types/affinion"
+import type { AfinionDatabaseType } from "@/types/afinion"
 import { FormProvider, useForm } from "react-hook-form"
 import { useParams } from "react-router"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import fetchSiteBySlug from "@/utils/fetchSiteBySlug"
-import fetchAffinions from "@/utils/fetchAffinions"
-import fetchCalibrations from "@/utils/fetchControls"
+import fetchSiteBySlug from "@/services/sites/fetchSiteBySlug"
+import fetchAfinions from "@/services/afinions/fetchAfinions"
+import fetchCalibrations from "@/services/controls/fetchControls"
 import RangesComponent from "./RangesComponent"
 import { useContext, useState } from "react"
-import updateLastCleaned from "@/form/utils/updateLastCleaned"
-import updateLastCalibration from "@/form/utils/updateLastCalibration"
-import addCalibrationResults from "@/form/utils/addResults"
-import updateSiteCalibration from "@/form/utils/updateSiteCalibration"
+import updateLastCleaned from "@/services/afinions/updateLastCleaned"
+import updateLastCalibration from "@/services/afinions/updateLastCalibration"
+import addCalibrationResults from "@/services/results/addResults"
+import updateSiteCalibration from "@/services/sites/updateSiteCalibration"
 import supabaseContext from "@/utils/supabaseContext"
 
 export default function FormSection () {
 
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
-    const { data: affinions, isError: affinionsError, isLoading: affinionsLoading} = useQuery({
-        queryKey: ['affinions', activeSite], 
+    const { data: afinions, isError: afinionsError, isLoading: afinionsLoading} = useQuery({
+        queryKey: ['afinions', activeSite], 
         queryFn: () => {
             if (!activeSite) throw new Error('Cannot find the current site')
-            return fetchAffinions(activeSite.site_id)},
+            return fetchAfinions(activeSite.site_id)},
         enabled: !!activeSite,
     })
 
-    if ( siteError || affinionsError ) throw new Error('Could not fetch active site or Affinions')
-    if ( siteLoading || affinionsLoading ) return (<p>Loading...</p>)
+    if ( siteError || afinionsError ) throw new Error('Could not fetch active site or Afinions')
+    if ( siteLoading || afinionsLoading ) return (<p>Loading...</p>)
 
 
     return (
         <div className="flex flex-row w-full justify-around overflow-scroll gap-3">
             {
-                affinions?.map((affinion: AffinionDatabaseType) => {
+                afinions?.map((afinion: AfinionDatabaseType) => {
                     return (
-                        <AffinionResultCard key={affinion.affinion_id} affinion={affinion} />
+                        <AfinionResultCard key={afinion.afinion_id} afinion={afinion} />
                     )
                 })
             }
@@ -43,11 +43,11 @@ export default function FormSection () {
     )
 }
 
-interface AffinionResultCardProps {
-    affinion: AffinionDatabaseType,
+interface AfinionResultCardProps {
+    afinion: AfinionDatabaseType,
 }
 
-function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
+function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
 
     const supabase = useContext(supabaseContext)
     const queryClient = useQueryClient()
@@ -65,12 +65,12 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
         enabled: !!activeSite,
     })
     const updateCleaned = useMutation({
-        mutationFn: ({ affinionID }) => updateLastCleaned(affinionID, supabase),
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ['affinions']})
+        mutationFn: ({ afinionID }) => updateLastCleaned(afinionID, supabase),
+        onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})
     })
     const updateCalibrated = useMutation({
-        mutationFn: ({ affinionID }) => updateLastCalibration(affinionID, supabase),
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ['affinions']})
+        mutationFn: ({ afinionID }) => updateLastCalibration(afinionID, supabase),
+        onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})
     })
     const addResult = useMutation({
         mutationFn: ({ result }) => addCalibrationResults(result, supabase)
@@ -80,11 +80,11 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
     })
 
 
-    if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
+    if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Afinions')
     if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
     if (!activeSite) throw new Error('This site cannot be found')
 
-    setValue("affinionID", affinion.affinion_id)
+    setValue("afinionID", afinion.afinion_id)
     setValue("siteID", activeSite.site_id)
     controls?.map((control) => {
         setValue(`${control.test_type}.c1.low`, control.calibration_ranges.c1.low)
@@ -94,8 +94,8 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
     })
 
     const onSubmit = handleSubmit((data) => {
-        if (isCleaned) updateCleaned.mutate({ affinionID: data.affinionID})
-        updateCalibrated.mutate({affinionID: data.affinionID})
+        if (isCleaned) updateCleaned.mutate({ afinionID: data.afinionID})
+        updateCalibrated.mutate({afinionID: data.afinionID})
         addResult.mutate({ result: data })
         updateSite.mutate()
     })
@@ -105,7 +105,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
             <form className="bg-white p-4 rounded outline m-2" onSubmit={onSubmit}>
                 <div className="m-0.5">
                     <div className="flex flex-col gap-1">
-                        <p className="flex items-center justify-center"><span>Affinion {affinion.affinion_number}</span> <span className="hidden md:block">&nbsp;| {affinion.nh_number}</span></p>
+                        <p className="flex items-center justify-center"><span>Afinion {afinion.afinion_number}</span> <span className="hidden md:block">&nbsp;| {afinion.nh_number}</span></p>
                         <div className=" bg-blue-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                             <Checkbox 
                                 className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
@@ -133,7 +133,7 @@ function AffinionResultCard ({ affinion }: AffinionResultCardProps) {
                                 checked={isCleaned}
                                 className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600 data-[state=checked]:text-white dark:data-[state=checked]:border-green-700 dark:data-[state=checked]:bg-green-700"
                             />
-                            <label className="text-green-500 text-sm">Affinion Cleaned</label>
+                            <label className="text-green-500 text-sm">Afinion Cleaned</label>
                         </div>
                     </div>
                 </div>

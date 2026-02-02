@@ -1,4 +1,4 @@
-import CreateSiteSlug from "./createSiteSlug"
+import CreateSiteSlug from "./create-site-slug"
 
 interface DataObj {
 teamLeader: string, siteName:string , region:string 

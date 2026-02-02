@@ -1,12 +1,12 @@
 
-const updateLastCleaned = async (affinionID: number, supabase) => {
+const updateLastCleaned = async (afinionID: number, supabase) => {
 
     const today = new Date()
 
     const { error } = await supabase
-    .from('affinions')
+    .from('afinions')
     .update({last_clean: today})
-    .eq("affinion_id", affinionID)
+    .eq("afinion_id", afinionID)
     
     if (error) throw error;
 

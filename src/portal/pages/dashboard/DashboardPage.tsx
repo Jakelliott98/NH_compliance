@@ -1,5 +1,5 @@
 import SiteSummary from "./SiteSummary"
-import ExpiredAffinions from "./ExpiredAffinions"
+import ExpiredAfinions from "./ExpiredAfinions"
 import ExpiredCalibrations from "./ExpiredCalibrations"
 import ExpiredCleans from "./ExpiredCleans"
 
@@ -22,7 +22,7 @@ export default function DashboardPage () {
 				</div>
 				<div className="flex justify-between [&>*]:flex-1 gap-3">
 					<ExpiredCleans />
-					<ExpiredAffinions />
+					<ExpiredAfinions />
 					<ExpiredCalibrations />
 				</div>
 			</div>

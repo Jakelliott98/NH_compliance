@@ -4,7 +4,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader } from 
 import AddSiteSection from "@/portal/pages/settings/organise-sites/AddSiteSection";
 import { FormProvider, useForm } from "react-hook-form";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import addSite from "@/portal/utils/addSite";
+import addSite from "@/services/sites/addSite";
 import { useContext } from "react";
 import supabaseContext from "@/utils/supabaseContext";
 

@@ -71,7 +71,7 @@ export function HomeNav () {
         >
           <img src={addFiles} className='w-2/3 md:w-2/5 mb-2 md:mb-5'/>
           <h1 className='font-bold uppercase text-lg md:text-2xl'>Form</h1>
-          <p className='text-gray-500 text-sm text-center'>Add calibrations, controls and affinions to your site.</p>
+          <p className='text-gray-500 text-sm text-center'>Add calibrations, controls and afinions to your site.</p>
         
         </button>
     </div>

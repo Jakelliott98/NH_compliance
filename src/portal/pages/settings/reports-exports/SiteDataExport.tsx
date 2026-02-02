@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDownload } from "@fortawesome/free-solid-svg-icons"
-import fetchAffinions from "@/utils/fetchAffinions"
+import fetchAfinions from "@/services/afinions/fetchAfinions"
 import { useQuery } from "@tanstack/react-query"
 import SelectButton from "@/components/SelectButton"
 import SelectDuration from "@/portal/components/SelectDuration"
@@ -14,19 +14,19 @@ interface SiteDataExportProps {
 
 function SiteDataExport ({ siteID }: SiteDataExportProps) {
 
-    const [selectedAffinion, setSelectedAffinion] = useState<string>('All Affinions')
+    const [selectedAfinion, setSelectedAfinion] = useState<string>('All Afinions')
     const [selectedDuration, setSelectedDuration] = useState<string>('Last Month')
 
-    const { data: siteAffinions, isError: isSiteAffinionError, isLoading: isSiteAffinionLoading, error: siteAffinionError} = useQuery({
-        queryKey: ['siteAffinion', siteID],
-        queryFn: () => fetchAffinions(siteID),
+    const { data: siteAfinions, isError: isSiteAfinionError, isLoading: isSiteAfinionLoading, error: siteAfinionError} = useQuery({
+        queryKey: ['siteAfinion', siteID],
+        queryFn: () => fetchAfinions(siteID),
     })
 
-    if (isSiteAffinionLoading) return (<p>Loading...</p>)
-    if (isSiteAffinionError) throw siteAffinionError
-    if (siteAffinions === undefined || siteAffinions === null) throw siteAffinionError
+    if (isSiteAfinionLoading) return (<p>Loading...</p>)
+    if (isSiteAfinionError) throw siteAfinionError
+    if (siteAfinions === undefined || siteAfinions === null) throw siteAfinionError
 
-    const setActiveAffinion: (SelectedValue: string) => void = (selectedValue) => setSelectedAffinion(selectedValue)
+    const setActiveAfinion: (SelectedValue: string) => void = (selectedValue) => setSelectedAfinion(selectedValue)
     const setActiveDuration: (SelectedValue: string) => void = (selectedValue) => setSelectedDuration(selectedValue)
 
     return (
@@ -37,17 +37,17 @@ function SiteDataExport ({ siteID }: SiteDataExportProps) {
                 <div className="py-2 flex flex-col gap-2">
                     <div className="flex flex-col gap-2">
                         <div>
-                            <p className="text-sm font-semibold">Affinion</p>
-                            <p className="text-sm text-gray-400 font-light">Affinions to extract data from.</p>
+                            <p className="text-sm font-semibold">Afinion</p>
+                            <p className="text-sm text-gray-400 font-light">Afinions to extract data from.</p>
                         </div>
                         <div className="flex gap-2">
-                                <SelectButton text='All Affinions' activeSelect={selectedAffinion} onSelect={setActiveAffinion}/>
+                                <SelectButton text='All Afinions' activeSelect={selectedAfinion} onSelect={setActiveAfinion}/>
                                 {
-                                    siteAffinions
-                                    .sort((a, b) => a.affinion_number - b.affinion_number)
-                                    .map((affinion) => {
+                                    siteAfinions
+                                    .sort((a, b) => a.afinion_number - b.afinion_number)
+                                    .map((afinion) => {
                                         return (
-                                            <SelectButton onSelect={setActiveAffinion} activeSelect={selectedAffinion} text={`Affinion ${affinion.affinion_number}`}/>
+                                            <SelectButton onSelect={setActiveAfinion} activeSelect={selectedAfinion} text={`Afinion ${afinion.afinion_number}`}/>
                                             
                                         )
                                     })

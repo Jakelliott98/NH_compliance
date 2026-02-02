@@ -1,5 +1,5 @@
 import { Dialog, DialogHeader, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog"
-import deleteSite from "@/portal/utils/deleteSite"
+import deleteSite from "@/services/sites/deleteSite"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import type { SiteDatabaseType } from "@/types/site"

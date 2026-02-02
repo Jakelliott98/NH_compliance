@@ -1,7 +1,7 @@
-import fetchAffinions from '@/utils/fetchAffinions';
+import fetchAfinions from '@/services/afinions/fetchAfinions';
 import { useQuery } from '@tanstack/react-query';
 import type { SiteDatabaseType } from '@/types/site';
-import type { AffinionDatabaseType } from '@/types/affinion';
+import type { AfinionDatabaseType } from '@/types/afinion';
 import moment from 'moment';
 
 interface SiteCardProps {
@@ -12,13 +12,13 @@ export default function SiteCard ({site}: SiteCardProps) {
 
     const difference = moment().diff(site.last_calibrated, "days");
     const isCalibrated = difference <= 7 ? true : false;
-    const { data: affinions, isLoading, isError} = useQuery<AffinionDatabaseType[]>({
-        queryKey: ['siteAffinions', site.site_id], 
-        queryFn: () => fetchAffinions(site.site_id)
+    const { data: afinions, isLoading, isError} = useQuery<AfinionDatabaseType[]>({
+        queryKey: ['siteAfinions', site.site_id], 
+        queryFn: () => fetchAfinions(site.site_id)
     })
     if (isLoading) return (<p>Loading...</p>)
-    if (isError || !affinions) return (<p>Error fetching the sites</p>)
-    const sortedAffinions = affinions.sort((a, b) => a.affinion_number - b.affinion_number)
+    if (isError || !afinions) return (<p>Error fetching the sites</p>)
+    const sortedAfinions = afinions.sort((a, b) => a.afinion_number - b.afinion_number)
 
     return (
         <div className={`${ isCalibrated ? 'bg-l-green-800' : 'border-l-red-800'} bg-white rounded w-full h-full p-4 border-l border-l-5 border-l-green-700 border border-gray-400 cursor-pointer`}>
@@ -31,16 +31,16 @@ export default function SiteCard ({site}: SiteCardProps) {
             </p>
             <div className="pt-2">
                 {
-                    sortedAffinions.length === 0 && (
-                        <p className='text-xs italic text-gray-500'>No affinions added yet</p>
+                    sortedAfinions.length === 0 && (
+                        <p className='text-xs italic text-gray-500'>No afinions added yet</p>
                     )
                 }
                 {
-                    sortedAffinions.map((affinion) => {
+                    sortedAfinions.map((afinion) => {
                         return (
-                            <div className="flex justify-between" key={affinion.affinion_id}>
-                                <p className='text-xs text-gray-500'>Affinion {affinion.affinion_number}</p>
-                                <p className={`text-xs ${!affinion.last_calibrated && 'italic'} text-gray-500`} >{affinion.last_calibrated ? moment(affinion.last_calibrated).format('DD MMM') : 'No calibrations'}</p>
+                            <div className="flex justify-between" key={afinion.afinion_id}>
+                                <p className='text-xs text-gray-500'>Afinion {afinion.afinion_number}</p>
+                                <p className={`text-xs ${!afinion.last_calibrated && 'italic'} text-gray-500`} >{afinion.last_calibrated ? moment(afinion.last_calibrated).format('DD MMM') : 'No calibrations'}</p>
                             </div>
                         )
                     })

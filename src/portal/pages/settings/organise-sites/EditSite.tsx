@@ -1,7 +1,7 @@
 import { Dialog, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog"
 import { useContext, useState } from "react"
-import type { SiteInfoData } from '../../../utils/updateSite'
-import updateSite from "@/portal/utils/updateSite"
+import type { SiteInfoData } from '../../../../services/sites/updateSite'
+import updateSite from "@/services/sites/updateSite"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import type { SiteDatabaseType } from "@/types/site"

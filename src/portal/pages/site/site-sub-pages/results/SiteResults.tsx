@@ -1,10 +1,10 @@
 import CalibrationCard from "@/portal/components/CalibrationCard"
-import type { AffinionDatabaseType } from "@/types/affinion"
+import type { AfinionDatabaseType } from "@/types/afinion"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router"
 import fetchSiteBySlug from "@/hooks/fetchSiteBySlug"
-import fetchAffinions from "@/utils/fetchAffinions"
-import fetchResults from "@/portal/utils/fetchResults"
+import fetchAfinions from "@/services/afinions/fetchAfinions"
+import fetchResults from "@/services/results/fetchResults"
 
 export default function SiteResults () {
 
@@ -17,9 +17,9 @@ export default function SiteResults () {
         },
             enabled: !!siteSlug,
     })
-    const { data: affinions, isError: affinionError, isLoading: affinionsLoading } = useQuery({
-        queryKey: ['portalAffinions', activeSite],
-        queryFn: () => fetchAffinions(activeSite.site_id),
+    const { data: afinions, isError: afinionError, isLoading: afinionsLoading } = useQuery({
+        queryKey: ['portalAfinions', activeSite],
+        queryFn: () => fetchAfinions(activeSite.site_id),
         enabled: !!activeSite,
     })
     const { data: results, isError: resultError, isLoading: resultLoading } = useQuery({
@@ -30,11 +30,11 @@ export default function SiteResults () {
 
     if (siteError) return <p>Error loading site</p>;
     if (!activeSite) return <p>No site found</p>;
-    if (siteLoading || affinionsLoading || resultLoading) return <p>Loading...</p>;
-    if (affinionError) return (<p>Something went wrong...</p>)
-    if (!affinions) return (<p>No affinions found</p>)
+    if (siteLoading || afinionsLoading || resultLoading) return <p>Loading...</p>;
+    if (afinionError) return (<p>Something went wrong...</p>)
+    if (!afinions) return (<p>No afinions found</p>)
     if (resultError) return (<p>Something went wrong...</p>)
-    if (!results) return (<p>No affinions found</p>)
+    if (!results) return (<p>No afinions found</p>)
 
     const sortedResults = results.sort((a, b) => new Date(b.calibration_date).getTime() - new Date(a.calibration_date).getTime())
 
@@ -50,9 +50,9 @@ export default function SiteResults () {
             <div className="flex flex-col w-full gap-2 my-2">
                 {
                     sortedResults.map(((result) => {
-                        const affinion: AffinionDatabaseType | undefined = affinions.find((item: AffinionDatabaseType) => item.affinion_id === result.affinion_id)
+                        const afinion: AfinionDatabaseType | undefined = afinions.find((item: AfinionDatabaseType) => item.afinion_id === result.afinion_id)
                         return (
-                            <CalibrationCard key={result.id} result={result} affinion={affinion}/>
+                            <CalibrationCard key={result.id} result={result} afinion={afinion}/>
                         )
                     }))
                 }

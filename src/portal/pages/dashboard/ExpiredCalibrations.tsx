@@ -1,7 +1,7 @@
 import type { CalibrationDatabaseType } from "@/types/calibration"
 import type { SiteDatabaseType } from "@/types/site"
-import fetchAllControls from "@/utils/fetchAllControls"
-import fetchAllSites from "@/utils/fetchAllSites"
+import fetchAllControls from "@/services/controls/fetchAllControls"
+import fetchAllSites from "@/services/sites/fetchAllSites"
 import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
 

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import type { SiteDatabaseType } from "@/types/site";
-import fetchAllSites from "@/utils/fetchAllSites";
+import fetchAllSites from "@/services/sites/fetchAllSites";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareCheck, faTriangleExclamation, faHandSparkles, faBug } from "@fortawesome/free-solid-svg-icons";

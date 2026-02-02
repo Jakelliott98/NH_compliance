@@ -4,7 +4,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/
 
 const option = {
     title: 'New Result',
-    text: 'Add a new set of affinion calibration results',
+    text: 'Add a new set of afinion calibration results',
     value: 'Results-Form',
 }
 

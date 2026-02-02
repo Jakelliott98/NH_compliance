@@ -1,6 +1,6 @@
 
 
-export default function CreateSiteSlug ( siteName: string ) {
+export default function createSiteSlug ( siteName: string ) {
 
     const slug = siteName.split(' ').join('-')
     return slug;

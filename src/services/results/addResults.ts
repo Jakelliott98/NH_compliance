@@ -14,7 +14,7 @@ interface TestResultType {
 
 interface ResultType {
     siteID: number,
-    affinionID: number,
+    afinionID: number,
     clinician: string,
     attempts: number,
     hdl: TestResultType,
@@ -29,7 +29,7 @@ const addCalibrationResults = async (result: ResultType, supabase) => {
     .from('results')
     .insert([{
         site_id: result.siteID,
-        affinion_id: result.affinionID,
+        afinion_id: result.afinionID,
         clinician: result.clinician,
         calibration_date: new Date(),
         attempts: result.attempts,

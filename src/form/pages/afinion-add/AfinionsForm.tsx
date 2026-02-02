@@ -1,21 +1,15 @@
 import { useForm } from 'react-hook-form'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router'
-import fetchSiteBySlug from '@/utils/fetchSiteBySlug'
-import type { AffinionData } from '@/form/utils/addAfinion'
-import addAfinion from '@/form/utils/addAfinion'
-import { useContext } from 'react'
-import supabaseContext from '@/utils/supabaseContext'
+import fetchSiteBySlug from '@/services/sites/fetchSiteBySlug'
+import type { AfinionData } from '@/services/afinions/createAfinion'
+import useCreateAfinion from '@/services/afinions/useCreateAfinion'
 
-interface AffinionFormSectionProps {
+interface AfinionFormSectionProps {
     closeDialog: () => void,
 }
 
-export default function AffinionFormSection ({ closeDialog }: AffinionFormSectionProps) {
-
-    const supabase = useContext(supabaseContext)
-
-    const queryClient = useQueryClient()
+export default function AfinionFormSection ({ closeDialog }: AfinionFormSectionProps) {
 
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: isSiteError, isLoading: isSiteLoading, error: siteError } = useQuery({
@@ -26,12 +20,7 @@ export default function AffinionFormSection ({ closeDialog }: AffinionFormSectio
         },
     })
 
-    const addNewAffinion = useMutation({
-        mutationFn: (affinionData: AffinionData) => addAfinion(affinionData, supabase),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['affinions']})
-        }
-    }) 
+    const { mutate } = useCreateAfinion();
 
     const { register, handleSubmit } = useForm()
     
@@ -41,12 +30,12 @@ export default function AffinionFormSection ({ closeDialog }: AffinionFormSectio
 
 
     const onSubmit = handleSubmit((data) => {
-        const affinionData: AffinionData = {
+        const afinionData: AfinionData = {
             number: data.number,
             nhNumber: data.nh_number,
             siteID: activeSite.site_id,
         }
-        addNewAffinion.mutate(affinionData)
+        mutate(afinionData)
         closeDialog()
     })
 
@@ -54,13 +43,13 @@ export default function AffinionFormSection ({ closeDialog }: AffinionFormSectio
         <div className="bg-gray-100 w-full p-2 lg:p-5 rounded flex flex-col items-center text-slate-600">
             <form className="p-4 bg-white flex flex-col gap-2 rounded" onSubmit={onSubmit}>
                 <div className="flex flex-col">
-                    <label>Affinion Number</label>
+                    <label>Afinion Number</label>
                     <div className='outline rounded flex py-1 px-2 gap-2'>
-                        <p className='text-slate-400'>Affinion</p>
+                        <p className='text-slate-400'>Afinion</p>
                         <input 
                             className="outline-none focuse:outline-none focus:ring-0" 
                             type="number" 
-                            {...register("number", {required: "Each affinion requires a name", valueAsNumber: true})}
+                            {...register("number", {required: "Each afinion requires a name", valueAsNumber: true})}
                         />
                     </div>
                 </div>
@@ -82,7 +71,7 @@ export default function AffinionFormSection ({ closeDialog }: AffinionFormSectio
                     type="submit"
                     className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded bg-gray-100 text-gray-900"
                 >
-                    Add Affinion
+                    Add Afinion
                 </button>
             </form>
         </div>

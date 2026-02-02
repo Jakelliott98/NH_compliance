@@ -2,15 +2,15 @@ import { useContext, useEffect, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form";
 import CalendarPopup from "@/form/components/CalendarPopup";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import fetchSiteBySlug from "@/utils/fetchSiteBySlug";
+import fetchSiteBySlug from "@/services/sites/fetchSiteBySlug";
 import { useParams } from "react-router";
-import fetchCalibrations from "@/utils/fetchControls";
+import fetchCalibrations from "@/services/controls/fetchControls";
 import ControlsSelect from "./ControlsSelect";
-import addControl from "@/form/utils/addControl";
-import type { ControlType } from "@/form/utils/addControl";
-import type { RangesType } from "@/form/utils/addControl";
+import addControl from "@/services/controls/addControl";
+import type { ControlType } from "@/services/controls/addControl";
+import type { RangesType } from "@/services/controls/addControl";
 import { useQueryClient } from "@tanstack/react-query";
-import updateControl from "@/form/utils/updateControl";
+import updateControl from "@/services/controls/updateControl";
 import InputTable from "./InputTable";
 import type { CalibrationDatabaseType } from "@/types/calibration";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -92,7 +92,7 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
     })
 
 
-    if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Affinions')
+    if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Afinions')
     if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
     if (!activeSite || !controls) return (<p>Something went wrong fetching sites</p>)
     

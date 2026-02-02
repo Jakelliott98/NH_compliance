@@ -1,12 +1,12 @@
 
-const updateLastCalibration = async (affinionID: number, supabase) => {
+const updateLastCalibration = async (afinionID: number, supabase) => {
 
     const today = new Date()
 
     const { error } = await supabase
-    .from('affinions')
+    .from('afinions')
     .update({last_calibrated: today})
-    .eq("affinion_id", affinionID)
+    .eq("afinion_id", afinionID)
     
     if (error) throw error;
 

@@ -1,5 +1,5 @@
 import SiteSearch from "@/form/pages/site-search/SiteSearch"
-import fetchAllSites from "@/utils/fetchAllSites"
+import fetchAllSites from "@/services/sites/fetchAllSites"
 import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import type { SiteDatabaseType } from "@/types/site"

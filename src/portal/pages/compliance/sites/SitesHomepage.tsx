@@ -2,7 +2,7 @@ import { useState } from 'react'
 import SitesSection from './components/SitesSection'
 import type { SiteDatabaseType } from '@/types/site'
 import { useQuery } from '@tanstack/react-query'
-import fetchAllSites from '@/utils/fetchAllSites'
+import fetchAllSites from '@/services/sites/fetchAllSites'
 import FilterSection from './components/sites-filters/FilterSection'
 import { useEffect } from 'react'
 

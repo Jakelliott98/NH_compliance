@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router"
-import fetchSiteBySlug from "@/utils/fetchSiteBySlug"
-import fetchCalibrations from "@/utils/fetchControls"
+import fetchSiteBySlug from "@/services/sites/fetchSiteBySlug"
+import fetchCalibrations from "@/services/controls/fetchControls"
 import type { CalibrationDatabaseType } from "@/types/calibration"
 import LipidsControlDisplay from "./LipidsControlDisplay"
 import HBA1cControlDisplay from "./HBA1cControlDisplay"
@@ -26,7 +26,7 @@ export default function CalibrationSection () {
     if (siteError) return <p>Error loading site</p>;
     if (!activeSite) return <p>No site found</p>;
     if (siteLoading || controlLoading) return <p>Loading...</p>;
-    if (!controls) return (<p>No affinions found</p>)
+    if (!controls) return (<p>No afinions found</p>)
     if (controlError) return (<p>Something went wrong...</p>)
 
     return (

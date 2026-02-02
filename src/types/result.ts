@@ -16,7 +16,7 @@ export interface ResultsDatabaseType {
     id: number,
     created_at: Date,
     site_id: number,
-    affinion_id: number,
+    afinion_id: number,
     clinician: string,
     calibration_date: Date,
     attempts: number,

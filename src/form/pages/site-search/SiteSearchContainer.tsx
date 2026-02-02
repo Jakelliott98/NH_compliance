@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router"
 import { useState } from "react"
-import fetchAllSites from "@/utils/fetchAllSites"
+import fetchAllSites from "@/services/sites/fetchAllSites"
 import SiteSearch from "./SiteSearch"
 import { useQuery } from "@tanstack/react-query"
 import type { SiteDatabaseType } from "@/types/site"
