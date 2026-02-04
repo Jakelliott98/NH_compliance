@@ -18,8 +18,8 @@ function HBA1cControlDisplay ({ hba1c }: Hba1cDisplayProps) {
     <div className='p-0.5 bg-red-100 rounded-xl flex flex-col h-fit grow-1'>
             <div className='bg-white rounded-xl p-3'>
                 <div className='border-b-2 border-solid border-gray-300 py-2'>
-                    <p className='font-medium'>{hba1c.display_name}</p>
-                    <p className='text-gray-400 text-xs'>Lot Number: {hba1c.lot_number}</p>
+                    <p className='text-sm md:text-base font-medium'>{hba1c.display_name}</p>
+                    <p className='text-sm md:text-base text-gray-400 text-xs'>Lot Number: {hba1c.lot_number}</p>
                 </div>
                 { !isOpen && <button className=" w-full pt-3 text-sm text-gray-400 cursor-pointer" onClick={() => {setIsOpen(true)}}>See Ranges <FontAwesomeIcon icon={faChevronDown} /></button>}
                 { isOpen && (

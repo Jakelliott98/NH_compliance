@@ -46,11 +46,13 @@ export default function AfinionSection () {
                 <table className="">
                     <thead className="text-xs text-gray-400  bg-gray-100">
                         <tr>
-                            <th className="text-left font-medium pl-2 py-2">Afinion</th>
-                            <th className="text-center font-medium">NH Number</th>
-                            <th className="text-center font-medium">Last Calibration</th>
-                            <th className="text-center font-medium">Last Clean</th>
-                            <th className="text-center font-medium pr-2">Status</th>
+                            <th className="text-center font-medium pl-2 py-2">Afinion</th>
+                            <th className="hidden md:table-cell text-center font-medium">NH Number</th>
+                            <th className="hidden md:table-cell text-center font-medium">Last Calibration</th>
+                            <th className="md:hidden text-center font-medium">Calibrated</th>
+                            <th className="md:hidden text-center font-medium">Cleaned</th>
+                            <th className="hidden md:table-cell text-center font-medium">Last Clean</th>
+                            <th className="hidden md:table-cell text-center font-medium pr-2">Status</th>
                         </tr>
                     </thead> 
                     <tbody className="">
@@ -58,11 +60,13 @@ export default function AfinionSection () {
                             sortedAfinions.map((afinion) => {
                                 return (
                                     <tr className="text-sm text-gray-600 bg-white">
-                                        <td className="text-left pl-2 py-1">Afinion {afinion.afinion_number}</td>
-                                        <td className="text-center">NH{afinion.nh_number}</td>
-                                        <td className="text-center">{afinion.last_calibrated ? moment(afinion.last_calibrated).format("Do MMM") : 'No calibrations'}</td>
-                                        <td className="text-center">{afinion.last_clean ? moment(afinion.last_clean).format("Do MMM") : 'No cleans'}</td>
-                                        <td className="text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_clean && afinion.last_calibrated ? 'text-green-700' : 'text-red-700'} text-xs`}/></td>
+                                        <td className="pl-2 py-1 text-center">{afinion.afinion_number}</td>
+                                        <td className="hidden md:table-cell text-center">NH{afinion.nh_number}</td>
+                                        <td className="hidden md:table-cell text-center">{afinion.last_calibrated ? moment(afinion.last_calibrated).format("Do MMM") : 'No calibrations'}</td>
+                                        <td className="md:hidden text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_calibrated ? 'text-green-700' : 'text-red-700'} text-xs`}/></td>
+                                        <td className="md:hidden text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_clean ? 'text-green-700' : 'text-red-700'} text-xs`}/></td>
+                                        <td className="hidden md:table-cell text-center">{afinion.last_clean ? moment(afinion.last_clean).format("Do MMM") : 'No cleans'}</td>
+                                        <td className="hidden md:table-cell text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_clean && afinion.last_calibrated ? 'text-green-700' : 'text-red-700'} text-xs`}/></td>
                                     </tr>
                                 )
                             })

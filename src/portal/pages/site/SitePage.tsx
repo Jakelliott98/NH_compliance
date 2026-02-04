@@ -32,21 +32,21 @@ export default function SitePage () {
     if (!afinions) return (<p>No afinions found</p>)
 
     return (
-        <div className="flex flex-col bg-white p-5 rounded-xl my-2">
-            <div className="flex justify-between gap-4 border-b-1 border-solid border-gray-300 pb-2">
-                <h1 className="font-bold text-xl">{activeSite.site_name}</h1>
-                <div className="flex flex-row gap-10">
+        <div className="flex flex-col bg-white p-2 md:p-5 rounded-xl my-2">
+            <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-4 border-b-1 border-solid border-gray-300 pb-2">
+                <h1 className="text-center md:text-left font-bold md:text-xl">{activeSite.site_name}</h1>
+                <div className="flex flex-row gap-10 items-center">
                     <div className="flex flex-col">
-                        <p className="text-xs uppercase text-gray-500">Team Leader</p>
-                        <p className="text-sm text-center">{activeSite.team_leader}</p>
+                        <p className="text-center md:text-left text-xs uppercase text-gray-500">Team Leader</p>
+                        <p className="text-center text-xs md:text-sm text-center">{activeSite.team_leader}</p>
                     </div>
                     <div className="flex flex-col">
-                        <p className="text-xs uppercase text-gray-500">Last Calibrated</p>
-                        <p className="text-sm text-center">{moment(activeSite.last_calibrated).format('Do MMM')}</p>
+                        <p className="text-center md:text-left text-xs uppercase text-gray-500">Last Calibrated</p>
+                        <p className="text-center text-xs md:text-sm text-center">{moment(activeSite.last_calibrated).format('Do MMM')}</p>
                     </div>
                     <div className="flex flex-col">
-                        <p className="text-xs uppercase text-gray-500">Afinions</p>
-                        <p className="text-sm text-center">{afinions.length}</p>
+                        <p className="text-center md:text-left text-xs uppercase text-gray-500">Afinions</p>
+                        <p className="text-center text-xs md:text-sm text-center">{afinions.length}</p>
                     </div>
                 </div>
             </div>

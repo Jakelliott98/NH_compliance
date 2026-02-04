@@ -30,12 +30,8 @@ export default function CalibrationSection () {
     if (controlError) return (<p>Something went wrong...</p>)
 
     return (
-        <div className='w-full flex-1 flex flex-col gap-3 p-3'>
-            <div className=' flex gap-8'>
-                {
-                    <CalibrationHolder controls={controls}/>
-                }
-             </div>
+        <div className='w-full md:px-5'>
+            <CalibrationHolder controls={controls}/>
         </div>
     )
 
