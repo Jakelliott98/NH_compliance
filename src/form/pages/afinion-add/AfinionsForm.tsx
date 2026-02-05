@@ -1,9 +1,8 @@
 import { useForm } from 'react-hook-form'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router'
-import fetchSiteBySlug from '@/services/sites/fetchSiteBySlug'
 import type { AfinionData } from '@/services/afinions/createAfinion'
 import useCreateAfinion from '@/services/afinions/useCreateAfinion'
+import useSiteBySlug from '@/services/sites/useSiteBySlug'
 
 interface AfinionFormSectionProps {
     closeDialog: () => void,
@@ -12,13 +11,7 @@ interface AfinionFormSectionProps {
 export default function AfinionFormSection ({ closeDialog }: AfinionFormSectionProps) {
 
     const siteSlug = useParams().Site;
-    const { data: activeSite, isError: isSiteError, isLoading: isSiteLoading, error: siteError } = useQuery({
-        queryKey: ['activeSite', siteSlug],
-        queryFn: () => {
-            if (!siteSlug) throw new Error('Cannot find this site as siteSlug is not available')    
-            return fetchSiteBySlug(siteSlug)
-        },
-    })
+    const { data: activeSite, isError: isSiteError, isLoading: isSiteLoading, error: siteError } = useSiteBySlug(siteSlug)
 
     const { mutate } = useCreateAfinion();
 

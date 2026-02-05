@@ -1,23 +1,15 @@
-import AfinionCard from "./AfinionCard"
 import { useParams } from "react-router"
-import fetchSiteBySlug from "@/hooks/fetchSiteBySlug"
 import fetchAfinions from "@/services/afinions/fetchAfinions"
 import { useQuery } from "@tanstack/react-query"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import moment from "moment"
+import useSiteBySlug from "@/services/sites/useSiteBySlug"
 
 export default function AfinionSection () {
 
     const siteSlug = useParams().Site
-    const { data: activeSite, isError:siteError, isLoading: siteLoading} = useQuery({
-        queryKey: ['portalActiveSite', siteSlug],
-        queryFn: () => {
-            if (!siteSlug) throw new Error('Cannot find this site')
-            return fetchSiteBySlug(siteSlug)
-        },
-            enabled: !!siteSlug,
-    })
+    const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
     const { data: afinions, isError: afinionError, isLoading: afinionsLoading } = useQuery({
         queryKey: ['portalAfinions', activeSite],
         queryFn: () => fetchAfinions(activeSite.site_id),

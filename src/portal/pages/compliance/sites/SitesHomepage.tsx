@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import SitesSection from './components/SitesSection'
 import type { SiteDatabaseType } from '@/types/site'
-import { useQuery } from '@tanstack/react-query'
-import fetchAllSites from '@/services/sites/fetchAllSites'
 import FilterSection from './components/sites-filters/FilterSection'
 import { useEffect } from 'react'
+import useAllSites from '@/services/sites/useAllSites'
 
 export interface ActiveRegionState{
     activeRegion: string,
@@ -18,10 +17,7 @@ export interface SearchSiteState {
 
 export default function SitesDashboardContainer () {
     
-    const { data: sites, isLoading: isSitesLoading, isError: isSitesError, error: sitesError } = useQuery<SiteDatabaseType[] ,Error>({
-        queryKey: ['sites'], 
-        queryFn: () => fetchAllSites()
-    })
+    const { data: sites, isLoading: isSitesLoading, isError: isSitesError, error: sitesError } = useAllSites()
 
     if (isSitesLoading) return (<p>Loading...</p>)
     if (isSitesError || sites === null || sites === undefined) throw sitesError;

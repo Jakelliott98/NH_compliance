@@ -2,8 +2,7 @@ import type { AfinionDatabaseType } from "@/types/afinion"
 import fetchAllAfinions from "@/services/afinions/fetchAllAfinions"
 import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
-import fetchAllSites from "@/services/sites/fetchAllSites"
-import type { SiteDatabaseType } from "@/types/site"
+import useAllSites from "@/services/sites/useAllSites"
 
 
 export default function ExpiredCleans () {
@@ -12,10 +11,8 @@ export default function ExpiredCleans () {
 		queryKey: ['allAfinions'],
 		queryFn: () => fetchAllAfinions(),
 	})
-	const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useQuery<SiteDatabaseType[]>({
-		queryKey: ['allSites'],
-		queryFn: () => fetchAllSites()
-	})
+	const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useAllSites()
+
 	if (isAllAfinionsLoading || isAllSitesLoading) (<p>Loading...</p>)
 	if (isAllAfinionsError) throw allAfinionsError
 	if (allAfinions === null || allAfinions === undefined ) (<p>Could not find any afinions</p>)

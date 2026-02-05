@@ -3,23 +3,17 @@ import ControlsSection from "./components/ControlsSection"
 import AddResults from "./components/AddResults"
 import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
-import fetchSiteBySlug from "../../../services/sites/fetchSiteBySlug"
 import fetchAfinions from "../../../services/afinions/fetchAfinions"
 import fetchCalibrations from "../../../services/controls/fetchControls"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import useSiteBySlug from "@/services/sites/useSiteBySlug"
 
 
 export function SitePage () {
 
     const siteSlug = useParams().Site;
-    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({
-        queryKey: ['activeSite', siteSlug], 
-        queryFn: () => {
-            if (!siteSlug) throw new Error('Cannot find this site')
-            return fetchSiteBySlug(siteSlug)
-        }
-    })
+    const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
     const { data: afinions, isError: afinionsError, isLoading: afinionsLoading} = useQuery({
         queryKey: ['afinions', activeSite], 
         queryFn: () => {
@@ -45,7 +39,7 @@ export function SitePage () {
         <div className="flex flex-col lg:gap-5 h-full">
             <h1 className="text-center font-semibold text-xl lg:text-2xl tracking-wide leading-relaxed">{activeSite.site_name}</h1>
             <div className="flex-1 flex flex-col gap-4 [&>*]:grow lg:grid lg:grid-rows-3 lg:gap-y-2">
-                    <AinionSection afinions={afinions} />
+                    <AfinionSection afinions={afinions} />
                     <ControlsSection controls={controls} />
                     {
                         controls.length === 0 || afinions.length === 0 ? <DisabledAddResults /> : <AddResults />

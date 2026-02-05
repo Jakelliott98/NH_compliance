@@ -1,19 +1,15 @@
 import SiteSearch from "@/form/pages/site-search/SiteSearch"
-import fetchAllSites from "@/services/sites/fetchAllSites"
 import { useState } from "react"
-import { useQuery } from "@tanstack/react-query"
 import type { SiteDatabaseType } from "@/types/site"
 import SiteDataExport from "./SiteDataExport"
 import SiteExport from "./SiteExport"
+import useAllSites from "@/services/sites/useAllSites"
 
 export default function ReportsExports () {
 
     const [activeSite, setActiveSite] = useState<SiteDatabaseType>()
 
-    const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useQuery<SiteDatabaseType[]>({
-        queryKey: ['allSites'], 
-        queryFn: () => fetchAllSites(),
-    })
+    const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useAllSites()
 
 
     if (isAllSitesError) throw allSitesError;

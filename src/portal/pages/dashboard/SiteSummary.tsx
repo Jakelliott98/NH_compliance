@@ -1,18 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import type { SiteDatabaseType } from "@/types/site";
-import fetchAllSites from "@/services/sites/fetchAllSites";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareCheck, faTriangleExclamation, faHandSparkles, faBug } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import useAllSites from "@/services/sites/useAllSites";
 
 
 export default function SiteSummary () {
 
-	    const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useQuery<SiteDatabaseType[]>({
-        queryKey: ['allSites'], 
-        queryFn: fetchAllSites
-    })
+	    const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useAllSites()
     
     if (isAllSitesError) throw allSitesError;
     if (isAllSitesLoading) return (<p>Loading...</p>)

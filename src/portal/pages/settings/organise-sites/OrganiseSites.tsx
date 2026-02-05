@@ -1,8 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import fetchAllSites from "@/services/sites/fetchAllSites"
-import type { SiteDatabaseType } from "@/types/site"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import moment from "moment"
 import EditSiteContainer from "./EditSite"
 import DeleteSiteContainer from "./DeleteSite"
@@ -11,6 +9,7 @@ import addSite from "@/services/sites/addSite"
 import AddSiteSection from "./AddSiteSection"
 import { useContext } from "react"
 import supabaseContext from "@/utils/supabaseContext"
+import useAllSites from "@/services/sites/useAllSites"
 
 export default function OrganiseSites () {
 
@@ -19,10 +18,7 @@ export default function OrganiseSites () {
     const { handleSubmit }  = methods;
     const queryClient = useQueryClient();
 
-    const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useQuery<SiteDatabaseType[]>({
-        queryKey:['allSites'], 
-        queryFn: () => fetchAllSites()
-    })
+    const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useAllSites()
     const mutation = useMutation({
         mutationFn: (data) => {return addSite(data, supabase)},
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})

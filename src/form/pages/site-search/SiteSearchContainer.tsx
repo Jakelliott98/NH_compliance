@@ -1,21 +1,16 @@
 import { useNavigate } from "react-router"
 import { useState } from "react"
-import fetchAllSites from "@/services/sites/fetchAllSites"
 import SiteSearch from "./SiteSearch"
-import { useQuery } from "@tanstack/react-query"
-import type { SiteDatabaseType } from "@/types/site"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"
+import useAllSites from "@/services/sites/useAllSites"
 
 export default function SiteSearchContainer () {
 
     const [activeSite, setActiveSite] = useState()
     const navigate = useNavigate();
 
-    const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useQuery<SiteDatabaseType[]>({
-        queryKey: ['allSites'], 
-        queryFn: () => fetchAllSites(),
-    })
+    const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useAllSites()
     
     if (isAllSitesError) throw allSitesError;
     if (isAllSitesLoading) return (<p>Loading...</p>)

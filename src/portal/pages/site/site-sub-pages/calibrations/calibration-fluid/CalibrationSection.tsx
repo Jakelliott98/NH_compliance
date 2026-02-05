@@ -1,21 +1,15 @@
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router"
-import fetchSiteBySlug from "@/services/sites/fetchSiteBySlug"
 import fetchCalibrations from "@/services/controls/fetchControls"
 import type { CalibrationDatabaseType } from "@/types/calibration"
 import LipidsControlDisplay from "./LipidsControlDisplay"
 import HBA1cControlDisplay from "./HBA1cControlDisplay"
+import useSiteBySlug from "@/services/sites/useSiteBySlug"
 
 export default function CalibrationSection () {
 
     const siteSlug = useParams().Site
-    const { data: activeSite, isError:siteError, isLoading: siteLoading} = useQuery({
-        queryKey: ['portalActiveSite', siteSlug],
-        queryFn: () => {
-            if (!siteSlug) throw new Error('Cannot find this site')
-            return fetchSiteBySlug(siteSlug)},
-            enabled: !!siteSlug,
-    })
+    const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
     const { data: controls, isError: controlError, isLoading: controlLoading} = useQuery({
         queryKey: ['controls', activeSite],
         queryFn: () => {

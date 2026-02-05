@@ -3,7 +3,6 @@ import type { AfinionDatabaseType } from "@/types/afinion"
 import { FormProvider, useForm } from "react-hook-form"
 import { useParams } from "react-router"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import fetchSiteBySlug from "@/services/sites/fetchSiteBySlug"
 import fetchAfinions from "@/services/afinions/fetchAfinions"
 import fetchCalibrations from "@/services/controls/fetchControls"
 import RangesComponent from "./RangesComponent"
@@ -13,11 +12,12 @@ import updateLastCalibration from "@/services/afinions/updateLastCalibration"
 import addCalibrationResults from "@/services/results/addResults"
 import updateSiteCalibration from "@/services/sites/updateSiteCalibration"
 import supabaseContext from "@/utils/supabaseContext"
+import useSiteBySlug from "@/services/sites/useSiteBySlug"
 
 export default function FormSection () {
 
     const siteSlug = useParams().Site;
-    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
+    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useSiteBySlug(siteSlug)
     const { data: afinions, isError: afinionsError, isLoading: afinionsLoading} = useQuery({
         queryKey: ['afinions', activeSite], 
         queryFn: () => {
@@ -56,7 +56,7 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
     const [isCleaned, setIsCleaned] = useState(false)
 
     const siteSlug = useParams().Site;
-    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({queryKey: ['activeSite', siteSlug], queryFn: () => fetchSiteBySlug(siteSlug)})
+    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useSiteBySlug(siteSlug)
     const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
         queryKey: ['controls', activeSite],
         queryFn: () => {

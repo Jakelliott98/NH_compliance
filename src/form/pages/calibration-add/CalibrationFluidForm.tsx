@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form";
 import CalendarPopup from "@/form/components/CalendarPopup";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import fetchSiteBySlug from "@/services/sites/fetchSiteBySlug";
 import { useParams } from "react-router";
 import fetchCalibrations from "@/services/controls/fetchControls";
 import ControlsSelect from "./ControlsSelect";
@@ -15,8 +14,8 @@ import InputTable from "./InputTable";
 import type { CalibrationDatabaseType } from "@/types/calibration";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import SubmitButton from "@/components/SubmitButton";
 import supabaseContext from "@/utils/supabaseContext";
+import useSiteBySlug from "@/services/sites/useSiteBySlug";
 
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
@@ -64,14 +63,7 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
     }, [date, setValue, selectedControl])
 
     const siteSlug: string | undefined = useParams().Site;
-    const { data: activeSite, isError: siteError, isLoading: siteLoading } = useQuery({
-        queryKey: ['activeSite', siteSlug], 
-        queryFn: () => {
-            if (!siteSlug) throw new Error('Cannot find the site')
-            return fetchSiteBySlug(siteSlug)
-        },
-        enabled: !!siteSlug,
-    })
+    const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
     const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery<CalibrationDatabaseType[]>({
         queryKey: ['controls', activeSite],
         queryFn: () => {
