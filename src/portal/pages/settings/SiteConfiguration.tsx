@@ -8,6 +8,7 @@ import { useState } from "react";
 import type { AfinionDatabaseType } from "@/types/afinion";
 import fetchAfinions from "@/services/afinions/fetchAfinions";
 import { useNavigate } from "react-router";
+import moment from "moment";
 
 export default function SiteConfiguration () {
     
@@ -26,7 +27,7 @@ export default function SiteConfiguration () {
             <div className="py-4">
                 <div className="flex-1 border-b border-gray-200 pb-2">
                     <p className="font-semibold">Site Configuration</p>
-                    <p className="text-sm text-gray-400">Select an individual site to manage its Afinion machines. Edit machine details, update records, or remove machines that are no longer in use.</p>
+                    <p className="hidden md:block text-sm text-gray-400">Select an individual site to manage its Afinion machines. Edit machine details, update records, or remove machines that are no longer in use.</p>
                 </div>
                 <div className="py-2 border-b border-gray-200">
                     <div>
@@ -72,17 +73,17 @@ function EditAfinionsSection ({activeSite}: EditAfinionsSectionProps) {
             <div className="pt-2">
                 <div className="grid grid-cols-4 text-sm text-gray-600 bg-gray-200 p-2 text-center">
                     <p>Afinion Number</p>
-                    <p>NH Number</p>
+                    <p className="hidden md:block">NH Number</p>
                     <p>Last Clean</p>
                     <></>
                 </div>
                 {
                     sortedAfinions.map((afinion: AfinionDatabaseType) => {
                         return (
-                            <div className="grid grid-cols-4 p-2 text-center border-b borger-gray-100" key={afinion.afinion_id}>
+                            <div className="grid grid-cols-4 p-2 text-center border-b borger-gray-100 text-sm md:text-base" key={afinion.afinion_id}>
                                 <p>{afinion.afinion_number}</p>
-                                <p>{afinion.nh_number}</p>
-                                <p>12-12-2026</p>
+                                <p className="hidden md:block">{afinion.nh_number}</p>
+                                <p className={afinion.last_clean ? '' : 'text-red-500/80 italic'} >{afinion.last_clean ? moment(afinion.last_clean).format('Do MMM') : 'No Cleans'}</p>
                                 <p><FontAwesomeIcon icon={faTrashCan} className="text-gray-400"/></p>
                             </div>
                         )

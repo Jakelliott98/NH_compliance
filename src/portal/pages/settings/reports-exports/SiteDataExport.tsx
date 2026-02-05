@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query"
 import SelectButton from "@/components/SelectButton"
 import SelectDuration from "@/portal/components/SelectDuration"
 import { useState } from "react"
-import type { SelectedValue } from "react-day-picker"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 
 interface SiteDataExportProps {
@@ -30,17 +30,17 @@ function SiteDataExport ({ siteID }: SiteDataExportProps) {
     const setActiveDuration: (SelectedValue: string) => void = (selectedValue) => setSelectedDuration(selectedValue)
 
     return (
-            <div className="p-4 border-b border-gray-200 flex-1">
+            <div className="py-2 md:p-4 border-b border-gray-200 flex-1">
                 <div>
-                    <h2 className="font-semibold text-sm">Export Site Data</h2>
+                    <h2 className="text-sm">Export Site Data</h2>
                 </div>
                 <div className="py-2 flex flex-col gap-2">
                     <div className="flex flex-col gap-2">
                         <div>
-                            <p className="text-sm font-semibold">Afinion</p>
+                            <p className="text-sm">Afinion</p>
                             <p className="text-sm text-gray-400 font-light">Afinions to extract data from.</p>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="hidden md:flex gap-2">
                                 <SelectButton text='All Afinions' activeSelect={selectedAfinion} onSelect={setActiveAfinion}/>
                                 {
                                     siteAfinions
@@ -52,6 +52,23 @@ function SiteDataExport ({ siteID }: SiteDataExportProps) {
                                         )
                                     })
                                 }
+                        </div>
+                        <div className="md:hidden">
+                            <Select>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder='Afinion' />
+                                </SelectTrigger>
+                                <SelectContent className="w-full">
+                                        {
+                                            siteAfinions
+                                            .sort((a, b) => a.afinion_number - b.afinion_number)
+                                            .map((afinion) => {
+                                                return (
+                                                <SelectItem value={`Afinion ${afinion.afinion_number}`}>Afinion {afinion.afinion_number}</SelectItem>
+                                            )})
+                                        }
+                                </SelectContent>
+                            </Select>
                         </div>
                     </div>
                     <SelectDuration onSelect={setActiveDuration} activeSelect={selectedDuration}/>

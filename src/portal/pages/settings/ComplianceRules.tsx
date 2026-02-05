@@ -10,16 +10,16 @@ export default function ComplianceRules () {
         <div className="py-4">
             <div className="flex-1 border-b border-gray-200 pb-2">
                 <h2 className="font-semibold">Compliance Rules</h2>
-                <p className="text-sm text-gray-400">Define the timeframes used to determine compliance, including calibration validity, cleaning frequency, and fluid expiry periods. These rules control how site status is calculated.</p>
+                <p className="hidden md:block text-sm text-gray-400">Define the timeframes used to determine compliance, including calibration validity, cleaning frequency, and fluid expiry periods. These rules control how site status is calculated.</p>
             </div>
             <div className="pt-2">
                 <div>
                     <h2 className="font-semibold text-sm">Compliance Ranges</h2>
                     <p className="text-sm text-gray-400">Control the compliance ranges for the cleaning and calibrations</p>
                 </div>
-                <div className="flex-3 flex justify-around pt-4">
+                <div className="flex-3 flex flex-col md:flex-row gap-5 md:gap-1 justify-around pt-4">
                     <div className="flex flex-col justify-center gap-4">
-                        <h2 className="font-medium ">Afinion machines need to be calibrated every: <span className="font-bold">{cleaningValue[0]} Weeks</span></h2>
+                        <h2 className="font-medium text-sm md:text-base">Afinion machines need to be calibrated every: <span className="font-bold">{cleaningValue[0]} Weeks</span></h2>
                         <Slider 
                             defaultValue={[4]}
                             max={12}
@@ -30,7 +30,7 @@ export default function ComplianceRules () {
                         <p className="text-sm text-gray-500 italic">Adjust the period for cleaning calibrations.</p>
                     </div>
                     <div className="flex flex-col justify-center gap-4">
-                        <h2 className="font-medium ">Afinions machines need to be cleaned every: <span className="font-bold">{calibrationValue[0]} Days</span></h2>
+                        <h2 className="font-medium text-sm md:text-base">Afinions machines need to be cleaned every: <span className="font-bold">{calibrationValue[0]} Days</span></h2>
                         <Slider
                             className="cursor-pointer"
                             defaultValue={[1]}
