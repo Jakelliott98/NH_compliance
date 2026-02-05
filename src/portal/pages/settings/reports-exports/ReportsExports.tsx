@@ -34,7 +34,7 @@ export default function ReportsExports () {
             {
                 activeSite && (
                     <div className="flex flex-col md:flex-row w-full justify-between gap-2 md:gap-20">
-                        <SiteDataExport siteID={activeSite.site_id}/>
+                        <SiteDataExport site={activeSite}/>
                         <SiteExport />
                     </div>
                 )

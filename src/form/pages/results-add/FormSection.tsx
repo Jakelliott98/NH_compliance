@@ -2,9 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import type { AfinionDatabaseType } from "@/types/afinion"
 import { FormProvider, useForm } from "react-hook-form"
 import { useParams } from "react-router"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import fetchAfinions from "@/services/afinions/fetchAfinions"
-import fetchCalibrations from "@/services/controls/fetchControls"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import RangesComponent from "./RangesComponent"
 import { useContext, useState } from "react"
 import updateLastCleaned from "@/services/afinions/updateLastCleaned"
@@ -13,18 +11,14 @@ import addCalibrationResults from "@/services/results/addResults"
 import updateSiteCalibration from "@/services/sites/updateSiteCalibration"
 import supabaseContext from "@/utils/supabaseContext"
 import useSiteBySlug from "@/services/sites/useSiteBySlug"
+import useControls from "@/services/controls/useControls"
+import useAfinions from "@/services/afinions/useAfinions"
 
 export default function FormSection () {
 
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useSiteBySlug(siteSlug)
-    const { data: afinions, isError: afinionsError, isLoading: afinionsLoading} = useQuery({
-        queryKey: ['afinions', activeSite], 
-        queryFn: () => {
-            if (!activeSite) throw new Error('Cannot find the current site')
-            return fetchAfinions(activeSite.site_id)},
-        enabled: !!activeSite,
-    })
+    const { data: afinions, isError: afinionsError, isLoading: afinionsLoading} = useAfinions(activeSite)
 
     if ( siteError || afinionsError ) throw new Error('Could not fetch active site or Afinions')
     if ( siteLoading || afinionsLoading ) return (<p>Loading...</p>)
@@ -57,13 +51,7 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
 
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useSiteBySlug(siteSlug)
-    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
-        queryKey: ['controls', activeSite],
-        queryFn: () => {
-            if (!activeSite) throw new Error('This site cannot be found')
-            return fetchCalibrations(activeSite.site_id)},
-        enabled: !!activeSite,
-    })
+    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useControls(activeSite)
     const updateCleaned = useMutation({
         mutationFn: ({ afinionID }) => updateLastCleaned(afinionID, supabase),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})

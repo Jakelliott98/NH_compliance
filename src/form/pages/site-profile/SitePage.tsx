@@ -2,34 +2,18 @@ import AfinionSection from "./components/AfinionSection"
 import ControlsSection from "./components/ControlsSection"
 import AddResults from "./components/AddResults"
 import { useParams } from "react-router"
-import { useQuery } from "@tanstack/react-query"
-import fetchAfinions from "../../../services/afinions/fetchAfinions"
-import fetchCalibrations from "../../../services/controls/fetchControls"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import useSiteBySlug from "@/services/sites/useSiteBySlug"
-
+import useControls from "@/services/controls/useControls"
+import useAfinions from "@/services/afinions/useAfinions"
 
 export function SitePage () {
 
     const siteSlug = useParams().Site;
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
-    const { data: afinions, isError: afinionsError, isLoading: afinionsLoading} = useQuery({
-        queryKey: ['afinions', activeSite], 
-        queryFn: () => {
-            if (!activeSite) throw new Error('Cannot find this site')
-            return fetchAfinions(activeSite.site_id)
-        },
-        enabled: !!activeSite,
-    })
-    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery({
-        queryKey: ['controls', activeSite],
-        queryFn: () => {
-            if (!activeSite) throw new Error('Cannot find this site')
-            return fetchCalibrations(activeSite.site_id)
-        },
-        enabled: !!activeSite,
-    })
+    const { data: afinions, isError: afinionsError, isLoading: afinionsLoading} = useAfinions(activeSite)
+    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useControls(activeSite)
 
     if ( siteError || afinionsError || controlsError) throw new Error('Could not fetch Active Site, Controls or Afinions')
     if ( siteLoading || afinionsLoading || controlsLoading ) return (<p>Loading...</p>)

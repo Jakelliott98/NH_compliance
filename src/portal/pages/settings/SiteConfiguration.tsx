@@ -1,14 +1,13 @@
 import SiteSearch from "@/form/pages/site-search/SiteSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faHandshakeSlash } from "@fortawesome/free-solid-svg-icons";
-import { useQuery } from "@tanstack/react-query";
 import type { SiteDatabaseType } from "@/types/site";
 import { useState } from "react";
 import type { AfinionDatabaseType } from "@/types/afinion";
-import fetchAfinions from "@/services/afinions/fetchAfinions";
 import { useNavigate } from "react-router";
 import moment from "moment";
 import useAllSites from "@/services/sites/useAllSites";
+import useAfinions from "@/services/afinions/useAfinions";
 
 export default function SiteConfiguration () {
     
@@ -46,13 +45,10 @@ interface EditAfinionsSectionProps {
     activeSite: SiteDatabaseType,
 }
 
-function EditAfinionsSection ({activeSite}: EditAfinionsSectionProps) {
+function EditAfinionsSection ({ activeSite }: EditAfinionsSectionProps) {
 
     const navigate = useNavigate();
-    const { data: afinions, isError: isAfinionsError, isLoading: isAfinionsLoading, error: afinionsError } = useQuery<AfinionDatabaseType[]>({
-        queryKey:['siteAfinion', activeSite],
-        queryFn: () => fetchAfinions(activeSite.site_id),
-    })
+    const { data: afinions, isError: isAfinionsError, isLoading: isAfinionsLoading, error: afinionsError } = useAfinions(activeSite)
 
     if (isAfinionsError) throw afinionsError
     if ( isAfinionsLoading) return (<p>Loading...</p>)

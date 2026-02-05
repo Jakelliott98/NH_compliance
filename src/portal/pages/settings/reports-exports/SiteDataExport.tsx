@@ -1,26 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDownload } from "@fortawesome/free-solid-svg-icons"
-import fetchAfinions from "@/services/afinions/fetchAfinions"
-import { useQuery } from "@tanstack/react-query"
 import SelectButton from "@/components/SelectButton"
 import SelectDuration from "@/portal/components/SelectDuration"
 import { useState } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import useAfinions from "@/services/afinions/useAfinions"
+import type { SiteDatabaseType } from "@/types/site"
 
 
 interface SiteDataExportProps {
-    siteID: number,
+    site: SiteDatabaseType,
 }
 
-function SiteDataExport ({ siteID }: SiteDataExportProps) {
+function SiteDataExport ({ site }: SiteDataExportProps) {
 
     const [selectedAfinion, setSelectedAfinion] = useState<string>('All Afinions')
     const [selectedDuration, setSelectedDuration] = useState<string>('Last Month')
 
-    const { data: siteAfinions, isError: isSiteAfinionError, isLoading: isSiteAfinionLoading, error: siteAfinionError} = useQuery({
-        queryKey: ['siteAfinion', siteID],
-        queryFn: () => fetchAfinions(siteID),
-    })
+    const { data: siteAfinions, isError: isSiteAfinionError, isLoading: isSiteAfinionLoading, error: siteAfinionError} = useAfinions(site)
 
     if (isSiteAfinionLoading) return (<p>Loading...</p>)
     if (isSiteAfinionError) throw siteAfinionError

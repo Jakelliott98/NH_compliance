@@ -1,8 +1,7 @@
-import fetchAfinions from '@/services/afinions/fetchAfinions';
-import { useQuery } from '@tanstack/react-query';
 import type { SiteDatabaseType } from '@/types/site';
-import type { AfinionDatabaseType } from '@/types/afinion';
 import moment from 'moment';
+import useAfinions from '@/services/afinions/useAfinions';
+
 
 interface SiteCardProps {
     site: SiteDatabaseType,
@@ -12,10 +11,8 @@ export default function SiteCard ({site}: SiteCardProps) {
 
     const difference = moment().diff(site.last_calibrated, "days");
     const isCalibrated = difference <= 7 ? true : false;
-    const { data: afinions, isLoading, isError} = useQuery<AfinionDatabaseType[]>({
-        queryKey: ['siteAfinions', site.site_id], 
-        queryFn: () => fetchAfinions(site.site_id)
-    })
+    const { data: afinions, isLoading, isError} = useAfinions(site)
+    
     if (isLoading) return (<p>Loading...</p>)
     if (isError || !afinions) return (<p>Error fetching the sites</p>)
     const sortedAfinions = afinions.sort((a, b) => a.afinion_number - b.afinion_number)

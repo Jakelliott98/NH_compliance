@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form";
 import CalendarPopup from "@/form/components/CalendarPopup";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import fetchCalibrations from "@/services/controls/fetchControls";
 import ControlsSelect from "./ControlsSelect";
 import addControl from "@/services/controls/addControl";
 import type { ControlType } from "@/services/controls/addControl";
@@ -11,11 +10,11 @@ import type { RangesType } from "@/services/controls/addControl";
 import { useQueryClient } from "@tanstack/react-query";
 import updateControl from "@/services/controls/updateControl";
 import InputTable from "./InputTable";
-import type { CalibrationDatabaseType } from "@/types/calibration";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import supabaseContext from "@/utils/supabaseContext";
 import useSiteBySlug from "@/services/sites/useSiteBySlug";
+import useControls from "@/services/controls/useControls";
 
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
@@ -64,14 +63,7 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
 
     const siteSlug: string | undefined = useParams().Site;
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
-    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useQuery<CalibrationDatabaseType[]>({
-        queryKey: ['controls', activeSite],
-        queryFn: () => {
-            if (!activeSite) throw new Error('Active site has not been fetched')
-            return fetchCalibrations(activeSite.site_id)
-        },
-        enabled: !!activeSite,
-    }) // ONLY ACCESSED FOR THE CHECK ON SUBMIT MAY FIND EASIER WAY
+    const { data: controls, isError: controlsError, isLoading: controlsLoading } = useControls(activeSite)
     const addNewControl = useMutation({
         mutationFn: ({control, testType, ranges}: NewControlParameters) => addControl(control, testType, ranges, supabase),
         onSuccess: () => {

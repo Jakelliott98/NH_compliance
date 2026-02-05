@@ -1,20 +1,15 @@
 import CalibrationCard from "@/portal/components/CalibrationCard"
 import type { AfinionDatabaseType } from "@/types/afinion"
-import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router"
-import fetchAfinions from "@/services/afinions/fetchAfinions"
 import useResults from "@/services/results/useFetchResult"
 import useSiteBySlug from "@/services/sites/useSiteBySlug"
+import useAfinions from "@/services/afinions/useAfinions"
 
 export default function SiteResults () {
 
     const siteSlug = useParams().Site
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
-    const { data: afinions, isError: afinionError, isLoading: afinionsLoading } = useQuery({
-        queryKey: ['portalAfinions', activeSite],
-        queryFn: () => fetchAfinions(activeSite.site_id),
-        enabled: !!activeSite,
-    })
+    const { data: afinions, isError: afinionError, isLoading: afinionsLoading } = useAfinions(activeSite)
     const { data: results, isError: resultError, isLoading: resultLoading } = useResults(activeSite)
 
     if (siteError) return <p>Error loading site</p>;

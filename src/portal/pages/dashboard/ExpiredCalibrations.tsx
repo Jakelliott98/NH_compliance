@@ -1,16 +1,12 @@
-import type { CalibrationDatabaseType } from "@/types/calibration"
-import fetchAllControls from "@/services/controls/fetchAllControls"
-import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
 import useAllSites from "@/services/sites/useAllSites"
+import useAllControls from "@/services/controls/useAllControls"
 
 export default function ExpiredCalibrations () {
 
-	const { data: allControls, isLoading: isAllControlsLoading, isError: isAllControlsError, error: allControlsError } = useQuery<CalibrationDatabaseType[]>({
-		queryKey: ['allControls'],
-		queryFn: () => fetchAllControls(),
-	})
+	const { data: allControls, isLoading: isAllControlsLoading, isError: isAllControlsError, error: allControlsError } = useAllControls()
 	const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useAllSites()
+	
 	if (isAllControlsLoading || isAllSitesLoading) (<p>Loading...</p>)
 	if (isAllControlsError) throw allControlsError
 	if (allControls === null || allControls === undefined) (<p>Error fetching the calibrations</p>)
