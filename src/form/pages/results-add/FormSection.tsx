@@ -105,12 +105,12 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
             <form className="bg-white p-4 rounded outline m-2" onSubmit={onSubmit}>
                 <div className="m-0.5">
                     <div className="flex flex-col gap-1">
-                        <p className="flex items-center justify-center"><span>Afinion {afinion.afinion_number}</span> <span className="hidden md:block">&nbsp;| {afinion.nh_number}</span></p>
+                        <p className="flex items-center justify-center"><span>Afinion {afinion.afinion_number}</span> <span className="sm-hidden-block">&nbsp;| {afinion.nh_number}</span></p>
                         <div className=" bg-blue-200 px-2 py-0.5 flex gap-2 justify-center items-center rounded">
                             <Checkbox 
                                 className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
                             />
-                            <label className="text-blue-500 text-sm flex">Not in rotation&nbsp;<span className="hidden md:block">this week</span></label>
+                            <label className="text-blue-500 text-sm flex">Not in rotation&nbsp;<span className="sm-hidden-block">this week</span></label>
                         </div>
                         {
                             controls?.map((control) => {

@@ -54,7 +54,7 @@ function DashboardCards ({dataPoint, title, icon, colour}: DashboardCardsProps) 
 				<p className="text-xs md:text-lg text-gray-700 font-light">{title}</p>
 			</div>
 			<p className="text-md text-center md:text-xl">{dataPoint}</p>
-			<div className="hidden md:block flex gap-1 items-center text-gray-500 text-xs cursor-pointer hover:text-black">
+			<div className="sm-hidden-block flex gap-1 items-center text-gray-500 text-xs cursor-pointer hover:text-black">
 				<a>View More →</a>
 			</div>
 		</div>

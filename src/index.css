@@ -128,3 +128,11 @@
     }
 }
 }
+
+.sm-hidden-block {
+  @apply hidden md:block
+}
+
+.sm-hidden-inline {
+  @apply hidden md:inline-block
+}

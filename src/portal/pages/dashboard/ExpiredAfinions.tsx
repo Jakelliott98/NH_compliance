@@ -39,7 +39,7 @@ export default function ExpiredAfinions () {
 
 	return (
 		<div className="bg-gray-50 p-4 rounded">
-			<h1 className="hidden md:block">CALIBRATIONS</h1>
+			<h1 className="sm-hidden-block">CALIBRATIONS</h1>
 			<table className="w-full bg-white">
 					<thead className="bg-gray-50">
 					<tr>

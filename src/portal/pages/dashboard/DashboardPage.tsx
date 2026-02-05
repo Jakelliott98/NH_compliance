@@ -17,7 +17,7 @@ export default function DashboardPage () {
 			<section className="flex flex-col gap-5 my-2">
 				<SiteSummary />
 				<section className="bg-white p-2"> 
-					<div className="hidden md:block">
+					<div className="sm-hidden-block">
 						<DashboardTables />
 					</div>
 					<div className="md:hidden">

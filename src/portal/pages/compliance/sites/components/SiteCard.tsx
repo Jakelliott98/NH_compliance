@@ -29,7 +29,7 @@ export default function SiteCard ({site}: SiteCardProps) {
             <p className={`text-xs pt-1  ${!isCalibrated ? 'text-red-800' : ''}`}>
                 {difference ? `Last Calibrated: ${difference} days ago` : 'No Calibration Record'}
             </p>
-            <div className="pt-2 hidden md:block">
+            <div className="pt-2 sm-hidden-block">
                 {
                     sortedAfinions.length === 0 && (
                         <p className='text-xs italic text-gray-500'>No afinions added yet</p>

@@ -57,7 +57,7 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
             <div className="py-2 px-1 bg-white flex flex-col justify-center items-center w-full">
                         <FontAwesomeIcon icon={faHandshakeSlash} className="pb-1 md:pb-5 text-gray-300" />
                         <p className="text-xs md:text-sm text-gray-500">No Afinions added yet</p>
-                        <p className="hidden md:block text-xs text-gray-500">Add Afinions to start submitting results.</p>
+                        <p className="sm-hidden-block text-xs text-gray-500">Add Afinions to start submitting results.</p>
             </div>
         )
     }

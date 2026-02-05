@@ -10,7 +10,7 @@ export default function ComplianceRules () {
         <div className="py-4">
             <div className="flex-1 border-b border-gray-200 pb-2">
                 <h2 className="font-semibold">Compliance Rules</h2>
-                <p className="hidden md:block text-sm text-gray-400">Define the timeframes used to determine compliance, including calibration validity, cleaning frequency, and fluid expiry periods. These rules control how site status is calculated.</p>
+                <p className="sm-hidden-block text-sm text-gray-400">Define the timeframes used to determine compliance, including calibration validity, cleaning frequency, and fluid expiry periods. These rules control how site status is calculated.</p>
             </div>
             <div className="pt-2">
                 <div>

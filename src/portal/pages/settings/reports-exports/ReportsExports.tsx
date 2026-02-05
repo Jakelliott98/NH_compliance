@@ -24,12 +24,12 @@ export default function ReportsExports () {
         <div className="py-4">
             <div className="flex-1 border-b border-gray-200 pb-2">
                 <p className="font-semibold">Reports & Exports</p>
-                <p className="hidden md:blocktext-sm text-gray-400">Generate and export compliance reports for individual sites or across the organisation, including missed checks and overall compliance status.</p>
+                <p className="sm-hidden-block text-sm text-gray-400">Generate and export compliance reports for individual sites or across the organisation, including missed checks and overall compliance status.</p>
             </div>
             <div className="py-2 border-b border-gray-200">
                 <div>
                     <h2 className="text-sm">Find site</h2>
-                    <p className="hidden md:inline-block text-sm text-gray-400">Find the site you want to edit</p>
+                    <p className="sm-hidden-inline text-sm text-gray-400">Find the site you want to edit</p>
                 </div>
                 <div className="pt-2">
                     <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>

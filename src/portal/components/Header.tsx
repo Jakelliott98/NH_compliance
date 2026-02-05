@@ -11,7 +11,7 @@ export default function Header () {
 
     return (
     <div className='bg-white px-5 py-4 w-full flex justify-between items-center'>
-        <p className='hidden md:block text-sm uppercase text-neutral-400'>CT</p>
+        <p className='sm-hidden-block text-sm uppercase text-neutral-400'>CT</p>
         <nav className='hidden md:flex w-4/12 justify-between cursor-pointer'>
             <NavLink to="Dashboard" className={isDashboard ? 'text-black' : 'text-neutral-400 hover:text-black'}>
                 <div className='flex gap-1 items-center'>

@@ -48,7 +48,7 @@ function DeleteSite ({ site, onSubmit }: DeleteSiteProps) {
             <DialogTrigger asChild>
                 <button className="cursor-pointer hover:text-black">
                     <FontAwesomeIcon icon={faTrashCan}/> 
-                    <span className="hidden md:inline-block pl-0.5">Remove</span>
+                    <span className="sm-hidden-inline pl-0.5">Remove</span>
                 </button>
             </DialogTrigger>
             <DialogContent>

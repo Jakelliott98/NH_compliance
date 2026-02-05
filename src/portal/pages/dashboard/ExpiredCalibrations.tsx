@@ -38,7 +38,7 @@ export default function ExpiredCalibrations () {
 
 	return (
 		<div className="bg-gray-50 p-4 rounded">
-			<h1 className="hidden md:block">CONTROLS</h1>
+			<h1 className="sm-hidden-block">CONTROLS</h1>
 				<table className="w-full bg-white">
 					<thead className="bg-gray-50">
 						<tr className="">

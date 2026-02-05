@@ -79,7 +79,7 @@ function EditSite ({ siteDetails, onSubmit, onChange }: EditSiteProps) {
             <DialogTrigger asChild>
                 <button className="cursor-pointer hover:text-black">
                     <FontAwesomeIcon icon={faPenToSquare}/> 
-                    <span className="hidden md:inline-block pl-0.5">Edit</span>
+                    <span className="sm-hidden-inline pl-0.5">Edit</span>
                 </button>
             </DialogTrigger>
             <DialogContent>
