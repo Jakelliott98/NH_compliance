@@ -1,10 +1,8 @@
 import { Dialog, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog"
-import { useContext, useState } from "react"
-import { useQueryClient } from "@tanstack/react-query"
+import { useState } from "react"
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import type { SiteDatabaseType } from "@/types/site"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import supabaseContext from "@/utils/supabaseContext"
 import { useUpdateSite } from "@/services/sites"
 
 interface SiteDetails {
@@ -25,9 +23,6 @@ interface EditSiteContainerProps {
 
 export default function EditSiteContainer ({site}: EditSiteContainerProps) {
 
-    const supabase = useContext(supabaseContext)
-    const queryClient = useQueryClient()
-
     const [siteDetails, setSiteDetails] = useState<SiteDetails>({
         name: site.site_name,
         teamLeader: site.team_leader,
@@ -40,7 +35,7 @@ export default function EditSiteContainer ({site}: EditSiteContainerProps) {
 
         setSiteDetails((prev) => {
             return {
-                key: value,
+                [key]: value,
                 ...prev,
             }
         })

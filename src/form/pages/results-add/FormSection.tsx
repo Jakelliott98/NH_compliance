@@ -2,17 +2,15 @@ import { Checkbox } from "@/components/ui/checkbox"
 import type { AfinionDatabaseType } from "@/types/afinion"
 import { FormProvider, useForm } from "react-hook-form"
 import { useParams } from "react-router"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
 import RangesComponent from "./RangesComponent"
-import { useContext, useState } from "react"
-import { updateLastCleaned } from "@/services/afinions"
-import { updateLastCalibration } from "@/services/afinions"
+import { useState } from "react"
+import { useUpdateLastCalibration } from "@/services/afinions"
 import { useUpdateSiteCalibration } from "@/services/sites"
-import supabaseContext from "@/utils/supabaseContext"
 import { useSiteBySlug } from '@/services/sites'
 import { useControls } from "@/services/controls/queries"
 import { useAfinions } from "@/services/afinions"
 import { useCreateResult } from "@/services/results/mutations"
+import { useUpdateLastClean } from "@/services/afinions"
 
 export default function FormSection () {
 
@@ -43,8 +41,6 @@ interface AfinionResultCardProps {
 
 function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
 
-    const supabase = useContext(supabaseContext)
-    const queryClient = useQueryClient()
     const methods = useForm();
     const { handleSubmit, setValue, register } = methods;
     const [isCleaned, setIsCleaned] = useState(false)
@@ -52,14 +48,8 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: siteError, isLoading: siteLoading } = useSiteBySlug(siteSlug)
     const { data: controls, isError: controlsError, isLoading: controlsLoading } = useControls(activeSite)
-    const updateCleaned = useMutation({
-        mutationFn: ({ afinionID }) => updateLastCleaned(afinionID, supabase),
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})
-    })
-    const updateCalibrated = useMutation({
-        mutationFn: ({ afinionID }) => updateLastCalibration(afinionID, supabase),
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})
-    })
+    const { mutate: updateCleaned } = useUpdateLastClean()
+    const { mutate: updateCalibrated } = useUpdateLastCalibration()
     const { mutate: createResult } = useCreateResult()
     const { mutate: updateSiteCalibration } = useUpdateSiteCalibration()
 
@@ -78,8 +68,8 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
     })
 
     const onSubmit = handleSubmit((data) => {
-        if (isCleaned) updateCleaned.mutate({ afinionID: data.afinionID})
-        updateCalibrated.mutate({afinionID: data.afinionID})
+        if (isCleaned) updateCleaned({ afinionID: data.afinionID})
+        updateCalibrated({afinionID: data.afinionID})
         createResult({ result: data })
         updateSiteCalibration({ siteID: activeSite.site_id })
     })
