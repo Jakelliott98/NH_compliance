@@ -1,6 +1,6 @@
 import moment from "moment"
 import useAllSites from "@/services/sites/useAllSites"
-import useAllControls from "@/services/controls/useAllControls"
+import { useAllControls } from "@/services/controls"
 
 export default function ExpiredCalibrations () {
 

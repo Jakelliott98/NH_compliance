@@ -10,7 +10,7 @@ import { updateLastCalibration } from "@/services/afinions"
 import updateSiteCalibration from "@/services/sites/updateSiteCalibration"
 import supabaseContext from "@/utils/supabaseContext"
 import useSiteBySlug from "@/services/sites/useSiteBySlug"
-import useControls from "@/services/controls/useControls"
+import { useControls } from "@/services/controls/queries"
 import { useAfinions } from "@/services/afinions"
 import { useCreateResult } from "@/services/results/mutations"
 

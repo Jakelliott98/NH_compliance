@@ -1,20 +1,16 @@
 import { useContext, useEffect, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form";
 import CalendarPopup from "@/form/components/CalendarPopup";
-import { useMutation } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import ControlsSelect from "./ControlsSelect";
-import addControl from "@/services/controls/addControl";
-import type { ControlType } from "@/services/controls/addControl";
-import type { RangesType } from "@/services/controls/addControl";
 import { useQueryClient } from "@tanstack/react-query";
-import updateControl from "@/services/controls/updateControl";
 import InputTable from "./InputTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import supabaseContext from "@/utils/supabaseContext";
 import useSiteBySlug from "@/services/sites/useSiteBySlug";
-import useControls from "@/services/controls/useControls";
+import { useControls } from "@/services/controls/queries";
+import { useUpdateControl, useCreateControl } from "@/services/controls";
 
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
@@ -42,16 +38,9 @@ interface CalibrationFormInputProps {
     closeDialog: () => void,
 }
 
-interface NewControlParameters {
-    control: ControlType,
-    testType: string,
-    ranges: RangesType,
-}
 
 export function CalibrationFormInput ({ selectedControl, closeDialog }: CalibrationFormInputProps) {
 
-    const supabase = useContext(supabaseContext)
-    const queryClient = useQueryClient()
     const methods = useForm();
     const { register, handleSubmit, setValue } = methods
     const [date, setDate] = useState<Date | undefined>()
@@ -64,16 +53,10 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
     const siteSlug: string | undefined = useParams().Site;
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
     const { data: controls, isError: controlsError, isLoading: controlsLoading } = useControls(activeSite)
-    const addNewControl = useMutation({
-        mutationFn: ({control, testType, ranges}: NewControlParameters) => addControl(control, testType, ranges, supabase),
-        onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ['controls']})
-        }
-    })
-    const updateNewControl = useMutation({
-        mutationFn: ({control, testType, ranges}: NewControlParameters) => updateControl(control, testType, ranges, supabase),
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ['controls']})
-    })
+
+    const { mutate: addControl } = useCreateControl()
+
+    const { mutate: updateControl } = useUpdateControl()
 
 
     if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Afinions')
@@ -89,22 +72,22 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
 
         if (selectedControl === 'hba1c') {
             if (hba1cControlPresent) {
-                updateNewControl.mutate({control: data, testType: 'hba1c', ranges: data.hba1c})
+                updateControl({control: data, testType: 'hba1c', ranges: data.hba1c})
                 closeDialog()
             } else {
-                addNewControl.mutate({control: data, testType: 'hba1c', ranges: data.hba1c})
+                addControl({control: data, testType: 'hba1c', ranges: data.hba1c})
                 closeDialog()
             }
         } else if (selectedControl === 'lipids') {
             if (lipidsControlPresent) {
-                updateNewControl.mutate({control: data, testType:'hdl', ranges: data.hdl})
-                updateNewControl.mutate({control: data, testType: 'triglycerides', ranges: data.triglycerides})
-                updateNewControl.mutate({control: data, testType: 'total', ranges: data.total})
+                updateControl({control: data, testType:'hdl', ranges: data.hdl})
+                updateControl({control: data, testType: 'triglycerides', ranges: data.triglycerides})
+                updateControl({control: data, testType: 'total', ranges: data.total})
                 closeDialog()
             } else {
-                addNewControl.mutate({control: data, testType:'hdl', ranges: data.hdl})
-                addNewControl.mutate({control: data, testType: 'triglycerides', ranges: data.triglycerides})
-                addNewControl.mutate({control: data, testType: 'total', ranges: data.total})
+                addControl({control: data, testType:'hdl', ranges: data.hdl})
+                addControl({control: data, testType: 'triglycerides', ranges: data.triglycerides})
+                addControl({control: data, testType: 'total', ranges: data.total})
                 closeDialog()
             }
         }
