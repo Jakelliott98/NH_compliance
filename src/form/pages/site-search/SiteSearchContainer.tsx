@@ -3,7 +3,7 @@ import { useState } from "react"
 import SiteSearch from "./SiteSearch"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"
-import useAllSites from "@/services/sites/useAllSites"
+import { useAllSites } from "@/services/sites"
 
 export default function SiteSearchContainer () {
 

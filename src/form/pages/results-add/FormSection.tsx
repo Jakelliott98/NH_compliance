@@ -7,9 +7,9 @@ import RangesComponent from "./RangesComponent"
 import { useContext, useState } from "react"
 import { updateLastCleaned } from "@/services/afinions"
 import { updateLastCalibration } from "@/services/afinions"
-import updateSiteCalibration from "@/services/sites/updateSiteCalibration"
+import { useUpdateSiteCalibration } from "@/services/sites"
 import supabaseContext from "@/utils/supabaseContext"
-import useSiteBySlug from "@/services/sites/useSiteBySlug"
+import { useSiteBySlug } from '@/services/sites'
 import { useControls } from "@/services/controls/queries"
 import { useAfinions } from "@/services/afinions"
 import { useCreateResult } from "@/services/results/mutations"
@@ -61,9 +61,7 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})
     })
     const { mutate: createResult } = useCreateResult()
-    const updateSite = useMutation({
-        mutationFn: () => updateSiteCalibration(activeSite?.site_id, supabase)
-    })
+    const { mutate: updateSiteCalibration } = useUpdateSiteCalibration()
 
 
     if ( siteError || controlsError) throw new Error('Could not fetch Active Site, Controls or Afinions')
@@ -83,7 +81,7 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
         if (isCleaned) updateCleaned.mutate({ afinionID: data.afinionID})
         updateCalibrated.mutate({afinionID: data.afinionID})
         createResult({ result: data })
-        updateSite.mutate()
+        updateSiteCalibration({ siteID: activeSite.site_id })
     })
 
     return (

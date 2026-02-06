@@ -1,5 +1,5 @@
 import moment from "moment"
-import useAllSites from "@/services/sites/useAllSites"
+import { useAllSites } from '@/services/sites'
 import { useAllAfinions } from "@/services/afinions"
 
 

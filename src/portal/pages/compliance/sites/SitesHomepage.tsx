@@ -3,7 +3,7 @@ import SitesSection from './components/SitesSection'
 import type { SiteDatabaseType } from '@/types/site'
 import FilterSection from './components/sites-filters/FilterSection'
 import { useEffect } from 'react'
-import useAllSites from '@/services/sites/useAllSites'
+import { useAllSites } from '@/services/sites'
 
 export interface ActiveRegionState{
     activeRegion: string,

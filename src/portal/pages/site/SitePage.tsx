@@ -1,7 +1,7 @@
 import { useParams } from "react-router"
 import moment from "moment"
 import SiteOverview from "./site-sub-pages/overview/SiteOverview"
-import useSiteBySlug from "@/services/sites/useSiteBySlug"
+import { useSiteBySlug } from '@/services/sites'
 import { useAfinions } from "@/services/afinions"
 
 export default function SitePage () {

@@ -4,7 +4,7 @@ import AddResults from "./components/AddResults"
 import { useParams } from "react-router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import useSiteBySlug from "@/services/sites/useSiteBySlug"
+import { useSiteBySlug } from '@/services/sites'
 import { useControls } from "@/services/controls/queries"
 import { useAfinions } from "@/services/afinions"
 

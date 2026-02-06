@@ -2,7 +2,7 @@ import CalibrationCard from "@/portal/components/CalibrationCard"
 import type { AfinionDatabaseType } from "@/types/afinion"
 import { useParams } from "react-router"
 import { useResults } from "@/services/results"
-import useSiteBySlug from "@/services/sites/useSiteBySlug"
+import { useSiteBySlug } from '@/services/sites'
 import { useAfinions } from "@/services/afinions"
 
 export default function SiteResults () {

@@ -1,28 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
 import moment from "moment"
 import EditSiteContainer from "./EditSite"
 import DeleteSiteContainer from "./DeleteSite"
 import { FormProvider, useForm } from "react-hook-form"
-import addSite from "@/services/sites/addSite"
+import { useAddSite } from "@/services/sites"
 import AddSiteSection from "./AddSiteSection"
-import { useContext } from "react"
-import supabaseContext from "@/utils/supabaseContext"
-import useAllSites from "@/services/sites/useAllSites"
+import { useAllSites } from '@/services/sites'
 
 export default function OrganiseSites () {
 
-    const supabase = useContext(supabaseContext)
     const methods = useForm();
     const { handleSubmit }  = methods;
-    const queryClient = useQueryClient();
 
     const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useAllSites()
-    const mutation = useMutation({
-        mutationFn: (data) => {return addSite(data, supabase)},
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})
-    })
+    const { mutate: addSite } = useAddSite()
     if (isAllSitesLoading) (<p>Loading...</p>)
     if (isAllSitesError) throw allSitesError
     if (allSites === null || allSites === undefined) return (<p>'All Sites could not be fetched'</p>)
@@ -30,7 +22,7 @@ export default function OrganiseSites () {
     const sevenDaysAgo = moment().subtract(7, 'days');
 
     const onAddSiteSubmit = handleSubmit((data) => {
-        mutation.mutate(data)
+        addSite(data)
     })
 
     return (

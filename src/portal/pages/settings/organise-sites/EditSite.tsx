@@ -1,12 +1,11 @@
 import { Dialog, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog"
 import { useContext, useState } from "react"
-import type { SiteInfoData } from '../../../../services/sites/updateSite'
-import updateSite from "@/services/sites/updateSite"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useQueryClient } from "@tanstack/react-query"
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import type { SiteDatabaseType } from "@/types/site"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import supabaseContext from "@/utils/supabaseContext"
+import { useUpdateSite } from "@/services/sites"
 
 interface SiteDetails {
         name: string,
@@ -35,12 +34,7 @@ export default function EditSiteContainer ({site}: EditSiteContainerProps) {
         region: site.site_region
     })
 
-    const saveSiteChanges = useMutation({
-        mutationFn: (siteInfo: SiteInfoData) => {
-            return updateSite(siteInfo, supabase)
-        },
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})
-    })
+    const { mutate: updateSite } = useUpdateSite()
 
     const onChange = (key: string, value: string) => {
 
@@ -60,7 +54,7 @@ export default function EditSiteContainer ({site}: EditSiteContainerProps) {
             siteName: siteDetails.name, 
             siteRegion: siteDetails.region, 
         }
-        saveSiteChanges.mutate(newSite)
+        updateSite(newSite)
     }
 
     return (

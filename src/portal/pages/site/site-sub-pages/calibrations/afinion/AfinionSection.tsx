@@ -2,7 +2,7 @@ import { useParams } from "react-router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import moment from "moment"
-import useSiteBySlug from "@/services/sites/useSiteBySlug"
+import { useSiteBySlug } from '@/services/sites'
 import { useAfinions } from "@/services/afinions"
 
 export default function AfinionSection () {

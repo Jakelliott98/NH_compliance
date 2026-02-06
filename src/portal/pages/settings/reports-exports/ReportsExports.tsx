@@ -3,7 +3,7 @@ import { useState } from "react"
 import type { SiteDatabaseType } from "@/types/site"
 import SiteDataExport from "./SiteDataExport"
 import SiteExport from "./SiteExport"
-import useAllSites from "@/services/sites/useAllSites"
+import { useAllSites } from '@/services/sites'
 
 export default function ReportsExports () {
 

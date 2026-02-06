@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router'
 import type { AfinionData } from '@/services/afinions'
 import { useCreateAfinion } from '@/services/afinions'
-import useSiteBySlug from '@/services/sites/useSiteBySlug'
+import { useSiteBySlug } from '@/services/sites'
 
 interface AfinionFormSectionProps {
     closeDialog: () => void,

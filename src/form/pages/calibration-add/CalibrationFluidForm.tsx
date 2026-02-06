@@ -1,14 +1,12 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form";
 import CalendarPopup from "@/form/components/CalendarPopup";
 import { useParams } from "react-router";
 import ControlsSelect from "./ControlsSelect";
-import { useQueryClient } from "@tanstack/react-query";
 import InputTable from "./InputTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import supabaseContext from "@/utils/supabaseContext";
-import useSiteBySlug from "@/services/sites/useSiteBySlug";
+import { useSiteBySlug } from '@/services/sites'
 import { useControls } from "@/services/controls/queries";
 import { useUpdateControl, useCreateControl } from "@/services/controls";
 

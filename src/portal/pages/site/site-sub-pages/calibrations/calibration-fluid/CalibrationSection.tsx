@@ -2,7 +2,7 @@ import { useParams } from "react-router"
 import type { CalibrationDatabaseType } from "@/types/calibration"
 import LipidsControlDisplay from "./LipidsControlDisplay"
 import HBA1cControlDisplay from "./HBA1cControlDisplay"
-import useSiteBySlug from "@/services/sites/useSiteBySlug"
+import { useSiteBySlug } from '@/services/sites'
 import { useControls } from "@/services/controls/queries"
 
 export default function CalibrationSection () {

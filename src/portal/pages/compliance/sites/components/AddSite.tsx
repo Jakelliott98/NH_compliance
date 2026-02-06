@@ -3,25 +3,17 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader } from "@/components/ui/dialog";
 import AddSiteSection from "@/portal/pages/settings/organise-sites/AddSiteSection";
 import { FormProvider, useForm } from "react-hook-form";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import addSite from "@/services/sites/addSite";
-import { useContext } from "react";
-import supabaseContext from "@/utils/supabaseContext";
+import { useAddSite } from "@/services/sites";
 
 function AddSiteContainer () {
 
-    const supabase = useContext(supabaseContext)
     const methods = useForm();
     const { handleSubmit }  = methods;
-    const queryClient = useQueryClient();
 
-    const mutation = useMutation({
-        mutationFn: (data) => {return addSite(data, supabase)},
-        onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})
-    })
+    const { mutate: addSite } = useAddSite()
 
     const onAddSiteSubmit = handleSubmit((data) => {
-        mutation.mutate(data)
+        addSite(data)
     })
 
     return (
