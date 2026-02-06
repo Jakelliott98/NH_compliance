@@ -36,7 +36,6 @@ interface CalibrationFormInputProps {
     closeDialog: () => void,
 }
 
-
 export function CalibrationFormInput ({ selectedControl, closeDialog }: CalibrationFormInputProps) {
 
     const methods = useForm();

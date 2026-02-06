@@ -17,7 +17,7 @@ import { Route, Routes } from 'react-router'
 import { HomeNav } from './HomeNav.tsx'
 import { HomeSection } from './HomeSection.tsx'
 import { useSession } from '@clerk/clerk-react'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import supabaseContext from './utils/supabaseContext.tsx'
 
 function App() {
@@ -37,10 +37,10 @@ function App() {
       )
   }
 
-  const client = createClerkSupabaseClient();
+  const client: SupabaseClient = createClerkSupabaseClient();
   
   return (
-    <supabaseContext.Provider value={client}>
+    <supabaseContext.Provider value={ client }>
       <Routes>
         <Route path="/" element={<HomeSection />}>
           <Route path="/" element={<HomeNav />}/>

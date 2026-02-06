@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addControl, updateControl } from "./api";
-import supabaseContext from "@/utils/supabaseContext";
 import type { ControlType } from "./api";
 import type { RangesType } from "./api";
-import { useContext } from "react";
+import { useSupabase } from "@/utils/useSupabase";
 
 interface NewControlParameters {
     control: ControlType,
@@ -14,7 +13,7 @@ interface NewControlParameters {
 function useCreateControl () {
 
     const queryClient = useQueryClient()
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
 
     return useMutation({
         mutationFn: ({control, testType, ranges}: NewControlParameters) => addControl(control, testType, ranges, supabase),
@@ -27,7 +26,7 @@ function useCreateControl () {
 function useUpdateControl () {
 
     const queryClient = useQueryClient()
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
 
     return useMutation({
         mutationFn: ({control, testType, ranges}: NewControlParameters) => updateControl(control, testType, ranges, supabase),

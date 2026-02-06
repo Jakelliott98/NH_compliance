@@ -1,11 +1,10 @@
 import { useMutation } from "@tanstack/react-query"
-import { useContext } from "react"
-import supabaseContext from "@/utils/supabaseContext"
 import { addCalibrationResults } from "./api"
+import { useSupabase } from "@/utils/useSupabase"
 
 function useCreateResult () {
     
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
 
     return useMutation({
         mutationFn: ({ result }) => addCalibrationResults(result, supabase)

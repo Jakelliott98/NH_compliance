@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
 import { fetchAllControls } from "./api"
 import { fetchCalibrations } from "./api"
+import type { SiteDatabaseType } from "@/types/site"
 
-function useControls (activeSite) {
+function useControls (activeSite :SiteDatabaseType) {
 
     return useQuery({
         queryKey: ['controls', activeSite],

@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useContext } from "react"
-import supabaseContext from "@/utils/supabaseContext"
 import { deleteSite, addSite, updateSite, updateSiteCalibration, type SiteInfoData } from "./api"
+import { useSupabase } from "@/utils/useSupabase";
 
 function useUpdateSite () {
 
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -19,7 +18,7 @@ function useUpdateSite () {
 
 function useUpdateSiteCalibration (siteID: number) {
 
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
 
     return useMutation({
         mutationFn: (siteID) => updateSiteCalibration(siteID, supabase)
@@ -33,7 +32,7 @@ interface onDeleteSite {
 function useDeleteSite () {
 
     const queryClient = useQueryClient()
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
 
     return useMutation({
             mutationFn: ({ siteID }: onDeleteSite) => {
@@ -46,7 +45,7 @@ function useDeleteSite () {
 function useAddSite () {
 
     const queryClient = useQueryClient()
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
 
     return useMutation({
             mutationFn: (data) => {return addSite(data, supabase)},

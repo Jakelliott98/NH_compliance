@@ -1,6 +1,7 @@
 
 import supabase from "@/utils/supabase"
 import type { CalibrationDatabaseType } from "@/types/calibration"
+import type { SupabaseClient } from "@supabase/supabase-js"
 
 export interface RangesType {
     c1: {
@@ -48,7 +49,7 @@ const fetchAllControls = async () => {
 
 }
 
-const addControl = async (control: ControlType, testType: string, ranges: RangesType, supabase) => {
+const addControl = async (control: ControlType, testType: string, ranges: RangesType, supabase: SupabaseClient) => {
 
     const { error } = await supabase
     .from('controls')
@@ -78,7 +79,7 @@ const fetchCalibrations = async (siteID: number): Promise<CalibrationDatabaseTyp
 
 }
 
-const updateControl = async (control: ControlType, testType: string, ranges: RangesType, supabase) => {
+const updateControl = async (control: ControlType, testType: string, ranges: RangesType, supabase: SupabaseClient) => {
 
     const { error } = await supabase
     .from('controls')

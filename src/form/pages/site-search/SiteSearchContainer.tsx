@@ -4,10 +4,11 @@ import SiteSearch from "./SiteSearch"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons"
 import { useAllSites } from "@/services/sites"
+import type { SiteDatabaseType } from "@/types/site"
 
 export default function SiteSearchContainer () {
 
-    const [activeSite, setActiveSite] = useState()
+    const [activeSite, setActiveSite] = useState<null | SiteDatabaseType>(null)
     const navigate = useNavigate();
 
     const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useAllSites()
@@ -17,7 +18,7 @@ export default function SiteSearchContainer () {
     if (allSites === undefined || allSites === null) throw allSitesError
 
     const onSubmit = () => {
-        navigate(`Sites/${activeSite.slug}`)
+        navigate(`Sites/${activeSite!.slug}`)
     }
 
     return (
@@ -26,7 +27,7 @@ export default function SiteSearchContainer () {
                 <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
             </div>
             {
-                activeSite !== '' && (
+                activeSite !== null && (
                     <button onClick={() => {onSubmit()}} className=" py-2 px-3 bg-gray-200 rounded-lg cursor-pointer w-full">
                         <span className="uppercase font-semibold pr-2">Go</span>
                         <FontAwesomeIcon icon={faArrowRightLong} className="font-bold"/>

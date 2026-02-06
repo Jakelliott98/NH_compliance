@@ -19,7 +19,7 @@ export default function AfinionFormSection ({ closeDialog }: AfinionFormSectionP
     
     if ( isSiteError ) throw siteError
     if ( isSiteLoading ) return (<p>Loading...</p>)
-    if (activeSite === null || activeSite === undefined) (<p>Cannot find the current site</p>)
+    if (activeSite === null || activeSite === undefined) return (<p>Cannot find the current site</p>)
 
 
     const onSubmit = handleSubmit((data) => {

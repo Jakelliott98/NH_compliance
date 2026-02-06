@@ -1,5 +1,6 @@
 import type { ResultsDatabaseType } from "@/types/result"
 import supabase from "@/utils/supabase"
+import { SupabaseClient } from "@supabase/supabase-js"
 
 interface TestResultType {
     c1: {
@@ -25,7 +26,7 @@ interface ResultType {
     total: TestResultType,
 }
 
-const addCalibrationResults = async (result: ResultType, supabase) => {
+const addCalibrationResults = async (result: ResultType, supabase: SupabaseClient) => {
 
     const { error } = await supabase
     .from('results')

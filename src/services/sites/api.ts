@@ -1,6 +1,7 @@
 import CreateSiteSlug from "../../utils/create-site-slug"
 import type { SiteDatabaseType } from "@/types/site";
 import supabase from "@/utils/supabase";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 interface DataObj {
 teamLeader: string, siteName:string , region:string 
@@ -13,7 +14,7 @@ export interface SiteInfoData {
     siteRegion: string  
 }
 
-const addSite = async (data: DataObj, supabase) => {
+const addSite = async (data: DataObj, supabase: SupabaseClient) => {
 
 const { error } = await supabase
     .from('sites')
@@ -29,7 +30,7 @@ const { error } = await supabase
 }
 
 
-const deleteSite = async (siteID: number, supabase) => {
+const deleteSite = async (siteID: number, supabase: SupabaseClient) => {
 
     const { error } = await supabase
     .from('sites')
@@ -64,7 +65,7 @@ const fetchSiteBySlug = async (siteSlug: string): Promise<SiteDatabaseType> => {
 
 }
 
-const updateSite = async (siteInfo: SiteInfoData, supabase) => {
+const updateSite = async (siteInfo: SiteInfoData, supabase: SupabaseClient) => {
     
     const { error } = await supabase
     .from('sites')
@@ -78,7 +79,7 @@ const updateSite = async (siteInfo: SiteInfoData, supabase) => {
     if (error) throw Error
 }
 
-const updateSiteCalibration = async (siteID: number, supabase) => {
+const updateSiteCalibration = async (siteID: number, supabase: SupabaseClient) => {
 
     const { error } = await supabase
     .from('sites')

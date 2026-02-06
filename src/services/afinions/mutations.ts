@@ -1,13 +1,12 @@
 import { createAfinion } from "./api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { AfinionData } from "./api";
-import { useContext } from "react";
-import supabaseContext from "@/utils/supabaseContext";
 import { updateLastCleaned, updateLastCalibration } from "./api";
+import { useSupabase } from "@/utils/useSupabase";
 
 function useCreateAfinion () {
 
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -22,7 +21,7 @@ function useCreateAfinion () {
 function useUpdateLastClean () {
 
     const queryClient = useQueryClient()
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
 
     return useMutation({
         mutationFn: ({ afinionID }) => updateLastCleaned(afinionID, supabase),
@@ -33,7 +32,7 @@ function useUpdateLastClean () {
 function useUpdateLastCalibration () {
 
     const queryClient = useQueryClient()
-    const supabase = useContext(supabaseContext)
+    const supabase = useSupabase()
 
     return useMutation({
         mutationFn: ({ afinionID }) => updateLastCalibration(afinionID, supabase),

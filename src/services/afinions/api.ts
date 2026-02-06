@@ -1,5 +1,6 @@
 import type { AfinionDatabaseType } from "@/types/afinion"
 import supabase from "@/utils/supabase"
+import { SupabaseClient } from "@supabase/supabase-js"
 
 export interface AfinionData {
     siteID: number, 
@@ -7,7 +8,7 @@ export interface AfinionData {
     number: string,
 }
 
-const createAfinion = async (afinionData: AfinionData, supabase) => {
+const createAfinion = async (afinionData: AfinionData, supabase: SupabaseClient) => {
     const { error } = await supabase
     .from('afinions')
     .insert({
@@ -42,7 +43,7 @@ const fetchAllAfinions = async () => {
 
 }
 
-const updateLastCalibration = async (afinionID: number, supabase) => {
+const updateLastCalibration = async (afinionID: number, supabase: SupabaseClient) => {
 
     const today = new Date()
 
@@ -55,7 +56,7 @@ const updateLastCalibration = async (afinionID: number, supabase) => {
 
 }
 
-const updateLastCleaned = async (afinionID: number, supabase) => {
+const updateLastCleaned = async (afinionID: number, supabase: SupabaseClient) => {
 
     const today = new Date()
 

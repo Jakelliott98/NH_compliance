@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface SiteSearchProps {
     sites: SiteDatabaseType[],
-    setActiveSite: React.Dispatch<React.SetStateAction<string>>
+    setActiveSite: React.Dispatch<React.SetStateAction<SiteDatabaseType | null>>
 }
 
 export default function SiteSearch ({ sites, setActiveSite }: SiteSearchProps) {

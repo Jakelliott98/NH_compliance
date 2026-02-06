@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query"
 import type { SiteDatabaseType } from "@/types/site"
 import { fetchAfinions, fetchAllAfinions } from "./api"
 
-function useAfinions (activeSite: SiteDatabaseType) {
+function useAfinions (activeSite: SiteDatabaseType | undefined) {
 
     return useQuery({
         queryKey: ['afinions', activeSite], 
-        queryFn: () => fetchAfinions(activeSite.site_id),
+        queryFn: () => fetchAfinions(activeSite!.site_id),
         enabled: !!activeSite,
     })
 }

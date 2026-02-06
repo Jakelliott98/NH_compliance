@@ -1,7 +1,8 @@
+import type { SiteDatabaseType } from "@/types/site";
 import { fetchResults } from "./api";
 import { useQuery } from "@tanstack/react-query";
 
-function useResults (activeSite) {
+function useResults (activeSite: SiteDatabaseType) {
 
     return useQuery({
         queryKey: ['portalResults', activeSite],
