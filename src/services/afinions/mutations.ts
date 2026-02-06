@@ -1,6 +1,6 @@
-import createAfinion from "./createAfinion";
+import { createAfinion } from "./api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { AfinionData } from "./createAfinion";
+import type { AfinionData } from "./api";
 import { useContext } from "react";
 import supabaseContext from "@/utils/supabaseContext";
 
@@ -18,4 +18,4 @@ function useCreateAfinion () {
 
 }
 
-export default useCreateAfinion;
+export { useCreateAfinion }

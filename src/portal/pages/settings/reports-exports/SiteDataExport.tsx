@@ -4,7 +4,7 @@ import SelectButton from "@/components/SelectButton"
 import SelectDuration from "@/portal/components/SelectDuration"
 import { useState } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import useAfinions from "@/services/afinions/useAfinions"
+import { useAfinions } from "@/services/afinions"
 import type { SiteDatabaseType } from "@/types/site"
 
 

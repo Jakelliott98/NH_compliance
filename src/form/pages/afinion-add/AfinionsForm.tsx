@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router'
-import type { AfinionData } from '@/services/afinions/createAfinion'
-import useCreateAfinion from '@/services/afinions/useCreateAfinion'
+import type { AfinionData } from '@/services/afinions'
+import { useCreateAfinion } from '@/services/afinions'
 import useSiteBySlug from '@/services/sites/useSiteBySlug'
 
 interface AfinionFormSectionProps {
@@ -13,7 +13,7 @@ export default function AfinionFormSection ({ closeDialog }: AfinionFormSectionP
     const siteSlug = useParams().Site;
     const { data: activeSite, isError: isSiteError, isLoading: isSiteLoading, error: siteError } = useSiteBySlug(siteSlug)
 
-    const { mutate } = useCreateAfinion();
+    const { mutate: createAfinion } = useCreateAfinion();
 
     const { register, handleSubmit } = useForm()
     
@@ -28,7 +28,7 @@ export default function AfinionFormSection ({ closeDialog }: AfinionFormSectionP
             nhNumber: data.nh_number,
             siteID: activeSite.site_id,
         }
-        mutate(afinionData)
+        createAfinion(afinionData)
         closeDialog()
     })
 

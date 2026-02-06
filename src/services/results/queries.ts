@@ -1,7 +1,7 @@
-import fetchResults from "./fetchResults";
+import { fetchResults } from "./api";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useResults (activeSite) {
+function useResults (activeSite) {
 
     return useQuery({
         queryKey: ['portalResults', activeSite],
@@ -10,3 +10,5 @@ export default function useResults (activeSite) {
     })
 
 }
+
+export { useResults }

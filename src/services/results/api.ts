@@ -1,3 +1,5 @@
+import type { ResultsDatabaseType } from "@/types/result"
+import supabase from "@/utils/supabase"
 
 interface TestResultType {
     c1: {
@@ -41,4 +43,16 @@ const addCalibrationResults = async (result: ResultType, supabase) => {
     if (error) throw error;
 }
 
-export default addCalibrationResults;
+const fetchResults = async (siteID: number): Promise<ResultsDatabaseType[]> => {
+
+    const { data, error } = await supabase
+    .from('results')
+    .select('*')
+    .eq('site_id', siteID)
+
+    if (error) throw error;
+    return data
+}
+
+
+export { addCalibrationResults, fetchResults }

@@ -16,8 +16,8 @@ function FilterButton ({ onSelect, isFiltered, dropdownOptions }: SortBtnProps) 
                 </SelectTrigger>
                 <SelectContent>
                     {
-                        dropdownOptions.map(item => (
-                            <SelectItem value={item}>{item}</SelectItem>
+                        dropdownOptions.map((item, i) => (
+                            <SelectItem key={i} value={item}>{item}</SelectItem>
                         ))
                     }
                 </SelectContent>

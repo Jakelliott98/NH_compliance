@@ -7,7 +7,7 @@ import type { AfinionDatabaseType } from "@/types/afinion";
 import { useNavigate } from "react-router";
 import moment from "moment";
 import useAllSites from "@/services/sites/useAllSites";
-import useAfinions from "@/services/afinions/useAfinions";
+import { useAfinions } from "@/services/afinions"
 
 export default function SiteConfiguration () {
     

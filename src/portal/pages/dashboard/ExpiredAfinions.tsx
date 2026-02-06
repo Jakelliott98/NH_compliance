@@ -1,15 +1,10 @@
-import fetchAllAfinions from "@/services/afinions/fetchAllAfinions"
-import { useQuery } from "@tanstack/react-query"
-import type { AfinionDatabaseType } from "@/types/afinion"
+import { useAllAfinions } from "@/services/afinions"
 import moment from "moment"
 import useAllSites from "@/services/sites/useAllSites"
 
 export default function ExpiredAfinions () {
 
-	const { data: allAfinions, isLoading: isAllAfinionsLoading, isError: isAllAfinionsError, error: allAfinionsError } = useQuery<AfinionDatabaseType[]>({
-		queryKey: ['allAfinions'],
-		queryFn: () => fetchAllAfinions(),
-	})
+	const { data: allAfinions, isLoading: isAllAfinionsLoading, isError: isAllAfinionsError, error: allAfinionsError } = useAllAfinions()
 	const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useAllSites()
 
 	if (isAllAfinionsLoading || isAllSitesLoading) (<p>Loading...</p>)

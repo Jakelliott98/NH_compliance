@@ -5,14 +5,14 @@ import { useParams } from "react-router"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import RangesComponent from "./RangesComponent"
 import { useContext, useState } from "react"
-import updateLastCleaned from "@/services/afinions/updateLastCleaned"
-import updateLastCalibration from "@/services/afinions/updateLastCalibration"
-import addCalibrationResults from "@/services/results/addResults"
+import { updateLastCleaned } from "@/services/afinions"
+import { updateLastCalibration } from "@/services/afinions"
 import updateSiteCalibration from "@/services/sites/updateSiteCalibration"
 import supabaseContext from "@/utils/supabaseContext"
 import useSiteBySlug from "@/services/sites/useSiteBySlug"
 import useControls from "@/services/controls/useControls"
-import useAfinions from "@/services/afinions/useAfinions"
+import { useAfinions } from "@/services/afinions"
+import { useCreateResult } from "@/services/results/mutations"
 
 export default function FormSection () {
 
@@ -60,9 +60,7 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
         mutationFn: ({ afinionID }) => updateLastCalibration(afinionID, supabase),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})
     })
-    const addResult = useMutation({
-        mutationFn: ({ result }) => addCalibrationResults(result, supabase)
-    })
+    const { mutate: createResult } = useCreateResult()
     const updateSite = useMutation({
         mutationFn: () => updateSiteCalibration(activeSite?.site_id, supabase)
     })
@@ -84,7 +82,7 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
     const onSubmit = handleSubmit((data) => {
         if (isCleaned) updateCleaned.mutate({ afinionID: data.afinionID})
         updateCalibrated.mutate({afinionID: data.afinionID})
-        addResult.mutate({ result: data })
+        createResult({ result: data })
         updateSite.mutate()
     })
 

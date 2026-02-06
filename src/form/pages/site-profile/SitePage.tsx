@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import useSiteBySlug from "@/services/sites/useSiteBySlug"
 import useControls from "@/services/controls/useControls"
-import useAfinions from "@/services/afinions/useAfinions"
+import { useAfinions } from "@/services/afinions"
 
 export function SitePage () {
 

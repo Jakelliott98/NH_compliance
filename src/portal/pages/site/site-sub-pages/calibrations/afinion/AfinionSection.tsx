@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import moment from "moment"
 import useSiteBySlug from "@/services/sites/useSiteBySlug"
-import useAfinions from "@/services/afinions/useAfinions"
+import { useAfinions } from "@/services/afinions"
 
 export default function AfinionSection () {
 

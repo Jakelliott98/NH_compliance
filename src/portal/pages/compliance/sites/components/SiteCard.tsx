@@ -1,6 +1,6 @@
 import type { SiteDatabaseType } from '@/types/site';
 import moment from 'moment';
-import useAfinions from '@/services/afinions/useAfinions';
+import { useAfinions } from "@/services/afinions"
 
 
 interface SiteCardProps {

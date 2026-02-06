@@ -1,16 +1,11 @@
-import type { AfinionDatabaseType } from "@/types/afinion"
-import fetchAllAfinions from "@/services/afinions/fetchAllAfinions"
-import { useQuery } from "@tanstack/react-query"
 import moment from "moment"
 import useAllSites from "@/services/sites/useAllSites"
+import { useAllAfinions } from "@/services/afinions"
 
 
 export default function ExpiredCleans () {
 
-	const { data: allAfinions, isLoading: isAllAfinionsLoading, isError: isAllAfinionsError, error: allAfinionsError } = useQuery<AfinionDatabaseType[]>({
-		queryKey: ['allAfinions'],
-		queryFn: () => fetchAllAfinions(),
-	})
+	const { data: allAfinions, isLoading: isAllAfinionsLoading, isError: isAllAfinionsError, error: allAfinionsError } = useAllAfinions()
 	const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useAllSites()
 
 	if (isAllAfinionsLoading || isAllSitesLoading) (<p>Loading...</p>)
@@ -50,7 +45,7 @@ export default function ExpiredCleans () {
 						expiredAfinions?.map((afinion) => {
 							const site = allSites?.find(site => site.site_id === afinion.site_id)
 							return (
-								<tr className="border border-gray-200">
+								<tr className="border border-gray-200" key={afinion.afinion_id}>
 									<td className="text-start text-sm p-1 text-gray-600 p-2">{site?.site_name}</td>
 									<td className="hidden md:table-cell text-start text-sm text-gray-600">NH{afinion.nh_number}</td>
 									<td className="text-start text-sm text-red-800">{moment(afinion.last_clean).format('Do MMM')}</td>
