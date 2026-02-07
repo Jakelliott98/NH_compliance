@@ -16,12 +16,12 @@ function useUpdateSite () {
 
 }
 
-function useUpdateSiteCalibration (siteID: number) {
+function useUpdateSiteCalibration () {
 
     const supabase = useSupabase()
 
     return useMutation({
-        mutationFn: (siteID) => updateSiteCalibration(siteID, supabase)
+        mutationFn: (siteID: number) => updateSiteCalibration(siteID, supabase)
     })
 }
 

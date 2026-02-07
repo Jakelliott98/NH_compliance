@@ -35,6 +35,7 @@ export default function SiteResults () {
                 {
                     sortedResults.map(((result) => {
                         const afinion: AfinionDatabaseType | undefined = afinions.find((item: AfinionDatabaseType) => item.afinion_id === result.afinion_id)
+                        if (!afinion) console.log('Could not find afinion')
                         return (
                             <CalibrationCard key={result.id} result={result} afinion={afinion}/>
                         )

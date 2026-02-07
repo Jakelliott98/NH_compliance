@@ -24,7 +24,7 @@ function useUpdateLastClean () {
     const supabase = useSupabase()
 
     return useMutation({
-        mutationFn: ({ afinionID }) => updateLastCleaned(afinionID, supabase),
+        mutationFn: ({ afinionID }: {afinionID: number}) => updateLastCleaned(afinionID, supabase),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})
     })
 }
@@ -35,7 +35,7 @@ function useUpdateLastCalibration () {
     const supabase = useSupabase()
 
     return useMutation({
-        mutationFn: ({ afinionID }) => updateLastCalibration(afinionID, supabase),
+        mutationFn: ({ afinionID }: { afinionID: number}) => updateLastCalibration(afinionID, supabase),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['afinions']})
     })
 }
