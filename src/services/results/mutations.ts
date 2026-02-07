@@ -7,7 +7,7 @@ function useCreateResult () {
     const supabase = useSupabase()
 
     return useMutation({
-        mutationFn: ({ result }) => addCalibrationResults(result, supabase)
+        mutationFn: (result) => addCalibrationResults(result, supabase)
     })
 }
 

@@ -70,8 +70,8 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
     const onSubmit = handleSubmit((data) => {
         if (isCleaned) updateCleaned({ afinionID: data.afinionID})
         updateCalibrated({afinionID: data.afinionID})
-        createResult({ result: data })
-        updateSiteCalibration({ siteID: activeSite.site_id })
+        createResult(data)
+        updateSiteCalibration(activeSite.site_id)
     })
 
     return (
