@@ -62,7 +62,7 @@ export default function AfinionFormSection ({ closeDialog }: AfinionFormSectionP
                 </div>
                 <button 
                     type="submit"
-                    className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded bg-gray-100 text-gray-900"
+                    className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded btn"
                 >
                     Add Afinion
                 </button>

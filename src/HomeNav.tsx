@@ -29,11 +29,12 @@ export function HomeNav () {
             <button 
               className='
                 flex-1
-                border-gray-400 border rounded-xl 
+                border-gray-400 border rounded-lg 
                 flex flex-col justify-center items-center 
                 p-4 md:p-10
                 cursor-pointer 
-                hover:bg-white
+                bg-white hover:bg-primary
+                hover:text-primary-foreground
                 md:h-1/3
                 lg:h-full
               ' 
@@ -42,17 +43,18 @@ export function HomeNav () {
 
               <img src={visualData} className="w-2/3 md:w-2/5 mb-2 md:mb-5"/>
               <h1 className='font-bold uppercase text-xl md:text-2xl'>Portal</h1>
-              <p className='text-gray-500 text-sm text-center'>Login to view calibration history</p>
+              <p className='text-sm text-center'>Login to view calibration history</p>
             </button>
 
             <button 
               className='
                 flex-1
-                border-gray-400 border rounded-xl 
+                border-gray-400 border rounded-lg 
                 flex flex-col justify-center items-center 
                 p-4 md:p-10
                 cursor-pointer 
-                hover:bg-white
+                bg-white hover:bg-primary
+                hover:text-primary-foreground
                 md:h-1/3
                 lg:h-full
               ' 
@@ -60,7 +62,7 @@ export function HomeNav () {
             >
               <img src={addFiles} className='w-2/3 md:w-2/5 mb-2 md:mb-5'/>
               <h1 className='font-bold uppercase text-lg md:text-2xl'>Form</h1>
-              <p className='text-gray-500 text-sm text-center'>Add calibrations, controls and afinions to your site.</p>
+              <p className='text-sm text-center'>Add calibrations, controls and afinions to your site.</p>
             
             </button>
         </div>

@@ -66,7 +66,7 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
         afinions.map((afinion) => {
             return (
                 <div className="flex-1 bg-gray-50 border border-gray-200 p-3 rounded flex-grow flex flex-col justify-around items-center shadow-sm" key={afinion.afinion_id}>
-                    <FontAwesomeIcon className="text-green-700/90 text-lg md:text-xl lg:text-3xl" icon={faCalendarCheck} />
+                    <FontAwesomeIcon className="text-success text-lg md:text-xl lg:text-3xl" icon={faCalendarCheck} />
                     <p className="font-light lg:font-semibold text-center text-sm lg:text-lg text-slate-900">Afinion {afinion.afinion_number}</p>
                     <div className="hidden lg:block">
                     {
@@ -76,7 +76,7 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
                                 <span className="italics text-slate-700"> {afinion.last_calibrated === null ? '' : moment(afinion.last_calibrated).format('Do MMM')}</span>
                             </p>
                         ) : (
-                            <p className="text-center text-xs text-red-700/80 italic">No Calibrations Yet</p>
+                            <p className="text-center text-xs text-warningitalic">No Calibrations Yet</p>
                         )
                     }
                     {
@@ -86,7 +86,7 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
                                 <span className="italics text-slate-700"> {afinion.last_clean === null ? '' : moment(afinion.last_clean).format('Do MMM')}</span>
                             </p>
                         ) : (
-                            <p className="text-center text-xs text-red-700/80 italic">No Cleans Yet</p>
+                            <p className="text-center text-xs text-warning italic">No Cleans Yet</p>
                         )
                     }
                     </div>

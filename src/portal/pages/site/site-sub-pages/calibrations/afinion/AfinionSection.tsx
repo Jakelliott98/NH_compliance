@@ -22,7 +22,7 @@ export default function AfinionSection () {
     if (afinions.length === 0) {
         return (
             <div>
-                <p className="text-sm text-center text-red-900 italic">Site currently has no afinions</p>
+                <p className="text-sm text-center text-warning italic">Site currently has no afinions</p>
             </div>
         )
     }
@@ -50,10 +50,10 @@ export default function AfinionSection () {
                                         <td className="pl-2 py-1 text-center">{afinion.afinion_number}</td>
                                         <td className="hidden md:table-cell text-center">NH{afinion.nh_number}</td>
                                         <td className="hidden md:table-cell text-center">{afinion.last_calibrated ? moment(afinion.last_calibrated).format("Do MMM") : 'No calibrations'}</td>
-                                        <td className="md:hidden text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_calibrated ? 'text-green-700' : 'text-red-700'} text-xs`}/></td>
-                                        <td className="md:hidden text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_clean ? 'text-green-700' : 'text-red-700'} text-xs`}/></td>
+                                        <td className="md:hidden text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_calibrated ? 'text-success' : 'text-warning'} text-xs`}/></td>
+                                        <td className="md:hidden text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_clean ? 'text-success' : 'text-warning'} text-xs`}/></td>
                                         <td className="hidden md:table-cell text-center">{afinion.last_clean ? moment(afinion.last_clean).format("Do MMM") : 'No cleans'}</td>
-                                        <td className="hidden md:table-cell text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_clean && afinion.last_calibrated ? 'text-green-700' : 'text-red-700'} text-xs`}/></td>
+                                        <td className="hidden md:table-cell text-center pr-2"><FontAwesomeIcon icon={faCircle} className={`${afinion.last_clean && afinion.last_calibrated ? 'text-success' : 'text-warning'} text-xs`}/></td>
                                     </tr>
                                 )
                             })

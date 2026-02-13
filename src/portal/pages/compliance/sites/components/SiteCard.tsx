@@ -18,12 +18,12 @@ export default function SiteCard ({site}: SiteCardProps) {
     const sortedAfinions = afinions.sort((a, b) => a.afinion_number - b.afinion_number)
 
     return (
-        <div className={`${ isCalibrated ? 'bg-l-green-800' : 'border-l-red-800'} bg-white rounded w-full h-full p-4 border-l border-l-5 border-l-green-700 border border-gray-400 cursor-pointer`}>
+        <div className={`${ isCalibrated ? 'bg-l-success' : 'border-l-warning'} bg-white rounded w-full h-full p-4 border-l border-l-5 border-l-green-700 border border-gray-400 cursor-pointer`}>
             <div className="border-b-1 border-gray-200 flex flex-col pb-1">
                     <p className="text-sm text-gray-700">{site.site_name}</p>
                     <p className="text-xs text-gray-500">{site.team_leader}</p>
             </div>
-            <p className={`text-xs pt-1  ${!isCalibrated ? 'text-red-800' : ''}`}>
+            <p className={`text-xs pt-1  ${!isCalibrated ? 'text-warning' : ''}`}>
                 {difference ? `Last Calibrated: ${difference} days ago` : 'No Calibration Record'}
             </p>
             <div className="pt-2 sm-hidden-block">

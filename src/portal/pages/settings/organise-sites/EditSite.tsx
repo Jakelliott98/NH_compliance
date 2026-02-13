@@ -91,10 +91,10 @@ function EditSite ({ siteDetails, onSubmit, onChange }: EditSiteProps) {
                 </div>
                 <div className=" flex gap-2 items-end [&>*]:flex-1">
                     <DialogClose className="flex-1">
-                    <button className="w-full rounded bg-gray-100 py-1 px-3 text-sm cursor-pointer hover:bg-gray-200">Cancel</button>
+                    <button className="w-full rounded-lg bg-gray-100 py-1 px-3 text-sm cursor-pointer hover:bg-gray-200">Cancel</button>
                     </DialogClose>
                     <DialogClose className="flex-1">
-                    <button className="w-full rounded bg-green-700 py-1 px-3 text-sm text-white cursor-pointer hover:bg-green-800" onClick={() => {onSubmit()}}>Save</button>
+                    <button className="w-full btn py-1 px-3" onClick={() => {onSubmit()}}>Save</button>
                     </DialogClose>
                 </div>
             </DialogContent>

@@ -105,15 +105,15 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
                             <Checkbox 
                                 onCheckedChange={(value: boolean) => setIsCleaned(value)}
                                 checked={isCleaned}
-                                className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600 data-[state=checked]:text-white dark:data-[state=checked]:border-green-700 dark:data-[state=checked]:bg-green-700"
+                                className="data-[state=checked]:border-green-600 data-[state=checked]:bg-success data-[state=checked]:text-white dark:data-[state=checked]:border-green-700 dark:data-[state=checked]:bg-green-700"
                             />
-                            <label className="text-green-500 text-sm">Afinion Cleaned</label>
+                            <label className="text-success text-sm">Afinion Cleaned</label>
                         </div>
                     </div>
                 </div>
                 <button 
                     type="submit"
-                    className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded bg-gray-100 text-gray-900"
+                    className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded btn"
                 >
                     Add Calibration
                 </button>

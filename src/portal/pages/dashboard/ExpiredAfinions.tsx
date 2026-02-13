@@ -47,7 +47,7 @@ export default function ExpiredAfinions () {
 								<tr className="border border-gray-200" key={afinion.afinion_id}>
 									<td className="text-start text-sm p-1 text-gray-600 p-2">{site?.site_name}</td>
 									<td className="hidden md:table-cell text-start text-sm text-gray-600">NH{afinion.nh_number}</td>
-									<td className="text-start text-sm text-red-800">{moment(afinion.last_calibrated).format('Do MMM')}</td>
+									<td className="text-start text-sm text-warning">{moment(afinion.last_calibrated).format('Do MMM')}</td>
 								</tr>
 							)
 						})

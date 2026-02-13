@@ -23,10 +23,10 @@ export function ReturnControlSection ({controlType, controlsData, title}: Return
 
     return (
         <div className="rounded p-2 flex flex-col justify-center items-center shadow-sm bg-gray-50 border border-gray-200">
-            <FontAwesomeIcon className="sm:text-lg md:text-xl lg:text-3xl pb-2 text-red-800/80" icon={faFlaskVial} />
-            <p className="text-sm font-light lg:font-semibold text-center pb-1 text-slate-900">{title}</p>
-            <p className="sm-hidden-block text-center text-sm font-light pb-1 text-slate-700">LOT{control.lot_number}</p>
-            <p className={isExpired ? 'sm-hidden-block text-center text-red-700 text-sm font-light' : 'font-light sm-hidden-block text-center text-sm text-slate-700'}>{isExpired ? 'Expired:' : 'Expires:'} {moment(control.expiry_date).format('Do MMMM')} </p>
+            <FontAwesomeIcon className="sm:text-lg md:text-xl lg:text-3xl pb-2 text-warning" icon={faFlaskVial} />
+            <p className="text-sm font-light lg:font-semibold text-center pb-1 text-neutral">{title}</p>
+            <p className="sm-hidden-block text-center text-sm font-light pb-1 text-neutral-light">LOT{control.lot_number}</p>
+            <p className={isExpired ? 'sm-hidden-block text-center text-warning text-sm font-light' : 'font-light sm-hidden-block text-center text-sm text-neutral-light'}>{isExpired ? 'Expired:' : 'Expires:'} {moment(control.expiry_date).format('Do MMMM')} </p>
         </div>
     )
 

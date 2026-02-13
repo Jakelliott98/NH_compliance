@@ -42,7 +42,7 @@ export function FormButtons ({ option }: FormButtonsProps) {
                                 <h1 className="text-sm md:text-base lg:text-xl lg:font-bold">{ option.title }</h1>
                         </div>
                         <p className="text-sm hidden lg:block"> {option.text} </p>
-                        <p className="sm-hidden-block text-xs text-red-500 italic text-center">{ option.optionalText ? option.optionalText : '' }</p>
+                        <p className="sm-hidden-block text-xs text-warning italic text-center">{ option.optionalText ? option.optionalText : '' }</p>
                 </div>
         )
 }

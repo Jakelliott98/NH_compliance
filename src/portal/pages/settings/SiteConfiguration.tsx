@@ -76,7 +76,7 @@ function EditAfinionsSection ({ activeSite }: EditAfinionsSectionProps) {
                             <div className="grid grid-cols-4 p-2 text-center border-b borger-gray-100 text-sm md:text-base" key={afinion.afinion_id}>
                                 <p>{afinion.afinion_number}</p>
                                 <p className="sm-hidden-block">{afinion.nh_number}</p>
-                                <p className={afinion.last_clean ? '' : 'text-red-500/80 italic'} >{afinion.last_clean ? moment(afinion.last_clean).format('Do MMM') : 'No Cleans'}</p>
+                                <p className={afinion.last_clean ? '' : 'text-warning italic'} >{afinion.last_clean ? moment(afinion.last_clean).format('Do MMM') : 'No Cleans'}</p>
                                 <p><FontAwesomeIcon icon={faTrashCan} className="text-gray-400"/></p>
                             </div>
                         )
@@ -91,7 +91,7 @@ function EditAfinionsSection ({ activeSite }: EditAfinionsSectionProps) {
                 <FontAwesomeIcon icon={faHandshakeSlash} className="text-5xl text-gray-400"/>
                 <h2 className="font-semibold text-xl text-gray-700">Oops! No afinions can be found...</h2>
                 <p className="text sm text-gray-500">There is nothing here to view right now, please add afinions to your site to see data.</p>
-                <button onClick={() => {navigate(`../../../SiteForm/Sites/${activeSite.slug}`)}} className="bg-gray-700 text-white py-2 px-5 font-semibold rounded-md cursor-pointer mt-2 hover:bg-gray-800 ">Add Afinion</button>
+                <button onClick={() => {navigate(`../../../SiteForm/Sites/${activeSite.slug}`)}} className="btn py-2 px-5 mt-2">Add Afinion</button>
             </div>
         )
     }

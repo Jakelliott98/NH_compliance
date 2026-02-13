@@ -106,7 +106,7 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
                 <InputTable test={ selectedControl === 'hba1c' ? hba1cTable : lipidsTable}/>
                 <button 
                     type="submit"
-                    className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded bg-gray-100 text-gray-900"
+                    className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded btn"
                 >
                     Add Control
                 </button>

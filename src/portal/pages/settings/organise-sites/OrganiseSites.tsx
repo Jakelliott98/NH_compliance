@@ -59,7 +59,7 @@ export default function OrganiseSites () {
                                     <tr key={site.site_id} className="border-b border-gray-200 [&>*]:pb-1">
                                         <td className="text-sm text-gray-600 pl-2 pt-2">{site.site_name}</td>
                                         <td className="hidden md:table-cell text-sm text-gray-600">{site.team_leader}</td>
-                                        <td className="hidden md:table-cell text-sm text-center"><FontAwesomeIcon icon={faCircle} className={`${isOutOfCalibration ? 'text-red-700' : 'text-green-700'}`}/></td>
+                                        <td className="hidden md:table-cell text-sm text-center"><FontAwesomeIcon icon={faCircle} className={`${isOutOfCalibration ? 'text-warning' : 'text-success'}`}/></td>
                                         <td className="text-sm text-gray-500 text-center"><EditSiteContainer site={site}/></td>
                                         <td className="text-sm text-gray-500 text-center"><DeleteSiteContainer site={site}/></td>
                                     </tr>

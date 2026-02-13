@@ -28,7 +28,7 @@ export default function SiteSearchContainer () {
             </div>
             {
                 activeSite !== null && (
-                    <button onClick={() => {onSubmit()}} className=" py-2 px-3 bg-gray-200 rounded-lg cursor-pointer w-full">
+                    <button onClick={() => {onSubmit()}} className=" py-2 px-3 btn cursor-pointer w-full">
                         <span className="uppercase font-semibold pr-2">Go</span>
                         <FontAwesomeIcon icon={faArrowRightLong} className="font-bold"/>
                     </button>

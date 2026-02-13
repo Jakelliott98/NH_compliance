@@ -25,7 +25,7 @@ export default function SiteResults () {
     if (sortedResults.length === 0) {
         return (
             <div className="h-full flex flex-col justify-center items-center flex-1">
-                <p className="text-sm text-red-900 text-center italics">Currently no calibrations for this site</p>
+                <p className="text-sm text-warning text-center italics">Currently no calibrations for this site</p>
             </div>
         )
     }

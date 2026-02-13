@@ -42,7 +42,7 @@ function SiteExport () {
                 </div>
             </div>
             <SelectDuration onSelect={setActiveDuration} activeSelect={selectedDuration}/>
-            <button className="w-full text-sm py-2 px-4 flex gap-0.5 items-center justify-center bg-white rounded border-gray-200 border-1 cursor-pointer">
+            <button className="w-full text-sm py-2 px-4 flex btn">
                     <FontAwesomeIcon icon={faDownload} />
                     <p>Export</p>
             </button>

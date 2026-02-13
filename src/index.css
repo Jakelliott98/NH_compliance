@@ -154,3 +154,19 @@
 .sm-hidden-inline {
   @apply hidden md:inline-block
 }
+
+.btn {
+  @apply 
+    inline-flex justify-center items-center
+    rounded-lg cursor-pointer  
+    bg-primary text-primary-foreground
+    
+}
+
+.btn:hover {
+  @apply bg-primary/90
+}
+
+.btn:active {
+  @apply bg-primary/80
+}

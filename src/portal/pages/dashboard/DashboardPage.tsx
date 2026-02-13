@@ -53,9 +53,9 @@ function MobileDashboardTables () {
 	return (
 		<div className="flex flex-col gap-1">
 			<div className="flex [&>*]:flex-1 p-1 text-center bg-slate-50">
-				<p className={`${activeTable === 'afinions' && 'bg-red-100'} text-sm p-1 rounded`} onClick={() => setActiveTable('afinions')}>Afinions</p>
-				<p className={`${activeTable === 'controls' && 'bg-red-100'} text-sm p-1 rounded`} onClick={() => setActiveTable('controls')}>Controls</p>
-				<p className={`${activeTable === 'calibrations' && 'bg-red-100'} text-sm p-1 rounded`} onClick={() => setActiveTable('calibrations')}>Calibrations</p>
+				<p className={`${activeTable === 'afinions' && 'bg-secondary text-secondary-foreground'} text-sm p-1 rounded`} onClick={() => setActiveTable('afinions')}>Afinions</p>
+				<p className={`${activeTable === 'controls' && 'bg-secondary text-secondary-foreground'} text-sm p-1 rounded`} onClick={() => setActiveTable('controls')}>Controls</p>
+				<p className={`${activeTable === 'calibrations' && 'bg-secondary text-secondary-foreground'} text-sm p-1 rounded`} onClick={() => setActiveTable('calibrations')}>Calibrations</p>
 			</div>
 			<div>
 				{

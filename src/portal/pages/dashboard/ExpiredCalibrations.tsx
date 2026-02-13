@@ -47,7 +47,7 @@ export default function ExpiredCalibrations () {
 									<tr className="border border-gray-200" key={control.id}>
 										<td className="text-start text-sm p-1 text-gray-600 p-2">{site?.site_name}</td>
 										<td className="hidden md:table-cell text-start text-sm text-gray-600">{control.control_type === 'hba1c' ? 'HBA1c' : 'Lipids'}</td>
-										<td className="text-start text-sm text-red-800">{moment(control.expiry_date).format('Do MMM')}</td>
+										<td className="text-start text-sm text-warning">{moment(control.expiry_date).format('Do MMM')}</td>
 									</tr>
 								)
 							})

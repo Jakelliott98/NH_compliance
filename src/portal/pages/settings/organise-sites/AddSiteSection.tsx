@@ -24,7 +24,7 @@ function AddSiteSection ({ onSubmit }: AddSiteSectionProps) {
                     <input className="w-full border border-gray-300 bg-gray-200 rounded p-1 px-2" {...register('region', {required: 'Provide a region'})}/>
                 </div>
             </div>
-            <button className="bg-gray-700 text-white py-2 px-4 rounded cursor-pointer shadow-sm hover:bg-gray-900 transition-colors duration-200 font-semibold" type="submit">Submit</button>
+            <button className="py-2 px-4 btn" type="submit">Submit</button>
         </form>
     )
 }

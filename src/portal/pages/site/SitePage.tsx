@@ -17,7 +17,7 @@ export default function SitePage () {
     if (!afinions) return (<p>No afinions found</p>)
 
     return (
-        <div className="flex flex-col bg-white p-2 md:p-5 rounded-xl my-2">
+        <div className="flex flex-col bg-white p-2 md:p-5 rounded-lg my-2">
             <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-4 border-b-1 border-solid border-gray-300 pb-2">
                 <h1 className="text-center md:text-left font-bold md:text-xl">{activeSite.site_name}</h1>
                 <div className="flex flex-row gap-10 items-center">
