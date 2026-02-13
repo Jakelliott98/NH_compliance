@@ -10,9 +10,9 @@ export default function Header () {
     const isDashboard = location === "/Portal/Dashboard" || location === '/Portal';
 
     return (
-    <div className='bg-white px-5 py-4 w-full flex justify-between items-center'>
+    <div className='bg-bg px-5 py-4 w-full flex justify-between items-center'>
         <p className='sm-hidden-block text-sm uppercase text-neutral-400'>CT</p>
-        <nav className='hidden md:flex cursor-pointer bg-bg rounded-lg'>
+        <nav className='p-1 hidden md:flex cursor-pointer bg-surface rounded-lg'>
             <NavLink to="Dashboard" className={`cursor-pointer py-2 px-4 rounded-lg ${isDashboard ? 'bg-primary text-primary-foreground' : 'text-neutral-light hover:text-neutral'}`}>
                 <div className='flex gap-1 items-center'>
                     <FontAwesomeIcon icon={faClipboardList} className='text-sm'/>
