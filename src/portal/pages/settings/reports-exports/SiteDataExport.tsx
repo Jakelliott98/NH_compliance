@@ -35,7 +35,7 @@ function SiteDataExport ({ site }: SiteDataExportProps) {
                     <div className="flex flex-col gap-2">
                         <div>
                             <p className="text-sm">Afinion</p>
-                            <p className="text-sm text-gray-400 font-light">Afinions to extract data from.</p>
+                            <p className="text-sm text-neutral-light font-light">Afinions to extract data from.</p>
                         </div>
                         <div className="hidden md:flex gap-2">
                                 <SelectButton text='All Afinions' activeSelect={selectedAfinion} onSelect={setActiveAfinion}/>

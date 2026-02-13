@@ -30,7 +30,7 @@ function DeleteSite ({ site, onSubmit }: DeleteSiteProps) {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <button className="cursor-pointer hover:text-black">
+                <button className="cursor-pointer hover:text-neutral">
                     <FontAwesomeIcon icon={faTrashCan}/> 
                     <span className="sm-hidden-inline pl-0.5">Remove</span>
                 </button>

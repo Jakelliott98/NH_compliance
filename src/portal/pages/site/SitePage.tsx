@@ -22,15 +22,15 @@ export default function SitePage () {
                 <h1 className="text-center md:text-left font-bold md:text-xl">{activeSite.site_name}</h1>
                 <div className="flex flex-row gap-10 items-center">
                     <div className="flex flex-col">
-                        <p className="text-center md:text-left text-xs uppercase text-gray-500">Team Leader</p>
+                        <p className="text-center md:text-left text-xs uppercase text-neutral-light">Team Leader</p>
                         <p className="text-center text-xs md:text-sm text-center">{activeSite.team_leader}</p>
                     </div>
                     <div className="flex flex-col">
-                        <p className="text-center md:text-left text-xs uppercase text-gray-500">Last Calibrated</p>
+                        <p className="text-center md:text-left text-xs uppercase text-neutral-light">Last Calibrated</p>
                         <p className="text-center text-xs md:text-sm text-center">{moment(activeSite.last_calibrated).format('Do MMM')}</p>
                     </div>
                     <div className="flex flex-col">
-                        <p className="text-center md:text-left text-xs uppercase text-gray-500">Afinions</p>
+                        <p className="text-center md:text-left text-xs uppercase text-neutral-light">Afinions</p>
                         <p className="text-center text-xs md:text-sm text-center">{afinions.length}</p>
                     </div>
                 </div>

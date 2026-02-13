@@ -39,8 +39,8 @@ function DisabledAddResults () {
 
     return (
         <div className="bg-gray-200 rounded p-5 cursor-pointer flex flex-col justify-center items-center gap-1 shadow-md" >        
-            <FontAwesomeIcon className="text-3xl text-gray-300" icon={faPlus} />
-            <h1 className="text-xl font-bold text-gray-300">Add Results</h1>
+            <FontAwesomeIcon className="text-3xl text-neutral-light" icon={faPlus} />
+            <h1 className="text-xl font-bold text-neutral-light">Add Results</h1>
             <p className="text-center text-xs md:text-sm text-warning italic"> Add an Afinion & Controls to add calibration results </p>
         </div>
     )

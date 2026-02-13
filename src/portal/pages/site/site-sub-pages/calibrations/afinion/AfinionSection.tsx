@@ -31,7 +31,7 @@ export default function AfinionSection () {
         <div className='flex-1 flex flex-col gap-3'>
             <div className="flex [&>*]:flex-1 gap-8">
                 <table className="">
-                    <thead className="text-xs text-gray-400  bg-gray-100">
+                    <thead className="text-xs text-neutral-light  bg-gray-100">
                         <tr>
                             <th className="text-center font-medium pl-2 py-2">Afinion</th>
                             <th className="hidden md:table-cell text-center font-medium">NH Number</th>
@@ -46,7 +46,7 @@ export default function AfinionSection () {
                         {
                             sortedAfinions.map((afinion) => {
                                 return (
-                                    <tr className="text-sm text-gray-600 bg-white">
+                                    <tr className="text-sm text-neutral-light bg-white">
                                         <td className="pl-2 py-1 text-center">{afinion.afinion_number}</td>
                                         <td className="hidden md:table-cell text-center">NH{afinion.nh_number}</td>
                                         <td className="hidden md:table-cell text-center">{afinion.last_calibrated ? moment(afinion.last_calibrated).format("Do MMM") : 'No calibrations'}</td>

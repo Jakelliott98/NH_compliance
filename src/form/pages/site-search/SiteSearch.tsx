@@ -18,8 +18,8 @@ export default function SiteSearch ({ sites, setActiveSite }: SiteSearchProps) {
 
     const buttonPlaceholder = (
         <div className="w-full flex items-center justify-between">
-            <p className="text-gray-500">Select a site to continue... </p>
-            <FontAwesomeIcon icon={ faCaretDown } className="text-gray-500"/>
+            <p className="text-neutral-light">Select a site to continue... </p>
+            <FontAwesomeIcon icon={ faCaretDown } className="text-neutral-light"/>
         </div>
     )
 

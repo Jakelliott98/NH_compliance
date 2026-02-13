@@ -35,9 +35,9 @@ export default function ExpiredCleans () {
 			<table className="w-full bg-white">
 					<thead className="bg-gray-50">
 					<tr>
-						<th className="text-start font-medium text-xs p-1 text-gray-500">SITE</th>
-						<th className="hidden md:table-cell text-start font-medium text-xs text-gray-500">AFINION</th>
-						<th className="text-start font-medium text-xs text-gray-500">DATE</th>
+						<th className="text-start font-medium text-xs p-1 text-neutral-light">SITE</th>
+						<th className="hidden md:table-cell text-start font-medium text-xs text-neutral-light">AFINION</th>
+						<th className="text-start font-medium text-xs text-neutral-light">DATE</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,8 +46,8 @@ export default function ExpiredCleans () {
 							const site = allSites?.find(site => site.site_id === afinion.site_id)
 							return (
 								<tr className="border border-gray-200" key={afinion.afinion_id}>
-									<td className="text-start text-sm p-1 text-gray-600 p-2">{site?.site_name}</td>
-									<td className="hidden md:table-cell text-start text-sm text-gray-600">NH{afinion.nh_number}</td>
+									<td className="text-start text-sm p-1 text-neutral-light p-2">{site?.site_name}</td>
+									<td className="hidden md:table-cell text-start text-sm text-neutral-light">NH{afinion.nh_number}</td>
 									<td className="text-start text-sm text-warning">{moment(afinion.last_clean).format('Do MMM')}</td>
 								</tr>
 							)

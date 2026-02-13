@@ -34,9 +34,9 @@ export default function ExpiredCalibrations () {
 				<table className="w-full bg-white">
 					<thead className="bg-gray-50">
 						<tr className="">
-							<th className="text-start font-medium text-xs p-1 text-gray-500">SITE</th>
-							<th className="hidden md:table-cell text-start font-medium text-xs text-gray-500">LOT</th>
-							<th className="text-start font-medium text-xs text-gray-500">EXPIRED</th>
+							<th className="text-start font-medium text-xs p-1 text-neutral-light">SITE</th>
+							<th className="hidden md:table-cell text-start font-medium text-xs text-neutral-light">LOT</th>
+							<th className="text-start font-medium text-xs text-neutral-light">EXPIRED</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,8 +45,8 @@ export default function ExpiredCalibrations () {
 								const site = allSites?.find(site => site.site_id === control.site_id)
 								return (
 									<tr className="border border-gray-200" key={control.id}>
-										<td className="text-start text-sm p-1 text-gray-600 p-2">{site?.site_name}</td>
-										<td className="hidden md:table-cell text-start text-sm text-gray-600">{control.control_type === 'hba1c' ? 'HBA1c' : 'Lipids'}</td>
+										<td className="text-start text-sm p-1 text-neutral-light p-2">{site?.site_name}</td>
+										<td className="hidden md:table-cell text-start text-sm text-neutral-light">{control.control_type === 'hba1c' ? 'HBA1c' : 'Lipids'}</td>
 										<td className="text-start text-sm text-warning">{moment(control.expiry_date).format('Do MMM')}</td>
 									</tr>
 								)

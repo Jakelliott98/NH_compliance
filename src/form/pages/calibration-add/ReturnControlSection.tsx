@@ -14,9 +14,9 @@ export function ReturnControlSection ({controlType, controlsData, title}: Return
     const control = controlsData.find((item: CalibrationDatabaseType) => { return item.control_type === controlType})
     if (!control) return (
         <div className="p-1 bg-white flex flex-col justify-center items-center">
-            <FontAwesomeIcon icon={faHandshakeSlash} className="p-2 md:pb-5 text-gray-300" />
-            <p className="text-xs md:text-sm text-gray-500">No {title} added</p>
-            <p className="sm-hidden-block text-xs text-gray-500">Add a {title} control to start submitting results.</p>
+            <FontAwesomeIcon icon={faHandshakeSlash} className="p-2 md:pb-5 text-neutral-light" />
+            <p className="text-xs md:text-sm text-neutral-light">No {title} added</p>
+            <p className="sm-hidden-block text-xs text-neutral-light">Add a {title} control to start submitting results.</p>
         </div>
     )
     const isExpired = moment(control.expiry_date).isBefore(moment())

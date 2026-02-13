@@ -47,9 +47,9 @@ function CalibrationCard ({ result, afinion }: CalibrationCardProps) {
     return (
         <div className='flex flex-col bg-white rounded-lg p-6 gap-4'>
             <div className='flex flex-row justify-between' onClick={() => {setIsOpen(prev => !prev)}}>
-                <p className='text-sm text-gray-500'>{ moment(result.calibration_date).format('Do MMMM YYYY') }</p>
-                <p className='text-sm text-gray-500'>Afinion {afinion.afinion_number} | NH{afinion.nh_number}</p>
-                <FontAwesomeIcon icon={isOpen ? faCaretUp : faCaretDown} className='cursor-pointer text-gray-500'/>
+                <p className='text-sm text-neutral-light'>{ moment(result.calibration_date).format('Do MMMM YYYY') }</p>
+                <p className='text-sm text-neutral-light'>Afinion {afinion.afinion_number} | NH{afinion.nh_number}</p>
+                <FontAwesomeIcon icon={isOpen ? faCaretUp : faCaretDown} className='cursor-pointer text-neutral-light'/>
             </div>
             {
                 isOpen && <AfinionDropdown result={result}/>

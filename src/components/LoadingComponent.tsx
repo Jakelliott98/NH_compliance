@@ -5,8 +5,8 @@ export default function LoadingComponent () {
 
     return (
         <div className='flex flex-col justify-center items-center w-full h-full'>
-            <FontAwesomeIcon icon={faAtom} className='animate-spin text-xl text-gray-700'/>
-            <p className='text-lg text-gray-700'>Fetching...</p>
+            <FontAwesomeIcon icon={faAtom} className='animate-spin text-xl text-neutral-light'/>
+            <p className='text-lg text-neutral-light'>Fetching...</p>
         </div>
     )
 }

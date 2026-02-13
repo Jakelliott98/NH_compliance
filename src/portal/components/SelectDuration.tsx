@@ -13,7 +13,7 @@ function SelectDuration ({ onSelect, activeSelect }: SelectDurationProps) {
         <div className="py-2">
             <div className="pb-2">
                     <p className="text-sm">Export Date Range</p>
-                    <p className="text-sm text-gray-400 font-light">All data within the selected date range.</p>
+                    <p className="text-sm text-neutral-light font-light">All data within the selected date range.</p>
             </div>
             <div className="hidden md:flex gap-2">
                 <SelectButton text='Last Month' onSelect={onSelect} activeSelect={activeSelect}/>

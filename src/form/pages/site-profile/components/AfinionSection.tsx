@@ -55,9 +55,9 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
     if (afinions.length === 0) {
         return (
             <div className="py-2 px-1 bg-white flex flex-col justify-center items-center w-full">
-                        <FontAwesomeIcon icon={faHandshakeSlash} className="pb-1 md:pb-5 text-gray-300" />
-                        <p className="text-xs md:text-sm text-gray-500">No Afinions added yet</p>
-                        <p className="sm-hidden-block text-xs text-gray-500">Add Afinions to start submitting results.</p>
+                        <FontAwesomeIcon icon={faHandshakeSlash} className="pb-1 md:pb-5 text-neutral-light" />
+                        <p className="text-xs md:text-sm text-neutral-light">No Afinions added yet</p>
+                        <p className="sm-hidden-block text-xs text-neutral-light">Add Afinions to start submitting results.</p>
             </div>
         )
     }
@@ -67,13 +67,13 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
             return (
                 <div className="flex-1 bg-gray-50 border border-gray-200 p-3 rounded flex-grow flex flex-col justify-around items-center shadow-sm" key={afinion.afinion_id}>
                     <FontAwesomeIcon className="text-success text-lg md:text-xl lg:text-3xl" icon={faCalendarCheck} />
-                    <p className="font-light lg:font-semibold text-center text-sm lg:text-lg text-slate-900">Afinion {afinion.afinion_number}</p>
+                    <p className="font-light lg:font-semibold text-center text-sm lg:text-lg text-neutral">Afinion {afinion.afinion_number}</p>
                     <div className="hidden lg:block">
                     {
                         afinion.last_clean ? (
                             <p className="text-xs text-center">
                                 Calibrated <br/>
-                                <span className="italics text-slate-700"> {afinion.last_calibrated === null ? '' : moment(afinion.last_calibrated).format('Do MMM')}</span>
+                                <span className="italics text-neutral-light"> {afinion.last_calibrated === null ? '' : moment(afinion.last_calibrated).format('Do MMM')}</span>
                             </p>
                         ) : (
                             <p className="text-center text-xs text-warningitalic">No Calibrations Yet</p>
@@ -83,7 +83,7 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
                         afinion.last_clean ? (
                             <p className="text-center text-xs">
                                 Cleaned<br/>
-                                <span className="italics text-slate-700"> {afinion.last_clean === null ? '' : moment(afinion.last_clean).format('Do MMM')}</span>
+                                <span className="italics text-neutral-light"> {afinion.last_clean === null ? '' : moment(afinion.last_clean).format('Do MMM')}</span>
                             </p>
                         ) : (
                             <p className="text-center text-xs text-warning italic">No Cleans Yet</p>

@@ -75,7 +75,7 @@ function FilterSection ({ setIsFiltered, resetSites, isFiltered }: FilterSection
             <div className='hidden md:flex gap-2'>
                 <FilterButton onSelect={setRegion} isFiltered={isFiltered} dropdownOptions={regionFilterOptions}/>
                 <button 
-                    className='py-1 px-2 flex items-center gap-2 border border-gray-300 rounded text-gray-500 text-sm cursor-pointer hover:text-gray-700 hover:border-gray-700'
+                    className='py-1 px-2 flex items-center gap-2 border border-gray-300 rounded text-neutral-light text-sm cursor-pointer hover:text-neutral-light hover:border-gray-700'
                     onClick={() => resetFilters()}
                 >
                     Reset

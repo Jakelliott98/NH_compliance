@@ -33,12 +33,12 @@ export default function AfinionFormSection ({ closeDialog }: AfinionFormSectionP
     })
 
     return (
-        <div className="bg-gray-100 w-full p-2 lg:p-5 rounded flex flex-col items-center text-slate-600">
+        <div className="bg-gray-100 w-full p-2 lg:p-5 rounded flex flex-col items-center text-neutral-light">
             <form className="p-4 bg-white flex flex-col gap-2 rounded" onSubmit={onSubmit}>
                 <div className="flex flex-col">
                     <label>Afinion Number</label>
                     <div className='outline rounded flex py-1 px-2 gap-2'>
-                        <p className='text-slate-400'>Afinion</p>
+                        <p className='text-neutral-light'>Afinion</p>
                         <input 
                             className="outline-none focuse:outline-none focus:ring-0" 
                             type="number" 
@@ -49,7 +49,7 @@ export default function AfinionFormSection ({ closeDialog }: AfinionFormSectionP
                 <div className="flex flex-col">
                     <label>NH Number</label>
                     <div className='outline rounded flex py-1 px-2 gap-2'>
-                        <p className='text-slate-400'>NH</p>
+                        <p className='text-neutral-light'>NH</p>
                         <input 
                             className="outline-none focuse:outline-none focus:ring-0" 
                             type="number" 

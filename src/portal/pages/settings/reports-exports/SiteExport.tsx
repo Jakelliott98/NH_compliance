@@ -21,7 +21,7 @@ function SiteExport () {
             <div className="py-2 flex flex-col gap-2">
                 <div>
                     <p className="text-sm">Content</p>
-                    <p className="text-sm text-gray-400 font-light">Type of data to export.</p>
+                    <p className="text-sm text-neutral-light font-light">Type of data to export.</p>
                 </div>
                 <div className="hidden md:flex gap-2">
                             <SelectButton text='All Compliance' onSelect={setActiveCompliance} activeSelect={selectedCompliance}/>

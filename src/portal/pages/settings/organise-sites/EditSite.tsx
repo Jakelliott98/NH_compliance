@@ -66,7 +66,7 @@ function EditSite ({ siteDetails, onSubmit, onChange }: EditSiteProps) {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <button className="cursor-pointer hover:text-black">
+                <button className="cursor-pointer hover:text-neutral">
                     <FontAwesomeIcon icon={faPenToSquare}/> 
                     <span className="sm-hidden-inline pl-0.5">Edit</span>
                 </button>
@@ -75,16 +75,16 @@ function EditSite ({ siteDetails, onSubmit, onChange }: EditSiteProps) {
                 <h1 className="font-bold text-lg">Edit Site</h1>
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col gap-1">
-                        <label className="text-gray-400 text-sm">Site Name</label>
+                        <label className="text-neutral-light text-sm">Site Name</label>
                         <input className="w-full rounded border-1 border-gray-200 px-2 py-1 text-sm" value={siteDetails.name} onChange={(e) => {onChange('name' ,e.target.value)}}/>
                     </div>
                     <div className="flex gap-5 [&>*]:flex-1">
                         <div className="flex flex-col gap-1">
-                            <label className="text-gray-400 text-sm">Team Leader</label>
+                            <label className="text-neutral-light text-sm">Team Leader</label>
                             <input className="w-full rounded border-1 border-gray-200 px-2 py-1 text-sm" value={siteDetails.teamLeader} onChange={(e) => {onChange('teamLeader', e.target.value)}}/>
                         </div>
                         <div className="flex flex-col gap-1">
-                            <label className="text-gray-400 text-sm">Region</label>
+                            <label className="text-neutral-light text-sm">Region</label>
                             <input className="w-full rounded border-1 border-gray-200 px-2 py-1 text-sm" value={siteDetails.region} onChange={(e) => {onChange('region', e.target.value)}}/>
                         </div>
                     </div>

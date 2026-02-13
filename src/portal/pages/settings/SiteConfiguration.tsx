@@ -23,12 +23,12 @@ export default function SiteConfiguration () {
             <div className="py-4">
                 <div className="flex-1 border-b border-gray-200 pb-2">
                     <p className="font-semibold">Site Configuration</p>
-                    <p className="sm-hidden-block text-sm text-gray-400">Select an individual site to manage its Afinion machines. Edit machine details, update records, or remove machines that are no longer in use.</p>
+                    <p className="sm-hidden-block text-sm text-neutral-light">Select an individual site to manage its Afinion machines. Edit machine details, update records, or remove machines that are no longer in use.</p>
                 </div>
                 <div className="py-2 border-b border-gray-200">
                     <div>
                         <h2 className="font-semibold text-sm">Find site</h2>
-                        <p className="text-sm text-gray-400">Find the site you want to edit</p>
+                        <p className="text-sm text-neutral-light">Find the site you want to edit</p>
                     </div>
                     <div className="pt-2">
                         <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
@@ -61,10 +61,10 @@ function EditAfinionsSection ({ activeSite }: EditAfinionsSectionProps) {
         <div className="py-2 border-b border-gray-200">
             <div>
                 <h2 className="font-semibold text-sm">Edit Afinion</h2>
-                <p className="text-sm text-gray-400">Edit the sites afinions</p>
+                <p className="text-sm text-neutral-light">Edit the sites afinions</p>
             </div>
             <div className="pt-2">
-                <div className="grid grid-cols-4 text-sm text-gray-600 bg-gray-200 p-2 text-center">
+                <div className="grid grid-cols-4 text-sm text-neutral-light bg-gray-200 p-2 text-center">
                     <p>Afinion Number</p>
                     <p className="sm-hidden-block">NH Number</p>
                     <p>Last Clean</p>
@@ -77,7 +77,7 @@ function EditAfinionsSection ({ activeSite }: EditAfinionsSectionProps) {
                                 <p>{afinion.afinion_number}</p>
                                 <p className="sm-hidden-block">{afinion.nh_number}</p>
                                 <p className={afinion.last_clean ? '' : 'text-warning italic'} >{afinion.last_clean ? moment(afinion.last_clean).format('Do MMM') : 'No Cleans'}</p>
-                                <p><FontAwesomeIcon icon={faTrashCan} className="text-gray-400"/></p>
+                                <p><FontAwesomeIcon icon={faTrashCan} className="text-neutral-light"/></p>
                             </div>
                         )
                     })
@@ -88,9 +88,9 @@ function EditAfinionsSection ({ activeSite }: EditAfinionsSectionProps) {
         
         return (
             <div className="flex flex-col items-center justify-center p-20 gap-2">
-                <FontAwesomeIcon icon={faHandshakeSlash} className="text-5xl text-gray-400"/>
-                <h2 className="font-semibold text-xl text-gray-700">Oops! No afinions can be found...</h2>
-                <p className="text sm text-gray-500">There is nothing here to view right now, please add afinions to your site to see data.</p>
+                <FontAwesomeIcon icon={faHandshakeSlash} className="text-5xl text-neutral-light"/>
+                <h2 className="font-semibold text-xl text-neutral-light">Oops! No afinions can be found...</h2>
+                <p className="text sm text-neutral-light">There is nothing here to view right now, please add afinions to your site to see data.</p>
                 <button onClick={() => {navigate(`../../../SiteForm/Sites/${activeSite.slug}`)}} className="btn py-2 px-5 mt-2">Add Afinion</button>
             </div>
         )

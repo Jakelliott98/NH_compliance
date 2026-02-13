@@ -16,7 +16,7 @@ function SelectButton ({ text, onSelect, activeSelect }: SelectButtonProps) {
                 rounded border-1
                 text-sm 
                 cursor-pointer
-                ${activeSelect === text ? 'bg-gray-300 text-gray-900 border-gray-500' : 'bg-gray-100 text-gray-500 border-gray-200'}
+                ${activeSelect === text ? 'bg-gray-300 text-neutral border-gray-500' : 'bg-gray-100 text-neutral-light border-gray-200'}
                 `}
             >
                 {text}

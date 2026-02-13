@@ -22,7 +22,7 @@ function LipidsControlDisplay ({ lipids }: LipidsDisplayProps) {
             <div className='bg-white rounded-lg p-3'>
                 <div className='border-b-2 border-solid border-gray-300 py-2'>
                     <p className='font-medium'>Lipids</p>
-                    <p className='text-gray-400 text-xs'>Lot Number: {total.lot_number}</p>
+                    <p className='text-neutral-light text-xs'>Lot Number: {total.lot_number}</p>
                 </div>
                 { !isOpen && <button className=" w-full pt-3 text-sm btn" onClick={() => {setIsOpen(true)}}>See Ranges <FontAwesomeIcon icon={faChevronDown} /></button>}
                 {
