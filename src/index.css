@@ -41,6 +41,24 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme inline {
+  --color-primary: oklch(0.5461 0.2152 262.88);
+  --color-primary-foreground: oklch(1 0 0);
+
+  --color-secondary: oklch(0.8091 0.0956 251.81);
+  --color-secondary-foreground: oklch(0.4244 0.1809 265.64);
+
+  --color-neutral: oklch(0.2781 0.0296 256.85);
+  --color-neutral-light: oklch(0.551 0.0234 264.36);
+
+  --color-success: oklch(0.6271 0.1699 149.21);
+  --color-warning: oklch(0.7686 0.1647 70.08);
+  --color-error: oklch(0.5771 0.2152 27.33);
+
+  --color-bg: oklch(0.9846 0.0017 247.84);
+  --color-surface: oklch(1 0 0);
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
