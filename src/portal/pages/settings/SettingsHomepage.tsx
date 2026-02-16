@@ -12,10 +12,10 @@ export default function SettingsHomepage () {
                 <p className="sm-hidden-block text-sm text-neutral-light">Manage the different sites and preferences</p>
             </div>
             <nav className="flex justify-around my-2 [&>*]:flex-1 [&>*]:text-center [&>*]:py-2 [&>*]:border-b-2">
-                    <NavLink to="Sites" className={isHomepage ? 'text-secondary-foreground bg-secondary/25 border-b-primary' : 'text-neutral-light/75'}>Sites</NavLink>
-                    <NavLink to="Configuration" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary/25 border-b-primary' : 'text-neutral-light/75'}}><span className="sm-hidden-inline">Site&nbsp;</span>Configuration</NavLink>
-                    <NavLink to="Compliance" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary/25 border-b-primary' : 'text-neutral-light/75'}}>Compliance<span className="sm-hidden-inline">&nbsp;Rules</span></NavLink>
-                    <NavLink to="Exports" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary/25 border-b-primary' : 'text-neutral-light/75'}}><span className="sm-hidden-inline">Reports &&nbsp;</span>Exports</NavLink>
+                    <NavLink to="Sites" className={isHomepage ? 'text-secondary-foreground bg-secondary border-b-primary' : 'text-neutral-light/75'}>Sites</NavLink>
+                    <NavLink to="Configuration" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary border-b-primary' : 'text-neutral-light/75'}}><span className="sm-hidden-inline">Site&nbsp;</span>Configuration</NavLink>
+                    <NavLink to="Compliance" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary border-b-primary' : 'text-neutral-light/75'}}>Compliance<span className="sm-hidden-inline">&nbsp;Rules</span></NavLink>
+                    <NavLink to="Exports" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary border-b-primary' : 'text-neutral-light/75'}}><span className="sm-hidden-inline">Reports &&nbsp;</span>Exports</NavLink>
             </nav>
             <Outlet />
         </div>

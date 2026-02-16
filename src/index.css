@@ -45,7 +45,7 @@
   --color-primary: oklch(0.5461 0.2152 262.88);
   --color-primary-foreground: oklch(1 0 0);
 
-  --color-secondary: oklch(0.8091 0.0956 251.81);
+  --color-secondary: oklch(0.9636 0.0176 253.34);
   --color-secondary-foreground: oklch(0.4244 0.1809 265.64);
 
   --color-neutral: oklch(0.2781 0.0296 256.85);
@@ -169,4 +169,8 @@
 
 .btn:active {
   @apply bg-primary/80
+}
+
+.flexCenter {
+  @apply flex items-center justify-center
 }
