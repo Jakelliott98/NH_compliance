@@ -7,23 +7,15 @@ export default function SettingsHomepage () {
 
     return (
         <div className="w-full p-2">
-            <div className="border-b border-gray-200 pb-2">
+            <div className=" pb-2">
                 <h1 className="text-lg md:text-2xl font-bold text-neutral">Settings</h1>
                 <p className="sm-hidden-block text-sm text-neutral-light">Manage the different sites and preferences</p>
             </div>
-            <nav className="bg-gray-200 flex rounded p-1 justify-around my-2">
-                <nav className="flex-1 text-neutral-light text-xs md:text-sm text-center">
-                    <NavLink to="Sites" className={isHomepage ? 'text-neutral' : 'text-neutral-light'}>Sites</NavLink>
-                </nav>
-                <nav className="flex-1 text-neutral-light text-xs md:text-sm text-center">
-                    <NavLink to="Configuration" className={({isActive}) => {return isActive ? 'text-neutral' : 'text-neutral-light'}}><span className="sm-hidden-inline">Site&nbsp;</span>Configuration</NavLink>
-                </nav>
-                <nav className="flex-1 text-neutral-light text-xs md:text-sm text-center">
-                    <NavLink to="Compliance" className={({isActive}) => {return isActive ? 'text-neutral' : 'text-neutral-light'}}>Compliance<span className="sm-hidden-inline">&nbsp;Rules</span></NavLink>
-                </nav>
-                <nav className="flex-1 text-neutral-light text-xs md:text-sm text-center">
-                    <NavLink to="Exports" className={({isActive}) => {return isActive ? 'text-neutral' : 'text-neutral-light'}}><span className="sm-hidden-inline">Reports &&nbsp;</span>Exports</NavLink>
-                </nav>
+            <nav className="flex justify-around my-2 [&>*]:flex-1 [&>*]:text-center [&>*]:py-2 [&>*]:border-b-2">
+                    <NavLink to="Sites" className={isHomepage ? 'text-secondary-foreground bg-secondary/25 border-b-primary' : 'text-neutral-light/75'}>Sites</NavLink>
+                    <NavLink to="Configuration" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary/25 border-b-primary' : 'text-neutral-light/75'}}><span className="sm-hidden-inline">Site&nbsp;</span>Configuration</NavLink>
+                    <NavLink to="Compliance" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary/25 border-b-primary' : 'text-neutral-light/75'}}>Compliance<span className="sm-hidden-inline">&nbsp;Rules</span></NavLink>
+                    <NavLink to="Exports" className={({isActive}) => {return isActive ? 'text-secondary-foreground bg-secondary/25 border-b-primary' : 'text-neutral-light/75'}}><span className="sm-hidden-inline">Reports &&nbsp;</span>Exports</NavLink>
             </nav>
             <Outlet />
         </div>
