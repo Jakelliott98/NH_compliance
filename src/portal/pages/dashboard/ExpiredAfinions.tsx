@@ -36,7 +36,7 @@ export default function ExpiredAfinions () {
 					<tr>
 						<th className="text-start font-medium text-xs p-1 text-neutral-light">SITE</th>
 						<th className="hidden md:table-cell text-start font-medium text-xs text-neutral-light">AFINION</th>
-						<th className="text-start font-medium text-xs text-neutral-light">DATE</th>
+						<th className="text-start font-medium text-xs text-neutral-light">EXPIRED</th>
 					</tr>
 				</thead>
 				<tbody>

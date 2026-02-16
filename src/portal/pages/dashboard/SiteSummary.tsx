@@ -25,10 +25,10 @@ export default function SiteSummary () {
 
 	return (
 		<div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-12">
-			<DashboardCards title='Calibrated Sites' dataPoint={calibratedSites.length} icon={faSquareCheck} colour={'green'}/>
-			<DashboardCards title='Flagging' dataPoint={1} icon={faTriangleExclamation} colour={'red'}/>
-			<DashboardCards title='Flagging Calibrations' dataPoint={sitesFlaggingCalibrations.length} icon={faBug} colour={'red'}/>
-			<DashboardCards title='Flagging Cleans' dataPoint={1} icon={faHandSparkles} colour={'red'}/>
+			<DashboardCards title='Calibrated Sites' dataPoint={calibratedSites.length} icon={faSquareCheck} fontClass={'text-success bg-success/25'} cardClass={'bg-success/10 border-success/25'}/>
+			<DashboardCards title='Flagging' dataPoint={1} icon={faTriangleExclamation} fontClass={'text-warning bg-warning/25'} cardClass={'bg-warning/10 border-warning/25'}/>
+			<DashboardCards title='Flagging Calibrations' dataPoint={sitesFlaggingCalibrations.length} icon={faBug} fontClass={'text-warning bg-warning/25'} cardClass={'bg-warning/10 border-warning/25'}/>
+			<DashboardCards title='Flagging Cleans' dataPoint={1} icon={faHandSparkles} fontClass={'text-warning bg-warning/25'} cardClass={'bg-warning/10 border-warning/25'}/>
 		</div>
 	)
 }
@@ -37,20 +37,18 @@ interface DashboardCardsProps {
 	title: string,
 	dataPoint: number,
 	icon: IconDefinition,
-	colour: string,
+	fontClass: string,
+	cardClass: string,
 }
 
-function DashboardCards ({dataPoint, title, icon, colour}: DashboardCardsProps) {
+function DashboardCards ({dataPoint, title, icon, fontClass, cardClass}: DashboardCardsProps) {
 
 	return (
-		<div className="bg-white p-2 md:p-5 rounded flex flex-col">
-			<div className="flex items-center gap-1">
-				<FontAwesomeIcon icon={icon} className={`text-${colour}-700 text-xs md:text-md`}/>
-				<p className="text-xs md:text-lg text-neutral-light font-light">{title}</p>
-			</div>
-			<p className="text-md text-center md:text-xl">{dataPoint}</p>
-			<div className="sm-hidden-block flex gap-1 items-center text-neutral-light text-xs cursor-pointer hover:text-neutral">
-				<a>View More →</a>
+		<div className={`p-2 rounded flex items-center justify-start gap-5 border ${cardClass}`}>
+			<FontAwesomeIcon icon={icon} className={`text-secondary-foreground text-2xl md:text-md p-4 ${fontClass} rounded`}/>
+			<div className="flex flex-col justify-center items-start">
+				<h1 className="text-xs md:text-lg text-neutral-light font-light">{title}</h1>
+				<p className="text-md text-center md:text-xl">{dataPoint}</p>
 			</div>
 		</div>
 	)
