@@ -10,7 +10,7 @@ export default function SiteResults () {
     const siteSlug = useParams().Site
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
     const { data: afinions, isError: afinionError, isLoading: afinionsLoading } = useAfinions(activeSite)
-    const { data: results, isError: resultError, isLoading: resultLoading } = useResults(activeSite)
+    const { data: results, isError: resultError, isLoading: resultLoading } = useResults(activeSite!)
     
     if (!activeSite) return <p>No site found</p>;
     if (siteError) return <p>Error loading site</p>;

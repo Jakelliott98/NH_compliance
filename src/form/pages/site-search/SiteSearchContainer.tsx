@@ -8,7 +8,7 @@ import type { SiteDatabaseType } from "@/types/site"
 
 export default function SiteSearchContainer () {
 
-    const [activeSite, setActiveSite] = useState<null | SiteDatabaseType>(null)
+    const [activeSite, setActiveSite] = useState<SiteDatabaseType>()
     const navigate = useNavigate();
 
     const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useAllSites()

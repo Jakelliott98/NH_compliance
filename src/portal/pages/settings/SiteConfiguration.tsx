@@ -11,7 +11,7 @@ import { useAfinions } from "@/services/afinions"
 
 export default function SiteConfiguration () {
     
-    const [activeSite, setActiveSite] = useState()
+    const [activeSite, setActiveSite] = useState<SiteDatabaseType>()
 
     const { data: allSites, isError: isAllSitesError, isLoading: isAllSitesLoading, error: allSitesError } = useAllSites()
 
