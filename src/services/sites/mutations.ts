@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { deleteSite, addSite, updateSite, updateSiteCalibration, type SiteInfoData } from "./api"
 import { useSupabase } from "@/utils/useSupabase";
+import type { AddSiteType } from "./api";
 
 function useUpdateSite () {
 
@@ -48,7 +49,7 @@ function useAddSite () {
     const supabase = useSupabase()
 
     return useMutation({
-            mutationFn: (data) => {return addSite(data, supabase)},
+            mutationFn: (data: AddSiteType) => {return addSite(data, supabase)},
             onSuccess: () => queryClient.invalidateQueries({queryKey: ['allSites']})
     })
 }

@@ -4,10 +4,11 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader } from 
 import AddSiteSection from "@/portal/pages/settings/organise-sites/AddSiteSection";
 import { FormProvider, useForm } from "react-hook-form";
 import { useAddSite } from "@/services/sites";
+import type { AddSiteType } from "@/services/sites";
 
 function AddSiteContainer () {
 
-    const methods = useForm();
+    const methods = useForm<AddSiteType>();
     const { handleSubmit }  = methods;
 
     const { mutate: addSite } = useAddSite()

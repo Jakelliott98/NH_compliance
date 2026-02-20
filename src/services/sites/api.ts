@@ -3,8 +3,10 @@ import type { SiteDatabaseType } from "@/types/site";
 import supabase from "@/utils/supabase";
 import { SupabaseClient } from "@supabase/supabase-js";
 
-interface DataObj {
-teamLeader: string, siteName:string , region:string 
+export interface AddSiteType {
+    teamLeader: string, 
+    siteName:string , 
+    region:string 
 }
 
 export interface SiteInfoData {
@@ -14,7 +16,7 @@ export interface SiteInfoData {
     siteRegion: string  
 }
 
-const addSite = async (data: DataObj, supabase: SupabaseClient) => {
+const addSite = async (data: AddSiteType, supabase: SupabaseClient) => {
 
 const { error } = await supabase
     .from('sites')
