@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { useSiteBySlug } from '@/services/sites'
 import { useControls } from "@/services/controls/queries";
-import { useUpdateControl, useCreateControl } from "@/services/controls";
+import { useUpdateControl, useCreateControl, type ControlType } from "@/services/controls";
 
 const lipidsTable = [{title: 'Total Cholesterol', type: 'total'}, {title: 'HDL Cholesterol', type: 'hdl'}, {title: 'Triglycerides', type: 'triglycerides'}]
 const hba1cTable = [{ title: 'HBA1c', type: 'hba1c' }]
@@ -19,7 +19,7 @@ interface CalibrationFormProps {
 
 export default function CalibrationForm ({ closeDialog }: CalibrationFormProps) {
 
-    const [selectedControl, setSelectedControl] = useState<string>('');
+    const [selectedControl, setSelectedControl] = useState<'hba1c' | 'lipids'>('hba1c');
     const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
 
     return (
@@ -32,20 +32,15 @@ export default function CalibrationForm ({ closeDialog }: CalibrationFormProps) 
 }
 
 interface CalibrationFormInputProps {
-    selectedControl: string,
+    selectedControl: 'hba1c' | 'lipids',
     closeDialog: () => void,
 }
 
 export function CalibrationFormInput ({ selectedControl, closeDialog }: CalibrationFormInputProps) {
 
-    const methods = useForm();
-    const { register, handleSubmit, setValue } = methods
-    const [date, setDate] = useState<Date | undefined>()
-
-    useEffect(() => {
-        setValue("expiryDate", date?.toISOString())
-        setValue("controlType", selectedControl)
-    }, [date, setValue, selectedControl])
+    const methods = useForm<ControlType>();
+    const { register, handleSubmit } = methods
+    const [date, setDate] = useState<Date>()
 
     const siteSlug: string | undefined = useParams().Site;
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
@@ -60,14 +55,18 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
     if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
     if (!activeSite || !controls) return (<p>Something went wrong fetching sites</p>)
     
-    setValue("siteID", activeSite.site_id)
     const hba1cControlPresent = controls?.some(control => control.control_type === 'hba1c')
     const lipidsControlPresent = controls?.some(control => control.control_type === 'lipids')
 
 
     const onSubmit = handleSubmit((data) => {
 
+        console.log(data)
+
+        data.expiryDate = new Date(data.expiryDate)
+
         if (selectedControl === 'hba1c') {
+            if (!data.hba1c) return;
             if (hba1cControlPresent) {
                 updateControl({control: data, testType: 'hba1c', ranges: data.hba1c})
                 closeDialog()
@@ -76,6 +75,7 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
                 closeDialog()
             }
         } else if (selectedControl === 'lipids') {
+            if(!data.hdl || !data.triglycerides || !data.total) return
             if (lipidsControlPresent) {
                 updateControl({control: data, testType:'hdl', ranges: data.hdl})
                 updateControl({control: data, testType: 'triglycerides', ranges: data.triglycerides})
@@ -104,6 +104,9 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
                     </div>
                 </div>
                 <InputTable test={ selectedControl === 'hba1c' ? hba1cTable : lipidsTable}/>
+                <input type="hidden" {...register('siteID', {valueAsNumber: true})} value={activeSite.site_id}/>
+                <input type="hidden" {...register('expiryDate')} value={date?.toISOString()}/>
+                <input type="hidden" {...register('controlType')} value={selectedControl}/>
                 <button 
                     type="submit"
                     className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded btn"

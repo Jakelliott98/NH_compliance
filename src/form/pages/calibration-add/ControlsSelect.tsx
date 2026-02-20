@@ -1,6 +1,6 @@
 
 interface ControlsSelectProps {
-    onSelect: React.Dispatch<React.SetStateAction<string>>,
+    onSelect: React.Dispatch<React.SetStateAction<'hba1c' | 'lipids'>>,
     setIsFormOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
