@@ -70,6 +70,7 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
 
     return (
         afinions.map((afinion) => {
+            console.log(afinion)
             return (
                 <div 
                     className="
@@ -85,7 +86,7 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
                     <p className="font-light lg:font-semibold text-center text-sm lg:text-lg text-neutral">Afinion {afinion.afinion_number}</p>
                     <div className="hidden lg:block">
                         {
-                            afinion.last_clean ? (
+                            afinion.last_calibrated ? (
                                 <p className="text-xs text-center">
                                     Calibrated <br/>
                                     <span className="italics text-neutral-light"> {afinion.last_calibrated === null ? '' : moment(afinion.last_calibrated).format('Do MMM')}</span>
