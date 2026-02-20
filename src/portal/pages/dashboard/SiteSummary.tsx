@@ -25,9 +25,9 @@ export default function SiteSummary () {
 
 	return (
 		<div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-12">
-			<DashboardCards title='Calibrated Sites' dataPoint={calibratedSites.length} icon={faSquareCheck} fontClass={'text-success bg-success/25'} cardClass={'bg-success/10 border-success/25'}/>
+			<DashboardCards title='Calibrated Sites' dataPoint={calibratedSites ? calibratedSites.length : 0} icon={faSquareCheck} fontClass={'text-success bg-success/25'} cardClass={'bg-success/10 border-success/25'}/>
 			<DashboardCards title='Flagging' dataPoint={1} icon={faTriangleExclamation} fontClass={'text-warning bg-warning/25'} cardClass={'bg-warning/10 border-warning/25'}/>
-			<DashboardCards title='Flagging Calibrations' dataPoint={sitesFlaggingCalibrations.length} icon={faBug} fontClass={'text-warning bg-warning/25'} cardClass={'bg-warning/10 border-warning/25'}/>
+			<DashboardCards title='Flagging Calibrations' dataPoint={sitesFlaggingCalibrations ? sitesFlaggingCalibrations.length : 0} icon={faBug} fontClass={'text-warning bg-warning/25'} cardClass={'bg-warning/10 border-warning/25'}/>
 			<DashboardCards title='Flagging Cleans' dataPoint={1} icon={faHandSparkles} fontClass={'text-warning bg-warning/25'} cardClass={'bg-warning/10 border-warning/25'}/>
 		</div>
 	)
