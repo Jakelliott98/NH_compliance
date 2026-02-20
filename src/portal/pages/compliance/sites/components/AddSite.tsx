@@ -5,6 +5,7 @@ import AddSiteSection from "@/portal/pages/settings/organise-sites/AddSiteSectio
 import { FormProvider, useForm } from "react-hook-form";
 import { useAddSite } from "@/services/sites";
 import type { AddSiteType } from "@/services/sites";
+import { useState } from "react";
 
 function AddSiteContainer () {
 
@@ -31,8 +32,15 @@ interface AddSiteProps {
 
 function AddSite ({ onSubmit }: AddSiteProps) {
 
+    const [open, setOpen] = useState(false)
+
+    const OnSubmitForm = () => {
+        onSubmit()
+        setOpen(false)
+    }
+
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <div className='py-1 px-2 flex items-center gap-2 border border-gray-300 rounded text-neutral-light text-sm cursor-pointer hover:text-neutral-light hover:border-gray-700'>
                     <FontAwesomeIcon icon={faPlus} className=''/>
@@ -43,7 +51,7 @@ function AddSite ({ onSubmit }: AddSiteProps) {
                 <DialogHeader>
                     <DialogTitle>Add Site</DialogTitle>
                 </DialogHeader>
-                    <AddSiteSection onSubmit={onSubmit}/>
+                    <AddSiteSection onSubmit={OnSubmitForm}/>
             </DialogContent>
         </Dialog>
     )

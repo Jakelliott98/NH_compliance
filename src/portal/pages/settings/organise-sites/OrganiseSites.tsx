@@ -4,13 +4,13 @@ import moment from "moment"
 import EditSiteContainer from "./EditSite"
 import DeleteSiteContainer from "./DeleteSite"
 import { FormProvider, useForm } from "react-hook-form"
-import { useAddSite } from "@/services/sites"
-import AddSiteSection from "./AddSiteSection"
+import { useAddSite, type AddSiteType } from "@/services/sites"
+import AddSite from "./AddSiteSection"
 import { useAllSites } from '@/services/sites'
 
 export default function OrganiseSites () {
 
-    const methods = useForm();
+    const methods = useForm<AddSiteType>();
     const { handleSubmit }  = methods;
 
     const { data: allSites, isLoading: isAllSitesLoading, isError: isAllSitesError, error: allSitesError } = useAllSites()
@@ -37,7 +37,7 @@ export default function OrganiseSites () {
                     <p className="sm-hidden-inline text-sm text-neutral-light">Add a new site to the database</p>
                 </div>
                 <FormProvider {...methods}>
-                    <AddSiteSection onSubmit={onAddSiteSubmit}/>
+                    <AddSite onSubmit={onAddSiteSubmit}/>
                 </FormProvider>
             </div>
             <div className="py-2">
