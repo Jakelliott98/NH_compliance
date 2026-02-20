@@ -1,6 +1,11 @@
+import type { CalibrationDatabaseType } from "@/types/calibration"
 import { useFormContext } from "react-hook-form"
 
-export default function RangesComponent ({ control }) {
+interface RangesComponentType {
+    control: CalibrationDatabaseType
+}
+
+export default function RangesComponent ({ control }: RangesComponentType) {
 
     const { register } = useFormContext()
 

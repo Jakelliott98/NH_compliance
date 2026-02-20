@@ -11,6 +11,7 @@ import { useControls } from "@/services/controls/queries"
 import { useAfinions } from "@/services/afinions"
 import { useCreateResult } from "@/services/results/mutations"
 import { useUpdateLastClean } from "@/services/afinions"
+import type { ResultType } from "@/services/results"
 
 export default function FormSection () {
 
@@ -41,8 +42,8 @@ interface AfinionResultCardProps {
 
 function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
 
-    const methods = useForm();
-    const { handleSubmit, setValue, register } = methods;
+    const methods = useForm<ResultType>();
+    const { handleSubmit, register } = methods;
     const [isCleaned, setIsCleaned] = useState(false)
 
     const siteSlug = useParams().Site;
@@ -58,16 +59,8 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
     if ( siteLoading || controlsLoading ) return (<p>Loading...</p>)
     if (!activeSite) throw new Error('This site cannot be found')
 
-    setValue("afinionID", afinion.afinion_id)
-    setValue("siteID", activeSite.site_id)
-    controls?.map((control) => {
-        setValue(`${control.test_type}.c1.low`, control.calibration_ranges.c1.low)
-        setValue(`${control.test_type}.c1.high`, control.calibration_ranges.c1.high)
-        setValue(`${control.test_type}.c2.low`, control.calibration_ranges.c2.low)
-        setValue(`${control.test_type}.c2.high`, control.calibration_ranges.c2.high)
-    })
-
     const onSubmit = handleSubmit((data) => {
+        console.log(data)
         if (isCleaned) updateCleaned({ afinionID: data.afinionID})
         updateCalibrated({afinionID: data.afinionID})
         createResult(data)
@@ -111,6 +104,20 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
                         </div>
                     </div>
                 </div>
+                <input type="hidden" {...register('siteID', {valueAsNumber: true})} value={activeSite.site_id}/>
+                <input type="hidden" {...register('afinionID', {valueAsNumber: true})} value={afinion.afinion_id}/>
+                {
+                    controls?.map((control) => {
+                        return (
+                            <>
+                                <input type="hidden" {...register(`${control.test_type}.c1.low`)} value={control.calibration_ranges.c1.low}/>
+                                <input type="hidden" {...register(`${control.test_type}.c1.high`)} value={control.calibration_ranges.c1.high}/>
+                                <input type="hidden" {...register(`${control.test_type}.c2.low`)} value={control.calibration_ranges.c2.low}/>
+                                <input type="hidden" {...register(`${control.test_type}.c2.high`)} value={control.calibration_ranges.c2.high}/>
+                            </>
+                        )
+                    })
+                }
                 <button 
                     type="submit"
                     className="w-full py-2 tracking-wide shadow-md hover:shadow-lg cursor-pointer rounded btn"

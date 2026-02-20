@@ -15,7 +15,7 @@ interface TestResultType {
     }
 }
 
-interface ResultType {
+export interface ResultType {
     siteID: number,
     afinionID: number,
     clinician: string,
