@@ -60,7 +60,6 @@ function AfinionResultCard ({ afinion }: AfinionResultCardProps) {
     if (!activeSite) throw new Error('This site cannot be found')
 
     const onSubmit = handleSubmit((data) => {
-        console.log(data)
         if (isCleaned) updateCleaned({ afinionID: data.afinionID})
         updateCalibrated({afinionID: data.afinionID})
         createResult(data)

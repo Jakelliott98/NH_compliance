@@ -61,8 +61,6 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
 
     const onSubmit = handleSubmit((data) => {
 
-        console.log(data)
-
         data.expiryDate = new Date(data.expiryDate)
 
         if (selectedControl === 'hba1c') {

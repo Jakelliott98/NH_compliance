@@ -70,7 +70,6 @@ function AfinionsDisplay ({ afinions }: AfinionsDisplayProps) {
 
     return (
         afinions.map((afinion) => {
-            console.log(afinion)
             return (
                 <div 
                     className="
