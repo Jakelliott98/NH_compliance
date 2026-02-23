@@ -64,7 +64,7 @@ function LoginPage () {
                 <div className="border-t border-neutral-light/50 pt-5 md:pt-10">
                     <p className="text-sm text-neutral-light text-center mb-5">Login with following username to view demo</p>
                     <p className="text-sm text-neutral-light text-center mb-2">Username: DemoVersion</p>
-                    <p className="text-sm text-neutral-light text-center">Password: Demo101</p>
+                    <p className="text-sm text-neutral-light text-center">Password: DemoVersion101</p>
                 </div>
             </div>
             <div className="hidden bg-primary lg:flex flex-col justify-center gap-3 p-20 rounded-lg">

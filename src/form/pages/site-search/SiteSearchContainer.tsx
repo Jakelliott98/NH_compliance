@@ -27,7 +27,7 @@ export default function SiteSearchContainer () {
                 <SiteSearch sites={allSites} setActiveSite={setActiveSite}/>
             </div>
             {
-                activeSite !== null && (
+                activeSite !== undefined && (
                     <button onClick={() => {onSubmit()}} className=" py-2 px-3 btn cursor-pointer w-full">
                         <span className="uppercase font-semibold pr-2">Go</span>
                         <FontAwesomeIcon icon={faArrowRightLong} className="font-bold"/>

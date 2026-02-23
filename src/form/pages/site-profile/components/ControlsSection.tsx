@@ -29,7 +29,7 @@ export default function ControlsSection ({ controls }: ControlsSectionProps) {
                                 flexCenter flex-col gap-2
                                 rounded bg-surface/40 text-neutral-light
                                 text-lg font-medium tracking-wide
-                                border border-neutral-light shadow-sm
+                                border border-neutral-light/50 shadow-sm
                                 transition-all cursor-pointer 
                                 hover:bg-surface/80 hover:border-primary hover:text-primary  hover:shadow-lg
                                 active:translate-y-0
