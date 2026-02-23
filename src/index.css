@@ -42,7 +42,7 @@
 }
 
 @theme inline {
-  --color-primary: oklch(0.5461 0.2152 262.88);
+  --color-primary: oklch(0.4677 0.2544 265.59);
   --color-primary-foreground: oklch(1 0 0);
 
   --color-secondary: oklch(0.9636 0.0176 253.34);
