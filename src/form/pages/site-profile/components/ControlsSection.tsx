@@ -16,7 +16,7 @@ export default function ControlsSection ({ controls }: ControlsSectionProps) {
 
     return (
         <div className="flex flex-col lg:flex-row gap-2">
-            <div className="flex flex-col lg:flex-row gap-2 lg:w-10/12">
+            <div className="flex flex-col [&>*]:flex-1 lg:flex-row gap-2 lg:w-10/12">
                 <ReturnControlSection title="Lipids" controlsData={controls} controlType="lipids"/>
                 <ReturnControlSection title="HBA1c" controlsData={controls} controlType="hba1c"/>
             </div>

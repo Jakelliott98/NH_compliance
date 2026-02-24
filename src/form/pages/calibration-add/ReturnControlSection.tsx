@@ -13,7 +13,7 @@ export function ReturnControlSection ({controlType, controlsData, title}: Return
 
     const control = controlsData.find((item: CalibrationDatabaseType) => { return item.control_type === controlType})
     if (!control) return (
-        <div className="py-2 px-1 bg-surface/80 backdrop-blur flexCenter flex-col w-full border border-neutral-light/25 rounded shadow-sm">
+        <div className="py-2 bg-surface/80 backdrop-blur flexCenter flex-col w-full border border-neutral-light/25 rounded shadow-sm">
             <FontAwesomeIcon icon={faHandshakeSlash} className="p-2 md:pb-5 text-neutral-light" />
             <p className="text-xs md:text-sm text-neutral-light">No {title} added</p>
             <p className="sm-hidden-block text-xs text-neutral-light">Add a {title} control to start submitting results.</p>
@@ -26,7 +26,7 @@ export function ReturnControlSection ({controlType, controlsData, title}: Return
         <div 
             className="
                 flex-1 
-                p-3 flex-grow
+                py-3 flex-grow
                 flex flex-col justify-center items-center gap-1
                 border border-neutral-light/25 rounded shadow-sm
                 bg-surface/80 backdrop-blur
