@@ -3,7 +3,7 @@ import FilterButton from "../FilterButton";
 import AddSiteContainer from "../AddSite";
 import type { IsFiltered } from "../../SitesHomepage";
 
-const regionFilterOptions = ['All Regions', 'North', 'East', 'South', 'West']
+const regionFilterOptions = ['All Regions', 'Northern Europe', 'Eastern Europe', 'Southern Europe', 'Western Europe']
 
 interface FilterSection {
     setIsFiltered: React.Dispatch<React.SetStateAction<IsFiltered>>,
