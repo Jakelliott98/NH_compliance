@@ -16,7 +16,7 @@ export default function ExpiredAfinions () {
 	const sevenDaysAgo = moment().subtract(7, 'days');
 
 	const expiredAfinions = allAfinions?.filter((afinion) => {
-		const isExpired = moment(afinion.last_calibrated).isBefore(sevenDaysAgo)
+		const isExpired = moment(afinion.last_calibrated).isBefore(sevenDaysAgo) || !afinion.last_calibrated
 		if (isExpired) return afinion
 	})
 
@@ -47,7 +47,7 @@ export default function ExpiredAfinions () {
 								<tr className="border border-gray-200" key={afinion.afinion_id}>
 									<td className="text-start text-sm p-1 text-neutral-light p-2">{site?.site_name}</td>
 									<td className="hidden md:table-cell text-start text-sm text-neutral-light">NH{afinion.nh_number}</td>
-									<td className="text-start text-sm text-warning">{moment(afinion.last_calibrated).format('Do MMM')}</td>
+									<td className="text-start text-sm text-warning">{afinion.last_Calibrated ? moment(afinion.last_calibrated).format('Do MMM') : 'Not Yet Calibrated'}</td>
 								</tr>
 							)
 						})
