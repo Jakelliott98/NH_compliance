@@ -25,8 +25,8 @@ export default function CalendarPopup ({ onSelect, date }: CalanderPopupProps) {
             <PopoverContent>
                 <Calendar 
                     mode="single" 
-                    onSelect={(date) => {
-                        onSelect(date)
+                    onSelect={(newDate) => {
+                        onSelect(newDate)
                         setOpen(false)
                     }
                     } />

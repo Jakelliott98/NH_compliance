@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, Controller } from "react-hook-form";
 import CalendarPopup from "@/form/components/CalendarPopup";
 import { useParams } from "react-router";
 import ControlsSelect from "./ControlsSelect";
@@ -40,7 +40,6 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
 
     const methods = useForm<ControlType>();
     const { register, handleSubmit } = methods
-    const [date, setDate] = useState<Date>()
 
     const siteSlug: string | undefined = useParams().Site;
     const { data: activeSite, isError:siteError, isLoading: siteLoading} = useSiteBySlug(siteSlug)
@@ -61,7 +60,7 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
 
     const onSubmit = handleSubmit((data) => {
 
-        data.expiryDate = new Date(data.expiryDate)
+        console.log(data)
 
         if (selectedControl === 'hba1c') {
             if (!data.hba1c) return;
@@ -98,12 +97,17 @@ export function CalibrationFormInput ({ selectedControl, closeDialog }: Calibrat
                     </div>
                     <div className="flex flex-col gap-1 flex-1">
                         <label className="text-sm">Expiry Date <FontAwesomeIcon icon={faCircleInfo} /> </label>
-                        <CalendarPopup onSelect={setDate} date={date}/>
+                        <Controller
+                            control={methods.control}
+                            name='expiryDate'
+                            render={({field}) => (
+                                <CalendarPopup onSelect={field.onChange} date={field.value}/>
+                            )}
+                        />
                     </div>
                 </div>
                 <InputTable test={ selectedControl === 'hba1c' ? hba1cTable : lipidsTable}/>
                 <input type="hidden" {...register('siteID', {valueAsNumber: true})} value={activeSite.site_id}/>
-                <input type="hidden" {...register('expiryDate')} value={date?.toISOString()}/>
                 <input type="hidden" {...register('controlType')} value={selectedControl}/>
                 <button 
                     type="submit"
