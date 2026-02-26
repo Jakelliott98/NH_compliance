@@ -1,6 +1,6 @@
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareCheck, faTriangleExclamation, faHandSparkles, faBug } from "@fortawesome/free-solid-svg-icons";
+import { faSquareCheck, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { useAllSites } from '@/services/sites'
 import { useAllAfinions } from "@/services/afinions";

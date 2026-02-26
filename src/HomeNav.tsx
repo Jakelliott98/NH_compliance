@@ -1,7 +1,7 @@
 import addFiles from './assets/add_files.svg';
 import visualData from './assets/visual_data.svg'
 import { useNavigate } from 'react-router';
-import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react"
+import { SignedIn, SignedOut } from "@clerk/clerk-react"
 import LoginPage from './LoginPage';
 
 export function HomeNav () {

@@ -1,4 +1,4 @@
-import { useSignIn } from "@clerk/clerk-react";
+import { SignIn, useSignIn } from "@clerk/clerk-react";
 import { useState } from "react";
 
 
@@ -7,17 +7,20 @@ function LoginPage () {
     const { isLoaded, signIn, setActive } = useSignIn()
     const [error, setError] = useState(false)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(false)
 
-        const email = e.target.email.value;
-        const password = e.target.password.value
+        const form = e.currentTarget as HTMLFormElement
+        const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+        const password = (form.elements.namedItem('password') as HTMLInputElement).value
 
         if (!password || !email) {
             setError(true)
             return;
         }
+
+        if (!isLoaded || !SignIn) return;
 
         try {  
 
