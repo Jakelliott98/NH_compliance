@@ -1,6 +1,6 @@
 import { SignIn, useSignIn } from "@clerk/clerk-react";
 import { useState } from "react";
-
+import desktopScreenshot from './assets/desktopScreen.png'
 
 function LoginPage () {
 
@@ -71,9 +71,9 @@ function LoginPage () {
                 </div>
             </div>
             <div className="hidden bg-primary lg:flex flex-col justify-center gap-3 p-20 rounded-lg">
-                <h1 className="text-primary-foreground text-2xl">Effortlessly manage your companies compliance and operations</h1>
-                <p className="text-primary-foreground font-light">Login to input compliance results and manage your clinics compliance scores</p>
-                <img src="#"/>
+                <h1 className="text-primary-foreground text-2xl font-bold text-center">Manage compliance with ease</h1>
+                <p className="text-primary-foreground font-light text-center">Log in to add results and track clinic compliance scores.</p>
+                <img src={desktopScreenshot}/>
             </div>
         </div>
     )
